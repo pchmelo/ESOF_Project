@@ -11,19 +11,19 @@ Este projeto consiste na criação de uma aplicação, com fins ecológicos. Par
 
 #### Signing In:
 Obrigatório para os users:
-E-mail, username, password     (possibilidade de Google acc);
+> E-mail, username, password     (possibilidade de Google acc);
 
-#### Opcional:
-Personalizaçãodo stock pessoal – Possibilidade de seleccionar produtos de uma lista já prédefinida e/ou adicionar um produto personalizado pela pessoa
+Opcional:
+> Personalizaçãodo stock pessoal – Possibilidade de seleccionar produtos de uma lista já prédefinida e/ou adicionar um produto personalizado pela pessoa
 
 #### Login / Logout:
-Possibilidade de manter a sessão iniciada
-Users devem iniciar com e-mail ou username e password
-Recuperar a password se necessário através de username ou e-mail
+> Possibilidade de manter a sessão iniciada
+> Users devem iniciar com e-mail ou username e password
+> Recuperar a password se necessário através de username ou e-mail
 
 #### Validades:
-Lista ordenada com sorting options (Alfabético, Quantitativo, Validade, Limiar)
-Calendário (widget) - Destaca os dias em que algum limiar acaba, ao clicar no dia destacado, o utilizador pode obter informação sobre o produto de forma geral
+> Lista ordenada com sorting options (Alfabético, Quantitativo, Validade, Limiar)
+> Calendário (widget) - Destaca os dias em que algum limiar acaba, ao clicar no dia destacado, o utilizador pode obter informação sobre o produto de forma geral
 
 #### Settings:
 Personalização da conta:
