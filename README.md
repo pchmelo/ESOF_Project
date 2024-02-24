@@ -29,7 +29,7 @@ Opcional:
 Personalização da conta:
 * Mudar username, password, e-mail;
 * Mudar tema (light/darkmode);
- 
+
 Adicionar/Remover/Editar novos tipos de produto ao stock:
 * Ao adicionar/editar, o     usuário poderá adicionar/editar o nome de um produto, imagem, e limiar de     quantidade no stock antes de este ser automáticamente adicionado à lista de compras;
 * Adicionar/Editar notificações de Stock/Validade;
