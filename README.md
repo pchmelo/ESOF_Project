@@ -11,47 +11,47 @@ Este projeto consiste na criação de uma aplicação, com fins ecológicos. Par
 
 #### Signing In:
 Obrigatório para os users:
-> E-mail, username, password     (possibilidade de Google acc);
+** E-mail, username, password     (possibilidade de Google acc);
 
 Opcional:
-> Personalizaçãodo stock pessoal – Possibilidade de seleccionar produtos de uma lista já prédefinida e/ou adicionar um produto personalizado pela pessoa;
+** Personalizaçãodo stock pessoal – Possibilidade de seleccionar produtos de uma lista já prédefinida e/ou adicionar um produto personalizado pela pessoa;
 
 #### Login / Logout:
-> Possibilidade de manter a sessão iniciada;
-> Users devem iniciar com e-mail ou username e password;
-> Recuperar a password se necessário através de username ou e-mail;
+** Possibilidade de manter a sessão iniciada;
+** Users devem iniciar com e-mail ou username e password;
+** Recuperar a password se necessário através de username ou e-mail;
 
 #### Validades:
-> Lista ordenada com sorting options (Alfabético, Quantitativo, Validade, Limiar);
-> Calendário (widget) - Destaca os dias em que algum limiar acaba, ao clicar no dia destacado, o utilizador pode obter informação sobre o produto de forma geral;
+** Lista ordenada com sorting options (Alfabético, Quantitativo, Validade, Limiar);
+** Calendário (widget) - Destaca os dias em que algum limiar acaba, ao clicar no dia destacado, o utilizador pode obter informação sobre o produto de forma geral;
 
 #### Settings:
 Personalização da conta:
-> Mudar username, password, e-mail;
-> Mudar tema (light/darkmode);
+** Mudar username, password, e-mail;
+** Mudar tema (light/darkmode);
  
 Adicionar/Remover/Editar novos tipos de produto ao stock
-> Ao adicionar/editar, o     usuário poderá adicionar/editar o nome de um produto, imagem, e limiar de     quantidade no stock antes de este ser automáticamente adicionado à lista de compras;
-> Adicionar/Editar notificações de Stock/Validade;
+** Ao adicionar/editar, o     usuário poderá adicionar/editar o nome de um produto, imagem, e limiar de     quantidade no stock antes de este ser automáticamente adicionado à lista de compras;
+** Adicionar/Editar notificações de Stock/Validade;
 
 #### Stock:
 Enumeração dos produtos presentes em stock consoante um sorting escolhido pelo utilizador, com possibilidade de várias opções de sorting;
 Tipos de sorting:
-> Alfabético;
-> Quantitativo;
-> Próximidade do limiar establecido;
+** Alfabético;
+** Quantitativo;
+** Próximidade do limiar establecido;
 
 #### Lista de compras:
-> (Onclick) Opção de criar lista ou de ver listas prévias;
-> Lista com os produtos que já atingiram o limiar;
-> Possibilidade de adicionar e remover produtos;
-> Possibilidade de adicionar produtos "extra";
-> Checkbox indicativa daquilo que já está no carrinho;
+** (Onclick) Opção de criar lista ou de ver listas prévias;
+** Lista com os produtos que já atingiram o limiar;
+** Possibilidade de adicionar e remover produtos;
+** Possibilidade de adicionar produtos "extra";
+** Checkbox indicativa daquilo que já está no carrinho;
 
 #### Adicionar produto ao Stock:
-> Manualmente, ou com código de barras;
-> Utilizadores deverão introduzir manualmente a data de validade, caso a considere relevante no produto em questão;
-> Se, ao ler o código de barras, a base de dados local não possa identificar o produto, ela vai pedir ao utilizador para associar o código a um determinado produto existente, ou para ele criar um novo produto;
+** Manualmente, ou com código de barras;
+** Utilizadores deverão introduzir manualmente a data de validade, caso a considere relevante no produto em questão;
+** Se, ao ler o código de barras, a base de dados local não possa identificar o produto, ela vai pedir ao utilizador para associar o código a um determinado produto existente, ou para ele criar um novo produto;
 
 ### Developed by:
 
