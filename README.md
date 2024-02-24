@@ -7,7 +7,7 @@
 
 Este projeto consiste na criação de uma aplicação, com fins ecológicos. Para tal, os alunos responsáveis pela elaboração deste projeto decidiram desenvolver uma aplicação que permite gerir o stock da dispensa, evitando assim o consumismo desnecessário, através da criação de uma lista de compras com os bens alimentares necessários. Para além disso, ajudará a controlar o desperdício alimentar, provocado por alimentos cujos prazos de validade se encontram ultrapassados, ao emitir notificações com lembretes, quando a data de validade de um alimento estiver prestes a expirar.
 
-### Functionalitys:
+### Functionalities:
 
 #### Signing In:
 Obrigatório para os users:
@@ -30,7 +30,7 @@ Personalização da conta:
 * Mudar username, password, e-mail;
 * Mudar tema (light/darkmode);
  
-Adicionar/Remover/Editar novos tipos de produto ao stock
+Adicionar/Remover/Editar novos tipos de produto ao stock:
 * Ao adicionar/editar, o     usuário poderá adicionar/editar o nome de um produto, imagem, e limiar de     quantidade no stock antes de este ser automáticamente adicionado à lista de compras;
 * Adicionar/Editar notificações de Stock/Validade;
 
