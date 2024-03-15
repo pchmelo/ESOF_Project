@@ -60,105 +60,75 @@ Tipos de sorting:
     Eu quero poder procurar por produtos específicos <br />
     Para que possa encontrar facilmente os itens que desejo <br />
 
-**FEATURE**: Analisar Produtos
+**FEATURE**: Analisar Produtos <br />
+    Como utilizador <br />
+    Eu quero poder ver informação detalhada sobre cada produto <br />
+    Para que possa tomar decisões conscientes relativamente às minhas compras <br />
 
-    Como utilizador
+**FEATURE**: Adicionar Produtos À Lista De Compras <br />
+    Como utilizador <br />    
+    Eu quero poder adicionar produtos à minha lista de compras <br />
+    Para que possa saber quais produtos preciso de comprar <br />
 
-    Eu quero poder ver informação detalhada sobre cada produto
-    
-    Para que possa tomar decisões conscientes relativamente às minhas compras
+**FEATURE**: Atualizar Catálogo De Produtos <br />
+    Como gestor de stock <br />
+    Eu quero poder adicionar, editar e remover produtos do inventário <br />
+    Para que possa manter o catálogo de produtos atualizado <br />
 
-**FEATURE**: Adicionar Produtos À Lista De Compras
-    
-    Como utilizador
-    
-    Eu quero poder adicionar produtos à minha lista de compras
-    
-    Para que possa saber quais produtos preciso de comprar
+**FEATURE**: Partilhar De Inventário <br />
+    Como utilizador <br />
+    Eu quero poder partilhar o meu inventário com quem vive comigo <br />
+    Para que possamos colaborar nas compras e evitar compras desnecessárias <br />
 
-**FEATURE**: Atualizar Catálogo De Produtos
-    
-    Como gestor de stock
-    
-    Eu quero poder adicionar, editar e remover produtos do inventário
-    
-    Para que possa manter o catálogo de produtos atualizado
+**FEATURE**: Notificações Falta De Stock <br />
+    Como utilizador <br />
+    Quero poder receber notificações de falta de produto em stock <br />
+    Para evitar que me esqueça de comprar certos produtos que necessito <br />
 
-**FEATURE**: Partilhar De Inventário
-    
-    Como utilizador
-    
-    Eu quero poder partilhar o meu inventário com quem vive comigo
-    
-    Para que possamos colaborar nas compras e evitar compras desnecessárias
+**FEATURE**: Notificações Data De Validade Prestes A Expirar <br />
+    Como utilizador <br />
+    Quero poder receber notificações quando a data de validade dos meus produtos estiver prester a expirar <br />
+    Para evitar que estes se estraguem e me ajudar a combater o desperdício alimentar <br />
 
-**FEATURE**: Notificações Falta De Stock
-    
-    Como utilizador
-    
-    Quero poder receber notificações de falta de produto em stock
-    
-    Para evitar que me esqueça de comprar certos produtos que necessito
+**FEATURE**: Filtrar Resultados De Pesquisa <br />
+    Como utilizador <br />
+    Eu quero poder filtrar produtos por ordem alfabética, quantitativa, ou por proximidade de limiares <br />
+    Para que possa melhorar os resultados da minha pesquisa <br />
 
-**FEATURE**: Notificações Data De Validade Prestes A Expirar
-    
-    Como utilizador
-    
-    Quero poder receber notificações quando a data de validade dos meus produtos estiver prester a expirar
-    
-    Para evitar que estes se estraguem e me ajudar a combater o desperdício alimentar
+**FEATURE**: Recuperar Password <br />
+    Como utilizador <br />
+    Eu quero poder recuperar a minha password <br />
+    Para que possa aceder à minha conta mesmo que esqueça a password <br />
 
-**FEATURE**: Filtrar Resultados De Pesquisa
-    
-    Como utilizador
-    
-    Eu quero poder filtrar produtos por ordem alfabética, quantitativa, ou por proximidade de limiares
-    
-    Para que possa melhorar os resultados da minha pesquisa 
+**FEATURE**: Visualizar E Alterar Definições De Conta <br />
+    Como utilizador <br />
+    Eu quero poder visualizar e alterar as definições da minha conta <br />
+    Para que possa manter a minha informação atualizada e personalizar a minha experiência <br />
 
-**FEATURE**: Recuperar Password
-    
-    Como utilizador
-    
-    Eu quero poder recuperar a minha password
-    
-    Para que possa aceder à minha conta mesmo que esqueça a password
+**FEATURE**: Criar E Gerir Listas De Compras <br />
+    Como utilizador <br />
+    Eu quero poder criar e gerir várias listas de compras <br />
+    Para que possa organizar-me para várias ocasiões e contextos diferentes  <br />
 
-**FEATURE**: Visualizar E Alterar Definições De Conta
-    
-    Como utilizador
-    
-    Eu quero poder visualizar e alterar as definições da minha conta
-    
-    Para que possa manter a minha informação atualizada e personalizar a minha experiência
+**FEATURE**: Gerir Privacidade <br />
+    Como utilizador preocupado com a privacidade <br />
+    Quero poder controlar as minhas preferências quanto à forma como a minha informação é usada <br />
+    Para poder fazer decisões informadas quanto à privacidade dos meus dados <br />
 
-**FEATURE**: Criar E Gerir Listas De Compras
-    
-    Como utilizador
-    
-    Eu quero poder criar e gerir várias listas de compras
-    
-    Para que possa organizar-me para várias ocasiões e contextos diferentes 
+**FEATURE**: Modo Offline <br />
+    Como utilizador <br />
+    Eu quero poder aceder à app em modo offline <br />
+    Para que possa ter os seus beneficios sem necessidade de internet <br />
 
-**FEATURE**: Gerir Privacidade
-    Como utilizador preocupado com a privacidade
-    Quero poder controlar as minhas preferências quanto à forma como a minha informação é usada
-    Para poder fazer decisões informadas quanto à privacidade dos meus dados
+**FEATURE**: Reportar Erros <br />
+    Como utilizador preocupado com a qualidade <br />
+    Eu quero poder reportar problemas, ( tais como informação de produtos errada, etc.) <br />
+    Para que o Staff possa manter a qualidade da App <br />
 
-**FEATURE**: Modo Offline
-    Como utilizador
-    Eu quero poder aceder à app em modo offline
-    Para que possa ter os seus beneficios sem necessidade de internet
-
-**FEATURE**: Reportar Erros
-    Como utilizador preocupado com a qualidade
-    Eu quero poder reportar problemas, ( tais como informação de produtos errada, etc.)
-    Para que o Staff possa manter a qualidade da App
-
-**FEATURE**: Manter Sessão Iniciada
-    Como utilizador
-    Eu quero poder manter a minha sessão iniciada
-    Para que não tenha de inserir as minhas credenciais sempre que abra a App
+**FEATURE**: Manter Sessão Iniciada <br />
+    Como utilizador <br />
+    Eu quero poder manter a minha sessão iniciada <br />
+    Para que não tenha de inserir as minhas credenciais sempre que abra a App <br />
 
 ### Developed by:
 
