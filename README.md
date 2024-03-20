@@ -3,11 +3,47 @@
 
 ## 2nd Year - 2st Semester - Group Project
 
-### Brief description:
+Welcome to the documentation pages of the "Nome da Aplicação"!
+
+You can find here detailed about "Nome da Aplicação", hereby mentioned as module, from a high-level vision to low-level implementation decisions, a kind of Software Development Report , organized by discipline (as of RUP):
+
+* Business modeling 
+  * [Product Vision](#Product-Vision)
+  * [Elevator Pitch](#Elevator-Pitch)
+* Requirements
+  * [Functionalities](#Functionalities)
+  * [Use Case Diagram](#Use-case-diagram)
+  * [User stories](#User-stories)
+  * [Domain model](#Domain-model)
+* Architecture and Design
+  * [Logical architecture](#Logical-architecture)
+  * [Physical architecture](#Physical-architecture)
+  * [Prototype](#Prototype)
+* [Implementation](#Implementation)
+* [Test](#Test)
+* [Configuration and change management](#Configuration-and-change-management)
+* [Project management](#Project-management)
+
+----
+## Product Vision
+As pessoas usam  a "Nome da Aplicação" para gerir o stock das suas dispensas e evitar o desperdício alimentar.
+
+----
+
+----
+## Elevator Pitch
+
+Do you ever get overwhelmed by the quantity of talks and how scattered they are through social media?
 
 Este projeto consiste na criação de uma aplicação, com fins ecológicos. Para tal, os alunos responsáveis pela elaboração deste projeto decidiram desenvolver uma aplicação que permite gerir o stock da dispensa, evitando assim o consumismo desnecessário, através da criação de uma lista de compras com os bens alimentares necessários. Para além disso, ajudará a controlar o desperdício alimentar, provocado por alimentos cujos prazos de validade se encontram ultrapassados, ao emitir notificações com lembretes, quando a data de validade de um alimento estiver prestes a expirar.
 
-### Functionalities:
+So, what are you waiting for? Sign up today!
+
+
+---
+
+---
+## Functionalities
 
 #### Signing In:
 Obrigatório para os users:
@@ -53,52 +89,122 @@ Tipos de sorting:
 * Utilizadores deverão introduzir manualmente a data de validade, caso a considere relevante no produto em questão;
 * Se, ao ler o código de barras, a base de dados local não possa identificar o produto, ela vai pedir ao utilizador para associar o código a um determinado produto existente, ou para ele criar um novo produto;
 
-### User Stories
+---
+
+---
+## User Stories
 
 **FEATURE**: Pesquisar Produtos <br />
     Como cliente <br />
     Eu quero poder procurar por produtos específicos <br />
     Para que possa encontrar facilmente os itens que desejo <br />
 
+> Scenario: Pesquisar produtos
+> Given: Existem produtos previamente inseridos numa base de dados
+> When: Executo uma pesquisa de um produto presente na base de dados
+> Then: Encontro o produto desejado
+
 **FEATURE**: Analisar Produtos <br />
     Como utilizador <br />
     Eu quero poder ver informação detalhada sobre cada produto <br />
     Para que possa tomar decisões conscientes relativamente às minhas compras <br />
+
+> Scenario: Analisar Produtos
+> Given: Eu tenho uma lista de produtos
+> When: Eu clico num produto
+> Then: Eu acedo a toda a informação detalhada disponível sobre o produto
 
 **FEATURE**: Adicionar Produtos À Lista De Compras <br />
     Como utilizador <br />    
     Eu quero poder adicionar produtos à minha lista de compras <br />
     Para que possa saber quais produtos preciso de comprar <br />
 
+> Scenario: Adicionar Produtos À Lista De Compras
+> Given: Eu tenho uma lista de compras criada
+> When: clico no botão "+"
+> And: Seleciono o produto que quero
+> Then: O produto é adicionado à minha lista de compras
+
 **FEATURE**: Atualizar Catálogo De Produtos <br />
     Como gestor de stock <br />
     Eu quero poder adicionar, editar e remover produtos do inventário <br />
     Para que possa manter o catálogo de produtos atualizado <br />
+
+> Scenario: Atualizar Descrição De Produtos
+> Given: Eu sou gestor de stock
+> When: Eu altero a descrição de um produto
+> Then: Essa descrição fica disponível para os utilizadores
+
+> Scenario: Remover Produtos do catálogo
+> Given: Eu sou gestor de stock
+> When: Eu removo um produto do catálogo
+> Then: Esse produto deixa de estar disponível para os utilizadores
+
+> Scenario: Adicionar Produtos do catálogo
+> Given: Eu sou gestor de stock
+> When: Eu adiciono um produto do catálogo
+> Then: Esse produto fica disponível para os utilizadores
 
 **FEATURE**: Partilhar De Inventário <br />
     Como utilizador <br />
     Eu quero poder partilhar o meu inventário com quem vive comigo <br />
     Para que possamos colaborar nas compras e evitar compras desnecessárias <br />
 
+> Scenario: Partilhar iventários
+> Given: Eu e outras pessoas temos um inventário em comum
+> When: Eu entro na conta associada a esse inventário
+> Then: Consigo aceder a todas as informações relativas a esse inventário
+
 **FEATURE**: Notificações Falta De Stock <br />
     Como utilizador <br />
     Quero poder receber notificações de falta de produto em stock <br />
     Para evitar que me esqueça de comprar certos produtos que necessito <br />
+
+> Scenario: Notificações Falta de Stock
+> Given: Eu tenho um determinado produto
+> When: Esse produto fica fora de stock ou baixa do limiar que eu estabeleci
+> Then: Recebo uma notificação, para me lembrar de comprar esse produto
 
 **FEATURE**: Notificações Data De Validade Prestes A Expirar <br />
     Como utilizador <br />
     Quero poder receber notificações quando a data de validade dos meus produtos estiver prester a expirar <br />
     Para evitar que estes se estraguem e me ajudar a combater o desperdício alimentar <br />
 
+> Scenario: Notificações Data De Validade Prestes A Expirar
+> Given: Eu tenho um determinado produto
+> When: A data de validade desse produto estiver prestes a expirar
+> Then: Recebo uma notificação, para me lembrar de consumir o produto, evitando que este se estrague
+
 **FEATURE**: Filtrar Resultados De Pesquisa <br />
     Como utilizador <br />
     Eu quero poder filtrar produtos por ordem alfabética, quantitativa, ou por proximidade de limiares <br />
     Para que possa melhorar os resultados da minha pesquisa <br />
 
+> Scenario: Filtrar Resultados de Pesquisa por ordem alfabética
+> Given: Eu executo uma determinada pesquisa
+> When: Filtro os resultados dessa pesquisa por ordem alfabética
+> Then: Os produtos devem me aparecer no ecrã por ordem alfabética
+
+> Scenario: Filtrar Resultados de Pesquisa por ordem quantitativa
+> Given: Eu executo uma determinada pesquisa
+> When: Filtro os resultados dessa pesquisa por ordem quantitativa
+> Then: Os produtos devem me aparecer conforme as suas quantidades em stock
+
+> Scenario: Filtrar Resultados de Pesquisa por proximidade de limiares
+> Given: Eu executo uma determinada pesquisa
+> When: Filtro os resultados dessa pesquisa por proximidade de limiares
+> Then: Os produtos devem me aparecer conforme a sua proximidade ao limiar estabelecido
+
 **FEATURE**: Recuperar Password <br />
     Como utilizador <br />
     Eu quero poder recuperar a minha password <br />
     Para que possa aceder à minha conta mesmo que esqueça a password <br />
+
+> Scenario: Recuperar password
+> Given: Eu perdi a minha password
+> When: Eu solicito uma nova passe
+> And: Confirmo a minha identidade através do email associado a conta
+> Then: Consigo escolher uma nova password
 
 **FEATURE**: Visualizar E Alterar Definições De Conta <br />
     Como utilizador <br />
@@ -130,6 +236,7 @@ Tipos de sorting:
     Eu quero poder manter a minha sessão iniciada <br />
     Para que não tenha de inserir as minhas credenciais sempre que abra a App <br />
 
+---
 ### Developed by:
 
 1. Diogo Ferreira - E-mail: up202205295@edu.fe.up.pt
