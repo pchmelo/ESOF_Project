@@ -51,6 +51,8 @@ Opcional:
 * Possibilidade de manter a sessão iniciada;
 * Users devem iniciar com e-mail ou username e password;
 * Recuperar a password se necessário através de username ou e-mail;
+
+
 ![Login Logout Image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/LoginLogout.png?raw=true)
 
 #### Validades:
