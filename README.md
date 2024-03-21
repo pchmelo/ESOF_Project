@@ -119,6 +119,9 @@ Scenario:  Pesquisar produtos
 * Value: Must have
 * Effort: 5
 
+<br />
+<br />
+
 **FEATURE**: Analisar Produtos <br />
     Como utilizador <br />
     Eu quero poder ver informação detalhada sobre cada produto <br />
@@ -140,6 +143,9 @@ Scenario:  Analisar Produtos
 ### Value and effort
 * Value: Should have
 * Effort: 1
+
+<br />
+<br />
 
 **FEATURE**: Adicionar Produtos À Lista De Compras <br />
     Como utilizador <br />
@@ -163,6 +169,9 @@ Scenario:  Adicionar Produtos À Lista De Compras
 ### Value and effort
 * Value: Must have
 * Effort: 3
+
+<br />
+<br />
 
 **FEATURE**: Atualizar Catálogo De Produtos <br />
     Como gestor de stock <br />
@@ -196,6 +205,9 @@ Scenario:  Adicionar Produtos do catálogo
 * Value: Must have
 * Effort: 5
 
+<br />
+<br />
+
 **FEATURE**: Partilhar De Inventário <br />
     Como utilizador <br />
     Eu quero poder partilhar o meu inventário com quem vive comigo <br />
@@ -213,6 +225,9 @@ Scenario:  Partilhar iventários
 ### Value and effort
 * Value: Could have
 * Effort: 100
+
+<br />
+<br />
 
 **FEATURE**: Notificações Falta De Stock <br />
     Como utilizador <br />
@@ -232,6 +247,9 @@ Scenario:  Notificações Falta de Stock
 * Value: Should have
 * Effort: 40
 
+<br />
+<br />
+
 **FEATURE**: Notificações Data De Validade Prestes A Expirar <br />
     Como utilizador <br />
     Quero poder receber notificações quando a data de validade dos meus produtos estiver prester a expirar <br />
@@ -249,6 +267,9 @@ Scenario:  Notificações Data De Validade Prestes A Expirar
 ### Value and effort
 * Value: Must have
 * Effort: 40
+
+<br />
+<br />
 
 **FEATURE**: Filtrar Resultados De Pesquisa <br />
     Como utilizador <br />
@@ -284,6 +305,9 @@ Scenario:  Filtrar Resultados de Pesquisa por proximidade de limiares
 * Value: Could have
 * Effort: 1
 
+<br />
+<br />
+
 **FEATURE**: Recuperar Password <br />
     Como utilizador <br />
     Eu quero poder recuperar a minha password <br />
@@ -303,6 +327,9 @@ Scenario:  Recuperar password
 * Value: Will not have yet
 * Effort: 40
 
+<br />
+<br />
+
 **FEATURE**: Visualizar E Alterar Definições De Conta <br />
     Como utilizador <br />
     Eu quero poder visualizar e alterar as definições da minha conta <br />
@@ -320,6 +347,9 @@ Scenario:  A implementar...
 ### Value and effort
 * Value: Could have
 * Effort: 20
+
+<br />
+<br />
 
 **FEATURE**: Criar E Gerir Listas De Compras <br />
     Como utilizador <br />
@@ -339,6 +369,8 @@ Scenario:  A implementar...
 * Value: Must have
 * Effort: 8
 
+<br />
+<br />
 
 **FEATURE**: Modo Offline <br />
     Como utilizador <br />
@@ -358,6 +390,8 @@ Scenario:  A implementar...
 * Value: Could have
 * Effort: 13
 
+<br />
+<br />
 
 **FEATURE**: Manter Sessão Iniciada <br />
     Como utilizador <br />
