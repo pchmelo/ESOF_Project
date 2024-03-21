@@ -114,7 +114,7 @@ Scenario:  Analisar Produtos
 
 
 **FEATURE**: Adicionar Produtos À Lista De Compras <br />
-    Como utilizador <br />    
+    Como utilizador <br />
     Eu quero poder adicionar produtos à minha lista de compras <br />
     Para que possa saber quais produtos preciso de comprar <br />
 
