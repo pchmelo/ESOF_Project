@@ -66,9 +66,6 @@ Opcional:
 * Users devem iniciar com e-mail ou username e password;
 * Recuperar a password se necessário através de username ou e-mail;
 
-
-<img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/LoginLogout.png?raw=true" alt="Login Logout Image" width="300" height="200">
-
 #### Validades:
 * Lista ordenada com sorting options (Alfabético, Quantitativo, Validade, Limiar);
 * Calendário (widget) - Destaca os dias em que algum limiar acaba, ao clicar no dia destacado, o utilizador pode obter informação sobre o produto de forma geral;
@@ -127,6 +124,11 @@ Scenario:  Pesquisar produtos
     Eu quero poder ver informação detalhada sobre cada produto <br />
     Para que possa tomar decisões conscientes relativamente às minhas compras <br />
 
+### User interface mock-up
+<div style="display: flex;">
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Captura%20de%20ecrã%202024-03-21%20170904.png?raw=true" alt="Image" style="width: 250px; height: 460px; margin-right: 20px;">
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Captura%20de%20ecrã%202024-03-21%20170852.png?raw=true" alt="Image" style="width: 250px; height: 460px;">
+
 ### Acceptance tests
 ```Gherkin
 Scenario:  Analisar Produtos
@@ -134,7 +136,6 @@ Scenario:  Analisar Produtos
   When Eu clico num produto
   Then Eu acedo a toda a informação detalhada disponível sobre o produto
 ```
-
 
 ### Value and effort
 * Value: Should have
@@ -144,6 +145,10 @@ Scenario:  Analisar Produtos
     Como utilizador <br />
     Eu quero poder adicionar produtos à minha lista de compras <br />
     Para que possa saber quais produtos preciso de comprar <br />
+
+### User interface mock-up
+<div style="display: flex;">
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Captura%20de%20ecrã%202024-03-21%20170904.png?raw=true" alt="Image" style="width: 250px; height: 460px; margin-right: 20px;">
 
 ### Acceptance tests
 ```Gherkin
@@ -376,4 +381,4 @@ Scenario:  A implementar...
 
 Para facilitar a comunicação e organização da equipa, foi utilizado o [GitHub Projects](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/48) para a Gestão do Projeto deste projeto.
 
-O projeto possui 5 colunas:  **Product Backlog**, **Sprint Baclog**, **In Progress**, **Done** e **Expected**. Estas colunas são bastante autoexplicativas. É importante notar que, no final de qualquer iteração, as tarefas que não foram concluídas são passadas para a próxima, de modo que a coluna In Progress apareça vazia no final de cada iteração.
+O projeto possui 5 colunas:  **Product Backlog**, **Sprint Baclog**, **In Progress**, **Done** e **Accepted**. Estas colunas são bastante autoexplicativas. É importante notar que, no final de qualquer iteração, as tarefas que não foram concluídas são passadas para a próxima, de modo que a coluna In Progress apareça vazia no final de cada iteração.
