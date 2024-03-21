@@ -31,11 +31,11 @@ As pessoas usam  a "Nome da Aplicação" para gerir o stock das suas dispensas e
 ----
 ## Elevator Pitch
 
-Do you ever get overwhelmed by the quantity of talks and how scattered they are through social media?
+Alguma vez foste às compras e trouxeste produtos que não precisavas?
 
-Este projeto consiste na criação de uma aplicação, com fins ecológicos. Para tal, os alunos responsáveis pela elaboração deste projeto decidiram desenvolver uma aplicação que permite gerir o stock da dispensa, evitando assim o consumismo desnecessário, através da criação de uma lista de compras com os bens alimentares necessários. Para além disso, ajudará a controlar o desperdício alimentar, provocado por alimentos cujos prazos de validade se encontram ultrapassados, ao emitir notificações com lembretes, quando a data de validade de um alimento estiver prestes a expirar.
+Instala o/a "Nome da Aplicação". A aplicação que permite gerir o stock da dispensa, evitando assim o consumismo desnecessário, através da criação de uma lista de compras com os bens alimentares necessários. Para além disso, ajudará a controlar o desperdício alimentar, provocado por alimentos cujos prazos de validade se encontram ultrapassados, ao emitir notificações com lembretes, quando a data de validade de um alimento estiver prestes a expirar.
 
-So, what are you waiting for? Sign up today!
+De que estás à espera? Regista-te hoje mesmo!
 
 ---
 ## Functionalities
@@ -92,6 +92,7 @@ Tipos de sorting:
     Eu quero poder procurar por produtos específicos <br />
     Para que possa encontrar facilmente os itens que desejo <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  Pesquisar produtos
   Given Existem produtos previamente inseridos numa base de dados
@@ -100,11 +101,16 @@ Scenario:  Pesquisar produtos
 ```
 
 
+### Value and effort
+* Value: Must have
+* Effort: 5
+
 **FEATURE**: Analisar Produtos <br />
     Como utilizador <br />
     Eu quero poder ver informação detalhada sobre cada produto <br />
     Para que possa tomar decisões conscientes relativamente às minhas compras <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  Analisar Produtos
   Given Eu tenho uma lista de produtos
@@ -113,11 +119,16 @@ Scenario:  Analisar Produtos
 ```
 
 
+### Value and effort
+* Value: Should have
+* Effort: 1
+
 **FEATURE**: Adicionar Produtos À Lista De Compras <br />
     Como utilizador <br />
     Eu quero poder adicionar produtos à minha lista de compras <br />
     Para que possa saber quais produtos preciso de comprar <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  Adicionar Produtos À Lista De Compras
   Given Eu tenho uma lista de compras criada
@@ -127,11 +138,16 @@ Scenario:  Adicionar Produtos À Lista De Compras
 ```
  
 
+### Value and effort
+* Value: Must have
+* Effort: 3
+
 **FEATURE**: Atualizar Catálogo De Produtos <br />
     Como gestor de stock <br />
     Eu quero poder adicionar, editar e remover produtos do inventário <br />
     Para que possa manter o catálogo de produtos atualizado <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  Atualizar Descrição De Produtos
   Given Eu sou gestor de stock
@@ -154,11 +170,16 @@ Scenario:  Adicionar Produtos do catálogo
 ```
 
 
+### Value and effort
+* Value: Must have
+* Effort: 5
+
 **FEATURE**: Partilhar De Inventário <br />
     Como utilizador <br />
     Eu quero poder partilhar o meu inventário com quem vive comigo <br />
     Para que possamos colaborar nas compras e evitar compras desnecessárias <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  Partilhar iventários
   Given Eu e outras pessoas temos um inventário em comum
@@ -167,11 +188,16 @@ Scenario:  Partilhar iventários
 ```
 
 
+### Value and effort
+* Value: Could have
+* Effort: 100
+
 **FEATURE**: Notificações Falta De Stock <br />
     Como utilizador <br />
     Quero poder receber notificações de falta de produto em stock <br />
     Para evitar que me esqueça de comprar certos produtos que necessito <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  Notificações Falta de Stock
   Given Eu tenho um determinado produto
@@ -180,11 +206,16 @@ Scenario:  Notificações Falta de Stock
 ```
 
 
+### Value and effort
+* Value: Should have
+* Effort: 40
+
 **FEATURE**: Notificações Data De Validade Prestes A Expirar <br />
     Como utilizador <br />
     Quero poder receber notificações quando a data de validade dos meus produtos estiver prester a expirar <br />
     Para evitar que estes se estraguem e me ajudar a combater o desperdício alimentar <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  Notificações Data De Validade Prestes A Expirar
   Given Eu tenho um determinado produto
@@ -193,11 +224,16 @@ Scenario:  Notificações Data De Validade Prestes A Expirar
 ```
 
 
+### Value and effort
+* Value: Must have
+* Effort: 40
+
 **FEATURE**: Filtrar Resultados De Pesquisa <br />
     Como utilizador <br />
     Eu quero poder filtrar produtos por ordem alfabética, quantitativa, ou por proximidade de limiares <br />
     Para que possa melhorar os resultados da minha pesquisa <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  Filtrar Resultados de Pesquisa por ordem alfabética
   Given Eu executo uma determinada pesquisa
@@ -222,11 +258,16 @@ Scenario:  Filtrar Resultados de Pesquisa por proximidade de limiares
 ```
 
 
+### Value and effort
+* Value: Could have
+* Effort: 1
+
 **FEATURE**: Recuperar Password <br />
     Como utilizador <br />
     Eu quero poder recuperar a minha password <br />
     Para que possa aceder à minha conta mesmo que esqueça a password <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  Recuperar password
   Given Eu perdi a minha password
@@ -236,11 +277,16 @@ Scenario:  Recuperar password
 ```
 
 
+### Value and effort
+* Value: Will not have yet
+* Effort: 40
+
 **FEATURE**: Visualizar E Alterar Definições De Conta <br />
     Como utilizador <br />
     Eu quero poder visualizar e alterar as definições da minha conta <br />
     Para que possa manter a minha informação atualizada e personalizar a minha experiência <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  A implementar...
   Given 
@@ -248,12 +294,17 @@ Scenario:  A implementar...
   Then 
 ```
 
+
+### Value and effort
+* Value: Could have
+* Effort: 20
 
 **FEATURE**: Criar E Gerir Listas De Compras <br />
     Como utilizador <br />
     Eu quero poder criar e gerir várias listas de compras <br />
     Para que possa organizar-me para várias ocasiões e contextos diferentes  <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  A implementar...
   Given 
@@ -262,17 +313,9 @@ Scenario:  A implementar...
 ```
 
 
-**FEATURE**: Gerir Privacidade <br />
-    Como utilizador preocupado com a privacidade <br />
-    Quero poder controlar as minhas preferências quanto à forma como a minha informação é usada <br />
-    Para poder fazer decisões informadas quanto à privacidade dos meus dados <br />
-
-```Gherkin
-Scenario:  A implementar...
-  Given 
-  When 
-  Then 
-```
+### Value and effort
+* Value: Must have
+* Effort: 8
 
 
 **FEATURE**: Modo Offline <br />
@@ -280,6 +323,7 @@ Scenario:  A implementar...
     Eu quero poder aceder à app em modo offline <br />
     Para que possa ter os seus beneficios sem necessidade de internet <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  A implementar...
   Given 
@@ -288,17 +332,9 @@ Scenario:  A implementar...
 ```
 
 
-**FEATURE**: Reportar Erros <br />
-    Como utilizador preocupado com a qualidade <br />
-    Eu quero poder reportar problemas, ( tais como informação de produtos errada, etc.) <br />
-    Para que o Staff possa manter a qualidade da App <br />
-
-```Gherkin
-Scenario:  A implementar...
-  Given 
-  When 
-  Then 
-```
+### Value and effort
+* Value: Could have
+* Effort: 13
 
 
 **FEATURE**: Manter Sessão Iniciada <br />
@@ -306,6 +342,7 @@ Scenario:  A implementar...
     Eu quero poder manter a minha sessão iniciada <br />
     Para que não tenha de inserir as minhas credenciais sempre que abra a App <br />
 
+### Acceptance tests
 ```Gherkin
 Scenario:  A implementar...
   Given 
@@ -313,6 +350,9 @@ Scenario:  A implementar...
   Then 
 ```
 
+### Value and effort
+* Value: Will not have yet
+* Effort: 20
 
 ---
 ### Developed by:
