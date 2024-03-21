@@ -136,6 +136,8 @@ Scenario:  Analisar Produtos
 ```
 
 
+
+
 ### Value and effort
 * Value: Should have
 * Effort: 1
