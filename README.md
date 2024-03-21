@@ -53,7 +53,7 @@ Opcional:
 * Recuperar a password se necessário através de username ou e-mail;
 
 
-![Login Logout Image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/LoginLogout.png?raw=true)
+<img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/LoginLogout.png?raw=true" alt="Login Logout Image" width="300" height="200">
 
 #### Validades:
 * Lista ordenada com sorting options (Alfabético, Quantitativo, Validade, Limiar);
