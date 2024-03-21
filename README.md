@@ -52,6 +52,9 @@ Opcional:
 * Users devem iniciar com e-mail ou username e password;
 * Recuperar a password se necessário através de username ou e-mail;
 
+
+<img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/LoginLogout.png?raw=true" alt="Login Logout Image" width="300" height="200">
+
 #### Validades:
 * Lista ordenada com sorting options (Alfabético, Quantitativo, Validade, Limiar);
 * Calendário (widget) - Destaca os dias em que algum limiar acaba, ao clicar no dia destacado, o utilizador pode obter informação sobre o produto de forma geral;
