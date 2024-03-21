@@ -371,3 +371,9 @@ Scenario:  A implementar...
 * Value: Will not have yet
 * Effort: 20
 
+---
+## Project management 
+
+Para facilitar a comunicação e organização da equipa, foi utilizado o [GitHub Projects](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/48) para a Gestão do Projeto deste projeto.
+
+O projeto possui 5 colunas:  **Product Backlog**, **Sprint Baclog**, **In Progress**, **Done** e **Expected**. Estas colunas são bastante autoexplicativas. É importante notar que, no final de qualquer iteração, as tarefas que não foram concluídas são passadas para a próxima, de modo que a coluna In Progress apareça vazia no final de cada iteração.
