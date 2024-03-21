@@ -24,6 +24,20 @@ You can find here detailed about "Nome da Aplicação", hereby mentioned as modu
 * [Configuration and change management](#Configuration-and-change-management)
 * [Project management](#Project-management)
 
+Até agora, as contribuições são exclusivamente feitas pela equipa inicial, mas esperamos abri-las à comunidade, em todas as áreas e tópicos: requisitos, tecnologias, desenvolvimento, experimentação, teste, etc.
+
+Por favor, contacte-nos!
+
+Obrigado!
+
+[Diogo Ferreira](https://github.com/DiogoFerreira2004)
+
+[Gabriel Carvalho](https://github.com/GabrielCarvalhoLEIC)
+
+[Rafael Cunha](https://github.com/rafaelcunha02)
+
+[Vasco Melo](https://github.com/pchmelo)
+
 ----
 ## Product Vision
 As pessoas usam  a "Nome da Aplicação" para gerir o stock das suas dispensas e evitar o desperdício alimentar.
@@ -357,10 +371,3 @@ Scenario:  A implementar...
 * Value: Will not have yet
 * Effort: 20
 
----
-### Developed by:
-
-1. Diogo Ferreira - E-mail: up202205295@edu.fe.up.pt
-2. Gabriel Carvalho - E-mail: up202208939@edu.fe.up.pt
-3. Rafael Cunha - E-mail: up202208957@edu.fe.up.pt
-4. Vasco Melo - E-mail: up202207564@edu.fe.up.pt
