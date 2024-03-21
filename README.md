@@ -120,7 +120,6 @@ Scenario:  Pesquisar produtos
 * Effort: 5
 
 <br />
-<br />
 
 **FEATURE**: Analisar Produtos <br />
     Como utilizador <br />
@@ -144,7 +143,6 @@ Scenario:  Analisar Produtos
 * Value: Should have
 * Effort: 1
 
-<br />
 <br />
 
 **FEATURE**: Adicionar Produtos À Lista De Compras <br />
@@ -170,7 +168,6 @@ Scenario:  Adicionar Produtos À Lista De Compras
 * Value: Must have
 * Effort: 3
 
-<br />
 <br />
 
 **FEATURE**: Atualizar Catálogo De Produtos <br />
@@ -206,7 +203,6 @@ Scenario:  Adicionar Produtos do catálogo
 * Effort: 5
 
 <br />
-<br />
 
 **FEATURE**: Partilhar De Inventário <br />
     Como utilizador <br />
@@ -226,7 +222,6 @@ Scenario:  Partilhar iventários
 * Value: Could have
 * Effort: 100
 
-<br />
 <br />
 
 **FEATURE**: Notificações Falta De Stock <br />
@@ -248,7 +243,6 @@ Scenario:  Notificações Falta de Stock
 * Effort: 40
 
 <br />
-<br />
 
 **FEATURE**: Notificações Data De Validade Prestes A Expirar <br />
     Como utilizador <br />
@@ -268,7 +262,6 @@ Scenario:  Notificações Data De Validade Prestes A Expirar
 * Value: Must have
 * Effort: 40
 
-<br />
 <br />
 
 **FEATURE**: Filtrar Resultados De Pesquisa <br />
@@ -306,7 +299,6 @@ Scenario:  Filtrar Resultados de Pesquisa por proximidade de limiares
 * Effort: 1
 
 <br />
-<br />
 
 **FEATURE**: Recuperar Password <br />
     Como utilizador <br />
@@ -328,7 +320,6 @@ Scenario:  Recuperar password
 * Effort: 40
 
 <br />
-<br />
 
 **FEATURE**: Visualizar E Alterar Definições De Conta <br />
     Como utilizador <br />
@@ -348,7 +339,6 @@ Scenario:  A implementar...
 * Value: Could have
 * Effort: 20
 
-<br />
 <br />
 
 **FEATURE**: Criar E Gerir Listas De Compras <br />
@@ -370,7 +360,6 @@ Scenario:  A implementar...
 * Effort: 8
 
 <br />
-<br />
 
 **FEATURE**: Modo Offline <br />
     Como utilizador <br />
@@ -390,7 +379,6 @@ Scenario:  A implementar...
 * Value: Could have
 * Effort: 13
 
-<br />
 <br />
 
 **FEATURE**: Manter Sessão Iniciada <br />
