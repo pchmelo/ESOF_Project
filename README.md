@@ -29,8 +29,6 @@ You can find here detailed about "Nome da Aplicação", hereby mentioned as modu
 As pessoas usam  a "Nome da Aplicação" para gerir o stock das suas dispensas e evitar o desperdício alimentar.
 
 ----
-
-----
 ## Elevator Pitch
 
 Do you ever get overwhelmed by the quantity of talks and how scattered they are through social media?
@@ -38,9 +36,6 @@ Do you ever get overwhelmed by the quantity of talks and how scattered they are 
 Este projeto consiste na criação de uma aplicação, com fins ecológicos. Para tal, os alunos responsáveis pela elaboração deste projeto decidiram desenvolver uma aplicação que permite gerir o stock da dispensa, evitando assim o consumismo desnecessário, através da criação de uma lista de compras com os bens alimentares necessários. Para além disso, ajudará a controlar o desperdício alimentar, provocado por alimentos cujos prazos de validade se encontram ultrapassados, ao emitir notificações com lembretes, quando a data de validade de um alimento estiver prestes a expirar.
 
 So, what are you waiting for? Sign up today!
-
-
----
 
 ---
 ## Functionalities
@@ -90,8 +85,6 @@ Tipos de sorting:
 * Se, ao ler o código de barras, a base de dados local não possa identificar o produto, ela vai pedir ao utilizador para associar o código a um determinado produto existente, ou para ele criar um novo produto;
 
 ---
-
----
 ## User Stories
 
 **FEATURE**: Pesquisar Produtos <br />
@@ -99,10 +92,13 @@ Tipos de sorting:
     Eu quero poder procurar por produtos específicos <br />
     Para que possa encontrar facilmente os itens que desejo <br />
 
-> Scenario: Pesquisar produtos
-> Given: Existem produtos previamente inseridos numa base de dados
-> When: Executo uma pesquisa de um produto presente na base de dados
-> Then: Encontro o produto desejado
+```Gherkin
+Scenario:  Pesquisar produtos
+  Given Existem produtos previamente inseridos numa base de dados
+  When Executo uma pesquisa de um produto presente na base de dados
+  Then Encontro o produto desejado
+```
+
 
 **FEATURE**: Analisar Produtos <br />
     Como utilizador <br />
