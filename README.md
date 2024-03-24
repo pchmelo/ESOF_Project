@@ -66,9 +66,6 @@ Opcional:
 * Users devem iniciar com e-mail ou username e password;
 * Recuperar a password se necessário através de username ou e-mail;
 
-
-<img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/LoginLogout.png?raw=true" alt="Login Logout Image" width="300" height="200">
-
 #### Validades:
 * Lista ordenada com sorting options (Alfabético, Quantitativo, Validade, Limiar);
 * Calendário (widget) - Destaca os dias em que algum limiar acaba, ao clicar no dia destacado, o utilizador pode obter informação sobre o produto de forma geral;
@@ -104,7 +101,7 @@ Tipos de sorting:
 ---
 ## User Stories
 
-**FEATURE**: Pesquisar Produtos <br />
+### **FEATURE**: Pesquisar Produtos
     Como cliente <br />
     Eu quero poder procurar por produtos específicos <br />
     Para que possa encontrar facilmente os itens que desejo <br />
@@ -122,10 +119,17 @@ Scenario:  Pesquisar produtos
 * Value: Must have
 * Effort: 5
 
-**FEATURE**: Analisar Produtos <br />
+<br />
+
+### **FEATURE**: Analisar Produtos
     Como utilizador <br />
     Eu quero poder ver informação detalhada sobre cada produto <br />
     Para que possa tomar decisões conscientes relativamente às minhas compras <br />
+
+### User interface mock-up
+<div style="display: flex;">
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Captura%20de%20ecrã%202024-03-21%20170904.png?raw=true" alt="Image" style="width: 250px; height: 460px; margin-right: 20px;">
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Captura%20de%20ecrã%202024-03-21%20170852.png?raw=true" alt="Image" style="width: 250px; height: 460px;">
 
 ### Acceptance tests
 ```Gherkin
@@ -135,17 +139,26 @@ Scenario:  Analisar Produtos
   Then Eu acedo a toda a informação detalhada disponível sobre o produto
 ```
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> f26c229a3f541758a688e0d147195c999bc77eeb
 ### Value and effort
 * Value: Should have
 * Effort: 1
 
-**FEATURE**: Adicionar Produtos À Lista De Compras <br />
+<br />
+
+### **FEATURE**: Adicionar Produtos À Lista De Compras
     Como utilizador <br />
     Eu quero poder adicionar produtos à minha lista de compras <br />
     Para que possa saber quais produtos preciso de comprar <br />
+
+### User interface mock-up
+<div style="display: flex;">
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Captura%20de%20ecrã%202024-03-21%20170904.png?raw=true" alt="Image" style="width: 250px; height: 460px; margin-right: 20px;">
 
 ### Acceptance tests
 ```Gherkin
@@ -161,7 +174,9 @@ Scenario:  Adicionar Produtos À Lista De Compras
 * Value: Must have
 * Effort: 3
 
-**FEATURE**: Atualizar Catálogo De Produtos <br />
+<br />
+
+### **FEATURE**: Atualizar Catálogo De Produtos
     Como gestor de stock <br />
     Eu quero poder adicionar, editar e remover produtos do inventário <br />
     Para que possa manter o catálogo de produtos atualizado <br />
@@ -193,7 +208,9 @@ Scenario:  Adicionar Produtos do catálogo
 * Value: Must have
 * Effort: 5
 
-**FEATURE**: Partilhar De Inventário <br />
+<br />
+
+### **FEATURE**: Partilhar De Inventário
     Como utilizador <br />
     Eu quero poder partilhar o meu inventário com quem vive comigo <br />
     Para que possamos colaborar nas compras e evitar compras desnecessárias <br />
@@ -211,7 +228,9 @@ Scenario:  Partilhar iventários
 * Value: Could have
 * Effort: 100
 
-**FEATURE**: Notificações Falta De Stock <br />
+<br />
+
+### **FEATURE**: Notificações Falta De Stock
     Como utilizador <br />
     Quero poder receber notificações de falta de produto em stock <br />
     Para evitar que me esqueça de comprar certos produtos que necessito <br />
@@ -229,7 +248,9 @@ Scenario:  Notificações Falta de Stock
 * Value: Should have
 * Effort: 40
 
-**FEATURE**: Notificações Data De Validade Prestes A Expirar <br />
+<br />
+
+### **FEATURE**: Notificações Data De Validade Prestes A Expirar
     Como utilizador <br />
     Quero poder receber notificações quando a data de validade dos meus produtos estiver prester a expirar <br />
     Para evitar que estes se estraguem e me ajudar a combater o desperdício alimentar <br />
@@ -247,7 +268,9 @@ Scenario:  Notificações Data De Validade Prestes A Expirar
 * Value: Must have
 * Effort: 40
 
-**FEATURE**: Filtrar Resultados De Pesquisa <br />
+<br />
+
+### **FEATURE**: Filtrar Resultados De Pesquisa 
     Como utilizador <br />
     Eu quero poder filtrar produtos por ordem alfabética, quantitativa, ou por proximidade de limiares <br />
     Para que possa melhorar os resultados da minha pesquisa <br />
@@ -281,7 +304,9 @@ Scenario:  Filtrar Resultados de Pesquisa por proximidade de limiares
 * Value: Could have
 * Effort: 1
 
-**FEATURE**: Recuperar Password <br />
+<br />
+
+### **FEATURE**: Recuperar Password
     Como utilizador <br />
     Eu quero poder recuperar a minha password <br />
     Para que possa aceder à minha conta mesmo que esqueça a password <br />
@@ -300,7 +325,9 @@ Scenario:  Recuperar password
 * Value: Will not have yet
 * Effort: 40
 
-**FEATURE**: Visualizar E Alterar Definições De Conta <br />
+<br />
+
+### **FEATURE**: Visualizar E Alterar Definições De Conta
     Como utilizador <br />
     Eu quero poder visualizar e alterar as definições da minha conta <br />
     Para que possa manter a minha informação atualizada e personalizar a minha experiência <br />
@@ -318,7 +345,9 @@ Scenario:  A implementar...
 * Value: Could have
 * Effort: 20
 
-**FEATURE**: Criar E Gerir Listas De Compras <br />
+<br />
+
+### **FEATURE**: Criar E Gerir Listas De Compras
     Como utilizador <br />
     Eu quero poder criar e gerir várias listas de compras <br />
     Para que possa organizar-me para várias ocasiões e contextos diferentes  <br />
@@ -336,8 +365,9 @@ Scenario:  A implementar...
 * Value: Must have
 * Effort: 8
 
+<br />
 
-**FEATURE**: Modo Offline <br />
+### **FEATURE**: Modo Offline
     Como utilizador <br />
     Eu quero poder aceder à app em modo offline <br />
     Para que possa ter os seus beneficios sem necessidade de internet <br />
@@ -355,8 +385,9 @@ Scenario:  A implementar...
 * Value: Could have
 * Effort: 13
 
+<br />
 
-**FEATURE**: Manter Sessão Iniciada <br />
+### **FEATURE**: Manter Sessão Iniciada
     Como utilizador <br />
     Eu quero poder manter a minha sessão iniciada <br />
     Para que não tenha de inserir as minhas credenciais sempre que abra a App <br />
@@ -373,3 +404,9 @@ Scenario:  A implementar...
 * Value: Will not have yet
 * Effort: 20
 
+---
+## Project management 
+
+Para facilitar a comunicação e organização da equipa, foi utilizado o [GitHub Projects](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/48) para a Gestão do Projeto deste projeto.
+
+O projeto possui 5 colunas:  **Product Backlog**, **Sprint Baclog**, **In Progress**, **Done** e **Accepted**. Estas colunas são bastante autoexplicativas. É importante notar que, no final de qualquer iteração, as tarefas que não foram concluídas são passadas para a próxima, de modo que a coluna In Progress apareça vazia no final de cada iteração.
