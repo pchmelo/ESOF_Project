@@ -31,12 +31,13 @@ Obrigado!
 [Vasco Melo](https://github.com/pchmelo)
 
 ----
-## Product Vision
+## Business modeling
+
+### Product Vision
 _"To make the world greener, keep your pantry stock 'cleaner'"._
 
-----
 
-## Functionalities
+### Functionalities
 
 #### Signing In:
 Obrigatório para os users:
@@ -82,9 +83,8 @@ Tipos de sorting:
 * Utilizadores deverão introduzir manualmente a data de validade, caso a considere relevante no produto em questão;
 * Se, ao ler o código de barras, a base de dados local não possa identificar o produto, ela vai pedir ao utilizador para associar o código a um determinado produto existente, ou para ele criar um novo produto;
 
----
 
-## Elevator Pitch
+### Elevator Pitch
 
 Alguma vez foste às compras e trouxeste produtos que não precisavas?
 Alguma vez deixaste a data de validade de um produto expirar?
@@ -95,6 +95,29 @@ De que estás à espera? Regista-te hoje mesmo!
 
 ---
 
+## Requirements
+
+### Domain Model
+
+Inserir Texto...
+
+---
+
+## Architecture and Design
+
+### Logical Architecture
+
+Inserir Texto...
+
+### Physical architecture
+
+Inserir Texto...
+
+### Vertical prototype
+
+Inserir texto...
+
+---
 ## Project management 
 
 Para facilitar a comunicação e organização da equipa, foi utilizado o [GitHub Projects](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/48) para a Gestão do Projeto deste projeto.
