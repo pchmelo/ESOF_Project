@@ -3,25 +3,20 @@
 
 ## 2nd Year - 2st Semester - Group Project
 
-Welcome to the documentation pages of the "Nome da Aplicação"!
+Bem-vindo às páginas de documentação da "Nome da Aplicação"!
 
-You can find here detailed about "Nome da Aplicação", hereby mentioned as module, from a high-level vision to low-level implementation decisions, a kind of Software Development Report , organized by discipline (as of RUP):
+Aqui poderá encontrar detalhes sobre a "Nome da Aplicação", doravante referida como módulo, desde uma visão de alto nível até às decisões de implementação de baixo nível, uma espécie de Relatório de Desenvolvimento de Software, organizado por disciplina (conforme o RUP):
 
 * Business modeling 
   * [Product Vision](#Product-Vision)
-  * [Elevator Pitch](#Elevator-Pitch)
   * [Functionalities](#Functionalities)
+  * [Elevator Pitch](#Elevator-Pitch)
 * Requirements
-  * [Use Case Diagram](#Use-case-diagram)
-  * [User stories](#User-stories)
   * [Domain model](#Domain-model)
 * Architecture and Design
   * [Logical architecture](#Logical-architecture)
   * [Physical architecture](#Physical-architecture)
-  * [Prototype](#Prototype)
-* [Implementation](#Implementation)
-* [Test](#Test)
-* [Configuration and change management](#Configuration-and-change-management)
+  * [Vertical Prototype](#Vertical-Prototype)
 * [Project management](#Project-management)
 
 Até agora, as contribuições são exclusivamente feitas pela equipa inicial, mas esperamos abri-las à comunidade, em todas as áreas e tópicos: requisitos, tecnologias, desenvolvimento, experimentação, teste, etc.
@@ -40,18 +35,10 @@ Obrigado!
 
 ----
 ## Product Vision
-As pessoas usam  a "Nome da Aplicação" para gerir o stock das suas dispensas e evitar o desperdício alimentar.
+_"To make the world greener, keep your pantry stock 'cleaner'"._
 
 ----
-## Elevator Pitch
 
-Alguma vez foste às compras e trouxeste produtos que não precisavas?
-
-Instala o/a "Nome da Aplicação". A aplicação que permite gerir o stock da dispensa, evitando assim o consumismo desnecessário, através da criação de uma lista de compras com os bens alimentares necessários. Para além disso, ajudará a controlar o desperdício alimentar, provocado por alimentos cujos prazos de validade se encontram ultrapassados, ao emitir notificações com lembretes, quando a data de validade de um alimento estiver prestes a expirar.
-
-De que estás à espera? Regista-te hoje mesmo!
-
----
 ## Functionalities
 
 #### Signing In:
@@ -99,312 +86,18 @@ Tipos de sorting:
 * Se, ao ler o código de barras, a base de dados local não possa identificar o produto, ela vai pedir ao utilizador para associar o código a um determinado produto existente, ou para ele criar um novo produto;
 
 ---
-## User Stories
 
-### **FEATURE**: Pesquisar Produtos
-    Como cliente <br />
-    Eu quero poder procurar por produtos específicos <br />
-    Para que possa encontrar facilmente os itens que desejo <br />
+## Elevator Pitch
 
-### Acceptance tests
-```Gherkin
-Scenario:  Pesquisar produtos
-  Given Existem produtos previamente inseridos numa base de dados
-  When Executo uma pesquisa de um produto presente na base de dados
-  Then Encontro o produto desejado
-```
+Alguma vez foste às compras e trouxeste produtos que não precisavas?
+Alguma vez deixaste a data de validade de um produto expirar?
 
+Então o/a "Nome da Aplicação" é a solução certa para ti. A aplicação que permite gerir o stock da dispensa, evitando assim o consumismo desnecessário, através da criação de uma lista de compras com os bens alimentares necessários. Para além disso, ajudará a controlar o desperdício alimentar, provocado por alimentos cujos prazos de validade se encontram ultrapassados, ao emitir notificações com lembretes, quando a data de validade de um alimento estiver prestes a expirar.
 
-### Value and effort
-* Value: Must have
-* Effort: 5
-
-<br />
-
-### **FEATURE**: Analisar Produtos
-    Como utilizador <br />
-    Eu quero poder ver informação detalhada sobre cada produto <br />
-    Para que possa tomar decisões conscientes relativamente às minhas compras <br />
-
-### User interface mock-up
-<div style="display: flex;">
-    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Captura%20de%20ecrã%202024-03-21%20170904.png?raw=true" alt="Image" style="width: 250px; height: 460px; margin-right: 20px;">
-    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Captura%20de%20ecrã%202024-03-21%20170852.png?raw=true" alt="Image" style="width: 250px; height: 460px;">
-
-### Acceptance tests
-```Gherkin
-Scenario:  Analisar Produtos
-  Given Eu tenho uma lista de produtos
-  When Eu clico num produto
-  Then Eu acedo a toda a informação detalhada disponível sobre o produto
-```
-
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> f26c229a3f541758a688e0d147195c999bc77eeb
-### Value and effort
-* Value: Should have
-* Effort: 1
-
-<br />
-
-### **FEATURE**: Adicionar Produtos À Lista De Compras
-    Como utilizador <br />
-    Eu quero poder adicionar produtos à minha lista de compras <br />
-    Para que possa saber quais produtos preciso de comprar <br />
-
-### User interface mock-up
-<div style="display: flex;">
-    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Captura%20de%20ecrã%202024-03-21%20170904.png?raw=true" alt="Image" style="width: 250px; height: 460px; margin-right: 20px;">
-
-### Acceptance tests
-```Gherkin
-Scenario:  Adicionar Produtos À Lista De Compras
-  Given Eu tenho uma lista de compras criada
-  When clico no botão "+"
-  And Seleciono o produto que quero
-  Then O produto é adicionado à minha lista de compras
-```
- 
-
-### Value and effort
-* Value: Must have
-* Effort: 3
-
-<br />
-
-### **FEATURE**: Atualizar Catálogo De Produtos
-    Como gestor de stock <br />
-    Eu quero poder adicionar, editar e remover produtos do inventário <br />
-    Para que possa manter o catálogo de produtos atualizado <br />
-
-### Acceptance tests
-```Gherkin
-Scenario:  Atualizar Descrição De Produtos
-  Given Eu sou gestor de stock
-  When Eu altero a descrição de um produto
-  Then Essa descrição fica disponível para os utilizadores
-```
-
-```Gherkin
-Scenario:  Remover Produtos do catálogo
-  Given Eu sou gestor de stock
-  When Eu removo um produto do catálogo
-  Then Esse produto deixa de estar disponível para os utilizadores
-```
-
-```Gherkin
-Scenario:  Adicionar Produtos do catálogo
-  Given Eu sou gestor de stock
-  When Eu adiciono um produto do catálogo
-  Then Esse produto fica disponível para os utilizadores
-```
-
-
-### Value and effort
-* Value: Must have
-* Effort: 5
-
-<br />
-
-### **FEATURE**: Partilhar De Inventário
-    Como utilizador <br />
-    Eu quero poder partilhar o meu inventário com quem vive comigo <br />
-    Para que possamos colaborar nas compras e evitar compras desnecessárias <br />
-
-### Acceptance tests
-```Gherkin
-Scenario:  Partilhar iventários
-  Given Eu e outras pessoas temos um inventário em comum
-  When Eu entro na conta associada a esse inventário
-  Then Consigo aceder a todas as informações relativas a esse inventário
-```
-
-
-### Value and effort
-* Value: Could have
-* Effort: 100
-
-<br />
-
-### **FEATURE**: Notificações Falta De Stock
-    Como utilizador <br />
-    Quero poder receber notificações de falta de produto em stock <br />
-    Para evitar que me esqueça de comprar certos produtos que necessito <br />
-
-### Acceptance tests
-```Gherkin
-Scenario:  Notificações Falta de Stock
-  Given Eu tenho um determinado produto
-  When Esse produto fica fora de stock ou baixa do limiar que eu estabeleci
-  Then Recebo uma notificação, para me lembrar de comprar esse produto
-```
-
-
-### Value and effort
-* Value: Should have
-* Effort: 40
-
-<br />
-
-### **FEATURE**: Notificações Data De Validade Prestes A Expirar
-    Como utilizador <br />
-    Quero poder receber notificações quando a data de validade dos meus produtos estiver prester a expirar <br />
-    Para evitar que estes se estraguem e me ajudar a combater o desperdício alimentar <br />
-
-### Acceptance tests
-```Gherkin
-Scenario:  Notificações Data De Validade Prestes A Expirar
-  Given Eu tenho um determinado produto
-  When A data de validade desse produto estiver prestes a expirar
-  Then Recebo uma notificação, para me lembrar de consumir o produto, evitando que este se estrague
-```
-
-
-### Value and effort
-* Value: Must have
-* Effort: 40
-
-<br />
-
-### **FEATURE**: Filtrar Resultados De Pesquisa 
-    Como utilizador <br />
-    Eu quero poder filtrar produtos por ordem alfabética, quantitativa, ou por proximidade de limiares <br />
-    Para que possa melhorar os resultados da minha pesquisa <br />
-
-### Acceptance tests
-```Gherkin
-Scenario:  Filtrar Resultados de Pesquisa por ordem alfabética
-  Given Eu executo uma determinada pesquisa
-  When Filtro os resultados dessa pesquisa por ordem alfabética
-  Then Os produtos devem me aparecer no ecrã por ordem alfabética
-```
-
-
-```Gherkin
-Scenario:  Filtrar Resultados de Pesquisa por ordem quantitativa
-  Given Eu executo uma determinada pesquisa
-  When Filtro os resultados dessa pesquisa por ordem quantitativa
-  Then Os produtos devem me aparecer conforme as suas quantidades em stock
-```
-
-
-```Gherkin
-Scenario:  Filtrar Resultados de Pesquisa por proximidade de limiares
-  Given Eu executo uma determinada pesquisa
-  When Filtro os resultados dessa pesquisa por proximidade de limiares
-  Then Os produtos devem me aparecer conforme a sua proximidade ao limiar estabelecido
-```
-
-
-### Value and effort
-* Value: Could have
-* Effort: 1
-
-<br />
-
-### **FEATURE**: Recuperar Password
-    Como utilizador <br />
-    Eu quero poder recuperar a minha password <br />
-    Para que possa aceder à minha conta mesmo que esqueça a password <br />
-
-### Acceptance tests
-```Gherkin
-Scenario:  Recuperar password
-  Given Eu perdi a minha password
-  When Eu solicito uma nova passe
-  And Confirmo a minha identidade através do email associado a conta
-  Then Consigo escolher uma nova password
-```
-
-
-### Value and effort
-* Value: Will not have yet
-* Effort: 40
-
-<br />
-
-### **FEATURE**: Visualizar E Alterar Definições De Conta
-    Como utilizador <br />
-    Eu quero poder visualizar e alterar as definições da minha conta <br />
-    Para que possa manter a minha informação atualizada e personalizar a minha experiência <br />
-
-### Acceptance tests
-```Gherkin
-Scenario:  A implementar...
-  Given 
-  When 
-  Then 
-```
-
-
-### Value and effort
-* Value: Could have
-* Effort: 20
-
-<br />
-
-### **FEATURE**: Criar E Gerir Listas De Compras
-    Como utilizador <br />
-    Eu quero poder criar e gerir várias listas de compras <br />
-    Para que possa organizar-me para várias ocasiões e contextos diferentes  <br />
-
-### Acceptance tests
-```Gherkin
-Scenario:  A implementar...
-  Given 
-  When 
-  Then 
-```
-
-
-### Value and effort
-* Value: Must have
-* Effort: 8
-
-<br />
-
-### **FEATURE**: Modo Offline
-    Como utilizador <br />
-    Eu quero poder aceder à app em modo offline <br />
-    Para que possa ter os seus beneficios sem necessidade de internet <br />
-
-### Acceptance tests
-```Gherkin
-Scenario:  A implementar...
-  Given 
-  When 
-  Then 
-```
-
-
-### Value and effort
-* Value: Could have
-* Effort: 13
-
-<br />
-
-### **FEATURE**: Manter Sessão Iniciada
-    Como utilizador <br />
-    Eu quero poder manter a minha sessão iniciada <br />
-    Para que não tenha de inserir as minhas credenciais sempre que abra a App <br />
-
-### Acceptance tests
-```Gherkin
-Scenario:  A implementar...
-  Given 
-  When 
-  Then 
-```
-
-### Value and effort
-* Value: Will not have yet
-* Effort: 20
+De que estás à espera? Regista-te hoje mesmo!
 
 ---
+
 ## Project management 
 
 Para facilitar a comunicação e organização da equipa, foi utilizado o [GitHub Projects](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/48) para a Gestão do Projeto deste projeto.
