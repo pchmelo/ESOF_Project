@@ -1,7 +1,4 @@
-# FEUP - Software Engineering - 2023/2024
-> Curricular Unit: ES - [Engenharia de Software](https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=520322)
-
-## 2nd Year - 2st Semester - Group Project
+# "Nome da Aplicação" Development Report
 
 Bem-vindo às páginas de documentação da "Nome da Aplicação"!
 
