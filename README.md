@@ -99,8 +99,8 @@ De que estás à espera? Regista-te hoje mesmo!
 
 ### Domain Model
 
-Inserir Diagrama de Classes...
 
+<img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/img.png?raw=true" alt="Image">
 ---
 
 ## Architecture and Design
