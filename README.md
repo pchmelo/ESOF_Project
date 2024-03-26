@@ -52,7 +52,7 @@ Opcional:
 * Recuperar a password se necessário através de username ou e-mail;
 
 #### Validades:
-* Lista ordenada com sorting options (Alfabético, Quantitativo, Validade, Limiar);
+* Lista ordenada com opções de sorting (Alfabético, Quantitativo, Validade, Limiar);
 * Calendário (widget) - Destaca os dias em que algum limiar acaba, ao clicar no dia destacado, o utilizador pode obter informação sobre o produto de forma geral;
 
 #### Settings:
