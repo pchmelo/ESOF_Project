@@ -40,7 +40,7 @@ _"To make the world greener, keep your pantry stock 'cleaner'"._
 ### Functionalities
 
 #### Signing In:
-Obrigatório para os users:
+Obrigatório para os utilizadores:
 * E-mail, username, password     (possibilidade de Google acc);
 
 Opcional:
