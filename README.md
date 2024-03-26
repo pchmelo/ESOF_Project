@@ -1,4 +1,4 @@
-# "Nome da Aplicação" Development Report
+# "StockOverflow" Development Report
 
 Bem-vindo às páginas de documentação da "Nome da Aplicação"!
 
