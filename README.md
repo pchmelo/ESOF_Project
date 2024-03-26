@@ -109,9 +109,15 @@ Inserir Diagrama de Classes...
 
 Inserir Texto...
 
+## Package diagram
+<img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/packdiagram.png?raw=true" alt="Image">
+
 ### Physical Architecture
 
 Inserir Texto...
+
+## Deployment diagram
+<img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/deploymentDiagram.png?raw=true" alt="Image">
 
 ### Vertical Prototype
 
