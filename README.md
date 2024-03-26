@@ -1,8 +1,8 @@
-# "Nome da Aplicação" Development Report
+# "Stock Overflow" Development Report
 
-Bem-vindo às páginas de documentação da "Nome da Aplicação"!
+Bem-vindo às páginas de documentação da "Stock Overflow"!
 
-Aqui poderá encontrar detalhes sobre a "Nome da Aplicação", doravante referida como módulo, desde uma visão de alto nível até às decisões de implementação de baixo nível, uma espécie de Relatório de Desenvolvimento de Software, organizado por disciplina (conforme o RUP):
+Aqui poderá encontrar detalhes sobre a "Stock Overflow", doravante referida como módulo, desde uma visão de alto nível até às decisões de implementação de baixo nível, uma espécie de Relatório de Desenvolvimento de Software, organizado por disciplina (conforme o RUP):
 
 * [Business modeling](#Business-modeling)
   * [Product Vision](#Product-Vision)
@@ -40,7 +40,7 @@ _"To make the world greener, keep your pantry stock 'cleaner'"._
 ### Functionalities
 
 #### Signing In:
-Obrigatório para os users:
+Obrigatório para os utilizadores:
 * E-mail, username, password     (possibilidade de Google acc);
 
 Opcional:
@@ -52,7 +52,7 @@ Opcional:
 * Recuperar a password se necessário através de username ou e-mail;
 
 #### Validades:
-* Lista ordenada com sorting options (Alfabético, Quantitativo, Validade, Limiar);
+* Lista ordenada com opções de sorting (Alfabético, Quantitativo, Validade, Limiar);
 * Calendário (widget) - Destaca os dias em que algum limiar acaba, ao clicar no dia destacado, o utilizador pode obter informação sobre o produto de forma geral;
 
 #### Settings:
