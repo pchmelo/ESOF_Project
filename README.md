@@ -1,6 +1,6 @@
 # "StockOverflow" Development Report
 
-Bem-vindo às páginas de documentação da "Nome da Aplicação"!
+Bem-vindo às páginas de documentação da "StockOverflow"!
 
 Aqui poderá encontrar detalhes sobre a "Nome da Aplicação", doravante referida como módulo, desde uma visão de alto nível até às decisões de implementação de baixo nível, uma espécie de Relatório de Desenvolvimento de Software, organizado por disciplina (conforme o RUP):
 
