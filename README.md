@@ -1,8 +1,8 @@
-# "StockOverflow" Development Report
+# "Stock Overflow" Development Report
 
-Bem-vindo às páginas de documentação da "StockOverflow"!
+Bem-vindo às páginas de documentação da "Stock Overflow"!
 
-Aqui poderá encontrar detalhes sobre a "StockOverflow", doravante referida como módulo, desde uma visão de alto nível até às decisões de implementação de baixo nível, uma espécie de Relatório de Desenvolvimento de Software, organizado por disciplina (conforme o RUP):
+Aqui poderá encontrar detalhes sobre a "Stock Overflow", doravante referida como módulo, desde uma visão de alto nível até às decisões de implementação de baixo nível, uma espécie de Relatório de Desenvolvimento de Software, organizado por disciplina (conforme o RUP):
 
 * [Business modeling](#Business-modeling)
   * [Product Vision](#Product-Vision)
