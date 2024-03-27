@@ -139,7 +139,7 @@ Inserir Texto...
 
 ### Vertical Prototype
 
-#### Already Implemented:
+#### Já implementado:
 
 * Sign in
 * Log in & Log out
