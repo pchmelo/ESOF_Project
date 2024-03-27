@@ -107,7 +107,26 @@ Do que estás à espera? Regista-te hoje mesmo!
 
 ### Logical Architecture
 
-Inserir Texto...
+Por motivos relacionados com organização e compreensão do código, assim como do projeto na sua generalidade, este está dividio em duas partes com algumas subpartes.
+
+#### Gerenciamento da Dispensa:
+Lógica central do sistema, responsável pelas Interfaces do utilizador e pela comunicação com o back-end.
+
+ 
+* UI/GUI (Interface do Usuário):
+Responsáveis por como os usuários interagem e comunicam com o sistema, através de widgets, botões, entre outros.
+
+* BackEnd:
+Lida com tarefas em segundo plano com as quais os usuários não interagem diretamente, como armazenamento e processamento dados. Inclui também o acesso a serviços externos ocasionalmente necessários para reconhecimento de alguns itens
+
+* Base de Dados (Interna):
+Armazena os dados do sistema, sendo estes utilizadores, produtos, definições pessoais dos utilizadores, entre outros.
+
+#### Serviços Externos:
+Incluem apenas uma base de dados externa, para acesso quando necessário.
+
+*Base de Dados (Externa):
+Banco de dados externo ao sistema, com o qual o sistema interage para adquirir informação que não está presente na base de dados interna
 
 ## Package diagram
 <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/packdiagram.png?raw=true" alt="Image">
