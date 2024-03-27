@@ -132,9 +132,30 @@ Banco de dados externo ao sistema, com o qual o sistema interage para adquirir i
 
 ### Physical Architecture
 
-Inserir Texto...
+#### Tecnologias Utilizadas
 
-## Deployment diagram
+Essencialmente, esta aplicação faz uso de várias tecnologias internas e externas ao dispositivo do utilizador.
+
+##### Dispositivo Móvel:
+
+* Camêra:
+Necessária para o Scan de produtos através de código de barras.
+
+* Acesso à Internet:
+Necessário para pesquisa de produtos numa Base de Dados externa após o Scan dos códigos de barras.
+
+##### Aplicação:
+
+* Calendário:
+Necessário para todas as funcionalidades envolvendo Datas de Validade e notificações.
+
+* API de leitura de código de barras:
+Possibilita a leitura de códigos de barras.
+
+* Estrutura Principal e Base de Dados Interna (verificar o [Package Diagram](#Package-Diagram)
+
+
+#### Deployment diagram
 <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/deploymentDiagram.png?raw=true" alt="Image">
 
 ### Vertical Prototype
