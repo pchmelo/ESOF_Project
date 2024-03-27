@@ -233,10 +233,3 @@ Todas as contas criadas são, de momento, associadas à mesma dispensa (base de 
 
 ##### Resultado visível aos administradores no Firebase, após criação de contas:
 <img style="width: 60em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Firebase.png?raw=true">
-
-
-## Project management 
-
-Para facilitar a comunicação e organização da equipa, foi utilizado o [GitHub Projects](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/48) para a Gestão do Projeto deste projeto.
-
-O projeto possui 5 colunas:  **Product Backlog**, **Sprint Baclog**, **In Progress**, **Done** e **Accepted**. Estas colunas são bastante autoexplicativas. É importante notar que, no final de qualquer iteração, as tarefas que não foram concluídas são passadas para a próxima, de modo que a coluna In Progress apareça vazia no final de cada iteração.
