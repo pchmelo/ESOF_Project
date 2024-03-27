@@ -202,17 +202,37 @@ Widget que permite a criação e verificação de datas respectivas a Eventos.
  <img style="width: 20em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/EventoApk.png?raw=true"></div>
 
 
- #### Scanner
+##### Scanner
 
 API de leitura de código de barras que permite identificar produtos através do seu código de barras.
 
-<img style="width: 20em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/ScannerApk.png?raw=true">
+<div style="display: flex;">
+    <img style="width: 20em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/ScannerApk.png?raw=true">
+<img style="width: 20em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/TicketApk.png?raw=true"></div>
+
+
+##### Firebase
+
+* Sign Up e Log in / Log out:
+
+Interface com dois campos para e-mail e palavra-passe, respectivamente. O e-mail deve, obrigatóriamente, ter um formato válido para que a aplicação o aceite, enquanto a palavra-passe deve ter, no mínimo, seis dígitos.
+
+<div style="display: flex;">
+    <img style="width: 20em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/SignUpFirebase.png?raw=true">
+<img style="width: 20em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/SignInFirebase.png?raw=true"></div>
+
+* Homepage:
+
+Todas as contas criadas são, de momento, associadas à mesma dispensa (base de dados) e é criado um produto associado a cada utilizador, que pode ser alterado pelo utilizador em questão.
+
+<div style="display: flex;">
+    <img style="width: 20em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/arrozFirebase.png?raw=true">
+<img style="width: 20em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/MassaFirebase.png?raw=true"></div>
 
 
 
-
-
-
+##### Resultado visível aos administradores no Firebase, após criação de contas:
+<img style="width: 60em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Firebase.png?raw=true">
 
 
 ## Project management 
