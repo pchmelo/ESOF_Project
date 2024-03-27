@@ -127,7 +127,7 @@ Incluem apenas uma base de dados externa, para acesso quando necessário.
 * Base de Dados (Externa):
 Banco de dados externo ao sistema, com o qual o sistema interage para adquirir informação que não está presente na base de dados interna
 
-## Package diagram
+#### Package diagram
 <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/packdiagram.png?raw=true" alt="Image">
 
 ### Physical Architecture
