@@ -166,6 +166,8 @@ Possibilita a leitura de códigos de barras.
 * Log in & Log out
 * Base de dados interna
 * Adição de produto à Base de Dados
+* API de leitura de códigos de barras
+* Calendário
 
 ---
 ## Project management 
