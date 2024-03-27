@@ -99,9 +99,8 @@ Do que estás à espera? Regista-te hoje mesmo!
 
 ### Domain Model
 
-
 <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/img.png?raw=true" alt="Image">
----
+
 
 ## Architecture and Design
 
@@ -140,7 +139,12 @@ Inserir Texto...
 
 ### Vertical Prototype
 
-Inserir texto...
+#### Already Implemented:
+
+* Sign in
+* Log in & Log out
+* Base de dados interna
+* Adição de produto à Base de Dados
 
 ---
 ## Project management 
