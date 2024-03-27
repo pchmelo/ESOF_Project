@@ -14,7 +14,7 @@ Aqui poderá encontrar detalhes sobre a "Stock Overflow", doravante referida com
   * [Logical architecture](#Logical-architecture)
   * [Physical architecture](#Physical-architecture)
   * [Vertical Prototype](#Vertical-Prototype)
-* [Project management](#Project-management)
+
 
 Até agora, as contribuições são exclusivamente feitas pela equipa inicial, mas esperamos abri-las à comunidade, em todas as áreas e tópicos: requisitos, tecnologias, desenvolvimento, experimentação, teste, etc.
 
