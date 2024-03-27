@@ -89,9 +89,9 @@ Tipos de sorting:
 Alguma vez foste às compras e trouxeste produtos que não precisavas?
 Alguma vez deixaste a data de validade de um produto expirar?
 
-Então o "Stock Overflow" é a solução certa para ti! A aplicação que permite gerir o stock da dispensa, evitando assim o consumismo desnecessário, através da criação de uma lista de compras com os bens alimentares necessários. Para além disso, ajudará a controlar o desperdício alimentar, provocado por alimentos cujos prazos de validade se encontram ultrapassados, ao emitir notificações com lembretes, quando a data de validade de um alimento estiver prestes a expirar.
+Então o "Stock Overflow" é a solução certa para ti! A aplicação que permite gerires o stock da tua dispensa, evitando assim o consumismo desnecessário, através da criação de uma lista de compras com os bens alimentares necessários. Para além disso, ajudará a controlar o desperdício alimentar, provocado por alimentos cujos prazos de validade se encontram ultrapassados, ao emitir notificações personalizaveis, quando a data de validade de um alimento estiver prestes a expirar.
 
-De que estás à espera? Regista-te hoje mesmo!
+Do que estás à espera? Regista-te hoje mesmo!
 
 ---
 
@@ -99,8 +99,8 @@ De que estás à espera? Regista-te hoje mesmo!
 
 ### Domain Model
 
-Inserir Diagrama de Classes...
 
+<img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/img.png?raw=true" alt="Image">
 ---
 
 ## Architecture and Design
