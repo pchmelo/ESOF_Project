@@ -99,6 +99,24 @@ Do que estás à espera? Regista-te hoje mesmo!
 
 ### Domain Model
 
+#### Elementos:
+
+* Dispensa:
+Elemento central ao qual vão ser associados utilizadores, produtos e listas de compras.
+
+* Conta:
+Utilizador associado a uma dispensa criada ou à qual concordou ser adicionado.
+
+* Lista de compras:
+Associadas a uma dispensa e a vários produtos, conteem uma data de notificação que avisa o utilizador sobre quando comprar.
+
+* Produto:
+Adicionável à dispensa e às listas de compras, guarda-se a sua quantidade e um limiar de notificações para quantidade e/ou data de validade expirada
+
+* Validade:
+Associada a um produto, dita quantas unidades desse produto existem cuja data de validade expira numa certa data.
+ 
+
 <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/img.png?raw=true" alt="Image">
 
 
