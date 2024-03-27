@@ -180,14 +180,41 @@ Possibilita a leitura de códigos de barras.
 
 #### Já implementado:
 
-* Sign in
-* Log in & Log out
-* Base de dados interna
-* Adição de produto à Base de Dados
+* Sign in (com Firebase)
+* Log in & Log out (com Firebase)
+* Adição e alteração de produtos à Base de Dados
 * API de leitura de códigos de barras
 * Calendário
 
----
+
+##### Página Inicial
+
+Nesta página, encontram-se três botoês que irão direccionar o utilizador a três diferentes APIs implementadas.
+O botão de "Calendário" dirige o utilizador a uma API do calendário, o botão de "Scanner" dirige a uma API de scan de códigos de barras para produtos alimentares, enquanto o botão de "Form" dirige a um Form com Firebase implementado.
+
+<img style="width: 20em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/FirstPageApk.png?raw=true"> 
+
+##### Calendário
+
+Widget que permite a criação e verificação de datas respectivas a Eventos.
+<div style="display: flex;">
+    <img style="width: 20em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/CalendarioApk.png?raw=true">
+ <img style="width: 20em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/EventoApk.png?raw=true"></div>
+
+
+ #### Scanner
+
+API de leitura de código de barras que permite identificar produtos através do seu código de barras.
+
+<img style="width: 20em; height: 35em" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/ScannerApk.png?raw=true">
+
+
+
+
+
+
+
+
 ## Project management 
 
 Para facilitar a comunicação e organização da equipa, foi utilizado o [GitHub Projects](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/48) para a Gestão do Projeto deste projeto.
