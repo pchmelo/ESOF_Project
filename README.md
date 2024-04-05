@@ -236,16 +236,15 @@ Todas as contas criadas são, de momento, associadas à mesma dispensa (base de 
 
 
 ## Project management
-Software project management is the art and science of planning and leading software projects, in which software projects are planned, implemented, monitored and controlled.
+Nesta secção iremos mostrar como decidimos organizar o nosso projeto. Para isso escolhemos criar uma scrum board com cinco colunas que dividem o projeto em diferentes etapas.
+Estas etapas são:
 
-In the context of ESOF, we recommend each team to adopt a set of project management practices and tools capable of registering tasks, assigning tasks to team members, adding estimations to tasks, monitor tasks progress, and therefore being able to track their projects.
+- Product Backlog: Secção onde guardamos todas as funcionalidades que iremos implementar ao longo do projeto
+- Sprint Backlog: Secção onde guardamos todas as funcionalidades que iremos implementar durante o sprint atual
+- In Progress: Secção onde guardamos todas as funcionalidades que estão neste momento a ser desenvolvidas
+- Done: Secção onde guardamos todas as funcionalidades que foram desenvolvidas e à espera de aprovação
+- Accepted: Secção onde guardamos todas as funcionalidades que foram desenvolvidas e aceites pelo cliente
 
-Common practices of managing iterative software development are: backlog management, release management, estimation, iteration planning, iteration development, acceptance tests, and retrospectives.
-
-You can find below information and references related with the project management in our team: 
-
-* Backlog management: Product backlog and Sprint backlog in a [Github Projects board](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/64);
-* Release management: [v0](#), v1, v2, v3, ...;
-* Sprint planning and retrospectives: 
-  * plans: screenshots of Github Projects board at begin and end of each iteration;
-  * retrospectives: meeting notes in a document in the repository;
+### Sprint 1:
+- Prints da scrum board durante a realização do primeiro sprint:
+<img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Sprint1.png?raw=true">
