@@ -1,11 +1,13 @@
-import 'package:esof_project/app/views/main_pages/storage.view.dart';
+import 'package:esof_project/app/views/authenticate/authenticate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Start extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Authenticate();
+    /*
+      Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -33,5 +35,7 @@ class Start extends StatelessWidget {
         ],
       ),
     );
+
+       */
   }
 }
