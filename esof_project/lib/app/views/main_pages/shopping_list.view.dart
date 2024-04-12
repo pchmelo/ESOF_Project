@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class ShoppingListView extends StatelessWidget {
   final name = 'Shopping List';
+  String currentRoute = '/start/shopping_list';
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +15,9 @@ class ShoppingListView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            child: Text(name),
-          ),
+          Text(name),
           const SizedBox(height: 600),
-          const Footer(),
+          Footer(),
         ],
       ),
     );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class SettingsView extends StatelessWidget {
   final name = 'Settings';
+  String currentRoute = '/start/settings';
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class SettingsView extends StatelessWidget {
             child: Text(name),
           ),
           const SizedBox(height: 600),
-          const Footer(),
+          Footer(),
         ],
       ),
     );

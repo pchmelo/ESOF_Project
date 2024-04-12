@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class CalanderView extends StatelessWidget {
   final name = 'Calendar';
+  String currentRoute = '/start/calendar';
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class CalanderView extends StatelessWidget {
             child: Text(name),
           ),
           const SizedBox(height: 600),
-          const Footer(),
+          Footer(),
         ],
       ),
     );
