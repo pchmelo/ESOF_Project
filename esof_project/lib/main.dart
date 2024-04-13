@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/start': (context) => Start(),
         '/start/storage': (context) => StorageView(),
-        '/start/calendar': (context) => CalanderView(),
+        '/start/calendar': (context) => CalenderView(),
         '/start/settings': (context) => SettingsView(),
         '/start/shopping_list': (context) => ShoppingListView(),
       },
