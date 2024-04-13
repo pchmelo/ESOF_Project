@@ -18,14 +18,26 @@ class DatabaseService {
   }
 
   List<Product> _productListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.docs.map((doc) {
-      return Product(
-        id: doc.get('id') ?? '',
-        name: doc.get('name') ?? '',
-        quantity: doc.get('quantity') ?? 0,
-        threshold: doc.get('threshold') ?? 0,
-      );
-    }).toList();
+    return snapshot.docs
+        .map((doc) {
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+          if (!data.containsKey('id')) {
+            print('Error: "id" field does not exist in the document');
+            // Handle the error appropriately
+            return null;
+          }
+
+          return Product(
+            id: data['id'] ?? '',
+            name: data['name'] ?? '',
+            quantity: data['quantity'] ?? 0,
+            threshold: data['threshold'] ?? 0,
+          );
+        })
+        .where((product) => product != null)
+        .cast<Product>()
+        .toList();
   }
 
   Stream<List<Product>> getProducts() {
