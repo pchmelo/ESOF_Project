@@ -27,7 +27,7 @@ class _ProductListState extends State<ProductList> {
   Widget build(BuildContext context) {
     return Expanded(
       child: StreamBuilder<List<Product>>(
-        stream: _dbService.getProduct(),
+        stream: _dbService.getProducts(),
         builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();

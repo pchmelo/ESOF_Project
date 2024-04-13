@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import '../../../models/product.model.dart';
+import '../../extra_pages/product.view.dart';
 
 class ProductTile extends StatelessWidget {
-  final Product? product;
-  const ProductTile({super.key, this.product});
+  final Product product;
+  const ProductTile({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ProducDetailsPage(product: product)));
+      },
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: Card(
