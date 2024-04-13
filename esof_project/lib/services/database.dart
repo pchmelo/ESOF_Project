@@ -9,17 +9,18 @@ class DatabaseService {
   final CollectionReference productCollection =
       FirebaseFirestore.instance.collection('users');
 
-  Future<DocumentReference<Map<String, dynamic>>> addProduct(
-      Product product) async {
+  Future<void> addProduct(Product product) async {
     return await productCollection
         .doc(uid)
         .collection('products')
-        .add(product.toJson());
+        .doc(product.id)
+        .set(product.toJson());
   }
 
   List<Product> _productListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return Product(
+        id: doc.get('id') ?? '',
         name: doc.get('name') ?? '',
         quantity: doc.get('quantity') ?? 0,
         threshold: doc.get('threshold') ?? 0,
@@ -27,7 +28,7 @@ class DatabaseService {
     }).toList();
   }
 
-  Stream<List<Product>> getProduct() {
+  Stream<List<Product>> getProducts() {
     return productCollection
         .doc(uid)
         .collection('products')
@@ -45,28 +46,16 @@ class DatabaseService {
   }
    */
 
-  Future<void> deleteProductByName(String productName) async {
-    QuerySnapshot snapshot = await productCollection
+  Future<void> deleteProductById(String productId) async {
+    await productCollection
         .doc(uid)
         .collection('products')
-        .where('name', isEqualTo: productName)
-        .get();
-
-    snapshot.docs.forEach((doc) async {
-      await doc.reference.delete();
-    });
+        .doc(productId)
+        .delete();
   }
 
-  Future<void> updateProductByName(
-      String productName, Product newProductData) async {
-    QuerySnapshot snapshot = await productCollection
-        .doc(uid)
-        .collection('products')
-        .where('name', isEqualTo: productName)
-        .get();
-
-    snapshot.docs.forEach((doc) async {
-      await doc.reference.update(newProductData.toJson());
-    });
+  Future<void> updateProduct(Product product) async {
+    deleteProductById(product.id!);
+    addProduct(product);
   }
 }

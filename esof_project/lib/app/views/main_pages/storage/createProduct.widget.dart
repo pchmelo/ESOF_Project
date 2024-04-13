@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/services/database.dart';
 import 'package:flutter/services.dart';
+import 'package:uuid/uuid.dart';
 
 class CreateProdut extends StatefulWidget {
   const CreateProdut({super.key});
@@ -83,6 +84,7 @@ class _CreateProdutState extends State<CreateProdut> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     Product product = Product(
+                        id: const Uuid().v4(),
                         name: _name,
                         threshold: _threshold.toInt(),
                         quantity: _quantity.toInt());
