@@ -57,8 +57,14 @@ class _CreateProdutState extends State<CreateProdut> {
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 decoration: const InputDecoration(labelText: 'Threshold'),
-                validator: (val) =>
-                    val!.isEmpty ? 'Enter a threshold' : null,
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'Enter a threshold';
+                  } else if (int.parse(val) > _quantity) {
+                    return 'Threshold must be less than quantity';
+                  }
+                  return null;
+                },
                 onChanged: (val) => setState(() => _threshold = int.parse(val)),
               ),
               ElevatedButton(
