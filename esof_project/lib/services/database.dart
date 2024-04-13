@@ -17,6 +17,25 @@ class DatabaseService {
         .add(product.toJson());
   }
 
+  List<Product> _productListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Product(
+        name: doc.get('name') ?? '',
+        quantity: doc.get('quantity') ?? 0,
+        threshold: doc.get('threshold') ?? 0,
+      );
+    }).toList();
+  }
+
+  Stream<List<Product>> getProduct() {
+    return productCollection
+        .doc(uid)
+        .collection('products')
+        .snapshots()
+        .map(_productListFromSnapshot);
+  }
+
+  /*
   Future<List<Product>> getProducts() async {
     QuerySnapshot snapshot =
         await productCollection.doc(uid).collection('products').get();
@@ -24,6 +43,7 @@ class DatabaseService {
         .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
         .toList();
   }
+   */
 
   Future<void> deleteProductByName(String productName) async {
     QuerySnapshot snapshot = await productCollection

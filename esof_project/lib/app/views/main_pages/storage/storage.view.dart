@@ -1,5 +1,6 @@
 import 'package:esof_project/app/components/footer.component.dart';
-import 'package:esof_project/app/views/main_pages/storage/createProduct.view.dart';
+import 'package:esof_project/app/views/main_pages/storage/createProduct.widget.dart';
+import 'package:esof_project/app/views/main_pages/storage/productList.widget.dart';
 import 'package:flutter/material.dart';
 
 class StorageView extends StatelessWidget {
@@ -28,15 +29,12 @@ class StorageView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            child: const Text(name),
-          ),
+          const ProductList(),
           IconButton(
               onPressed: () {
                 return _createProductForm();
               },
               icon: const Icon(Icons.add)),
-          const SizedBox(height: 600),
           Footer(),
         ],
       ),

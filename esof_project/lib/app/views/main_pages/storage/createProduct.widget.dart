@@ -34,7 +34,7 @@ class _CreateProdutState extends State<CreateProdut> {
         title: const Text('Create Product'),
       ),
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Form(
           key: _formKey,
           child: Column(
