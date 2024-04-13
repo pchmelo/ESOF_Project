@@ -31,7 +31,7 @@ class _CreateProdutState extends State<CreateProdut> {
   @override
   Widget build(BuildContext context) {
         return Container(
-            height: 350,
+            height: 425,
             padding: const EdgeInsets.all(15.0),
             child: Form(
               key: _formKey,
