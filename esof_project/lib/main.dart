@@ -1,7 +1,7 @@
 import 'package:esof_project/app/views/main_pages/calendar.view.dart';
 import 'package:esof_project/app/views/main_pages/settings.view.dart';
 import 'package:esof_project/app/views/main_pages/shopping_list.view.dart';
-import 'package:esof_project/app/views/main_pages/storage.view.dart';
+import 'package:esof_project/app/views/main_pages/storage/storage.view.dart';
 import 'package:esof_project/app/views/start.view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
