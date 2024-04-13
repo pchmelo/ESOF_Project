@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/services/database.dart';
+import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
 
 class CreateProdut extends StatefulWidget {
@@ -30,31 +31,53 @@ class _CreateProdutState extends State<CreateProdut> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Create Product'),
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(20),
+    return Container(
+        height: 425,
+        padding: const EdgeInsets.all(15.0),
         child: Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Product Name'),
+                decoration: const InputDecoration(
+                  labelText: 'Product Name',
+                  border: OutlineInputBorder(),
+                ),
                 validator: (val) =>
                     val!.isEmpty ? 'Enter a product name' : null,
                 onChanged: (val) => setState(() => _name = val),
               ),
+              const Padding(padding: EdgeInsets.only(top: 20)),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Threshold'),
-                validator: (val) => val!.isEmpty ? 'Enter a threshold' : null,
-                onChanged: (val) => setState(() => _threshold = int.parse(val)),
-              ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'Quantity'),
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                decoration: const InputDecoration(
+                  labelText: 'Quantity',
+                  border: OutlineInputBorder(),
+                ),
                 validator: (val) => val!.isEmpty ? 'Enter a quantity' : null,
                 onChanged: (val) => setState(() => _quantity = int.parse(val)),
+              ),
+              const Padding(padding: EdgeInsets.only(top: 20)),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                decoration: const InputDecoration(
+                  labelText: 'Threshold',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'Enter a threshold';
+                  } else if (int.parse(val) > _quantity) {
+                    return 'Threshold must be less than quantity';
+                  }
+                  return null;
+                },
+                onChanged: (val) => setState(() => _threshold = int.parse(val)),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               ElevatedButton(
                 child: const Text('Create Product'),
@@ -66,13 +89,12 @@ class _CreateProdutState extends State<CreateProdut> {
                         threshold: _threshold.toInt(),
                         quantity: _quantity.toInt());
                     await _dbService.addProduct(product);
+                    Navigator.pop(context);
                   }
                 },
               ),
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
