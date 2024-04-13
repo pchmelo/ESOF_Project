@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/services/database.dart';
+import 'package:flutter/services.dart';
 
 class CreateProdut extends StatefulWidget {
   const CreateProdut({super.key});
@@ -46,14 +47,19 @@ class _CreateProdutState extends State<CreateProdut> {
                 onChanged: (val) => setState(() => _name = val),
               ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Threshold'),
-                validator: (val) => val!.isEmpty ? 'Enter a threshold' : null,
-                onChanged: (val) => setState(() => _threshold = int.parse(val)),
+              keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: const InputDecoration(labelText: 'Quantity'),
+              validator: (val) => val!.isEmpty ? 'Enter a quantity' : null,
+              onChanged: (val) => setState(() => _quantity = int.parse(val)),
               ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Quantity'),
-                validator: (val) => val!.isEmpty ? 'Enter a quantity' : null,
-                onChanged: (val) => setState(() => _quantity = int.parse(val)),
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                decoration: const InputDecoration(labelText: 'Threshold'),
+                validator: (val) =>
+                    val!.isEmpty ? 'Enter a threshold' : null,
+                onChanged: (val) => setState(() => _threshold = int.parse(val)),
               ),
               ElevatedButton(
                 child: const Text('Create Product'),
