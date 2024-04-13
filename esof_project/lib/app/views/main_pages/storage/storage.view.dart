@@ -11,14 +11,15 @@ class StorageView extends StatelessWidget {
   Widget build(BuildContext context) {
     void _createProductForm() {
       showModalBottomSheet(
-          context: context,
-          builder: (context) {
-            return Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-              child: const CreateProdut(),
-            );
-          });
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext context) {
+          return Padding(
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: const CreateProdut(),
+          );
+        },
+      );
     }
 
     return Scaffold(
