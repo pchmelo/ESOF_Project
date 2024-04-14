@@ -34,7 +34,12 @@ class _FooterState extends State<Footer> {
           iconSize: 40,
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            String? currentRoute = ModalRoute.of(context)!.settings.name;
+            if (currentRoute != '/start/add_product') {
+              Navigator.pushReplacementNamed(context, '/start/add_product');
+            }
+          },
           icon: const Icon(Icons.add),
           iconSize: 40,
         ),

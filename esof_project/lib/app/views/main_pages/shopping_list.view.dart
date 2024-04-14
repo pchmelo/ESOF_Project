@@ -17,9 +17,9 @@ class ShoppingListView extends StatelessWidget {
         children: [
           Text(name),
           const SizedBox(height: 600),
-          Footer(),
         ],
       ),
+      bottomNavigationBar: Footer(),
     );
   }
 }
