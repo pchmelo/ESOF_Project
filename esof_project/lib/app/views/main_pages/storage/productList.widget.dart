@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:esof_project/app/views/main_pages/storage/productTile.widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../services/database.dart';
 import '../../../models/product.model.dart';
+import 'ProductListBuilder.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({super.key});
@@ -23,6 +27,24 @@ class _ProductListState extends State<ProductList> {
     _dbService = DatabaseService(uid: user.uid);
   }
 
+  List<Map<String, dynamic>> _allProducts = [];
+  ValueNotifier<List<Map<String, dynamic>>> _foundProducts = ValueNotifier([]);
+
+  String _searchText = '';
+
+  void _runFilter() {
+    List<Map<String, dynamic>> results = [];
+    if (_searchText.isEmpty) {
+      results = List.from(_allProducts);
+    } else {
+      results = _allProducts
+          .where((product) =>
+              product['name'].toLowerCase().contains(_searchText.toLowerCase()))
+          .toList();
+    }
+    _foundProducts.value = results;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -34,20 +56,38 @@ class _ProductListState extends State<ProductList> {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                return Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.white,
-                    ),
-                    child: ProductTile(
-                      product: snapshot.data![index],
-                    ));
-              },
-            );
+            _allProducts =
+                snapshot.data!.map((product) => product.toJson()).toList();
+            _foundProducts.value = List.from(_allProducts);
+
+            return Column(children: [
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
+                onChanged: (value) => _searchText = value,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Search',
+                  suffixIcon: Icon(Icons.search),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: _runFilter,
+                child: const Text('Search'),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                  child: ValueListenableBuilder(
+                valueListenable: _foundProducts,
+                builder: (BuildContext context,
+                    List<Map<String, dynamic>> value, Widget? child) {
+                  return ProductListBuilder(foundProducts: value);
+                },
+              )),
+            ]);
           }
         },
       ),
