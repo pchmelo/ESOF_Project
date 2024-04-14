@@ -19,9 +19,9 @@ class SettingsView extends StatelessWidget {
             child: Text(name),
           ),
           const SizedBox(height: 600),
-          Footer(),
         ],
       ),
+      bottomNavigationBar: Footer(),
     );
   }
 }

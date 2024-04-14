@@ -15,7 +15,8 @@ class StorageView extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return Padding(
-            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
             child: const CreateProdut(),
           );
         },
@@ -36,9 +37,9 @@ class StorageView extends StatelessWidget {
                 return _createProductForm();
               },
               icon: const Icon(Icons.add)),
-          Footer(),
         ],
       ),
+      bottomNavigationBar: Footer(),
     );
   }
 }

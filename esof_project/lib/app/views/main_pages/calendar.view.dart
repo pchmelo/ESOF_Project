@@ -41,10 +41,10 @@ class _CalenderViewState extends State<CalenderView> {
     const name = 'Calendar';
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(name),
-        ),
-        /*
+      appBar: AppBar(
+        title: const Text(name),
+      ),
+      /*
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             showDialog(
@@ -82,14 +82,15 @@ class _CalenderViewState extends State<CalenderView> {
           child: const Icon(Icons.add),
         ),
         */
-        body: Expanded(
-          child: Column(
-            children: [
-              Expanded(child: calendar()),
-              Footer(),
-            ],
-          ),
-        ));
+      body: Expanded(
+        child: Column(
+          children: [
+            Expanded(child: calendar()),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Footer(),
+    );
   }
 
   Widget calendar() {
