@@ -4,16 +4,16 @@ import '../../extra_pages/product.view.dart';
 
 class ProductTile extends StatelessWidget {
   final Product product;
-  const ProductTile({super.key, required this.product});
+  final Function onProductTap;
+
+  const ProductTile(
+      {super.key, required this.product, required this.onProductTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ProducDetailsPage(product: product)));
+        onProductTap(product);
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0),

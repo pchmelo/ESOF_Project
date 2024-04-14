@@ -9,6 +9,8 @@ import 'package:esof_project/app/views/start.view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'app/views/main_pages/addProduct/manualAddProduct.view.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -37,6 +39,8 @@ class MyApp extends StatelessWidget {
         '/start/add_product': (context) => AddProductView(),
         '/start/shopping_list': (context) => ShoppingListView(),
         '/start/add_product/bar_scanner': (context) => BarScannerView(),
+        '/start/add_product/manual_add_product': (context) =>
+            ManualProductView(),
       },
     );
   }

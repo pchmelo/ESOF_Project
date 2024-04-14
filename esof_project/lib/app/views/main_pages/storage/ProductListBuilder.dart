@@ -4,8 +4,10 @@ import '../../../models/product.model.dart';
 
 class ProductListBuilder extends StatefulWidget {
   final List<Map<String, dynamic>> foundProducts;
+  Function handleProductTap;
 
-  const ProductListBuilder({super.key, required this.foundProducts});
+  ProductListBuilder(
+      {super.key, required this.foundProducts, required this.handleProductTap});
 
   @override
   _ProductListBuilderState createState() => _ProductListBuilderState();
@@ -24,8 +26,8 @@ class _ProductListBuilderState extends State<ProductListBuilder> {
             color: Colors.white,
           ),
           child: ProductTile(
-            product: Product.fromJson(widget.foundProducts[index]),
-          ),
+              product: Product.fromJson(widget.foundProducts[index]),
+              onProductTap: widget.handleProductTap),
         );
       },
     );

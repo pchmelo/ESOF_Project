@@ -3,6 +3,8 @@ import 'package:esof_project/app/views/main_pages/storage/createProduct.widget.d
 import 'package:esof_project/app/views/main_pages/storage/productList.widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../extra_pages/product.view.dart';
+
 class StorageView extends StatelessWidget {
   static const name = 'Storage';
   String currentRoute = '/start/storage';
@@ -23,6 +25,13 @@ class StorageView extends StatelessWidget {
       );
     }
 
+    void _handleProductTap(product) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ProducDetailsPage(product: product)));
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(name),
@@ -31,7 +40,7 @@ class StorageView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const ProductList(),
+          ProductList(handleProductTap: _handleProductTap),
           IconButton(
               onPressed: () {
                 return _createProductForm();

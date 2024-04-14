@@ -17,7 +17,11 @@ class AddProductView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextButton(
-                onPressed: () {}, child: const Text('Add Product Manually')),
+                onPressed: () {
+                  Navigator.pushNamed(
+                      context, '/start/add_product/manual_add_product');
+                },
+                child: const Text('Add Product Manually')),
             const SizedBox(height: 20),
             TextButton(
                 onPressed: () {

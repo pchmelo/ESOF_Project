@@ -10,7 +10,8 @@ import '../../../models/product.model.dart';
 import 'ProductListBuilder.dart';
 
 class ProductList extends StatefulWidget {
-  const ProductList({super.key});
+  ProductList({super.key, required this.handleProductTap});
+  Function handleProductTap;
 
   @override
   State<ProductList> createState() => _ProductListState();
@@ -84,7 +85,9 @@ class _ProductListState extends State<ProductList> {
                 valueListenable: _foundProducts,
                 builder: (BuildContext context,
                     List<Map<String, dynamic>> value, Widget? child) {
-                  return ProductListBuilder(foundProducts: value);
+                  return ProductListBuilder(
+                      foundProducts: value,
+                      handleProductTap: widget.handleProductTap);
                 },
               )),
             ]);
