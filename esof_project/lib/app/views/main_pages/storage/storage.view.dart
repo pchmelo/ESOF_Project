@@ -26,6 +26,8 @@ class StorageView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(name),
+        backgroundColor: Colors.grey[800],
+        foregroundColor: Colors.white,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

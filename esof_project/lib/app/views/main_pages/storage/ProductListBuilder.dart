@@ -17,14 +17,23 @@ class _ProductListBuilderState extends State<ProductListBuilder> {
     return ListView.builder(
       itemCount: widget.foundProducts.length,
       itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.circular(10.0),
-            color: Colors.white,
-          ),
-          child: ProductTile(
-            product: Product.fromJson(widget.foundProducts[index]),
+        return Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Container(
+            margin: const EdgeInsets.all(5.0),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 3,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: ProductTile(
+              product: Product.fromJson(widget.foundProducts[index]),
+            ),
           ),
         );
       },
