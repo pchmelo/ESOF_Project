@@ -28,6 +28,24 @@ class _ProductListBuilderState extends State<ProductListBuilder> {
           child: ProductTile(
               product: Product.fromJson(widget.foundProducts[index]),
               onProductTap: widget.handleProductTap),
+        return Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Container(
+            margin: const EdgeInsets.all(5.0),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 3,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: ProductTile(
+              product: Product.fromJson(widget.foundProducts[index]),
+            ),
+          ),
         );
       },
     );

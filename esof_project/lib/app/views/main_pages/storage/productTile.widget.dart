@@ -15,27 +15,42 @@ class ProductTile extends StatelessWidget {
       onTap: () {
         onProductTap(product);
       },
-      child: Padding(
-        padding: const EdgeInsets.only(top: 8.0),
         child: Card(
-          margin: const EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-          child: ListTile(
-            tileColor: Colors.white,
-            leading: SizedBox(
-              width: 50.0,
-              height: 50.0,
-              child: CircleAvatar(
-                radius: 25.0,
-                backgroundColor: Colors.yellow[100],
-                backgroundImage: const AssetImage('assets/product_mock.png'),
-              ),
+          margin: const EdgeInsets.fromLTRB(0,0,0,0),
+          elevation: 0.0,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Container(
+                  width: 50.0,
+                  height: 50.0,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.grey),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25.0),
+                    child: CircleAvatar(
+                      radius: 25.0,
+                      backgroundColor: Colors.yellow[100],
+                      backgroundImage: const AssetImage('assets/images/default_product_image.png'),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10.0),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(product!.name!),
+                    Text('Threshold: ${product!.threshold}'),
+                    Text('Quantity: ${product!.quantity}'),
+                  ],
+                ),
+              ],
             ),
-            title: Text(product!.name!),
-            subtitle: Text('Threshold: ${product!.threshold}'),
-            trailing: Text('Quantity: ${product!.quantity}'),
           ),
         ),
-      ),
     );
   }
 }

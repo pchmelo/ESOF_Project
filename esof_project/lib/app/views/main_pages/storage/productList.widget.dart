@@ -29,7 +29,7 @@ class _ProductListState extends State<ProductList> {
   }
 
   List<Map<String, dynamic>> _allProducts = [];
-  ValueNotifier<List<Map<String, dynamic>>> _foundProducts = ValueNotifier([]);
+  final ValueNotifier<List<Map<String, dynamic>>> _foundProducts = ValueNotifier([]);
 
   String _searchText = '';
 
@@ -62,24 +62,44 @@ class _ProductListState extends State<ProductList> {
             _foundProducts.value = List.from(_allProducts);
 
             return Column(children: [
-              const SizedBox(
-                height: 20,
-              ),
-              TextField(
-                onChanged: (value) => _searchText = value,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Search',
-                  suffixIcon: Icon(Icons.search),
+              Container(
+                color: Colors.grey[600], // Set the color here
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Card(
+                      child: TextField(
+                        onChanged: (value) => _searchText = value,
+                        cursorColor: Colors.grey[600],
+                        decoration: InputDecoration(
+                          labelText: 'Search',
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          suffixIcon: IconButton(
+                            onPressed: _runFilter,
+                            icon: const Icon(Icons.search),
+                          ),
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              ElevatedButton(
-                onPressed: _runFilter,
-                child: const Text('Search'),
+              const Divider(
+                color: Colors.black,
+                height: 1,
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
+              const Text('Products:'),
               Expanded(
                   child: ValueListenableBuilder(
                 valueListenable: _foundProducts,
