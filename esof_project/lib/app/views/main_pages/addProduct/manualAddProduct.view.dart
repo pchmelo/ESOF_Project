@@ -24,8 +24,10 @@ class ManualProductView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ProductList(
-            handleProductTap:
-                ProductForm(context: context).AddProductQuantityForm,
+            handleProductTap: (product, controller) {
+              ProductForm(context: context)
+                  .AddProductQuantityForm(product, controller, '');
+            },
             controller: change_quantity_controller,
           ),
         ],

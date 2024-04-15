@@ -4,10 +4,14 @@ import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/services/database.dart';
 
 class ChangeQuantityProduct extends StatefulWidget {
+  final String scancode;
   final Function controller;
   final product;
   const ChangeQuantityProduct(
-      {super.key, required this.product, required this.controller});
+      {super.key,
+      required this.product,
+      required this.controller,
+      required this.scancode});
 
   @override
   State<ChangeQuantityProduct> createState() => _ChangeQuantityProductState();
@@ -51,7 +55,12 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
                 child: const Text('Edit Product'),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    widget.controller(context, widget.product, _value);
+                    if (widget.scancode != null) {
+                      await widget.controller(
+                          context, widget.product, _value, widget.scancode);
+                    } else {
+                      await widget.controller(context, widget.product, _value);
+                    }
                   }
                 },
               ),

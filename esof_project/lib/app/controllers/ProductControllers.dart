@@ -43,7 +43,12 @@ class ProductControllers {
     Navigator.pop(context);
   }
 
-  ChangeQuantityProduct(context, product, _value) async {
+  ChangeQuantityProduct(context, product, _value, scancode) async {
+    List<String> barcodes = product.barcodes;
+    if (scancode != '') {
+      barcodes.add(scancode);
+    }
+
     _value ??= 0;
 
     Product newProduct = Product(
@@ -51,7 +56,7 @@ class ProductControllers {
       name: product.name,
       threshold: product.threshold,
       quantity: product.quantity + _value!,
-      barcodes: product.barcodes,
+      barcodes: barcodes,
     );
 
     await dbService.updateProduct(newProduct);
