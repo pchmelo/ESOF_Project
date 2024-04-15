@@ -35,7 +35,7 @@ Obrigado!
 ## Business modeling
 
 ### Product Vision
-_"To make the world greener, keep your pantry stock 'cleaner'"._
+_"To make the world greener and to keep people's pantry stock 'cleaner'"._
 
 
 ### Functionalities

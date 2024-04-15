@@ -27,6 +27,15 @@ class StorageView extends StatelessWidget {
     }
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amber,
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.add),
+        onPressed: () {
+          return ProductForm(context: context)
+              .CreateProductForm(create_controller);
+        },
+      ),
       appBar: AppBar(
         title: const Text(name),
         backgroundColor: Colors.grey[800],
@@ -38,12 +47,6 @@ class StorageView extends StatelessWidget {
         children: [
           ProductList(
               handleProductTap: handleProductTap, controller: edit_controller),
-          IconButton(
-              onPressed: () {
-                return ProductForm(context: context)
-                    .CreateProductForm(create_controller);
-              },
-              icon: const Icon(Icons.add)),
         ],
       ),
       bottomNavigationBar: const Footer(),
