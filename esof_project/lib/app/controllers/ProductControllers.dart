@@ -55,6 +55,6 @@ class ProductControllers {
     );
 
     await dbService.updateProduct(newProduct);
-    Navigator.pop(context);
+    Navigator.pushReplacementNamed(context, '/start/add_product');
   }
 }

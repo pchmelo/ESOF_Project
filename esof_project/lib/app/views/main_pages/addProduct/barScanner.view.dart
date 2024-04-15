@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import 'barCodeProcess.dart';
@@ -11,19 +12,19 @@ class BarScannerView extends StatefulWidget {
 }
 
 class _BarScannerView extends State<BarScannerView> {
-  String ticket = "";
-
   readCodeBar() async {
     String code = await FlutterBarcodeScanner.scanBarcode(
         '#FF0000', "Cancel", false, ScanMode.BARCODE);
 
     if (code != '-1' && isValidBarcode(code)) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => BarCodeProcess(barCode: code),
-        ),
-      );
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BarCodeProcess(barCode: code),
+          ),
+        );
+      });
     }
   }
 
@@ -44,14 +45,6 @@ class _BarScannerView extends State<BarScannerView> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (ticket != '')
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 24),
-                  child: Text(
-                    'Ticket: $ticket',
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                ),
               ElevatedButton(
                 onPressed: readCodeBar,
                 child: const Icon(Icons.barcode_reader),

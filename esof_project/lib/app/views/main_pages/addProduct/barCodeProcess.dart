@@ -1,14 +1,19 @@
-import 'package:esof_project/app/components/productForm.component.dart';
+import 'package:esof_project/app/views/main_pages/addProduct/barScanner.view.dart';
 import 'package:esof_project/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
+import '../../../components/productForm.component.dart';
+import '../../../controllers/ProductControllers.dart';
 import '../../../models/product.model.dart';
 
 class BarCodeProcess extends StatefulWidget {
+  final Function change_quantity_controller =
+      ProductControllers().ChangeQuantityProduct;
   final String barCode;
-  const BarCodeProcess({super.key, required this.barCode});
+  BarCodeProcess({super.key, required this.barCode});
 
   @override
   State<BarCodeProcess> createState() => _BarCodeProcessState();
@@ -27,9 +32,11 @@ class _BarCodeProcessState extends State<BarCodeProcess> {
 
   @override
   Widget build(BuildContext context) {
+    /*
     final Function controller =
         ProductForm(context: context).AddProductQuantityForm;
 
+     */
     return FutureBuilder<Product?>(
       future: _dbService.getProductByBarcode(widget.barCode),
       builder: (BuildContext context, AsyncSnapshot<Product?> snapshot) {
@@ -38,20 +45,20 @@ class _BarCodeProcessState extends State<BarCodeProcess> {
         } else if (snapshot.hasError) {
           return const Center(child: Text('Error occurred'));
         } else if (snapshot.hasData) {
-          return Expanded(
-            child: ProductForm(context: context)
-                .AddProductQuantityForm(snapshot.data!, controller // Product
-                    ) as Widget,
-          );
-        } else {
-          WidgetsBinding.instance!.addPostFrameCallback((_) {
-            Navigator.of(context).pushNamed('/start/add_product/bar_scanner');
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            ProductForm(context: context).AddProductQuantityForm(
+                snapshot.data, widget.change_quantity_controller);
           });
+          return Container();
+        } else {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Product not found'),
+              title: const Text('Not Found'),
             ),
-          ); // Return an empty container while navigation is being prepared
+            body: Center(
+              child: Text('Chora baby! ${widget.barCode}'),
+            ),
+          );
         }
       },
     );
