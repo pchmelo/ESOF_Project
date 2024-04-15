@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
+import 'barCodeProcess.dart';
+
 class BarScannerView extends StatefulWidget {
+  const BarScannerView({super.key});
+
   @override
   State<BarScannerView> createState() => _BarScannerView();
 }
@@ -11,8 +15,21 @@ class _BarScannerView extends State<BarScannerView> {
 
   readCodeBar() async {
     String code = await FlutterBarcodeScanner.scanBarcode(
-        '#FF0000', "Cancelar", false, ScanMode.BARCODE);
-    setState(() => ticket = code != '-1' ? code : '');
+        '#FF0000', "Cancel", false, ScanMode.BARCODE);
+
+    if (code != '-1' && isValidBarcode(code)) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BarCodeProcess(barCode: code),
+        ),
+      );
+    }
+  }
+
+  bool isValidBarcode(String barcode) {
+    final regex = RegExp(r'^\d+$');
+    return regex.hasMatch(barcode) && barcode.length == 13;
   }
 
   @override

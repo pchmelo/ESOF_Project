@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Footer extends StatefulWidget {
+  const Footer({super.key});
+
   @override
   State<Footer> createState() => _FooterState();
 }

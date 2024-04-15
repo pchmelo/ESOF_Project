@@ -5,6 +5,8 @@ class ShoppingListView extends StatelessWidget {
   final name = 'Shopping List';
   String currentRoute = '/start/shopping_list';
 
+  ShoppingListView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +21,7 @@ class ShoppingListView extends StatelessWidget {
           const SizedBox(height: 600),
         ],
       ),
-      bottomNavigationBar: Footer(),
+      bottomNavigationBar: const Footer(),
     );
   }
 }

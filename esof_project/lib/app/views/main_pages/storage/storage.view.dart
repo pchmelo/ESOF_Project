@@ -1,35 +1,29 @@
 import 'package:esof_project/app/components/footer.component.dart';
+import 'package:esof_project/app/components/productForm.component.dart';
 import 'package:esof_project/app/views/main_pages/storage/createProduct.widget.dart';
 import 'package:esof_project/app/views/main_pages/storage/productList.widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../../controllers/ProductControllers.dart';
 import '../../extra_pages/product.view.dart';
 
 class StorageView extends StatelessWidget {
+  final create_controller = ProductControllers().CreateProduct;
+  final edit_controller = ProductControllers().EditProduct;
+
   static const name = 'Storage';
   String currentRoute = '/start/storage';
 
+  StorageView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    void _createProductForm() {
-      showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext context) {
-          return Padding(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: const CreateProdut(),
-          );
-        },
-      );
-    }
-
-    void _handleProductTap(product) {
+    void handleProductTap(product, controller) {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ProducDetailsPage(product: product)));
+              builder: (context) =>
+                  ProducDetailsPage(product: product, controller: controller)));
     }
 
     return Scaffold(
@@ -42,15 +36,17 @@ class StorageView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ProductList(handleProductTap: _handleProductTap),
+          ProductList(
+              handleProductTap: handleProductTap, controller: edit_controller),
           IconButton(
               onPressed: () {
-                return _createProductForm();
+                return ProductForm(context: context)
+                    .CreateProductForm(create_controller);
               },
               icon: const Icon(Icons.add)),
         ],
       ),
-      bottomNavigationBar: Footer(),
+      bottomNavigationBar: const Footer(),
     );
   }
 }

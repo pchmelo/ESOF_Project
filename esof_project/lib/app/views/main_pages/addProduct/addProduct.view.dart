@@ -5,6 +5,8 @@ class AddProductView extends StatelessWidget {
   final name = 'Add Product';
   String currentRoute = '/start/settings';
 
+  AddProductView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +34,7 @@ class AddProductView extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Footer(),
+      bottomNavigationBar: const Footer(),
     );
   }
 }

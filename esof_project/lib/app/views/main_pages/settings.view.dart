@@ -5,6 +5,8 @@ class SettingsView extends StatelessWidget {
   final name = 'Settings';
   String currentRoute = '/start/settings';
 
+  SettingsView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +23,7 @@ class SettingsView extends StatelessWidget {
           const SizedBox(height: 600),
         ],
       ),
-      bottomNavigationBar: Footer(),
+      bottomNavigationBar: const Footer(),
     );
   }
 }

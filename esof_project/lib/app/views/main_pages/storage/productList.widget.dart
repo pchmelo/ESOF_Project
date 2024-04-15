@@ -1,8 +1,4 @@
-import 'dart:async';
-
-import 'package:esof_project/app/views/main_pages/storage/productTile.widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../services/database.dart';
@@ -10,8 +6,11 @@ import '../../../models/product.model.dart';
 import 'ProductListBuilder.dart';
 
 class ProductList extends StatefulWidget {
-  ProductList({super.key, required this.handleProductTap});
-  Function handleProductTap;
+  final Function controller;
+  final Function handleProductTap;
+
+  ProductList(
+      {super.key, required this.handleProductTap, required this.controller});
 
   @override
   State<ProductList> createState() => _ProductListState();
@@ -29,7 +28,8 @@ class _ProductListState extends State<ProductList> {
   }
 
   List<Map<String, dynamic>> _allProducts = [];
-  final ValueNotifier<List<Map<String, dynamic>>> _foundProducts = ValueNotifier([]);
+  final ValueNotifier<List<Map<String, dynamic>>> _foundProducts =
+      ValueNotifier([]);
 
   String _searchText = '';
 
@@ -107,7 +107,8 @@ class _ProductListState extends State<ProductList> {
                     List<Map<String, dynamic>> value, Widget? child) {
                   return ProductListBuilder(
                       foundProducts: value,
-                      handleProductTap: widget.handleProductTap);
+                      handleProductTap: widget.handleProductTap,
+                      controller: widget.controller);
                 },
               )),
             ]);

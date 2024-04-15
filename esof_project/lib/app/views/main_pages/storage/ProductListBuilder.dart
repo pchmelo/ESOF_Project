@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import '../../../models/product.model.dart';
 
 class ProductListBuilder extends StatefulWidget {
+  final Function controller;
   final List<Map<String, dynamic>> foundProducts;
   Function handleProductTap;
 
   ProductListBuilder(
-      {super.key, required this.foundProducts, required this.handleProductTap});
+      {super.key,
+      required this.foundProducts,
+      required this.handleProductTap,
+      required this.controller});
 
   @override
   _ProductListBuilderState createState() => _ProductListBuilderState();
@@ -19,15 +23,6 @@ class _ProductListBuilderState extends State<ProductListBuilder> {
     return ListView.builder(
       itemCount: widget.foundProducts.length,
       itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.circular(10.0),
-            color: Colors.white,
-          ),
-          child: ProductTile(
-              product: Product.fromJson(widget.foundProducts[index]),
-              onProductTap: widget.handleProductTap),
         return Padding(
           padding: const EdgeInsets.all(5.0),
           child: Container(
@@ -44,6 +39,8 @@ class _ProductListBuilderState extends State<ProductListBuilder> {
             ),
             child: ProductTile(
               product: Product.fromJson(widget.foundProducts[index]),
+              onProductTap: widget.handleProductTap,
+              controller: widget.controller,
             ),
           ),
         );

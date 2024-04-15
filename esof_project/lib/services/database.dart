@@ -33,6 +33,7 @@ class DatabaseService {
             name: data['name'] ?? '',
             quantity: data['quantity'] ?? 0,
             threshold: data['threshold'] ?? 0,
+            barcodes: List<String>.from(data['barcodes'] ?? []),
           );
         })
         .where((product) => product != null)
@@ -69,5 +70,17 @@ class DatabaseService {
   Future<void> updateProduct(Product product) async {
     deleteProductById(product.id!);
     addProduct(product);
+  }
+
+  Future<Product?> getProductByBarcode(String barcode) async {
+    QuerySnapshot snapshot =
+        await productCollection.doc(uid).collection('products').get();
+    for (var doc in snapshot.docs) {
+      Product product = Product.fromJson(doc.data() as Map<String, dynamic>);
+      if (product.isBarcodeExist(barcode)) {
+        return product;
+      }
+    }
+    return null;
   }
 }

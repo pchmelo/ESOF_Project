@@ -1,3 +1,4 @@
+import 'package:esof_project/app/components/productForm.component.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,29 +7,19 @@ import '../../../services/database.dart';
 import 'editProduct.widget.dart';
 
 class ProducDetailsPage extends StatelessWidget {
+  final Function controller;
   final Product product;
-  const ProducDetailsPage({super.key, required this.product});
+  const ProducDetailsPage(
+      {super.key, required this.product, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    Future<void> _editProduct() async {
-      await showModalBottomSheet(
-          context: context,
-          builder: (context) {
-            return Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-              child: EditProduct(product: product),
-            );
-          });
-    }
-
-    Future<void> _deleteProduct() async {
+    Future<void> deleteProduct() async {
       User user = FirebaseAuth.instance.currentUser!;
-      DatabaseService _dbService = DatabaseService(uid: user.uid);
+      DatabaseService dbService = DatabaseService(uid: user.uid);
 
       if (product.id != null) {
-        await _dbService.deleteProductById(product.id!);
+        await dbService.deleteProductById(product.id!);
       } else {
         // Handle the case where product.id is null
         print('Error: product.id is null');
@@ -37,7 +28,7 @@ class ProducDetailsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product Details'),
+        title: const Text('Product Details'),
       ),
       body: Column(
         children: [
@@ -50,13 +41,14 @@ class ProducDetailsPage extends StatelessWidget {
                 Text('Quantity: ${product.quantity}'),
                 TextButton(
                     onPressed: () async {
-                      await _editProduct();
+                      await ProductForm(product: product, context: context)
+                          .EditProductForm(controller);
                       Navigator.pop(context);
                     },
                     child: const Text('Edit')),
                 TextButton(
                     onPressed: () {
-                      _deleteProduct();
+                      deleteProduct();
                       Navigator.pop(context);
                     },
                     child: const Text('Delete')),

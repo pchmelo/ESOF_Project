@@ -4,6 +4,8 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../models/event.model.dart';
 
 class CalenderView extends StatefulWidget {
+  const CalenderView({super.key});
+
   @override
   State<CalenderView> createState() => _CalenderViewState();
 }
@@ -89,7 +91,7 @@ class _CalenderViewState extends State<CalenderView> {
           ],
         ),
       ),
-      bottomNavigationBar: Footer(),
+      bottomNavigationBar: const Footer(),
     );
   }
 

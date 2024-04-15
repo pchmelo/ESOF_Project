@@ -1,4 +1,3 @@
-import 'package:esof_project/app/views/extra_pages/product.view.dart';
 import 'package:esof_project/app/views/main_pages/addProduct/addProduct.view.dart';
 import 'package:esof_project/app/views/main_pages/addProduct/barScanner.view.dart';
 import 'package:esof_project/app/views/main_pages/calendar.view.dart';
@@ -22,23 +21,25 @@ void main() async {
     storageBucket: 'stockoverflow2-4f45a.appspot.com',
   ));
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/start',
       routes: {
-        '/start': (context) => Start(),
+        '/start': (context) => const Start(),
         '/start/storage': (context) => StorageView(),
-        '/start/calendar': (context) => CalenderView(),
+        '/start/calendar': (context) => const CalenderView(),
         '/start/settings': (context) => SettingsView(),
         '/start/add_product': (context) => AddProductView(),
         '/start/shopping_list': (context) => ShoppingListView(),
-        '/start/add_product/bar_scanner': (context) => BarScannerView(),
+        '/start/add_product/bar_scanner': (context) => const BarScannerView(),
         '/start/add_product/manual_add_product': (context) =>
             ManualProductView(),
       },
