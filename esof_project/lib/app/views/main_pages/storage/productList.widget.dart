@@ -11,7 +11,7 @@ class ProductList extends StatefulWidget {
   final Function controller;
   final Function handleProductTap;
 
-  ProductList(
+  const ProductList(
       {super.key, required this.handleProductTap, required this.controller});
 
   @override
