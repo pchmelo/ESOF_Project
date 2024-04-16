@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
 import '../views/extra_pages/changeQuantity.widget.dart';
 import '../views/extra_pages/editProduct.widget.dart';
 import '../views/main_pages/storage/createProduct.widget.dart';
@@ -27,11 +26,12 @@ class ProductForm {
 
   Future<void> EditProductForm(controller) async {
     await showModalBottomSheet(
+        isScrollControlled: true,
         context: context,
-        builder: (context) {
-          return Container(
+        builder: (BuildContext context) {
+          return Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
             child: EditProduct(product: product, controller: controller),
           );
         });
