@@ -1,7 +1,10 @@
 import 'package:esof_project/app/components/footer.component.dart';
 import 'package:flutter/material.dart';
 
+import '../../../services/authenticate.dart';
+
 class SettingsView extends StatelessWidget {
+  final AuthService _auth = AuthService();
   final name = 'Settings';
   String currentRoute = '/start/settings';
 
@@ -17,10 +20,19 @@ class SettingsView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            child: Text(name),
+          TextButton.icon(
+            icon: const Icon(Icons.person),
+            label: const Text('logout'),
+            onPressed: () async {
+              try {
+                await _auth.signOut();
+                Navigator.pushReplacementNamed(context,
+                    '/start'); // assuming '/start' is your sign-in route
+              } catch (e) {
+                print('Error signing out: $e');
+              }
+            },
           ),
-          const SizedBox(height: 600),
         ],
       ),
       bottomNavigationBar: const Footer(),

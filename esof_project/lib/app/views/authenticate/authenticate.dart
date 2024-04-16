@@ -1,16 +1,28 @@
+import 'package:esof_project/app/views/authenticate/register.view.dart';
 import 'package:esof_project/app/views/authenticate/sign_in.view.dart';
 import 'package:flutter/material.dart';
 
-class Authenticate extends StatefulWidget {
-  const Authenticate({super.key});
+class AuthenticateView extends StatefulWidget {
+  const AuthenticateView({super.key});
 
   @override
-  State<Authenticate> createState() => _AuthenticateState();
+  State<AuthenticateView> createState() => _AuthenticateView();
 }
 
-class _AuthenticateState extends State<Authenticate> {
+class _AuthenticateView extends State<AuthenticateView> {
+  bool showSignIn = true;
+  void toggleView() {
+    setState(() {
+      showSignIn = !showSignIn;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const SignIn();
+    if (showSignIn) {
+      return SignInView(toggleView: toggleView);
+    } else {
+      return RegisterView(toggleView: toggleView);
+    }
   }
 }
