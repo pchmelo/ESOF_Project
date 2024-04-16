@@ -246,5 +246,8 @@ Estas etapas são:
 - Accepted: Secção onde guardamos todas as funcionalidades que foram desenvolvidas e aceites pelo cliente
 
 ### Sprint 1:
-- Prints da scrum board durante a realização do primeiro sprint:
-<img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/Sprint1.png?raw=true">
+- Print da scrum board no início a realização do primeiro sprint:
+<img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/sprint1.png?raw=true">
+
+- Print da scrum board após a realização do primeiro sprint:
+<img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/sprint1_conclusion.png?raw=true">
