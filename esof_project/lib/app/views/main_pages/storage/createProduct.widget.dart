@@ -21,7 +21,20 @@ class _CreateProdutState extends State<CreateProdut> {
     return Container(
         height: 425,
         padding: const EdgeInsets.all(15.0),
-        child: Form(
+
+        child: Column(
+          children: <Widget>[
+        const Text(
+        'Add Product',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+            const SizedBox(height: 20), // Adjust as needed for spacing
+
+         Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
@@ -67,7 +80,25 @@ class _CreateProdutState extends State<CreateProdut> {
                 height: 20,
               ),
               ElevatedButton(
-                child: const Text('Create Product'),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
+                  foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                  textStyle: MaterialStateProperty.all<TextStyle>(
+                    const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  minimumSize: MaterialStateProperty.all<Size>(
+                    Size(150.0, 50.0),
+                  ),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0), // Decreasing border radius
+                    ),
+                  ),
+                ),
+                child: const Text('Confirm'),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     widget.controller(context, _name, _threshold, _quantity);
@@ -76,6 +107,9 @@ class _CreateProdutState extends State<CreateProdut> {
               ),
             ],
           ),
-        ));
+        ),
+      ],
+        ),
+    );
   }
 }

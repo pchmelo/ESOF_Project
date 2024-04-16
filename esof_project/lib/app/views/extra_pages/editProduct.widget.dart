@@ -38,7 +38,7 @@ class _EditProdutState extends State<EditProduct> {
             color: Colors.black,
           ),
         ),
-        const SizedBox(height: 20), // Adjust as needed for spacing
+        const SizedBox(height: 20),
         Form(
           key: _formKey,
           child: Column(
@@ -74,7 +74,7 @@ class _EditProdutState extends State<EditProduct> {
                 onChanged: (val) => setState(() => _threshold = int.parse(val)),
               ),
               Container(
-                margin: EdgeInsets.only(top: 16.0),
+                margin: const EdgeInsets.only(top: 16.0),
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
@@ -86,7 +86,7 @@ class _EditProdutState extends State<EditProduct> {
                       ),
                     ),
                     minimumSize: MaterialStateProperty.all<Size>(
-                      Size(150.0, 50.0),
+                      const Size(150.0, 50.0),
                     ),
                     shape: MaterialStateProperty.all<OutlinedBorder>(
                       RoundedRectangleBorder(
