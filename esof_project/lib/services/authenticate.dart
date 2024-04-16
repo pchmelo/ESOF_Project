@@ -1,7 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../app/models/user.mode.dart';
+
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  MyUser? _userFromFirebaseUser(User? user) {
+    if (user == null) {
+      return null;
+    }
+    return MyUser(uid: user.uid);
+  }
+
+  Stream<MyUser?> get user {
+    return _auth
+        .authStateChanges()
+        .map((User? user) => _userFromFirebaseUser(user));
+  }
 
   //sign in anon
   Future signInAnon() async {

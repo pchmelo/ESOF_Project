@@ -28,33 +28,68 @@ class ProducDetailsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Details'),
+        title: const Text('Product Info'),
+        centerTitle: true,
+        actions: <Widget>[
+          PopupMenuButton(itemBuilder: (context)=>[
+            PopupMenuItem<int>(
+                value: 0,
+                child: Text('Edit'),
+              onTap: ()async{
+                await ProductForm(product: product, context: context)
+                    .EditProductForm(controller);
+                Navigator.pop(context);
+              },
+            ),
+            PopupMenuItem<int>(
+              value: 1,
+              child: Text('Delete'),
+              onTap: (){
+                deleteProduct();
+              },
+            ),
+          ], onSelected: (item)=>SelectedItem(context, item),
+          ),
+        ],
       ),
       body: Column(
         children: [
+          SizedBox(height: MediaQuery.of(context).size.height * 0.1,),
+          Container(
+            height: 100,
+            width: 100,
+            child: Placeholder(),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.03,),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Container(
-                  child: Text('Name: ${product.name}',
-                    style: TextStyle(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  child: Center(
+                    child: Text('${product.name}',
+                      style: TextStyle(
+                        fontSize: 35.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  child: Center(
+                    child: Text('Threshold: ${product.threshold}',
+                      style: TextStyle(
                       fontSize: 35.0,
                       fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-                Container(
-                  child: Text('Threshold: ${product.threshold}',
-                    style: TextStyle(
-                    fontSize: 35.0,
-                    fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Container(
+                Center(
                   child: Text('Quantity: ${product.quantity}',
                     style: TextStyle(
                       fontSize: 35.0,
@@ -62,30 +97,29 @@ class ProducDetailsPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 400),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.2,),
                 FloatingActionButton(
                     onPressed: () async {
-                      await ProductForm(product: product, context: context)
-                          .EditProductForm(controller);
-                      Navigator.pop(context);
                     },
                     foregroundColor: Colors.black,
-                    backgroundColor: Colors.grey[100],
-                    child: const Text('Edit')),
-                SizedBox(height: 15),
-                FloatingActionButton(
-                    onPressed: () {
-                      deleteProduct();
-                      Navigator.pop(context);
-                    },
-                    foregroundColor: Colors.black,
-                    backgroundColor: Colors.red,
-                    child: const Text('Delete')),
+                    backgroundColor: Colors.amber,
+                    child: const Text('IN PROGRESS')),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+}
+
+SelectedItem(BuildContext context, item){
+  switch(item){
+    case 0:
+      print('Edit');
+      break;
+    case 1:
+      Navigator.pop(context);
+      break;
   }
 }

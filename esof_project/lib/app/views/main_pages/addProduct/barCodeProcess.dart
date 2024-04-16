@@ -1,4 +1,3 @@
-import 'package:esof_project/app/views/main_pages/addProduct/barScanner.view.dart';
 import 'package:esof_project/app/views/main_pages/storage/productList.widget.dart';
 import 'package:esof_project/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
