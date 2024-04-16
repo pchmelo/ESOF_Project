@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/services/database.dart';
+import 'package:flutter/services.dart';
 
 class EditProduct extends StatefulWidget {
   final Function controller;
@@ -23,48 +24,97 @@ class _EditProdutState extends State<EditProduct> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit Product'),
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(20),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                initialValue: widget.product.name,
-                decoration: const InputDecoration(labelText: 'Product Name'),
-                validator: (val) =>
-                    val!.isEmpty ? 'Enter a product name' : null,
-                onChanged: (val) => setState(() => _name = val),
-              ),
-              TextFormField(
-                initialValue: widget.product.threshold.toString(),
-                decoration: const InputDecoration(labelText: 'Threshold'),
-                validator: (val) => val!.isEmpty ? 'Enter a threshold' : null,
-                onChanged: (val) => setState(() => _threshold = int.parse(val)),
-              ),
-              TextFormField(
-                initialValue: widget.product.quantity.toString(),
-                decoration: const InputDecoration(labelText: 'Quantity'),
-                validator: (val) => val!.isEmpty ? 'Enter a quantity' : null,
-                onChanged: (val) => setState(() => _quantity = int.parse(val)),
-              ),
-              ElevatedButton(
-                child: const Text('Edit Product'),
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    widget.controller(
-                        context, widget.product, _name, _threshold, _quantity);
-                  }
-                },
-              ),
-            ],
+    return Container(
+      height: 425,
+      padding: const EdgeInsets.all(15.0),
+
+      child: Column(
+        children: <Widget>[
+          const Text(
+            'Edit Product',
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
-        ),
+          const SizedBox(height: 20),
+          Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  initialValue: widget.product.name,
+                  decoration: const InputDecoration(labelText: 'Product Name',
+                    border: OutlineInputBorder(),),
+                  validator: (val) =>
+                  val!.isEmpty ? 'Enter a product name' : null,
+                  onChanged: (val) => setState(() => _name = val),
+                ),
+                const Padding(padding: EdgeInsets.only(top:20)),
+                TextFormField(
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  initialValue: widget.product.quantity.toString(),
+                  decoration: const InputDecoration(
+                    labelText: 'Quantity',
+                    border: OutlineInputBorder(),),
+                  validator: (val) => val!.isEmpty ? 'Enter a quantity' : null,
+                  onChanged: (val) => setState(() => _quantity = int.parse(val)),
+                ),
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                TextFormField(
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  initialValue: widget.product.threshold.toString(),
+                  decoration: const InputDecoration(
+                    labelText: 'Threshold',
+                    border: OutlineInputBorder(),),
+                  validator: (val) => val!.isEmpty ? 'Enter a threshold' : null,
+                  onChanged: (val) => setState(() => _threshold = int.parse(val)),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 16.0),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
+                      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                      textStyle: MaterialStateProperty.all<TextStyle>(
+                        const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                      minimumSize: MaterialStateProperty.all<Size>(
+                        const Size(150.0, 50.0),
+                      ),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0), // Decreasing border radius
+                        ),
+                      ),
+                    ),
+                    child: const Text('Confirm'),
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        widget.controller(
+                            context,
+                            widget.product,
+                            _name,
+                            _threshold,
+                            _quantity
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 }
+
+
