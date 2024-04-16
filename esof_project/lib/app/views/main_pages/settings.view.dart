@@ -17,7 +17,7 @@ class SettingsView extends StatelessWidget {
         title: Text(name),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextButton.icon(
@@ -32,6 +32,16 @@ class SettingsView extends StatelessWidget {
                 print('Error signing out: $e');
               }
             },
+          ),
+          Transform.rotate(
+              angle: -0.785,
+              child: const Text(
+                  'IN PROGRESS',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 100 )
+              )
           ),
         ],
       ),

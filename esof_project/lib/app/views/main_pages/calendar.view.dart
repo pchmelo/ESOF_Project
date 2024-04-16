@@ -136,6 +136,17 @@ class _CalenderViewState extends State<CalenderView> {
                     });
               }),
         ),
+        Transform.rotate(
+            angle: -0.785,
+            child: const Text(
+                'IN PROGRESS',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 100 )
+            )
+        ),
+        const SizedBox(height:500),
       ],
     );
   }
