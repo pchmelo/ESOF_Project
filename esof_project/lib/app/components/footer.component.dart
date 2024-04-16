@@ -13,6 +13,7 @@ class _FooterState extends State<Footer> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.grey[100],
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         IconButton(
           onPressed: () {
@@ -21,7 +22,7 @@ class _FooterState extends State<Footer> {
               Navigator.pushReplacementNamed(context, '/start/storage');
             }
           },
-          icon: const Icon(Icons.storage),
+          icon: const Icon(Icons.inbox_outlined),
           iconSize: 40,
         ),
         IconButton(
@@ -31,7 +32,7 @@ class _FooterState extends State<Footer> {
               Navigator.pushReplacementNamed(context, '/start/shopping_list');
             }
           },
-          icon: const Icon(Icons.list),
+          icon: const Icon(Icons.shopping_basket_outlined),
           iconSize: 40,
         ),
         IconButton(
@@ -41,7 +42,7 @@ class _FooterState extends State<Footer> {
               Navigator.pushReplacementNamed(context, '/start/add_product');
             }
           },
-          icon: const Icon(Icons.add),
+          icon: const Icon(Icons.add_circle),
           iconSize: 40,
         ),
         IconButton(
@@ -61,7 +62,7 @@ class _FooterState extends State<Footer> {
               Navigator.pushReplacementNamed(context, '/start/settings');
             }
           },
-          icon: const Icon(Icons.settings),
+          icon: const Icon(Icons.person_outline),
           iconSize: 40,
         ),
       ]),

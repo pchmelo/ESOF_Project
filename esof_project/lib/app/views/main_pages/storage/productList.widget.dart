@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:esof_project/app/shared/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +56,7 @@ class _ProductListState extends State<ProductList> {
         stream: _dbService.getProducts(),
         builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return Loading();
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -63,7 +66,7 @@ class _ProductListState extends State<ProductList> {
 
             return Column(children: [
               Container(
-                color: Colors.grey[600], // Set the color here
+                // Set the color here
                 child: Column(
                   children: [
                     const SizedBox(
@@ -92,14 +95,9 @@ class _ProductListState extends State<ProductList> {
                   ],
                 ),
               ),
-              const Divider(
-                color: Colors.black,
-                height: 1,
-              ),
               const SizedBox(
                 height: 10,
               ),
-              const Text('Products:'),
               Expanded(
                   child: ValueListenableBuilder(
                 valueListenable: _foundProducts,

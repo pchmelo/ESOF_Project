@@ -1,5 +1,3 @@
-import 'package:esof_project/app/views/extra_pages/changeQuantity.widget.dart';
-import 'package:esof_project/app/views/main_pages/storage/createProduct.widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
@@ -10,13 +8,15 @@ import '../models/product.model.dart';
 class ProductControllers {
   late DatabaseService dbService;
   late User user;
+  ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
 
-  ProductControllers() {
-    user = FirebaseAuth.instance.currentUser!;
-    dbService = DatabaseService(uid: user.uid);
+  ProductControllers([DatabaseService? dbServiceParam, User? userParam]) {
+    user = userParam ?? FirebaseAuth.instance.currentUser!;
+    dbService = dbServiceParam ?? DatabaseService(uid: user.uid);
   }
 
-  CreateProduct(context, _name, _threshold, _quantity) async {
+  Future<void> CreateProduct(context, _name, _threshold, _quantity) async {
+    isLoading.value = true;
     Product product = Product(
         id: const Uuid().v4(),
         name: _name,
@@ -25,9 +25,12 @@ class ProductControllers {
         barcodes: <String>[]);
     await dbService.addProduct(product);
     Navigator.pop(context);
+    isLoading.value = false;
   }
 
-  EditProduct(context, product, _name, _threshold, _quantity) async {
+  Future<void> EditProduct(
+      context, product, _name, _threshold, _quantity) async {
+    isLoading.value = true;
     _name ??= product.name;
     _threshold ??= product.threshold;
     _quantity ??= product.quantity;
@@ -41,9 +44,11 @@ class ProductControllers {
 
     await dbService.updateProduct(newProduct);
     Navigator.pop(context);
+    isLoading.value = false;
   }
 
-  ChangeQuantityProduct(context, product, _value, scancode) async {
+  Future<void> ChangeQuantityProduct(context, product, _value, scancode) async {
+    isLoading.value = true;
     List<String> barcodes = product.barcodes;
     if (scancode != '') {
       barcodes.add(scancode);
@@ -61,5 +66,6 @@ class ProductControllers {
 
     await dbService.updateProduct(newProduct);
     Navigator.pushReplacementNamed(context, '/start/add_product');
+    isLoading.value = false;
   }
 }

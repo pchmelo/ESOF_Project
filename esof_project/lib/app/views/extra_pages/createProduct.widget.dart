@@ -69,8 +69,6 @@ class _CreateProdutState extends State<CreateProdut> {
                 validator: (val) {
                   if (val!.isEmpty) {
                     return 'Enter a threshold';
-                  } else if (int.parse(val) > _quantity) {
-                    return 'Threshold must be less than quantity';
                   }
                   return null;
                 },

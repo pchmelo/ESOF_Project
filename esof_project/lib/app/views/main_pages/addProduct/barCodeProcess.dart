@@ -1,3 +1,4 @@
+import 'package:esof_project/app/shared/loading.dart';
 import 'package:esof_project/app/views/main_pages/storage/productList.widget.dart';
 import 'package:esof_project/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -53,7 +54,7 @@ class _BarCodeProcessState extends State<BarCodeProcess> {
       future: _dbService.getProductByBarcode(widget.barCode),
       builder: (BuildContext context, AsyncSnapshot<Product?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: Loading());
         } else if (snapshot.hasError) {
           return const Center(child: Text('Error occurred'));
         } else if (snapshot.hasData) {
