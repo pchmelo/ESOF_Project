@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/services/database.dart';
 
+import '../../controllers/ProductControllers.dart';
+
 class ChangeQuantityProduct extends StatefulWidget {
   final String scancode;
   final Function controller;
@@ -24,6 +26,7 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
   late DatabaseService _dbService;
 
   int? _value;
+  final ProductControllers productControllers = ProductControllers();
 
   @override
   void initState() {
@@ -51,17 +54,27 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
                 validator: (val) => val!.isEmpty ? 'Enter a quantity' : null,
                 onChanged: (val) => setState(() => _value = int.parse(val)),
               ),
-              ElevatedButton(
-                child: const Text('Edit Product'),
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    if (widget.scancode != null) {
-                      await widget.controller(
-                          context, widget.product, _value, widget.scancode);
-                    } else {
-                      await widget.controller(context, widget.product, _value);
-                    }
-                  }
+              ValueListenableBuilder<bool>(
+                valueListenable: productControllers.isLoading,
+                builder: (context, isLoading, child) {
+                  return ElevatedButton(
+                    onPressed: isLoading
+                        ? null
+                        : () async {
+                            if (_formKey.currentState!.validate()) {
+                              if (widget.scancode != '') {
+                                await widget.controller(context, widget.product,
+                                    _value, widget.scancode);
+                              } else {
+                                await widget.controller(
+                                    context, widget.product, _value);
+                              }
+                            }
+                          },
+                    child: isLoading
+                        ? const CircularProgressIndicator()
+                        : const Text('Edit Product'),
+                  );
                 },
               ),
             ],

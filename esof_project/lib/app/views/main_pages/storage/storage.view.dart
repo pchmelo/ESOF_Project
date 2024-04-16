@@ -44,24 +44,24 @@ class _StorageViewState extends State<StorageView> {
         },
       ),
       appBar: AppBar(
-        title: const Text(name,
-        style: TextStyle(
-          fontFamily: 'CrimsonPro',
-          fontSize: 31,
-        ),
+        title: const Text(
+          name,
+          style: TextStyle(
+            fontFamily: 'CrimsonPro',
+            fontSize: 31,
+          ),
         ),
         centerTitle: true,
         backgroundColor: Colors.cyan,
-        title: const Text(StorageView.name),
-        backgroundColor: Colors.grey[800],
         foregroundColor: Colors.white,
       ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/boxes_background.png"), fit: BoxFit.cover,
+            image: AssetImage("assets/boxes_background.png"),
+            fit: BoxFit.cover,
           ),
         ),
         child: Column(
@@ -69,7 +69,8 @@ class _StorageViewState extends State<StorageView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ProductList(
-                handleProductTap: handleProductTap, controller: edit_controller),
+                handleProductTap: handleProductTap,
+                controller: edit_controller),
           ],
         ),
       ),

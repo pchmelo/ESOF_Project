@@ -1,4 +1,5 @@
 import 'package:esof_project/app/controllers/ProductControllers.dart';
+import 'package:esof_project/app/shared/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:esof_project/app/models/product.model.dart';
@@ -16,6 +17,7 @@ class EditProduct extends StatefulWidget {
 
 class _EditProdutState extends State<EditProduct> {
   final _formKey = GlobalKey<FormState>();
+  final ProductControllers productControllers = ProductControllers();
 
   String? _name;
   int? _threshold;
@@ -52,13 +54,20 @@ class _EditProdutState extends State<EditProduct> {
                 validator: (val) => val!.isEmpty ? 'Enter a quantity' : null,
                 onChanged: (val) => setState(() => _quantity = int.parse(val)),
               ),
-              ElevatedButton(
-                child: const Text('Edit Product'),
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    widget.controller(
-                        context, widget.product, _name, _threshold, _quantity);
-                  }
+              ValueListenableBuilder<bool>(
+                valueListenable: productControllers.isLoading,
+                builder: (context, isLoading, child) {
+                  return ElevatedButton(
+                    onPressed: isLoading
+                        ? null
+                        : () async {
+                            if (_formKey.currentState!.validate()) {
+                              await widget.controller(context, widget.product,
+                                  _name, _threshold, _quantity);
+                            }
+                          },
+                    child: isLoading ? Loading() : const Text('Edit Product'),
+                  );
                 },
               ),
             ],

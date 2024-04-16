@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../views/extra_pages/changeQuantity.widget.dart';
 import '../views/extra_pages/editProduct.widget.dart';
-import '../views/main_pages/storage/createProduct.widget.dart';
+import '../views/extra_pages/createProduct.widget.dart';
 
 class ProductForm {
   final context;
