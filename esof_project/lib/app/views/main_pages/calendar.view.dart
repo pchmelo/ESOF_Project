@@ -143,10 +143,10 @@ class _CalenderViewState extends State<CalenderView> {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
-                    fontSize: 100 )
+                    fontSize: 50 )
             )
         ),
-        const SizedBox(height:500),
+        const SizedBox(height:100),
       ],
     );
   }

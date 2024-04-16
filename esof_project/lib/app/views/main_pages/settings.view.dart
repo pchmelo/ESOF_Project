@@ -33,6 +33,7 @@ class SettingsView extends StatelessWidget {
               }
             },
           ),
+          const SizedBox(height: 100),
           Transform.rotate(
               angle: -0.785,
               child: const Text(
@@ -40,7 +41,7 @@ class SettingsView extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
-                      fontSize: 100 )
+                      fontSize: 50 )
               )
           ),
         ],

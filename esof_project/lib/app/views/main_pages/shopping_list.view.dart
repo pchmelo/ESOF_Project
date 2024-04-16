@@ -23,7 +23,7 @@ class ShoppingListView extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
-                      fontSize: 100))),
+                      fontSize: 50))),
         ],
       ),
       bottomNavigationBar: const Footer(),
