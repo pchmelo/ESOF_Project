@@ -35,22 +35,51 @@ class ProducDetailsPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              children: [
-                Text('Name: ${product.name}'),
-                Text('Threshold: ${product.threshold}'),
-                Text('Quantity: ${product.quantity}'),
-                TextButton(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Container(
+                  child: Text('Name: ${product.name}',
+                    style: TextStyle(
+                      fontSize: 35.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Container(
+                  child: Text('Threshold: ${product.threshold}',
+                    style: TextStyle(
+                    fontSize: 35.0,
+                    fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Container(
+                  child: Text('Quantity: ${product.quantity}',
+                    style: TextStyle(
+                      fontSize: 35.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 400),
+                FloatingActionButton(
                     onPressed: () async {
                       await ProductForm(product: product, context: context)
                           .EditProductForm(controller);
                       Navigator.pop(context);
                     },
+                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.grey[100],
                     child: const Text('Edit')),
-                TextButton(
+                SizedBox(height: 15),
+                FloatingActionButton(
                     onPressed: () {
                       deleteProduct();
                       Navigator.pop(context);
                     },
+                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.red,
                     child: const Text('Delete')),
               ],
             ),
