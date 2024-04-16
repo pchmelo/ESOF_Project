@@ -31,6 +31,18 @@ class AddProductView extends StatelessWidget {
                       context, '/start/add_product/bar_scanner');
                 },
                 child: const Text('Bar Code Scan')),
+
+            Transform.rotate(
+                angle: -0.785,
+                child: const Text(
+                    'IN PROGRESS',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 100 )
+                )
+            ),
+            const SizedBox(height:100),
           ],
         ),
       ),
