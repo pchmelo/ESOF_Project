@@ -11,7 +11,7 @@ class StorageView extends StatelessWidget {
   final create_controller = ProductControllers().CreateProduct;
   final edit_controller = ProductControllers().EditProduct;
 
-  static const name = 'Storage';
+  static const name = 'STORAGE';
   String currentRoute = '/start/storage';
 
   StorageView({super.key});
@@ -37,17 +37,32 @@ class StorageView extends StatelessWidget {
         },
       ),
       appBar: AppBar(
-        title: const Text(name),
-        backgroundColor: Colors.grey[800],
+        title: const Text(name,
+        style: TextStyle(
+          fontFamily: 'CrimsonPro',
+          fontSize: 31,
+        ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.cyan,
         foregroundColor: Colors.white,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ProductList(
-              handleProductTap: handleProductTap, controller: edit_controller),
-        ],
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/boxes_background.png"), fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ProductList(
+                handleProductTap: handleProductTap, controller: edit_controller),
+          ],
+        ),
       ),
       bottomNavigationBar: const Footer(),
     );
