@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -62,8 +64,7 @@ class _ProductListState extends State<ProductList> {
             _foundProducts.value = List.from(_allProducts);
 
             return Column(children: [
-              Container(
-                color: Colors.grey[600], // Set the color here
+              Container( // Set the color here
                 child: Column(
                   children: [
                     const SizedBox(
@@ -92,14 +93,9 @@ class _ProductListState extends State<ProductList> {
                   ],
                 ),
               ),
-              const Divider(
-                color: Colors.black,
-                height: 1,
-              ),
               const SizedBox(
                 height: 10,
               ),
-              const Text('Products:'),
               Expanded(
                   child: ValueListenableBuilder(
                 valueListenable: _foundProducts,
