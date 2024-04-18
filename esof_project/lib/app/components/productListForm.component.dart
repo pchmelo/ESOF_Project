@@ -1,3 +1,4 @@
+import 'package:esof_project/app/views/extra_pages/list_products/createProductList.widget.dart';
 import 'package:flutter/material.dart';
 
 class ProductListForm {
@@ -14,7 +15,7 @@ class ProductListForm {
         return Padding(
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: CreateProdut(controller: controller),
+          child: CreateProdutList(controller: controller),
         );
       },
     );

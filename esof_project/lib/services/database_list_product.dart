@@ -3,30 +3,33 @@ import 'package:esof_project/app/models/shoppingList.model.dart';
 
 class DatabaseForListProduct {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final String uid;
 
-  Future<void> createListProduct(String uid, ShoppingList listProduct) async {
+  DatabaseForListProduct({required this.uid});
+
+  Future<void> createShoppingList(String uid, ShoppingList shoppingList) async {
     await _firestore
         .collection('users')
         .doc(uid)
-        .collection('listProducts')
-        .add(listProduct.toMap());
+        .collection('shoppingList')
+        .add(shoppingList.toMap());
   }
 
-  Future<ShoppingList> getListProduct(String uid, String listId) async {
+  Future<ShoppingList> getShoppingList(String uid, String listId) async {
     DocumentSnapshot doc = await _firestore
         .collection('users')
         .doc(uid)
-        .collection('listProducts')
+        .collection('shoppingList')
         .doc(listId)
         .get();
     return ShoppingList.fromMap(doc.data() as Map<String, dynamic>);
   }
 
-  Stream<List<ShoppingList>> getListProductsStream(String uid) {
+  Stream<List<ShoppingList>> getShoppingListStream(String uid) {
     return _firestore
         .collection('users')
         .doc(uid)
-        .collection('listProducts')
+        .collection('shoppingList')
         .snapshots()
         .map((snapshot) {
       return snapshot.docs.map((doc) {
@@ -35,21 +38,21 @@ class DatabaseForListProduct {
     });
   }
 
-  Future<void> updateListProduct(
-      String uid, String listId, ShoppingList listProduct) async {
+  Future<void> updateShoppingList(
+      String uid, String listId, ShoppingList shoppingList) async {
     return _firestore
         .collection('users')
         .doc(uid)
-        .collection('listProducts')
+        .collection('shoppingList')
         .doc(listId)
-        .update(listProduct.toMap());
+        .update(shoppingList.toMap());
   }
 
-  Future<void> deleteListProduct(String uid, String listId) async {
+  Future<void> deleteShoppingList(String uid, String listId) async {
     return _firestore
         .collection('users')
         .doc(uid)
-        .collection('listProducts')
+        .collection('shoppingList')
         .doc(listId)
         .delete();
   }

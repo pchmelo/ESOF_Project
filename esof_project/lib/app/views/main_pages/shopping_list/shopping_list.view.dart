@@ -1,4 +1,6 @@
 import 'package:esof_project/app/components/footer.component.dart';
+import 'package:esof_project/app/components/productListForm.component.dart';
+import 'package:esof_project/app/controllers/shoppingListControllers.dart';
 import 'package:flutter/material.dart';
 
 class ShoppingListView extends StatelessWidget {
@@ -9,12 +11,17 @@ class ShoppingListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final create_controller = ShoppingListControllers().CreateProduct;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber,
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          return ProductListForm(context: context)
+              .CreateProductForm(create_controller);
+        },
       ),
       appBar: AppBar(
         title: Text(name),
