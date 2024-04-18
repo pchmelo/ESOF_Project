@@ -10,6 +10,12 @@ class ShoppingListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amber,
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.add),
+        onPressed: () {},
+      ),
       appBar: AppBar(
         title: Text(name),
       ),

@@ -2,17 +2,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../services/database.dart';
+import '../../services/database_product.dart';
 import '../models/product.model.dart';
 
 class ProductControllers {
-  late DatabaseService dbService;
+  late DatabaseForProducts dbService;
   late User user;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
 
-  ProductControllers([DatabaseService? dbServiceParam, User? userParam]) {
+  ProductControllers([DatabaseForProducts? dbServiceParam, User? userParam]) {
     user = userParam ?? FirebaseAuth.instance.currentUser!;
-    dbService = dbServiceParam ?? DatabaseService(uid: user.uid);
+    dbService = dbServiceParam ?? DatabaseForProducts(uid: user.uid);
   }
 
   Future<void> CreateProduct(context, _name, _threshold, _quantity) async {

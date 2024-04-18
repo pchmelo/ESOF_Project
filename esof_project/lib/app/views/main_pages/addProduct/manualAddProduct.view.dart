@@ -1,8 +1,7 @@
 import 'package:esof_project/app/components/productForm.component.dart';
-import 'package:esof_project/app/views/extra_pages/product.view.dart';
 import 'package:esof_project/app/views/main_pages/storage/productList.widget.dart';
 import 'package:flutter/material.dart';
-import '../../../controllers/ProductControllers.dart';
+import '../../../controllers/productControllers.dart';
 
 class ManualProductView extends StatelessWidget {
   final name = 'Choose the Product you want to add to the Storage';

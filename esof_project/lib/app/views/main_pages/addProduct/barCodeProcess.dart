@@ -1,13 +1,13 @@
 import 'package:esof_project/app/shared/loading.dart';
 import 'package:esof_project/app/views/main_pages/storage/productList.widget.dart';
-import 'package:esof_project/services/database.dart';
+import 'package:esof_project/services/database_product.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../../../components/productForm.component.dart';
-import '../../../controllers/ProductControllers.dart';
+import '../../../controllers/productControllers.dart';
 import '../../../models/product.model.dart';
 
 class BarCodeProcess extends StatefulWidget {
@@ -25,7 +25,7 @@ class BarCodeProcess extends StatefulWidget {
 }
 
 class _BarCodeProcessState extends State<BarCodeProcess> {
-  late DatabaseService _dbService;
+  late DatabaseForProducts _dbService;
   late User user;
 
   void handleProductTap(product, controller) {
@@ -45,7 +45,7 @@ class _BarCodeProcessState extends State<BarCodeProcess> {
   void initState() {
     super.initState();
     user = FirebaseAuth.instance.currentUser!;
-    _dbService = DatabaseService(uid: user.uid);
+    _dbService = DatabaseForProducts(uid: user.uid);
   }
 
   @override
