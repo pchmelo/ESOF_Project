@@ -24,6 +24,20 @@ class ProductForm {
     );
   }
 
+  void PlusButtonForm(controller) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+          padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: CreateProdut(controller: controller),
+        );
+      },
+    );
+  }
+
   Future<void> EditProductForm(controller) async {
     await showModalBottomSheet(
         isScrollControlled: true,

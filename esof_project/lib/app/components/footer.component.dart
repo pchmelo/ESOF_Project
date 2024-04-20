@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../controllers/ProductControllers.dart';
+import 'package:esof_project/app/components/productForm.component.dart';
+import '../views/extra_pages/plusButton.widget.dart';
 
 class Footer extends StatefulWidget {
   const Footer({super.key});
@@ -9,6 +12,7 @@ class Footer extends StatefulWidget {
 
 class _FooterState extends State<Footer> {
   bool isCurrentRoute = false;
+  final create_controller = ProductControllers().PlusButton;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,8 @@ class _FooterState extends State<Footer> {
           onPressed: () {
             String? currentRoute = ModalRoute.of(context)!.settings.name;
             if (currentRoute != '/start/add_product') {
-              Navigator.pushReplacementNamed(context, '/start/add_product');
+              return ProductForm(context: context)
+                  .PlusButtonForm(create_controller);
             }
           },
           icon: const Icon(Icons.add_circle),
