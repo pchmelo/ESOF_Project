@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import '../views/extra_pages/changeQuantity.widget.dart';
-import '../views/extra_pages/editProduct.widget.dart';
-import '../views/extra_pages/createProduct.widget.dart';
+import '../views/extra_pages/product/changeQuantity.widget.dart';
+import '../views/extra_pages/product/createProduct.widget.dart';
+import '../views/extra_pages/product/editProduct.widget.dart';
 
 class ProductForm {
   final context;
@@ -44,8 +44,8 @@ class ProductForm {
         context: context,
         builder: (BuildContext context) {
           return Padding(
-            padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
             child: EditProduct(product: product, controller: controller),
           );
         });

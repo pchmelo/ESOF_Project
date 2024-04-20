@@ -1,8 +1,8 @@
-import 'package:esof_project/app/controllers/ProductControllers.dart';
+import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:esof_project/app/models/product.model.dart';
-import 'package:esof_project/services/database.dart';
+import 'package:esof_project/services/database_product.dart';
 import 'package:flutter/services.dart';
 
 class EditProduct extends StatefulWidget {
@@ -27,7 +27,6 @@ class _EditProdutState extends State<EditProduct> {
     return Container(
       height: 425,
       padding: const EdgeInsets.all(15.0),
-
       child: Column(
         children: <Widget>[
           const Text(
@@ -45,22 +44,26 @@ class _EditProdutState extends State<EditProduct> {
               children: <Widget>[
                 TextFormField(
                   initialValue: widget.product.name,
-                  decoration: const InputDecoration(labelText: 'Product Name',
-                    border: OutlineInputBorder(),),
+                  decoration: const InputDecoration(
+                    labelText: 'Product Name',
+                    border: OutlineInputBorder(),
+                  ),
                   validator: (val) =>
-                  val!.isEmpty ? 'Enter a product name' : null,
+                      val!.isEmpty ? 'Enter a product name' : null,
                   onChanged: (val) => setState(() => _name = val),
                 ),
-                const Padding(padding: EdgeInsets.only(top:20)),
+                const Padding(padding: EdgeInsets.only(top: 20)),
                 TextFormField(
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   initialValue: widget.product.quantity.toString(),
                   decoration: const InputDecoration(
                     labelText: 'Quantity',
-                    border: OutlineInputBorder(),),
+                    border: OutlineInputBorder(),
+                  ),
                   validator: (val) => val!.isEmpty ? 'Enter a quantity' : null,
-                  onChanged: (val) => setState(() => _quantity = int.parse(val)),
+                  onChanged: (val) =>
+                      setState(() => _quantity = int.parse(val)),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 TextFormField(
@@ -69,16 +72,20 @@ class _EditProdutState extends State<EditProduct> {
                   initialValue: widget.product.threshold.toString(),
                   decoration: const InputDecoration(
                     labelText: 'Threshold',
-                    border: OutlineInputBorder(),),
+                    border: OutlineInputBorder(),
+                  ),
                   validator: (val) => val!.isEmpty ? 'Enter a threshold' : null,
-                  onChanged: (val) => setState(() => _threshold = int.parse(val)),
+                  onChanged: (val) =>
+                      setState(() => _threshold = int.parse(val)),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 16.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.yellow),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.black),
                       textStyle: MaterialStateProperty.all<TextStyle>(
                         const TextStyle(
                           fontWeight: FontWeight.bold,
@@ -90,20 +97,16 @@ class _EditProdutState extends State<EditProduct> {
                       ),
                       shape: MaterialStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0), // Decreasing border radius
+                          borderRadius: BorderRadius.circular(
+                              10.0), // Decreasing border radius
                         ),
                       ),
                     ),
                     child: const Text('Confirm'),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        widget.controller(
-                            context,
-                            widget.product,
-                            _name,
-                            _threshold,
-                            _quantity
-                        );
+                        widget.controller(context, widget.product, _name,
+                            _threshold, _quantity);
                       }
                     },
                   ),
@@ -116,5 +119,3 @@ class _EditProdutState extends State<EditProduct> {
     );
   }
 }
-
-

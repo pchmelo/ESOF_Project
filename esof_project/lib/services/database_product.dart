@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esof_project/app/models/product.model.dart';
 
-class DatabaseService {
+class DatabaseForProducts {
   final String uid;
-  DatabaseService({required this.uid});
+  DatabaseForProducts({required this.uid});
 
   // collection reference
   final CollectionReference productCollection =

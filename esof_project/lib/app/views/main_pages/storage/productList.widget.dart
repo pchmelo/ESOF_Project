@@ -4,7 +4,7 @@ import 'package:esof_project/app/shared/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../services/database.dart';
+import '../../../../services/database_product.dart';
 import '../../../models/product.model.dart';
 import 'ProductListBuilder.dart';
 
@@ -21,13 +21,13 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
   late User user;
-  late DatabaseService _dbService;
+  late DatabaseForProducts _dbService;
 
   @override
   void initState() {
     super.initState();
     user = FirebaseAuth.instance.currentUser!;
-    _dbService = DatabaseService(uid: user.uid);
+    _dbService = DatabaseForProducts(uid: user.uid);
   }
 
   List<Map<String, dynamic>> _allProducts = [];

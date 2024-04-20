@@ -251,3 +251,27 @@ Estas etapas são:
 
 - Print da scrum board após a realização do primeiro sprint:
 <img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/sprint1_conclusion.png?raw=true">
+
+#### Sprint 1 retrospective:
+##### O que correu bem:
+
+- A mutua cooperação entre os elementos do grupo para desenvolver as diferentes tarefas (user stories)
+- A distribuição do trabalho entre os membros do grupo e a organização
+
+##### O que poderia ter corrido melhor:
+
+- Gestão do tempo em relação a outras entregas de trabalhos e/ou avaliações.
+- Expectativa de maior facilidade relativamente à implementação de certas features que se revelaram mais difíceis do que julgamos
+- Alguns problemas em gerir as branches no repositório do github
+
+##### O que nos causou dúvidas:
+
+- A comunicação da regência relativamente aos testes de Gherklin
+- A familiarização com a linguagem de programação Dart
+- A configuração do Emulador no Android Studio
+
+##### O que vamos fazer para melhorar:
+
+- Continuar a tentar dedicar mais tempo a este projecto
+- Aumentar a quantidade de pesquisa relativa à dificuldade da implementação de uma feature antes de realmente a criar
+- Comunicar mais e mais frequentemente relativamente às branches no github
