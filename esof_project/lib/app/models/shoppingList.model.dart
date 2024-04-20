@@ -5,7 +5,7 @@ class ShoppingList {
 
   ShoppingList({required this.uid, required this.name, required this.products});
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'uid': uid,
       'name': name,
@@ -13,7 +13,7 @@ class ShoppingList {
     };
   }
 
-  static ShoppingList fromMap(Map<String, dynamic> map) {
+  static ShoppingList fromJson(Map<String, dynamic> map) {
     return ShoppingList(
       uid: map['uid'],
       name: map['name'],

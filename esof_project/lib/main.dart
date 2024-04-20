@@ -2,7 +2,7 @@ import 'package:esof_project/app/views/main_pages/addProduct/addProduct.view.dar
 import 'package:esof_project/app/views/main_pages/addProduct/barScanner.view.dart';
 import 'package:esof_project/app/views/main_pages/calendar.view.dart';
 import 'package:esof_project/app/views/main_pages/settings.view.dart';
-import 'package:esof_project/app/views/main_pages/shopping_list/shopping_list.view.dart';
+import 'package:esof_project/app/views/main_pages/shopping_list/shoppingList.view.dart';
 import 'package:esof_project/app/views/main_pages/storage/storage.view.dart';
 import 'package:esof_project/app/views/wrapper.dart';
 import 'package:esof_project/services/authenticate.dart';

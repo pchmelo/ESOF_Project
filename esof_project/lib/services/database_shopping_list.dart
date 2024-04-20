@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
 
-class DatabaseForListProduct {
+class DatabaseForShoppingList {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String uid;
 
-  DatabaseForListProduct({required this.uid});
+  DatabaseForShoppingList({required this.uid});
 
   Future<void> createShoppingList(String uid, ShoppingList shoppingList) async {
     await _firestore
         .collection('users')
         .doc(uid)
         .collection('shoppingList')
-        .add(shoppingList.toMap());
+        .add(shoppingList.toJson());
   }
 
   Future<ShoppingList> getShoppingList(String uid, String listId) async {
@@ -22,7 +22,7 @@ class DatabaseForListProduct {
         .collection('shoppingList')
         .doc(listId)
         .get();
-    return ShoppingList.fromMap(doc.data() as Map<String, dynamic>);
+    return ShoppingList.fromJson(doc.data() as Map<String, dynamic>);
   }
 
   Stream<List<ShoppingList>> getShoppingListStream(String uid) {
@@ -33,7 +33,7 @@ class DatabaseForListProduct {
         .snapshots()
         .map((snapshot) {
       return snapshot.docs.map((doc) {
-        return ShoppingList.fromMap(doc.data());
+        return ShoppingList.fromJson(doc.data());
       }).toList();
     });
   }
@@ -45,7 +45,7 @@ class DatabaseForListProduct {
         .doc(uid)
         .collection('shoppingList')
         .doc(listId)
-        .update(shoppingList.toMap());
+        .update(shoppingList.toJson());
   }
 
   Future<void> deleteShoppingList(String uid, String listId) async {

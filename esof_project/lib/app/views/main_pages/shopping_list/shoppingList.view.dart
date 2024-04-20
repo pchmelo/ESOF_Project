@@ -1,6 +1,8 @@
 import 'package:esof_project/app/components/footer.component.dart';
 import 'package:esof_project/app/components/productListForm.component.dart';
 import 'package:esof_project/app/controllers/shoppingListControllers.dart';
+import 'package:esof_project/app/views/extra_pages/list_products/shoppingListDisplay.dart';
+import 'package:esof_project/app/views/main_pages/shopping_list/shoppingList.widgetViewList.dart';
 import 'package:flutter/material.dart';
 
 class ShoppingListView extends StatelessWidget {
@@ -12,6 +14,14 @@ class ShoppingListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final create_controller = ShoppingListControllers().CreateProduct;
+
+    void handleShoppingListTap(shoppingList, controller) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ShoppingListDisplay(
+                  shoppingList: shoppingList, controller: controller)));
+    }
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -30,13 +40,9 @@ class ShoppingListView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Transform.rotate(
-              angle: -0.785,
-              child: const Text('IN PROGRESS',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 50))),
+          ShoppingListViewList(
+              controller: create_controller,
+              handleShoppingListTap: handleShoppingListTap)
         ],
       ),
       bottomNavigationBar: const Footer(),
