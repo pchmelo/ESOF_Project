@@ -1,24 +1,24 @@
 import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:flutter/material.dart';
 
-class ShoppingListTile extends StatelessWidget {
-  final ShoppingList shoppingList;
-  final Function controller;
-  final Function onShoppingListTap;
+import '../../../components/productListForm.component.dart';
+import '../../../controllers/shoppingListControllers.dart';
 
-  const ShoppingListTile(
-      {super.key,
-      required this.shoppingList,
-      required this.controller,
-      required this.onShoppingListTap});
+class ShoppingListTileAdd extends StatelessWidget {
+  const ShoppingListTileAdd({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    Function create_controller = ShoppingListControllers().CreateProduct;
+
     return AspectRatio(
       aspectRatio: 1.0, // This makes the tile square
       child: GestureDetector(
         onTap: () {
-          onShoppingListTap(shoppingList, controller);
+          return ProductListForm(context: context)
+              .CreateProductForm(create_controller);
         },
         child: Stack(
           children: [
@@ -30,10 +30,9 @@ class ShoppingListTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0),
               ),
             ),
-            Positioned(
-              top: 5.0, // Adjust this value as needed
-              left: 5.0, // Adjust this value as needed
-              child: Text(shoppingList.name!),
+            const Center(
+              // This centers its child
+              child: Icon(Icons.add, size: 50.0), // Add icon
             ),
           ],
         ),

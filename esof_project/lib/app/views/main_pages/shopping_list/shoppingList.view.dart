@@ -24,15 +24,6 @@ class ShoppingListView extends StatelessWidget {
     }
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amber,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-        onPressed: () {
-          return ProductListForm(context: context)
-              .CreateProductForm(create_controller);
-        },
-      ),
       appBar: AppBar(
         title: Text(name),
       ),
