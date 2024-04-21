@@ -46,8 +46,6 @@ class MyApp extends StatelessWidget {
           '/start/add_product': (context) => AddProductView(),
           '/start/shopping_list': (context) => ShoppingListView(),
           '/start/add_product/bar_scanner': (context) => const BarScannerView(),
-          '/start/add_product/manual_add_product': (context) =>
-              ManualProductView(),
         },
       ),
     );

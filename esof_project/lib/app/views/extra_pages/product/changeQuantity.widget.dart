@@ -7,11 +7,13 @@ class ChangeQuantityProduct extends StatefulWidget {
   final String scancode;
   final Function controller;
   final product;
+  final listUid;
   const ChangeQuantityProduct(
       {super.key,
       required this.product,
       required this.controller,
-      required this.scancode});
+      required this.scancode,
+      required this.listUid});
 
   @override
   State<ChangeQuantityProduct> createState() => _ChangeQuantityProductState();
@@ -51,7 +53,7 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
           key: _formKey,
           child: Column(
             children: <Widget>[
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text('Product Name: ${widget.product.name}'),
               TextFormField(
                 initialValue: "0",
@@ -89,13 +91,9 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
                   child: const Text('Confirm'),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      if (widget.scancode != null) {
-                        await widget.controller(
-                            context, widget.product, _value, widget.scancode);
-                      } else {
-                        await widget.controller(
-                            context, widget.product, _value);
-                      }
+                      await widget.controller(widget.listUid, widget.product,
+                          _value, widget.scancode);
+                      Navigator.pop(context);
                     }
                   },
                 ),

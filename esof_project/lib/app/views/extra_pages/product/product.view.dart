@@ -3,7 +3,6 @@ import 'package:esof_project/app/models/product.model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../../../services/database_product.dart';
-import 'editProduct.widget.dart';
 
 class ProducDetailsPage extends StatelessWidget {
   final Function controller;
@@ -34,7 +33,7 @@ class ProducDetailsPage extends StatelessWidget {
             itemBuilder: (context) => [
               PopupMenuItem<int>(
                 value: 0,
-                child: Text('Edit'),
+                child: const Text('Edit'),
                 onTap: () async {
                   await ProductForm(product: product, context: context)
                       .EditProductForm(controller);
@@ -43,7 +42,7 @@ class ProducDetailsPage extends StatelessWidget {
               ),
               PopupMenuItem<int>(
                 value: 1,
-                child: Text('Delete'),
+                child: const Text('Delete'),
                 onTap: () {
                   deleteProduct();
                 },
@@ -58,7 +57,7 @@ class ProducDetailsPage extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.1,
           ),
-          Container(
+          const SizedBox(
             height: 100,
             width: 100,
             child: Placeholder(),
@@ -77,7 +76,7 @@ class ProducDetailsPage extends StatelessWidget {
                   child: Center(
                     child: Text(
                       '${product.name}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 35.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -89,7 +88,7 @@ class ProducDetailsPage extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Threshold: ${product.threshold}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 35.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -99,7 +98,7 @@ class ProducDetailsPage extends StatelessWidget {
                 Center(
                   child: Text(
                     'Quantity: ${product.quantity}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 35.0,
                       fontWeight: FontWeight.bold,
                     ),

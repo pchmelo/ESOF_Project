@@ -37,7 +37,7 @@ class ProductForm {
         });
   }
 
-  AddProductQuantityForm(product, controller, scancode) {
+  AddProductQuantityForm(listUid, product, controller, scancode) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       showModalBottomSheet(
         isScrollControlled: true,
@@ -47,6 +47,7 @@ class ProductForm {
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
             child: ChangeQuantityProduct(
+              listUid: listUid,
               product: product,
               controller: controller,
               scancode: scancode,
