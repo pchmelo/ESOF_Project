@@ -61,4 +61,31 @@ class ShoppingListControllers {
     await dbService.updateShoppingList(listId, shoppingList);
     isLoading.value = false;
   }
+
+  Future<void> updateProductCheckedStatus(
+      String listId, String productId, bool newStatus) async {
+    isLoading.value = true;
+    ShoppingList shoppingList = await dbService.getShoppingList(listId);
+
+    if (shoppingList.products.containsKey(productId)) {
+      int currentQuantity = shoppingList.products[productId]!.keys.first;
+      shoppingList.products[productId] = {currentQuantity: newStatus};
+    }
+
+    await dbService.updateShoppingList(listId, shoppingList);
+    isLoading.value = false;
+  }
+
+  Future<void> removeProductFromShoppingList(
+      String listId, String productId) async {
+    isLoading.value = true;
+    ShoppingList shoppingList = await dbService.getShoppingList(listId);
+
+    if (shoppingList.products.containsKey(productId)) {
+      shoppingList.products.remove(productId);
+    }
+
+    await dbService.updateShoppingList(listId, shoppingList);
+    isLoading.value = false;
+  }
 }

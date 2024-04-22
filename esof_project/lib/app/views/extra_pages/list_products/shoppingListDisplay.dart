@@ -1,4 +1,5 @@
 import 'package:esof_project/app/models/shoppingList.model.dart';
+import 'package:esof_project/app/views/extra_pages/list_products/shoppingListCard.dart';
 import 'package:esof_project/app/views/extra_pages/list_products/showProductsShoppingListBuilder.dart';
 import 'package:esof_project/services/database_shopping_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,6 +14,8 @@ class ShoppingListDisplay extends StatelessWidget {
   final Function controller;
   final Function controller_addProductToList =
       ShoppingListControllers().addProductToList;
+
+  final Function shoppingListCard = ShoppingListCard().shoppingListCard;
 
   ShoppingListDisplay(
       {super.key, required this.shoppingList, required this.controller});
@@ -90,26 +93,42 @@ class ShoppingListDisplay extends StatelessWidget {
         ),
         body: Column(
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.all(8.0), // Adjust the padding as needed
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'Name',
-                    style: TextStyle(fontSize: 25.0),
-                  ),
-                  Text(
-                    'Quantity',
-                    style: TextStyle(fontSize: 25.0),
+            Expanded(
+              child: ShowProductsShoppingListBuilder(
+                  shoppingList: shoppingList,
+                  shoppingListCard: shoppingListCard),
+            ),
+            Container(
+              padding: const EdgeInsets.all(
+                  20), // Increase the padding to make the button bigger
+              decoration: BoxDecoration(
+                color: Colors.blue, // Set the color of the button
+                borderRadius: BorderRadius.circular(
+                    10), // Set the border radius of the button
+                boxShadow: [
+                  // Add a shadow to the button
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
-            ),
-            Expanded(
-              child:
-                  ShowProductsShoppingListBuilder(shoppingList: shoppingList),
-            ),
+              child: TextButton(
+                onPressed: () {
+                  // Add the action of the button here
+                },
+                child: const Text(
+                  'Finish your Shopps :)',
+                  style: TextStyle(
+                    color: Colors.white, // Set the color of the text
+                    fontSize:
+                        20, // Increase the font size to make the text bigger
+                  ),
+                ),
+              ),
+            )
           ],
         ));
   }

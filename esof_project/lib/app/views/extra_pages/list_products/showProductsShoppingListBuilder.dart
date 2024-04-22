@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:esof_project/app/models/product.model.dart';
 
 class ShowProductsShoppingListBuilder extends StatefulWidget {
+  final Function shoppingListCard;
   final ShoppingList shoppingList;
   const ShowProductsShoppingListBuilder(
-      {super.key, required this.shoppingList});
+      {super.key, required this.shoppingList, required this.shoppingListCard});
 
   @override
   State<ShowProductsShoppingListBuilder> createState() =>
@@ -47,37 +48,8 @@ class _ShowProductsShoppingListBuilderState
               itemBuilder: (context, index) {
                 MapEntry<Product?, Map<int, bool>> entry =
                     products.entries.elementAt(index);
-                Product? product = entry.key;
-                Map<int, bool> productDetails = entry.value;
-                int quantity = productDetails.keys.first;
-                bool checked = productDetails.values.first;
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Flexible(
-                          child: Text(
-                            product?.name ?? 'Unknown product',
-                            style: const TextStyle(fontSize: 20.0),
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        child: Text(
-                          'x$quantity',
-                          style: const TextStyle(fontSize: 16.0),
-                        ),
-                      ),
-                      Checkbox(
-                        value: checked,
-                        onChanged: (bool? value) {
-                          // Handle when the checkbox is tapped
-                        },
-                      ),
-                    ],
-                  ),
-                );
+                return widget.shoppingListCard(
+                    entry: entry, shoppingList: widget.shoppingList);
               },
             );
           } else {

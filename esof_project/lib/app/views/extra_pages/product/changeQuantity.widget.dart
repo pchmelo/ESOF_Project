@@ -1,3 +1,4 @@
+import 'package:esof_project/app/components/changeQuantitity.component.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:esof_project/app/models/product.model.dart';
@@ -55,14 +56,14 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
             children: <Widget>[
               const SizedBox(height: 20),
               Text('Product Name: ${widget.product.name}'),
-              TextFormField(
-                initialValue: "0",
-                decoration: const InputDecoration(
-                  labelText: 'Product Name',
-                  border: OutlineInputBorder(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ChangeQuantityComponent(
+                  initialValue: 0,
+                  onQuantityChanged: (quantity) {
+                    _value = quantity;
+                  },
                 ),
-                validator: (val) => val!.isEmpty ? 'Enter a quantity' : null,
-                onChanged: (val) => setState(() => _value = int.parse(val)),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 16.0),

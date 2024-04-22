@@ -1,4 +1,6 @@
 import 'package:esof_project/app/models/shoppingList.model.dart';
+import 'package:esof_project/app/views/extra_pages/list_products/shoppingListCard.dart';
+import 'package:esof_project/app/views/extra_pages/list_products/showProductsShoppingListBuilder.dart';
 import 'package:flutter/material.dart';
 
 import '../../../controllers/shoppingListControllers.dart';
@@ -6,6 +8,7 @@ import '../../../controllers/shoppingListControllers.dart';
 class EditShoppingList extends StatefulWidget {
   final ShoppingList shoppingList;
   final Function controller = ShoppingListControllers().editShoppingList;
+  final Function shoppingListCard = ShoppingListCard().editShoppingListCard;
 
   EditShoppingList({super.key, required this.shoppingList});
 
@@ -34,8 +37,14 @@ class _EditShoppingListState extends State<EditShoppingList> {
           ),
         ),
       ),
-      body: const Column(
-        children: <Widget>[],
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: ShowProductsShoppingListBuilder(
+                shoppingList: widget.shoppingList,
+                shoppingListCard: widget.shoppingListCard),
+          ),
+        ],
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
