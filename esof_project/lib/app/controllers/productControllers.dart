@@ -15,8 +15,14 @@ class ProductControllers {
     dbService = dbServiceParam ?? DatabaseForProducts(uid: user.uid);
   }
 
-  Future<void> CreateProduct(String id, Product product, int quantity) async {
+  Future<void> CreateProduct(String name, int threshold, int quantity) async {
     isLoading.value = true;
+    Product product = Product(
+        id: const Uuid().v4(),
+        name: name,
+        threshold: threshold,
+        quantity: quantity,
+        barcodes: []);
     await dbService.addProduct(product);
     isLoading.value = false;
   }
