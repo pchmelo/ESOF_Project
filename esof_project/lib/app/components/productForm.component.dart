@@ -1,3 +1,4 @@
+import 'package:esof_project/app/views/extra_pages/plusButton.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import '../views/extra_pages/product/changeQuantity.widget.dart';
@@ -19,6 +20,20 @@ class ProductForm {
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: CreateProdut(controller: controller),
+        );
+      },
+    );
+  }
+
+  void PlusButtonForm(controller) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+          padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: PlusButton(controller: controller),
         );
       },
     );

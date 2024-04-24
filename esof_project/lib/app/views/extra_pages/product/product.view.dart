@@ -33,7 +33,19 @@ class ProducDetailsPage extends StatelessWidget {
             itemBuilder: (context) => [
               PopupMenuItem<int>(
                 value: 0,
+<<<<<<< HEAD
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                      child: Icon(Icons.edit),
+                    ),
+                    Text('Edit'),
+                  ],
+                ),
+=======
                 child: const Text('Edit'),
+>>>>>>> 18a7f0d575c99fdd62635052866e74e7a34d86fe
                 onTap: () async {
                   await ProductForm(product: product, context: context)
                       .EditProductForm(controller);
@@ -42,7 +54,19 @@ class ProducDetailsPage extends StatelessWidget {
               ),
               PopupMenuItem<int>(
                 value: 1,
+<<<<<<< HEAD
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                      child: Icon(Icons.delete),
+                    ),
+                  Text('Delete'),
+    ],
+                ),
+=======
                 child: const Text('Delete'),
+>>>>>>> 18a7f0d575c99fdd62635052866e74e7a34d86fe
                 onTap: () {
                   deleteProduct();
                 },
@@ -105,13 +129,24 @@ class ProducDetailsPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.1,
                 ),
-                FloatingActionButton(
+                IconButton(
                     onPressed: () async {},
-                    foregroundColor: Colors.black,
-                    backgroundColor: Colors.amber,
-                    child: const Text('IN PROGRESS')),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Colors.amber),
+                      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                      minimumSize: MaterialStateProperty.all<Size>(
+                        Size(50.0, 50.0),
+                      ),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0), // Decreasing border radius
+                        ),
+                      ),
+                    ),
+                    icon: Icon(Icons.shopping_basket_outlined),
+                iconSize: 80,),
               ],
             ),
           ),

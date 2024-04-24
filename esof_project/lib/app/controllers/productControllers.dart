@@ -27,6 +27,19 @@ class ProductControllers {
     isLoading.value = false;
   }
 
+  Future<void> PlusButton(context, _name, _threshold, _quantity) async {
+    isLoading.value = true;
+    Product product = Product(
+        id: const Uuid().v4(),
+        name: _name,
+        threshold: _threshold.toInt(),
+        quantity: _quantity.toInt(),
+        barcodes: <String>[]);
+    await dbService.addProduct(product);
+    Navigator.pop(context);
+    isLoading.value = false;
+  }
+
   Future<void> EditProduct(
       context, product, _name, _threshold, _quantity) async {
     isLoading.value = true;
