@@ -37,8 +37,7 @@ class _ShoppingListViewStateViewList extends State<ShoppingListViewList> {
   Widget build(BuildContext context) {
     return Expanded(
         child: StreamBuilder<List<ShoppingList>>(
-      stream: _dbService.getShoppingListStream(user.uid)
-          as Stream<List<ShoppingList>>?,
+      stream: _dbService.getShoppingListStream() as Stream<List<ShoppingList>>?,
       builder:
           (BuildContext context, AsyncSnapshot<List<ShoppingList>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {

@@ -3,7 +3,6 @@ import 'package:esof_project/app/models/product.model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../../../services/database_product.dart';
-import 'editProduct.widget.dart';
 
 class ProducDetailsPage extends StatelessWidget {
   final Function controller;
@@ -34,6 +33,7 @@ class ProducDetailsPage extends StatelessWidget {
             itemBuilder: (context) => [
               PopupMenuItem<int>(
                 value: 0,
+<<<<<<< HEAD
                 child: Row(
                   children: <Widget>[
                     Padding(
@@ -43,6 +43,9 @@ class ProducDetailsPage extends StatelessWidget {
                     Text('Edit'),
                   ],
                 ),
+=======
+                child: const Text('Edit'),
+>>>>>>> 18a7f0d575c99fdd62635052866e74e7a34d86fe
                 onTap: () async {
                   await ProductForm(product: product, context: context)
                       .EditProductForm(controller);
@@ -51,6 +54,7 @@ class ProducDetailsPage extends StatelessWidget {
               ),
               PopupMenuItem<int>(
                 value: 1,
+<<<<<<< HEAD
                 child: Row(
                   children: <Widget>[
                     Padding(
@@ -60,6 +64,9 @@ class ProducDetailsPage extends StatelessWidget {
                   Text('Delete'),
     ],
                 ),
+=======
+                child: const Text('Delete'),
+>>>>>>> 18a7f0d575c99fdd62635052866e74e7a34d86fe
                 onTap: () {
                   deleteProduct();
                 },
@@ -74,7 +81,7 @@ class ProducDetailsPage extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.1,
           ),
-          Container(
+          const SizedBox(
             height: 100,
             width: 100,
             child: Placeholder(),
@@ -93,7 +100,7 @@ class ProducDetailsPage extends StatelessWidget {
                   child: Center(
                     child: Text(
                       '${product.name}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 35.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -105,7 +112,7 @@ class ProducDetailsPage extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Threshold: ${product.threshold}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 35.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -115,7 +122,7 @@ class ProducDetailsPage extends StatelessWidget {
                 Center(
                   child: Text(
                     'Quantity: ${product.quantity}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 35.0,
                       fontWeight: FontWeight.bold,
                     ),

@@ -1,13 +1,18 @@
 import 'package:uuid/uuid.dart';
 
 class Product {
-  final String? id;
+  final String id;
   final String? name;
   final int? threshold;
   final int? quantity;
   final List<String>? barcodes;
 
-  Product({this.id, this.name, this.threshold, this.quantity, this.barcodes});
+  Product(
+      {required this.id,
+      this.name,
+      this.threshold,
+      this.quantity,
+      this.barcodes});
 
   void main() {
     var uuid = const Uuid();

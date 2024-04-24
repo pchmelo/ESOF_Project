@@ -1,3 +1,4 @@
+import 'package:esof_project/app/components/changeQuantitity.component.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:esof_project/app/models/product.model.dart';
@@ -7,11 +8,13 @@ class ChangeQuantityProduct extends StatefulWidget {
   final String scancode;
   final Function controller;
   final product;
+  final listUid;
   const ChangeQuantityProduct(
       {super.key,
       required this.product,
       required this.controller,
-      required this.scancode});
+      required this.scancode,
+      required this.listUid});
 
   @override
   State<ChangeQuantityProduct> createState() => _ChangeQuantityProductState();
@@ -51,16 +54,16 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
           key: _formKey,
           child: Column(
             children: <Widget>[
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text('Product Name: ${widget.product.name}'),
-              TextFormField(
-                initialValue: "0",
-                decoration: const InputDecoration(
-                  labelText: 'Product Name',
-                  border: OutlineInputBorder(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ChangeQuantityComponent(
+                  initialValue: 0,
+                  onQuantityChanged: (quantity) {
+                    _value = quantity;
+                  },
                 ),
-                validator: (val) => val!.isEmpty ? 'Enter a quantity' : null,
-                onChanged: (val) => setState(() => _value = int.parse(val)),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 16.0),
@@ -89,13 +92,9 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
                   child: const Text('Confirm'),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      if (widget.scancode != null) {
-                        await widget.controller(
-                            context, widget.product, _value, widget.scancode);
-                      } else {
-                        await widget.controller(
-                            context, widget.product, _value);
-                      }
+                      await widget.controller(widget.listUid, widget.product,
+                          _value, widget.scancode);
+                      Navigator.pop(context);
                     }
                   },
                 ),

@@ -6,7 +6,7 @@ import 'package:esof_project/app/views/main_pages/shopping_list/shoppingList.wid
 import 'package:flutter/material.dart';
 
 class ShoppingListView extends StatelessWidget {
-  final name = 'Shopping List';
+  final name = 'Shopping Lists';
   String currentRoute = '/start/shopping_list';
 
   ShoppingListView({super.key});
@@ -24,26 +24,27 @@ class ShoppingListView extends StatelessWidget {
     }
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amber,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-        onPressed: () {
-          return ProductListForm(context: context)
-              .CreateProductForm(create_controller);
-        },
-      ),
       appBar: AppBar(
         title: Text(name),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ShoppingListViewList(
-              controller: create_controller,
-              handleShoppingListTap: handleShoppingListTap)
-        ],
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/shopping_cart.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ShoppingListViewList(
+                controller: create_controller,
+                handleShoppingListTap: handleShoppingListTap)
+          ],
+        ),
       ),
       bottomNavigationBar: const Footer(),
     );

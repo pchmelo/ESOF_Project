@@ -15,16 +15,15 @@ class ProductControllers {
     dbService = dbServiceParam ?? DatabaseForProducts(uid: user.uid);
   }
 
-  Future<void> CreateProduct(context, _name, _threshold, _quantity) async {
+  Future<void> CreateProduct(String name, int threshold, int quantity) async {
     isLoading.value = true;
     Product product = Product(
         id: const Uuid().v4(),
-        name: _name,
-        threshold: _threshold.toInt(),
-        quantity: _quantity.toInt(),
-        barcodes: <String>[]);
+        name: name,
+        threshold: threshold,
+        quantity: quantity,
+        barcodes: []);
     await dbService.addProduct(product);
-    Navigator.pop(context);
     isLoading.value = false;
   }
 
@@ -60,7 +59,7 @@ class ProductControllers {
     isLoading.value = false;
   }
 
-  Future<void> ChangeQuantityProduct(context, product, _value, scancode) async {
+  Future<void> ChangeQuantityProduct(id, product, _value, scancode) async {
     isLoading.value = true;
     List<String> barcodes = product.barcodes;
     if (scancode != '') {
@@ -78,7 +77,6 @@ class ProductControllers {
     );
 
     await dbService.updateProduct(newProduct);
-    Navigator.pushReplacementNamed(context, '/start/add_product');
     isLoading.value = false;
   }
 }

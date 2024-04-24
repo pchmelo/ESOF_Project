@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esof_project/app/models/product.model.dart';
 
+import '../app/models/shoppingList.model.dart';
+
 class DatabaseForProducts {
   final String uid;
   DatabaseForProducts({required this.uid});
@@ -82,5 +84,31 @@ class DatabaseForProducts {
       }
     }
     return null;
+  }
+
+  Future<Product?> getProductById(String productId) async {
+    DocumentSnapshot doc = await productCollection
+        .doc(uid)
+        .collection('products')
+        .doc(productId)
+        .get();
+    return Product.fromJson(doc.data() as Map<String, dynamic>);
+  }
+
+  Future<Map<Product?, Map<int, bool>>> getProductsInShoppingList(
+      ShoppingList shoppingList) async {
+    Map<Product?, Map<int, bool>> productMap = {};
+
+    for (var entry in shoppingList.products.entries) {
+      String? productId = entry.key;
+      int quantity = entry.value.keys.first;
+      bool checked = entry.value.values.first;
+
+      Product? product = await getProductById(productId!);
+
+      productMap[product] = {quantity: checked};
+    }
+
+    return productMap;
   }
 }

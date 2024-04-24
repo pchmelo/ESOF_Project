@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import '../../../controllers/productControllers.dart';
 
 class ManualProductView extends StatelessWidget {
+  final listUid;
+  final Function controller;
   final name = 'Choose the Product you want to add to the Storage';
   String currentRoute = '/start/shopping_list';
 
-  final Function change_quantity_controller =
-      ProductControllers().ChangeQuantityProduct;
-
-  ManualProductView({super.key});
+  ManualProductView(
+      {super.key, required this.controller, required this.listUid});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,9 @@ class ManualProductView extends StatelessWidget {
           ProductList(
             handleProductTap: (product, controller) {
               ProductForm(context: context)
-                  .AddProductQuantityForm(product, controller, '');
+                  .AddProductQuantityForm(listUid, product, controller, '');
             },
-            controller: change_quantity_controller,
+            controller: controller,
           ),
         ],
       ),
