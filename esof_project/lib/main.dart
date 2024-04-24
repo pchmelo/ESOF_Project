@@ -6,6 +6,7 @@ import 'package:esof_project/app/views/main_pages/shopping_list/shoppingList.vie
 import 'package:esof_project/app/views/main_pages/storage/storage.view.dart';
 import 'package:esof_project/app/views/wrapper.dart';
 import 'package:esof_project/services/authenticate.dart';
+import 'package:esof_project/services/navigationService.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,8 @@ import 'package:provider/provider.dart';
 import 'app/components/transitionAnimation.component.dart';
 import 'app/models/user.mode.dart';
 import 'app/views/main_pages/addProduct/manualAddProduct.view.dart';
+
+final NavigationService navigationService = NavigationService();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +40,7 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       initialData: MyUser(uid: null),
       child: MaterialApp(
+        navigatorKey: navigationService.navigatorKey,
         debugShowCheckedModeBanner: false,
         initialRoute: '/start',
         onGenerateRoute: (route) => onGenerateRoute(route),
@@ -45,11 +49,11 @@ class MyApp extends StatelessWidget {
   }
 
   static Route onGenerateRoute(RouteSettings settings) {
-    String currentRoute = settings.name!;
+    String? previousRoute = navigationService.previousRoute;
     AxisDirection direction;
     int index;
 
-    switch (currentRoute) {
+    switch (previousRoute) {
 
       case '/start/storage':
         index = 0;
@@ -57,14 +61,11 @@ class MyApp extends StatelessWidget {
       case '/start/shopping_list':
         index = 1;
         break;
-      case '/start/add_product':
+      case '/start/calendar':
         index = 2;
         break;
-      case '/start/calendar':
-        index = 3;
-        break;
       case '/start/settings':
-        index = 4;
+        index = 3;
         break;
       default:
         index = -1;
@@ -75,10 +76,10 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(builder: (context) => Wrapper());
       case '/start/storage':
         if (index > 0) {
-          direction  = AxisDirection.left;
+          direction  = AxisDirection.right;
         }
         else {
-          direction = AxisDirection.right;
+          direction = AxisDirection.left;
         }
 
         return CustomPageRoute(
@@ -87,11 +88,11 @@ class MyApp extends StatelessWidget {
           settings: settings,
         );
       case '/start/calendar':
-        if (index > 3) {
-          direction = AxisDirection.left;
+        if (index > 2) {
+          direction = AxisDirection.right;
         }
         else {
-          direction = AxisDirection.right;
+          direction = AxisDirection.left;
         }
 
         return CustomPageRoute(
@@ -100,11 +101,11 @@ class MyApp extends StatelessWidget {
           settings: settings,
         );
       case '/start/settings':
-        if (index > 4) {
-          direction = AxisDirection.left;
+        if (index > 3) {
+          direction = AxisDirection.right;
         }
         else {
-          direction = AxisDirection.right;
+          direction = AxisDirection.left;
         }
 
         return CustomPageRoute(
@@ -113,24 +114,17 @@ class MyApp extends StatelessWidget {
           settings: settings,
         );
       case '/start/add_product':
-        if (index > 2) {
-          direction = AxisDirection.left;
-        }
-        else {
-          direction = AxisDirection.right;
-        }
-
         return CustomPageRoute(
           child: AddProductView(),
-          direction: direction,
+          direction: AxisDirection.up,
           settings: settings,
         );
       case '/start/shopping_list':
         if (index > 1) {
-          direction = AxisDirection.left;
+          direction = AxisDirection.right;
         }
         else {
-          direction = AxisDirection.right;
+          direction = AxisDirection.left;
         }
 
         return CustomPageRoute(

@@ -44,6 +44,7 @@ class _CalenderViewState extends State<CalenderView> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(name),
       ),
       /*

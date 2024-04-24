@@ -44,6 +44,7 @@ class _StorageViewState extends State<StorageView> {
         },
       ),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           name,
           style: TextStyle(

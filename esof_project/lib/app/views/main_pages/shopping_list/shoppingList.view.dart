@@ -25,6 +25,7 @@ class ShoppingListView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(name),
       ),
       body: Container(

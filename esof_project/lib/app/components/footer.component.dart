@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../controllers/ProductControllers.dart';
 import 'package:esof_project/app/components/productForm.component.dart';
-import '../views/extra_pages/plusButton.widget.dart';
+import '../controllers/productControllers.dart';
+import '../../main.dart';
+
 
 class Footer extends StatefulWidget {
   const Footer({super.key});
@@ -23,7 +24,7 @@ class _FooterState extends State<Footer> {
           onPressed: () {
             String? currentRoute = ModalRoute.of(context)!.settings.name;
             if (currentRoute != '/start/storage') {
-              Navigator.pushReplacementNamed(context, '/start/storage');
+              navigationService.navigateTo('/start/storage');
             }
           },
           icon: const Icon(Icons.inbox_outlined),
@@ -33,8 +34,7 @@ class _FooterState extends State<Footer> {
           onPressed: () {
             String? currentRoute = ModalRoute.of(context)!.settings.name;
             if (currentRoute != '/start/shopping_list') {
-              Navigator.pushReplacementNamed(context, '/start/shopping_list');
-            }
+              navigationService.navigateTo('/start/shopping_list');            }
           },
           icon: const Icon(Icons.shopping_basket_outlined),
           iconSize: 40,
@@ -54,7 +54,7 @@ class _FooterState extends State<Footer> {
           onPressed: () {
             String? currentRoute = ModalRoute.of(context)!.settings.name;
             if (currentRoute != '/start/calendar') {
-              Navigator.pushReplacementNamed(context, '/start/calendar');
+              navigationService.navigateTo('/start/calendar');
             }
           },
           icon: const Icon(Icons.calendar_month),
@@ -64,7 +64,7 @@ class _FooterState extends State<Footer> {
           onPressed: () {
             String? currentRoute = ModalRoute.of(context)!.settings.name;
             if (currentRoute != '/start/settings') {
-              Navigator.pushReplacementNamed(context, '/start/settings');
+              navigationService.navigateTo('/start/settings');
             }
           },
           icon: const Icon(Icons.person_outline),
