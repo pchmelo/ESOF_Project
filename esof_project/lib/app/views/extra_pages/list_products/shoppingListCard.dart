@@ -89,7 +89,7 @@ class ShoppingListCard {
     Product product = entry.key;
     Map<int, bool> productDetails = entry.value;
     int quantity = productDetails.keys.first;
-
+    ValueNotifier<bool> checkedNotifier = ValueNotifier(product.checked);
     return Card(
       child: ListTile(
         title:
@@ -99,15 +99,22 @@ class ShoppingListCard {
           children: <Widget>[
             ChangeQuantityComponent(
               initialValue: quantity ?? 0,
-              onQuantityChanged: (quantity) {
-                _values[product.id ?? ''] = {quantity: product.checked};
+              onQuantityChanged: (value) {
+                _values[product.id ?? ''] = {value: product.checked};
+                quantity = value;
               },
             ),
             IconButton(
-              icon: Icon(product.checked ? Icons.close : Icons.delete),
+              icon: ValueListenableBuilder<bool>(
+                valueListenable: checkedNotifier,
+                builder: (context, value, child) {
+                  return Icon(value ? Icons.close : Icons.delete);
+                },
+              ),
               onPressed: () {
                 product.toggleCheckedStatus();
                 _values[product.id ?? ''] = {quantity: product.checked};
+                checkedNotifier.value = product.checked;
               },
             ),
           ],
