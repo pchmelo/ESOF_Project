@@ -4,11 +4,12 @@ import 'package:esof_project/app/views/extra_pages/list_products/showProductsSho
 import 'package:flutter/material.dart';
 
 import '../../../controllers/shoppingListControllers.dart';
+import '../../../models/product.model.dart';
 
 class EditShoppingList extends StatefulWidget {
   final ShoppingList shoppingList;
   final Function controller = ShoppingListControllers().editShoppingList;
-  final Function shoppingListCard = ShoppingListCard().editShoppingListCard;
+  final shoppingListCard = ShoppingListCard();
 
   EditShoppingList({super.key, required this.shoppingList});
 
@@ -24,7 +25,7 @@ class _EditShoppingListState extends State<EditShoppingList> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Container(
+        title: SizedBox(
           width: double.infinity,
           child: TextField(
             controller: _nameController,
@@ -42,7 +43,7 @@ class _EditShoppingListState extends State<EditShoppingList> {
           Expanded(
             child: ShowProductsShoppingListBuilder(
                 shoppingList: widget.shoppingList,
-                shoppingListCard: widget.shoppingListCard),
+                shoppingListCard: widget.shoppingListCard.editShoppingListCard),
           ),
         ],
       ),
@@ -50,8 +51,22 @@ class _EditShoppingListState extends State<EditShoppingList> {
         padding: const EdgeInsets.all(8.0),
         child: ElevatedButton(
           onPressed: () {
-            widget.controller(widget.shoppingList.uid, _nameController.text,
-                widget.shoppingList.products);
+            for (var entry in widget.shoppingList.products.entries) {
+              String? productId = entry.key;
+              var quantity = widget.shoppingListCard.getValue(productId ?? '');
+              bool deletion = false;
+              if (quantity != 0 && !deletion) {
+                widget.shoppingList.updateProductQuantity(productId, quantity);
+              }
+            }
+
+            String newName = _nameController.text.isEmpty
+                ? widget.shoppingList.name
+                : _nameController.text;
+
+            widget.controller(
+                widget.shoppingList.uid, newName, widget.shoppingList.products);
+
             Navigator.pushReplacementNamed(context, '/start/shopping_list');
           },
           child: const Text('Confirm'),

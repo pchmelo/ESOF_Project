@@ -1,3 +1,4 @@
+import 'package:esof_project/app/components/changeQuantitity.component.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,12 @@ import '../../../models/product.model.dart';
 import '../../../shared/loading.dart';
 
 class ShoppingListCard {
+  Map<String, Map<int, bool>> _values = {};
+
+  int getValue(String productId) {
+    return _values[productId]?.keys.first ?? 0;
+  }
+
   Widget shoppingListCard(
       {required MapEntry<Product?, Map<int, bool>> entry,
       required ShoppingList shoppingList}) {
@@ -75,7 +82,7 @@ class ShoppingListCard {
     Product? product = entry.key;
     Map<int, bool> productDetails = entry.value;
     int quantity = productDetails.keys.first;
-    List<String> productsMarkedForDeletion = [];
+    bool delete = false;
 
     return Card(
       child: ListTile(
@@ -84,20 +91,15 @@ class ShoppingListCard {
         trailing: Row(
           mainAxisSize: MainAxisSize.min, // Set the main axis size to minimum
           children: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.edit), // Set the icon of the button
-              onPressed: () {
-                // Add the action of the button here
+            ChangeQuantityComponent(
+              initialValue: quantity ?? 0,
+              onQuantityChanged: (quantity) {
+                _values[product?.id ?? ''] = {quantity: false};
               },
             ),
             IconButton(
-              icon: const Icon(Icons.delete), // Set the icon of the button
-              onPressed: () {
-                ShoppingListControllers().removeProductFromShoppingList(
-                  shoppingList.uid,
-                  product?.id ?? '',
-                );
-              },
+              icon: Icon(delete ? Icons.close : Icons.delete),
+              onPressed: () {},
             ),
           ],
         ),

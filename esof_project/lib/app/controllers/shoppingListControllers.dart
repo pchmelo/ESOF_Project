@@ -33,7 +33,6 @@ class ShoppingListControllers {
       String listId, String name, Map<String, Map<int, bool>> products) async {
     isLoading.value = true;
 
-    // Create a new ShoppingList object with the updated values
     ShoppingList newShoppingList = ShoppingList(
       uid: listId,
       name: name,

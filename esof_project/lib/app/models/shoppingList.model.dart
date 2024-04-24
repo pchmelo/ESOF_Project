@@ -1,7 +1,7 @@
 class ShoppingList {
   final String uid;
   final String name;
-  final Map<String?, Map<int, bool>> products;
+  final Map<String, Map<int, bool>> products;
 
   ShoppingList({required this.uid, required this.name, required this.products});
 
@@ -27,5 +27,11 @@ class ShoppingList {
         ),
       ),
     );
+  }
+
+  void updateProductQuantity(String productId, int quantity) {
+    if (products.containsKey(productId)) {
+      products[productId] = {quantity: products[productId]!.values.first};
+    }
   }
 }
