@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'app/components/transitionAnimation.component.dart';
+import 'app/controllers/productControllers.dart';
 import 'app/models/user.mode.dart';
 import 'app/views/main_pages/addProduct/manualAddProduct.view.dart';
 
@@ -113,9 +114,12 @@ class MyApp extends StatelessWidget {
           direction: direction,
           settings: settings,
         );
-      case '/start/add_product':
+      case '/start/add_product/manual_add_product':
         return CustomPageRoute(
-          child: AddProductView(),
+          child: ManualProductView(
+            controller: ProductControllers().ChangeQuantityProduct,
+            listUid: 0,
+          ),
           direction: AxisDirection.up,
           settings: settings,
         );

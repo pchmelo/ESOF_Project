@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../main.dart';
 
 class PlusButton extends StatefulWidget {
   final Function controller;
@@ -70,8 +71,7 @@ class _PlusButtonState extends State<PlusButton> {
                             icon: const Icon(Icons.add),
                             iconSize: 80,
                             onPressed: () {
-                              String? currentRoute =
-                                  ModalRoute.of(context)!.settings.name;
+                              String? currentRoute = ModalRoute.of(context)!.settings.name;
                               if (currentRoute != '/start/add_product') {
                                 Navigator.pushReplacementNamed(context,
                                     '/start/add_product/manual_add_product');

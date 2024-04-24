@@ -66,7 +66,6 @@ class _ProductListState extends State<ProductList> {
 
             return Column(children: [
               Container(
-                // Set the color here
                 child: Column(
                   children: [
                     const SizedBox(
