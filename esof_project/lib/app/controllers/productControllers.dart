@@ -1,3 +1,5 @@
+import 'package:esof_project/app/models/shoppingList.model.dart';
+import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
@@ -78,5 +80,15 @@ class ProductControllers {
 
     await dbService.updateProduct(newProduct);
     isLoading.value = false;
+  }
+
+  Future<void> addQuantitiesToProducts(ShoppingList shoppingList) async {
+    for (var entry in shoppingList.products.entries) {
+      String productId = entry.key;
+      int quantityToAdd = entry.value.keys.first;
+
+      Product product = await dbService.getProductById(productId);
+      await ChangeQuantityProduct(productId, product, quantityToAdd, '');
+    }
   }
 }
