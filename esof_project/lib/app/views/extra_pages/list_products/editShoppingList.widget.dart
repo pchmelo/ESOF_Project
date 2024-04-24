@@ -50,13 +50,25 @@ class _EditShoppingListState extends State<EditShoppingList> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ElevatedButton(
-          onPressed: () {
-            for (var entry in widget.shoppingList.products.entries) {
-              String? productId = entry.key;
+          onPressed: () async {
+            ShoppingListControllers shoppingListControllers =
+                ShoppingListControllers();
+            var products_p = await shoppingListControllers
+                .fetchProducts(widget.shoppingList);
+
+            var new_shops = widget.shoppingList;
+            new_shops.updateProducts(products_p);
+
+            for (var entry in products_p.entries) {
+              String productId = entry.key;
               var quantity = widget.shoppingListCard.getValue(productId ?? '');
-              bool deletion = false;
-              if (quantity != 0 && !deletion) {
-                widget.shoppingList.updateProductQuantity(productId, quantity);
+              bool deletion =
+                  widget.shoppingListCard.getDelete(productId ?? '');
+
+              if (deletion) {
+                new_shops.removeProduct(productId);
+              } else if (quantity != 0 && !deletion) {
+                new_shops.updateProductQuantity(productId, quantity);
               }
             }
 
@@ -65,7 +77,7 @@ class _EditShoppingListState extends State<EditShoppingList> {
                 : _nameController.text;
 
             widget.controller(
-                widget.shoppingList.uid, newName, widget.shoppingList.products);
+                widget.shoppingList.uid, newName, new_shops.products);
 
             Navigator.pushReplacementNamed(context, '/start/shopping_list');
           },

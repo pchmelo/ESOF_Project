@@ -87,4 +87,8 @@ class ShoppingListControllers {
     await dbService.updateShoppingList(listId, shoppingList);
     isLoading.value = false;
   }
+
+  Future<Map<String, Map<int, bool>>> fetchProducts(ShoppingList listId) {
+    return dbService.getProductsInShoppingListFuture(listId);
+  }
 }

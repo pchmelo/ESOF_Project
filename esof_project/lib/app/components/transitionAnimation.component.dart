@@ -5,17 +5,19 @@ class CustomPageRoute extends PageRouteBuilder {
   final RouteSettings settings;
   final AxisDirection direction;
 
-  CustomPageRoute({required this.child, required this.settings, this.direction = AxisDirection.right})
+  CustomPageRoute(
+      {required this.child,
+      required this.settings,
+      this.direction = AxisDirection.right})
       : super(
-          transitionDuration: const Duration(milliseconds: 500),
+          transitionDuration: const Duration(milliseconds: 300),
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) => child,
-      );
+        );
 
   @override
-  Widget buildTransitions(
-      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) =>
-
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+          Animation<double> secondaryAnimation, Widget child) =>
       SlideTransition(
         position: Tween<Offset>(
           begin: getOffset(),

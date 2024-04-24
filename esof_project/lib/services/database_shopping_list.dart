@@ -29,7 +29,7 @@ class DatabaseForShoppingList {
     return ShoppingList.fromJson(doc.data() as Map<String, dynamic>);
   }
 
-  Stream<Map<Product?, Map<int, bool>>> getProductsInShoppingList(
+  Stream<Map<Product, Map<int, bool>>> getProductsInShoppingList(
       ShoppingList shoppingList) {
     DocumentReference shoppingListDoc = shoppingListCollection
         .doc(uid)
@@ -42,7 +42,7 @@ class DatabaseForShoppingList {
       Map<String, dynamic> productsData =
           snapshot.get('products') as Map<String, dynamic>;
 
-      Map<Product?, Map<int, bool>> result = {};
+      Map<Product, Map<int, bool>> result = {};
 
       for (var entry in productsData.entries) {
         // Get the quantity and checked status from the entry value
@@ -51,7 +51,7 @@ class DatabaseForShoppingList {
 
         DatabaseForProducts db = DatabaseForProducts(uid: uid);
         // Fetch the Product from the database
-        Product? product = await db.getProductById(entry.key);
+        Product product = await db.getProductById(entry.key);
 
         // Add the Product and its details to the map
         result[product] = {quantity: checked};
@@ -59,6 +59,32 @@ class DatabaseForShoppingList {
 
       return result;
     });
+  }
+
+  Future<Map<String, Map<int, bool>>> getProductsInShoppingListFuture(
+      ShoppingList shoppingList) async {
+    DocumentReference shoppingListDoc = shoppingListCollection
+        .doc(uid)
+        .collection('shoppingList')
+        .doc(shoppingList.uid);
+
+    DocumentSnapshot snapshot = await shoppingListDoc.get();
+
+    Map<String, dynamic> productsData =
+        snapshot.get('products') as Map<String, dynamic>;
+
+    Map<String, Map<int, bool>> result = {};
+
+    for (var entry in productsData.entries) {
+      // Get the quantity and checked status from the entry value
+      int quantity = int.parse(entry.value.keys.first);
+      bool checked = entry.value.values.first as bool;
+
+      // Add the productId and its details to the map
+      result[entry.key] = {quantity: checked};
+    }
+
+    return result;
   }
 
   Stream<List<ShoppingList>> getShoppingListStream() {

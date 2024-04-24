@@ -34,4 +34,13 @@ class ShoppingList {
       products[productId] = {quantity: products[productId]!.values.first};
     }
   }
+
+  void removeProduct(String productId) {
+    products.remove(productId);
+  }
+
+  void updateProducts(Map<String, Map<int, bool>> newProducts) {
+    products.clear();
+    products.addAll(newProducts);
+  }
 }

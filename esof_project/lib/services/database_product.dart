@@ -86,7 +86,7 @@ class DatabaseForProducts {
     return null;
   }
 
-  Future<Product?> getProductById(String productId) async {
+  Future<Product> getProductById(String productId) async {
     DocumentSnapshot doc = await productCollection
         .doc(uid)
         .collection('products')

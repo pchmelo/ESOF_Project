@@ -18,7 +18,7 @@ class ShowProductsShoppingListBuilder extends StatefulWidget {
 
 class _ShowProductsShoppingListBuilderState
     extends State<ShowProductsShoppingListBuilder> {
-  late Stream<Map<Product?, Map<int, bool>>> productsStream;
+  late Stream<Map<Product, Map<int, bool>>> productsStream;
 
   @override
   void initState() {
@@ -30,10 +30,10 @@ class _ShowProductsShoppingListBuilderState
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Map<Product?, Map<int, bool>>>(
+    return StreamBuilder<Map<Product, Map<int, bool>>>(
       stream: productsStream,
       builder: (BuildContext context,
-          AsyncSnapshot<Map<Product?, Map<int, bool>>> snapshot) {
+          AsyncSnapshot<Map<Product, Map<int, bool>>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           print('Waiting for data...');
           return Loading();
@@ -42,7 +42,7 @@ class _ShowProductsShoppingListBuilderState
           return Text('Error: ${snapshot.error}');
         } else {
           if (snapshot.hasData) {
-            Map<Product?, Map<int, bool>> products = snapshot.data!;
+            Map<Product, Map<int, bool>> products = snapshot.data!;
             return ListView.builder(
               itemCount: products.length,
               itemBuilder: (context, index) {

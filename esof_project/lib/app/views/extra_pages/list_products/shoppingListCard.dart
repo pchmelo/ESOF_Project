@@ -8,11 +8,12 @@ import '../../../shared/loading.dart';
 
 class ShoppingListCard {
   Map<String, Map<int, bool>> _values = {};
-
-  bool delete = false;
-
   int getValue(String productId) {
     return _values[productId]?.keys.first ?? 0;
+  }
+
+  Map<String, Map<int, bool>> getValues() {
+    return _values;
   }
 
   bool getDelete(String productId) {
@@ -83,31 +84,30 @@ class ShoppingListCard {
   }
 
   Widget editShoppingListCard(
-      {required MapEntry<Product?, Map<int, bool>> entry,
+      {required MapEntry<Product, Map<int, bool>> entry,
       required ShoppingList shoppingList}) {
-    Product? product = entry.key;
+    Product product = entry.key;
     Map<int, bool> productDetails = entry.value;
     int quantity = productDetails.keys.first;
 
     return Card(
       child: ListTile(
-        title: Text(
-            product?.name ?? 'Unknown product'), // Display the product name
+        title:
+            Text(product.name ?? 'Unknown product'), // Display the product name
         trailing: Row(
           mainAxisSize: MainAxisSize.min, // Set the main axis size to minimum
           children: <Widget>[
             ChangeQuantityComponent(
               initialValue: quantity ?? 0,
               onQuantityChanged: (quantity) {
-                _values[product?.id ?? ''] = {quantity: delete};
+                _values[product.id ?? ''] = {quantity: product.checked};
               },
             ),
             IconButton(
-              icon: Icon(delete ? Icons.close : Icons.delete),
+              icon: Icon(product.checked ? Icons.close : Icons.delete),
               onPressed: () {
-                delete = !delete;
-                _values[product?.id ?? ''] = {quantity: !delete};
-                int i = 9;
+                product.toggleCheckedStatus();
+                _values[product.id ?? ''] = {quantity: product.checked};
               },
             ),
           ],
