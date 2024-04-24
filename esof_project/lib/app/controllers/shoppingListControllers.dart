@@ -1,13 +1,17 @@
+import 'package:esof_project/app/controllers/ProductControllers.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
+import 'package:esof_project/services/database_product.dart';
 import 'package:esof_project/services/database_shopping_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/product.model.dart';
+import '../views/extra_pages/product/changeQuantity.widget.dart';
 
 class ShoppingListControllers {
   late DatabaseForShoppingList dbService;
+  late DatabaseForProducts dbServiceProduct;
   late User user;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
 
@@ -15,6 +19,7 @@ class ShoppingListControllers {
       [DatabaseForShoppingList? dbServiceParam, User? userParam]) {
     user = userParam ?? FirebaseAuth.instance.currentUser!;
     dbService = dbServiceParam ?? DatabaseForShoppingList(uid: user.uid);
+    dbServiceProduct = DatabaseForProducts(uid: user.uid);
   }
 
   Future<void> CreateProduct(context, _name) async {
@@ -90,5 +95,24 @@ class ShoppingListControllers {
 
   Future<Map<String, Map<int, bool>>> fetchProducts(ShoppingList listId) {
     return dbService.getProductsInShoppingListFuture(listId);
+  }
+
+  Future<void> resetProductStatus(ShoppingList shoppingList) async {
+    ShoppingList new_shoppingList =
+        await dbService.getShoppingList(shoppingList.uid);
+
+    for (var entry in new_shoppingList.products.entries) {
+      String productId = entry.key;
+      int currentQuantity = entry.value.keys.first;
+
+      if (entry.value.values.first == true) {
+        Product product = await dbServiceProduct.getProductById(productId);
+        await ProductControllers()
+            .ChangeQuantityProduct(productId, product, currentQuantity, '');
+      }
+      new_shoppingList.products[productId] = {currentQuantity: false};
+    }
+
+    await dbService.updateShoppingList(new_shoppingList.uid, new_shoppingList);
   }
 }
