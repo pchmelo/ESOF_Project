@@ -9,8 +9,14 @@ import '../../../shared/loading.dart';
 class ShoppingListCard {
   Map<String, Map<int, bool>> _values = {};
 
+  bool delete = false;
+
   int getValue(String productId) {
     return _values[productId]?.keys.first ?? 0;
+  }
+
+  bool getDelete(String productId) {
+    return _values[productId]?.values.first ?? false;
   }
 
   Widget shoppingListCard(
@@ -82,7 +88,6 @@ class ShoppingListCard {
     Product? product = entry.key;
     Map<int, bool> productDetails = entry.value;
     int quantity = productDetails.keys.first;
-    bool delete = false;
 
     return Card(
       child: ListTile(
@@ -94,12 +99,16 @@ class ShoppingListCard {
             ChangeQuantityComponent(
               initialValue: quantity ?? 0,
               onQuantityChanged: (quantity) {
-                _values[product?.id ?? ''] = {quantity: false};
+                _values[product?.id ?? ''] = {quantity: delete};
               },
             ),
             IconButton(
               icon: Icon(delete ? Icons.close : Icons.delete),
-              onPressed: () {},
+              onPressed: () {
+                delete = !delete;
+                _values[product?.id ?? ''] = {quantity: !delete};
+                int i = 9;
+              },
             ),
           ],
         ),
