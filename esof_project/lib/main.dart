@@ -10,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'app/components/transitionAnimation.component.dart';
 import 'app/models/user.mode.dart';
 import 'app/views/main_pages/addProduct/manualAddProduct.view.dart';
 
@@ -38,16 +39,113 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/start',
-        routes: {
-          '/start': (context) => Wrapper(),
-          '/start/storage': (context) => StorageView(),
-          '/start/calendar': (context) => const CalenderView(),
-          '/start/settings': (context) => SettingsView(),
-          '/start/add_product': (context) => AddProductView(),
-          '/start/shopping_list': (context) => ShoppingListView(),
-          '/start/add_product/bar_scanner': (context) => const BarScannerView(),
-        },
+        onGenerateRoute: (route) => onGenerateRoute(route),
       ),
     );
+  }
+
+  static Route onGenerateRoute(RouteSettings settings) {
+    String currentRoute = settings.name!;
+    AxisDirection direction;
+    int index;
+
+    switch (currentRoute) {
+
+      case '/start/storage':
+        index = 0;
+        break;
+      case '/start/shopping_list':
+        index = 1;
+        break;
+      case '/start/add_product':
+        index = 2;
+        break;
+      case '/start/calendar':
+        index = 3;
+        break;
+      case '/start/settings':
+        index = 4;
+        break;
+      default:
+        index = -1;
+    }
+
+    switch (settings.name) {
+      case '/start':
+        return MaterialPageRoute(builder: (context) => Wrapper());
+      case '/start/storage':
+        if (index > 0) {
+          direction  = AxisDirection.left;
+        }
+        else {
+          direction = AxisDirection.right;
+        }
+
+        return CustomPageRoute(
+          child: const StorageView(),
+          direction: direction,
+          settings: settings,
+        );
+      case '/start/calendar':
+        if (index > 3) {
+          direction = AxisDirection.left;
+        }
+        else {
+          direction = AxisDirection.right;
+        }
+
+        return CustomPageRoute(
+          child: const CalenderView(),
+          direction: direction,
+          settings: settings,
+        );
+      case '/start/settings':
+        if (index > 4) {
+          direction = AxisDirection.left;
+        }
+        else {
+          direction = AxisDirection.right;
+        }
+
+        return CustomPageRoute(
+          child: SettingsView(),
+          direction: direction,
+          settings: settings,
+        );
+      case '/start/add_product':
+        if (index > 2) {
+          direction = AxisDirection.left;
+        }
+        else {
+          direction = AxisDirection.right;
+        }
+
+        return CustomPageRoute(
+          child: AddProductView(),
+          direction: direction,
+          settings: settings,
+        );
+      case '/start/shopping_list':
+        if (index > 1) {
+          direction = AxisDirection.left;
+        }
+        else {
+          direction = AxisDirection.right;
+        }
+
+        return CustomPageRoute(
+          child: ShoppingListView(),
+          direction: direction,
+          settings: settings,
+        );
+      case '/start/add_product/bar_scanner':
+        return CustomPageRoute(
+          child: const BarScannerView(),
+          direction: AxisDirection.up,
+          settings: settings,
+        );
+      default:
+        return MaterialPageRoute(builder: (context) => Wrapper());
+    }
   }
 }
