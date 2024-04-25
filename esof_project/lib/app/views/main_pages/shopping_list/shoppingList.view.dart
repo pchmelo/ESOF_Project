@@ -5,6 +5,8 @@ import 'package:esof_project/app/views/extra_pages/list_products/shoppingListDis
 import 'package:esof_project/app/views/main_pages/shopping_list/shoppingList.widgetViewList.dart';
 import 'package:flutter/material.dart';
 
+import '../../../models/product.model.dart';
+
 class ShoppingListView extends StatelessWidget {
   final name = 'Shopping Lists';
   String currentRoute = '/start/shopping_list';
@@ -15,12 +17,13 @@ class ShoppingListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final create_controller = ShoppingListControllers().CreateProduct;
 
-    void handleShoppingListTap(shoppingList, controller) {
+    void handleShoppingListTap(
+        String uid, Function controller, Product? product, String scan) {
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => ShoppingListDisplay(
-                  shoppingList: shoppingList, controller: controller)));
+                  uid: uid, controller: controller, b: product, a: scan)));
     }
 
     return Scaffold(
@@ -43,7 +46,7 @@ class ShoppingListView extends StatelessWidget {
           children: [
             ShoppingListViewList(
                 controller: create_controller,
-                handleShoppingListTap: handleShoppingListTap)
+                handleShoppingListTap: handleShoppingListTap),
           ],
         ),
       ),

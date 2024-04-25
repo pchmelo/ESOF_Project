@@ -28,14 +28,14 @@ class _BarCodeProcessState extends State<BarCodeProcess> {
   late DatabaseForProducts _dbService;
   late User user;
 
-  void handleProductTap(product, controller) {
+  void handleProductTap(Product product, Function controller) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => Scaffold(
               body: ProductForm(context: context).AddProductQuantityForm(
-                  0, product, controller, widget.barCode),
+                  "", controller, product, widget.barCode),
             ),
           ));
     });
@@ -60,7 +60,7 @@ class _BarCodeProcessState extends State<BarCodeProcess> {
         } else if (snapshot.hasData) {
           SchedulerBinding.instance.addPostFrameCallback((_) {
             ProductForm(context: context).AddProductQuantityForm(
-                0, snapshot.data, widget.change_quantity_controller, '');
+                "0", widget.change_quantity_controller, snapshot.data, '');
           });
           return Container();
         } else {

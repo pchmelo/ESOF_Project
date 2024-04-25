@@ -75,15 +75,20 @@ class DatabaseForProducts {
   }
 
   Future<Product?> getProductByBarcode(String barcode) async {
-    QuerySnapshot snapshot =
-        await productCollection.doc(uid).collection('products').get();
-    for (var doc in snapshot.docs) {
-      Product product = Product.fromJson(doc.data() as Map<String, dynamic>);
-      if (product.isBarcodeExist(barcode)) {
-        return product;
+    try {
+      QuerySnapshot snapshot =
+          await productCollection.doc(uid).collection('products').get();
+      for (var doc in snapshot.docs) {
+        Product product = Product.fromJson(doc.data() as Map<String, dynamic>);
+        if (product.isBarcodeExist(barcode)) {
+          return product;
+        }
       }
+      return null;
+    } catch (e) {
+      print('Error: $e');
+      return null;
     }
-    return null;
   }
 
   Future<Product> getProductById(String productId) async {

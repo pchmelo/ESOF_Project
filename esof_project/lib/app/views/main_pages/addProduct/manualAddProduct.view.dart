@@ -25,7 +25,7 @@ class ManualProductView extends StatelessWidget {
           ProductList(
             handleProductTap: (product, controller) {
               ProductForm(context: context)
-                  .AddProductQuantityForm(listUid, product, controller, '');
+                  .AddProductQuantityForm(listUid, controller, product, '');
             },
             controller: controller,
           ),

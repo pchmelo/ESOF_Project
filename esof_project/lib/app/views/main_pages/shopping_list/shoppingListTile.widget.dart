@@ -1,3 +1,4 @@
+import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:flutter/material.dart';
 
@@ -5,20 +6,23 @@ class ShoppingListTile extends StatelessWidget {
   final ShoppingList shoppingList;
   final Function controller;
   final Function onShoppingListTap;
+  Product? product;
 
-  const ShoppingListTile(
+  ShoppingListTile(
       {super.key,
       required this.shoppingList,
       required this.controller,
-      required this.onShoppingListTap});
+      required this.onShoppingListTap,
+      this.product});
 
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1.0, // This makes the tile square
-      child: GestureDetector(
+      child: InkWell(
         onTap: () {
-          onShoppingListTap(shoppingList, controller);
+          print(onShoppingListTap);
+          onShoppingListTap(shoppingList.uid, controller, product, '');
         },
         child: Stack(
           children: [

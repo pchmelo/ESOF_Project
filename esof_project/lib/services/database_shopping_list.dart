@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:esof_project/services/database_product.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../app/models/product.model.dart';
 
@@ -108,13 +109,14 @@ class DatabaseForShoppingList {
         .update(shoppingList.toJson());
   }
 
-  Future<void> deleteShoppingList(String listId) async {
+  Future<void> deleteShoppingList(String listId, context) async {
     try {
-      return await shoppingListCollection
+      await shoppingListCollection
           .doc(uid)
           .collection('shoppingList')
           .doc(listId)
           .delete();
+      return Navigator.pop(context);
     } catch (e) {
       print('Error deleting shopping list: $e');
       rethrow;

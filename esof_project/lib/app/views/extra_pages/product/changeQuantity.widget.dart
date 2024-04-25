@@ -1,7 +1,6 @@
 import 'package:esof_project/app/components/changeQuantitity.component.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/services/database_product.dart';
 
 class ChangeQuantityProduct extends StatefulWidget {
@@ -9,12 +8,13 @@ class ChangeQuantityProduct extends StatefulWidget {
   final Function controller;
   final product;
   final listUid;
-  const ChangeQuantityProduct(
-      {super.key,
-      required this.product,
-      required this.controller,
-      required this.scancode,
-      required this.listUid});
+  const ChangeQuantityProduct({
+    super.key,
+    required this.listUid,
+    required this.controller,
+    required this.product,
+    required this.scancode,
+  });
 
   @override
   State<ChangeQuantityProduct> createState() => _ChangeQuantityProductState();
@@ -39,6 +39,7 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           'Add Quantity to a Product',
           style: TextStyle(

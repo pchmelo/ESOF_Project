@@ -22,7 +22,10 @@ class ShoppingListControllers {
     dbServiceProduct = DatabaseForProducts(uid: user.uid);
   }
 
-  Future<void> CreateProduct(context, _name) async {
+  Future<void> CreateProduct(
+    context,
+    _name,
+  ) async {
     isLoading.value = true;
     ShoppingList shoppingList = ShoppingList(
       uid: const Uuid().v4(),

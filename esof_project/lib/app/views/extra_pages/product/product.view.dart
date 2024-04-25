@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../../../services/database_product.dart';
 import '../../../components/productForm.component.dart';
+import '../../../controllers/shoppingListControllers.dart';
+import '../../main_pages/shopping_list/shoppingList.widgetViewList.dart';
+import '../list_products/shoppingListDisplay.dart';
 
 class ProducDetailsPage extends StatelessWidget {
   final Function controller;
@@ -16,12 +19,7 @@ class ProducDetailsPage extends StatelessWidget {
       User user = FirebaseAuth.instance.currentUser!;
       DatabaseForProducts dbService = DatabaseForProducts(uid: user.uid);
 
-      if (product.id != null) {
-        await dbService.deleteProductById(product.id!);
-      } else {
-        // Handle the case where product.id is null
-        print('Error: product.id is null');
-      }
+      await dbService.deleteProductById(product.id);
     }
 
     return Scaffold(
@@ -124,14 +122,22 @@ class ProducDetailsPage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
                 IconButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ShoppingListForm(context: context)
+                                  .SelectShoppingListForm(this.product)),
+                    );
+                  },
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.amber),
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.black),
                     minimumSize: MaterialStateProperty.all<Size>(
-                      Size(50.0, 50.0),
+                      const Size(50.0, 50.0),
                     ),
                     shape: MaterialStateProperty.all<OutlinedBorder>(
                       RoundedRectangleBorder(
@@ -140,7 +146,7 @@ class ProducDetailsPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  icon: Icon(Icons.shopping_basket_outlined),
+                  icon: const Icon(Icons.shopping_basket_outlined),
                   iconSize: 80,
                 ),
               ],
@@ -152,7 +158,7 @@ class ProducDetailsPage extends StatelessWidget {
   }
 }
 
-SelectedItem(BuildContext context, item) {
+SelectedItem(BuildContext context, item) async {
   switch (item) {
     case 0:
       print('Edit');

@@ -3,7 +3,10 @@ import 'package:esof_project/app/views/main_pages/shopping_list/shoppingListTile
 import 'package:esof_project/app/views/main_pages/shopping_list/shoppingListTileAdd.widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../../models/product.model.dart';
+
 class ShoppingListBuilder extends StatefulWidget {
+  Product? product;
   final Function controller;
   final List<ShoppingList> foundShoppingList;
   Function handleProductTap;
@@ -12,7 +15,8 @@ class ShoppingListBuilder extends StatefulWidget {
       {super.key,
       required this.controller,
       required this.foundShoppingList,
-      required this.handleProductTap});
+      required this.handleProductTap,
+      this.product});
 
   @override
   State<ShoppingListBuilder> createState() => _ShoppingListBuilderState();
@@ -70,6 +74,7 @@ class _ShoppingListBuilderState extends State<ShoppingListBuilder> {
                 shoppingList: widget.foundShoppingList[index],
                 onShoppingListTap: widget.handleProductTap,
                 controller: widget.controller,
+                product: widget.product,
               ),
             ),
           );
