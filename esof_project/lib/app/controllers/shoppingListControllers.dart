@@ -1,13 +1,12 @@
-import 'package:esof_project/app/controllers/ProductControllers.dart';
+import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:esof_project/services/database_product.dart';
 import 'package:esof_project/services/database_shopping_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
-
 import '../models/product.model.dart';
-import '../views/extra_pages/product/changeQuantity.widget.dart';
+
 
 class ShoppingListControllers {
   late DatabaseForShoppingList dbService;
