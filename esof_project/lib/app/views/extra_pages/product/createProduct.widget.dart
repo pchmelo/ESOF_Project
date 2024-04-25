@@ -14,7 +14,7 @@ class _CreateProdutState extends State<CreateProdut> {
 
   String _name = '';
   int _threshold = 0;
-  int _quantity = 0;
+  bool _validity = false;
 
   @override
   Widget build(BuildContext context) {
@@ -51,18 +51,6 @@ class _CreateProdutState extends State<CreateProdut> {
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   decoration: const InputDecoration(
-                    labelText: 'Quantity',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (val) => val!.isEmpty ? 'Enter a quantity' : null,
-                  onChanged: (val) =>
-                      setState(() => _quantity = int.parse(val)),
-                ),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  decoration: const InputDecoration(
                     labelText: 'Threshold',
                     border: OutlineInputBorder(),
                   ),
@@ -74,6 +62,15 @@ class _CreateProdutState extends State<CreateProdut> {
                   },
                   onChanged: (val) =>
                       setState(() => _threshold = int.parse(val)),
+                ),
+                CheckboxListTile(
+                  title: const Text('Validity'),
+                  value: _validity,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      _validity = value!;
+                    });
+                  },
                 ),
                 const SizedBox(
                   height: 20,
@@ -103,7 +100,7 @@ class _CreateProdutState extends State<CreateProdut> {
                   child: const Text('Confirm'),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      widget.controller(_name, _threshold, _quantity);
+                      widget.controller(_name, _threshold, 0, _validity);
                       Navigator.pop(context);
                     }
                   },

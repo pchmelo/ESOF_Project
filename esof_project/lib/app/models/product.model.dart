@@ -7,14 +7,17 @@ class Product {
   final int? quantity;
   final List<String>? barcodes;
   bool checked;
+  final bool validity;
 
-  Product(
-      {required this.id,
-      this.name,
-      this.threshold,
-      this.quantity,
-      this.barcodes,
-      this.checked = false});
+  Product({
+    required this.id,
+    this.name,
+    this.threshold,
+    this.quantity,
+    this.barcodes,
+    this.checked = false,
+    required this.validity,
+  });
 
   void main() {
     var uuid = const Uuid();
@@ -24,6 +27,7 @@ class Product {
       threshold: 0,
       quantity: 0,
       barcodes: [],
+      validity: false,
       checked: false,
     );
   }
@@ -44,6 +48,7 @@ class Product {
       'quantity': quantity,
       'barcodes': barcodes,
       'checked': checked ? 'true' : 'false',
+      'validity': validity ? 'true' : 'false',
     };
   }
 
@@ -54,6 +59,7 @@ class Product {
       threshold: json['threshold'],
       quantity: json['quantity'],
       barcodes: List<String>.from(json['barcodes']),
+      validity: json['validity'] == 'true',
       checked: json['checked'] == 'true',
     );
   }

@@ -58,8 +58,8 @@ class ProductForm {
         });
   }
 
-  AddProductQuantityForm(
-      String listUid, Function controller, Product? product, String scancode) {
+  AddProductQuantityForm(String listUid, Function controller, Product? product,
+      String scancode, String spec) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       showModalBottomSheet(
         isScrollControlled: true,
@@ -73,6 +73,7 @@ class ProductForm {
               controller: controller,
               product: product,
               scancode: scancode,
+              spec: spec,
             ),
           );
         },
@@ -89,6 +90,7 @@ class ShoppingListForm {
     return Builder(builder: (BuildContext context) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
         showModalBottomSheet(
+          enableDrag: false,
           isScrollControlled: true,
           context: context,
           builder: (BuildContext context) {

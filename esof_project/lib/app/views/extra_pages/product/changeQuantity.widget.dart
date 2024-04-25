@@ -1,4 +1,5 @@
 import 'package:esof_project/app/components/changeQuantitity.component.dart';
+import 'package:esof_project/app/controllers/validityControllers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:esof_project/services/database_product.dart';
@@ -8,12 +9,14 @@ class ChangeQuantityProduct extends StatefulWidget {
   final Function controller;
   final product;
   final listUid;
+  final String spec;
   const ChangeQuantityProduct({
     super.key,
     required this.listUid,
     required this.controller,
     required this.product,
     required this.scancode,
+    required this.spec,
   });
 
   @override
@@ -22,11 +25,20 @@ class ChangeQuantityProduct extends StatefulWidget {
 
 class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
   final _formKey = GlobalKey<FormState>();
-
+  final DateTime _dateTime = DateTime.now();
   late User user;
   late DatabaseForProducts _dbService;
 
   int? _value;
+
+  Future<DateTime?> _showDatePicker() async {
+    return await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(DateTime.now().year),
+      lastDate: DateTime(DateTime.now().year + 10),
+    );
+  }
 
   @override
   void initState() {
@@ -93,8 +105,25 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
                   child: const Text('Confirm'),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      await widget.controller(widget.listUid, widget.product,
-                          _value, widget.scancode);
+                      if (widget.spec == 'middle') {
+                        if (widget.product.validity) {
+                          DateTime? selectedDate = await _showDatePicker();
+                          if (selectedDate != null) {
+                            await ValidityController().CreateValidity(
+                                widget.product.id,
+                                _value!,
+                                selectedDate.day,
+                                selectedDate.month,
+                                selectedDate.year);
+                          }
+                          await widget.controller(widget.listUid,
+                              widget.product, _value, widget.scancode);
+                        }
+                      } else {
+                        await widget.controller(widget.listUid, widget.product,
+                            _value, widget.scancode);
+                      }
+
                       Navigator.pop(context);
                     }
                   },

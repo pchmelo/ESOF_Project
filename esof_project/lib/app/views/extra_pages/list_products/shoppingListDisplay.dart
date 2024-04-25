@@ -82,6 +82,7 @@ class ShoppingListDisplay extends StatelessWidget {
                             builder: (context) => ManualProductView(
                               listUid: shoppingList.uid,
                               controller: controller_addProductToList,
+                              spec: 'list',
                             ),
                           ),
                         );
@@ -136,8 +137,8 @@ class ShoppingListDisplay extends StatelessWidget {
                   ),
                   child: TextButton(
                     onPressed: () async {
-                      ShoppingListControllers()
-                          .resetProductStatus(shoppingList);
+                      await ShoppingListControllers()
+                          .resetProductStatus(shoppingList, context);
                       Navigator.pushReplacementNamed(
                           context, '/start/shopping_list');
                     },

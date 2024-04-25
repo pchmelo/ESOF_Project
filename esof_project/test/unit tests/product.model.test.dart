@@ -8,9 +8,11 @@ void main() {
       const expectedName = 'Test Product';
       const expectedThreshold = 10;
       const expectedQuantity = 20;
+      const expectedValidity = false;
       final expectedBarcodes = ['1234567890'];
 
       final product = Product(
+        validity: expectedValidity,
         id: expectedId,
         name: expectedName,
         threshold: expectedThreshold,
@@ -53,6 +55,7 @@ void main() {
     test('Add var code to a Product test', () {
       const barcode = '1234567890';
       final product = Product(
+        validity: false,
         id: 'test-id',
         name: 'Test Product',
         threshold: 10,

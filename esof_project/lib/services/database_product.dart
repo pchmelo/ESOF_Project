@@ -36,6 +36,7 @@ class DatabaseForProducts {
             quantity: data['quantity'] ?? 0,
             threshold: data['threshold'] ?? 0,
             barcodes: List<String>.from(data['barcodes'] ?? []),
+            validity: data['validity'] == 'true',
           );
         })
         .where((product) => product != null)

@@ -30,6 +30,7 @@ class AddProductView extends StatelessWidget {
                           builder: (context) => ManualProductView(
                                 listUid: 0,
                                 controller: controller,
+                                spec: 'middle',
                               )));
                 },
                 child: const Text('Add Product Manually')),

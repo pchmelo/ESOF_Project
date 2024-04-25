@@ -20,7 +20,13 @@ class _EditProdutState extends State<EditProduct> {
 
   String? _name;
   int? _threshold;
-  int? _quantity;
+  late bool _validity;
+
+  @override
+  void initState() {
+    super.initState();
+    _validity = widget.product.validity;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,19 +62,6 @@ class _EditProdutState extends State<EditProduct> {
                 TextFormField(
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  initialValue: widget.product.quantity.toString(),
-                  decoration: const InputDecoration(
-                    labelText: 'Quantity',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (val) => val!.isEmpty ? 'Enter a quantity' : null,
-                  onChanged: (val) =>
-                      setState(() => _quantity = int.parse(val)),
-                ),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   initialValue: widget.product.threshold.toString(),
                   decoration: const InputDecoration(
                     labelText: 'Threshold',
@@ -77,6 +70,15 @@ class _EditProdutState extends State<EditProduct> {
                   validator: (val) => val!.isEmpty ? 'Enter a threshold' : null,
                   onChanged: (val) =>
                       setState(() => _threshold = int.parse(val)),
+                ),
+                CheckboxListTile(
+                  title: const Text('Validity'),
+                  value: _validity,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      _validity = value!;
+                    });
+                  },
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 16.0),
@@ -105,8 +107,9 @@ class _EditProdutState extends State<EditProduct> {
                     child: const Text('Confirm'),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
+                        _validity ??= widget.product.validity;
                         widget.controller(context, widget.product, _name,
-                            _threshold, _quantity);
+                            _threshold, widget.product.quantity, _validity);
                       }
                     },
                   ),

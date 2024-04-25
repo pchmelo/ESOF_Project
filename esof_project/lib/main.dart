@@ -55,7 +55,6 @@ class MyApp extends StatelessWidget {
     int index;
 
     switch (previousRoute) {
-
       case '/start/storage':
         index = 0;
         break;
@@ -77,9 +76,8 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(builder: (context) => Wrapper());
       case '/start/storage':
         if (index > 0) {
-          direction  = AxisDirection.right;
-        }
-        else {
+          direction = AxisDirection.right;
+        } else {
           direction = AxisDirection.left;
         }
 
@@ -91,8 +89,7 @@ class MyApp extends StatelessWidget {
       case '/start/calendar':
         if (index > 2) {
           direction = AxisDirection.right;
-        }
-        else {
+        } else {
           direction = AxisDirection.left;
         }
 
@@ -104,8 +101,7 @@ class MyApp extends StatelessWidget {
       case '/start/settings':
         if (index > 3) {
           direction = AxisDirection.right;
-        }
-        else {
+        } else {
           direction = AxisDirection.left;
         }
 
@@ -118,7 +114,8 @@ class MyApp extends StatelessWidget {
         return CustomPageRoute(
           child: ManualProductView(
             controller: ProductControllers().ChangeQuantityProduct,
-            listUid: 0,
+            listUid: "",
+            spec: "middle",
           ),
           direction: AxisDirection.up,
           settings: settings,
@@ -126,8 +123,7 @@ class MyApp extends StatelessWidget {
       case '/start/shopping_list':
         if (index > 1) {
           direction = AxisDirection.right;
-        }
-        else {
+        } else {
           direction = AxisDirection.left;
         }
 

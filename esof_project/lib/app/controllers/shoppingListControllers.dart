@@ -1,12 +1,13 @@
 import 'package:esof_project/app/controllers/productControllers.dart';
+import 'package:esof_project/app/controllers/validityControllers.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:esof_project/services/database_product.dart';
 import 'package:esof_project/services/database_shopping_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import '../models/product.model.dart';
-
 
 class ShoppingListControllers {
   late DatabaseForShoppingList dbService;
@@ -99,7 +100,16 @@ class ShoppingListControllers {
     return dbService.getProductsInShoppingListFuture(listId);
   }
 
-  Future<void> resetProductStatus(ShoppingList shoppingList) async {
+  Future<DateTime?> _showDatePicker(context) async {
+    return await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(DateTime.now().year),
+      lastDate: DateTime(DateTime.now().year + 10),
+    );
+  }
+
+  Future<void> resetProductStatus(ShoppingList shoppingList, context) async {
     ShoppingList new_shoppingList =
         await dbService.getShoppingList(shoppingList.uid);
 
@@ -109,6 +119,15 @@ class ShoppingListControllers {
 
       if (entry.value.values.first == true) {
         Product product = await dbServiceProduct.getProductById(productId);
+
+        if (product.validity) {
+          DateTime? dateTime = await _showDatePicker(context);
+          if (dateTime != null) {
+            await ValidityController().CreateValidity(product.id,
+                currentQuantity, dateTime.day, dateTime.month, dateTime.year);
+          }
+        }
+
         await ProductControllers()
             .ChangeQuantityProduct(productId, product, currentQuantity, '');
       }

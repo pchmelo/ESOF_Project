@@ -1,5 +1,4 @@
 import 'package:esof_project/app/models/shoppingList.model.dart';
-import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
@@ -17,9 +16,11 @@ class ProductControllers {
     dbService = dbServiceParam ?? DatabaseForProducts(uid: user.uid);
   }
 
-  Future<void> CreateProduct(String name, int threshold, int quantity) async {
+  Future<void> CreateProduct(
+      String name, int threshold, int quantity, bool validity) async {
     isLoading.value = true;
     Product product = Product(
+        validity: validity,
         id: const Uuid().v4(),
         name: name,
         threshold: threshold,
@@ -32,6 +33,7 @@ class ProductControllers {
   Future<void> PlusButton(context, _name, _threshold, _quantity) async {
     isLoading.value = true;
     Product product = Product(
+        validity: false,
         id: const Uuid().v4(),
         name: _name,
         threshold: _threshold.toInt(),
@@ -43,18 +45,20 @@ class ProductControllers {
   }
 
   Future<void> EditProduct(
-      context, product, _name, _threshold, _quantity) async {
+      context, product, _name, _threshold, _quantity, _validity) async {
     isLoading.value = true;
     _name ??= product.name;
     _threshold ??= product.threshold;
     _quantity ??= product.quantity;
+    _validity ??= product.validity;
 
     Product newProduct = Product(
         id: product.id,
         name: _name,
         threshold: _threshold!.toInt(),
         quantity: _quantity!.toInt(),
-        barcodes: product.barcodes);
+        barcodes: product.barcodes,
+        validity: _validity);
 
     await dbService.updateProduct(newProduct);
     Navigator.pop(context);
@@ -71,6 +75,7 @@ class ProductControllers {
     _value ??= 0;
 
     Product newProduct = Product(
+      validity: product.validity,
       id: product.id,
       name: product.name,
       threshold: product.threshold,
