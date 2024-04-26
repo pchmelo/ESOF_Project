@@ -1,4 +1,7 @@
+import 'package:esof_project/app/controllers/shoppingListControllers.dart';
+import 'package:esof_project/app/controllers/validityControllers.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
+import 'package:esof_project/services/database_shopping_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
@@ -95,5 +98,18 @@ class ProductControllers {
       Product product = await dbService.getProductById(productId);
       await ChangeQuantityProduct(productId, product, quantityToAdd, '');
     }
+  }
+
+  Future<void> deleteProduct(String productId) async {
+    isLoading.value = true;
+
+    ShoppingListControllers shoppingListControllers = ShoppingListControllers();
+    shoppingListControllers.deleteProductFromAllLists(productId);
+
+    ValidityController validityController = ValidityController();
+    validityController.deleteAllValiditiesOfProduct(productId);
+
+    await dbService.deleteProductById(productId);
+    isLoading.value = false;
   }
 }

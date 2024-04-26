@@ -27,8 +27,8 @@ class Validity {
 
   factory Validity.fromJson(Map<String, dynamic> json) {
     return Validity(
-      json['uid'],
       json['productId'],
+      json['uid'],
       quantity: json['quantity'],
       day: json['day'],
       month: json['month'],

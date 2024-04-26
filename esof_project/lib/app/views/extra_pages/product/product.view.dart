@@ -1,16 +1,13 @@
+import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:esof_project/app/models/product.model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../../../services/database_product.dart';
 import '../../../components/productForm.component.dart';
-import '../../../controllers/shoppingListControllers.dart';
-import '../../main_pages/shopping_list/shoppingList.widgetViewList.dart';
-import '../list_products/shoppingListDisplay.dart';
 
 class ProducDetailsPage extends StatefulWidget {
   final Function controller;
   final Product product;
-  const ProducDetailsPage(
+  final Function controller_delete = ProductControllers().deleteProduct;
+  ProducDetailsPage(
       {super.key, required this.product, required this.controller});
 
   @override
@@ -20,62 +17,57 @@ class ProducDetailsPage extends StatefulWidget {
 class _ProducDetailsPageState extends State<ProducDetailsPage> {
   bool isInProductInfo = true;
 
-  Future<void> deleteProduct() async {
-    User user = FirebaseAuth.instance.currentUser!;
-    DatabaseForProducts dbService = DatabaseForProducts(uid: user.uid);
-
-    await dbService.deleteProductById(widget.product.id);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: widget.product.validity
             ? Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextButton(
-              onPressed: () {
-                if (!isInProductInfo) {
-                  setState(() {
-                    isInProductInfo = true;
-                  });
-                }
-              },
-              child: Text(
-                'Product Info',
-                style: TextStyle(
-                  fontSize: 20,
-                  decoration: isInProductInfo ? TextDecoration.underline : null,
-                ),
-              ),
-            ),
-            const Text(' | ', style: TextStyle(fontSize: 20)),
-            TextButton(
-              onPressed: () {
-                if (isInProductInfo) {
-                  setState(() {
-                    isInProductInfo = false;
-                  });
-                }
-              },
-              child: Text(
-                'Expiration Dates',
-                style: TextStyle(
-                  fontSize: 20,
-                  decoration: isInProductInfo ? null : TextDecoration.underline,
-                ),
-              ),
-            ),
-          ],
-        )
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      if (!isInProductInfo) {
+                        setState(() {
+                          isInProductInfo = true;
+                        });
+                      }
+                    },
+                    child: Text(
+                      'Product Info',
+                      style: TextStyle(
+                        fontSize: 10,
+                        decoration:
+                            isInProductInfo ? TextDecoration.underline : null,
+                      ),
+                    ),
+                  ),
+                  const Text(' | ', style: TextStyle(fontSize: 10)),
+                  TextButton(
+                    onPressed: () {
+                      if (isInProductInfo) {
+                        setState(() {
+                          isInProductInfo = false;
+                        });
+                      }
+                    },
+                    child: Text(
+                      'Expiration Dates',
+                      style: TextStyle(
+                        fontSize: 10,
+                        decoration:
+                            isInProductInfo ? null : TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ],
+              )
             : const Center(
-          child: Text(
-            'Product Info',
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
+                child: Text(
+                  'Product Info',
+                  style: TextStyle(fontSize: 10),
+                ),
+              ),
         actions: <Widget>[
           PopupMenuButton(
             itemBuilder: (context) => [
@@ -108,7 +100,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                   ],
                 ),
                 onTap: () {
-                  deleteProduct();
+                  widget.controller_delete(widget.product.id);
                 },
               ),
             ],
@@ -116,94 +108,94 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
           ),
         ],
       ),
-      body: isInProductInfo ?
-      Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          const SizedBox(
-            height: 100,
-            width: 100,
-            child: Placeholder(),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.03,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                  child: Center(
-                    child: Text(
-                      '${widget.product.name}',
-                      style: const TextStyle(
-                        fontSize: 35.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                  child: Center(
-                    child: Text(
-                      'Threshold: ${widget.product.threshold}',
-                      style: const TextStyle(
-                        fontSize: 35.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    'Quantity: ${widget.product.quantity}',
-                    style: const TextStyle(
-                      fontSize: 35.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+      body: isInProductInfo
+          ? Column(
+              children: [
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
-                IconButton(
-                  onPressed: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ShoppingListForm(context: context)
-                                  .SelectShoppingListForm(widget.product)),
-                    );
-                  },
-                  style: ButtonStyle(
-                    backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.amber),
-                    foregroundColor:
-                    MaterialStateProperty.all<Color>(Colors.black),
-                    minimumSize: MaterialStateProperty.all<Size>(
-                      const Size(50.0, 50.0),
-                    ),
-                    shape: MaterialStateProperty.all<OutlinedBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
+                const SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: Placeholder(),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                        child: Center(
+                          child: Text(
+                            '${widget.product.name}',
+                            style: const TextStyle(
+                              fontSize: 35.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                        child: Center(
+                          child: Text(
+                            'Threshold: ${widget.product.threshold}',
+                            style: const TextStyle(
+                              fontSize: 35.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: Text(
+                          'Quantity: ${widget.product.quantity}',
+                          style: const TextStyle(
+                            fontSize: 35.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.1,
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShoppingListForm(
+                                        context: context)
+                                    .SelectShoppingListForm(widget.product)),
+                          );
+                        },
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.amber),
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.black),
+                          minimumSize: MaterialStateProperty.all<Size>(
+                            const Size(50.0, 50.0),
+                          ),
+                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                          ),
+                        ),
+                        icon: const Icon(Icons.shopping_basket_outlined),
+                        iconSize: 80,
+                      ),
+                    ],
                   ),
-                  icon: const Icon(Icons.shopping_basket_outlined),
-                  iconSize: 80,
                 ),
               ],
-            ),
-          ),
-        ],
-      )
+            )
           : const Text('You are in Expiration Dates menus'),
     );
   }

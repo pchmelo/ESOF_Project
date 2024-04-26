@@ -116,9 +116,9 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
                                 selectedDate.month,
                                 selectedDate.year);
                           }
-                          await widget.controller(widget.listUid,
-                              widget.product, _value, widget.scancode);
                         }
+                        await widget.controller(widget.listUid, widget.product,
+                            _value, widget.scancode);
                       } else {
                         await widget.controller(widget.listUid, widget.product,
                             _value, widget.scancode);

@@ -17,11 +17,15 @@ class DatabaseForValidity {
   }
 
   Future<void> deleteValidity(String validityId) async {
-    await validityCollection
-        .doc(uid)
-        .collection('validity')
-        .doc(validityId)
-        .delete();
+    try {
+      await validityCollection
+          .doc(uid)
+          .collection('validity')
+          .doc(validityId)
+          .delete();
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> updateValidity(String validityId, Validity validity) async {

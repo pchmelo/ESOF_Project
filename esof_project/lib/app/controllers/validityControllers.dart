@@ -29,4 +29,22 @@ class ValidityController {
     await dbService.createValidity(validity);
     isLoading.value = false;
   }
+
+  Future<void> deleteValidity(String validityId) async {
+    isLoading.value = true;
+    await dbService.deleteValidity(validityId);
+    isLoading.value = false;
+  }
+
+  Future<void> deleteAllValiditiesOfProduct(String productId) async {
+    isLoading.value = true;
+    List<Validity> validities =
+        await dbService.getAllValiditiesOfProduct(productId);
+    for (Validity validity in validities) {
+      await dbService.deleteValidity(validity.uid);
+    }
+    validities = await dbService.getAllValiditiesOfProduct(productId);
+
+    isLoading.value = false;
+  }
 }

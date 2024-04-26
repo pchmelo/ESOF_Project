@@ -136,4 +136,20 @@ class ShoppingListControllers {
 
     await dbService.updateShoppingList(new_shoppingList.uid, new_shoppingList);
   }
+
+  Future<void> deleteProductFromAllLists(String id) async {
+    isLoading.value = true;
+
+    List<ShoppingList> allShoppingLists =
+        await dbService.getShoppingListStream().first;
+
+    for (var shoppingList in allShoppingLists) {
+      if (shoppingList.products.containsKey(id)) {
+        shoppingList.products.remove(id);
+        await dbService.updateShoppingList(shoppingList.uid, shoppingList);
+      }
+    }
+
+    isLoading.value = false;
+  }
 }
