@@ -1,4 +1,5 @@
 class Validity {
+  final String name;
   final String uid;
   final String productId;
   final int quantity;
@@ -6,7 +7,7 @@ class Validity {
   late int month;
   late int year;
 
-  Validity(this.productId, this.uid,
+  Validity(this.name, this.productId, this.uid,
       {this.quantity = 0, int? day, int? month, int? year}) {
     var now = DateTime.now();
     this.day = day ?? now.day;
@@ -16,6 +17,7 @@ class Validity {
 
   Map<String, dynamic> toJson() {
     return {
+      'name': name,
       'uid': uid,
       'productId': productId,
       'quantity': quantity,
@@ -27,6 +29,7 @@ class Validity {
 
   factory Validity.fromJson(Map<String, dynamic> json) {
     return Validity(
+      json['name'],
       json['productId'],
       json['uid'],
       quantity: json['quantity'],

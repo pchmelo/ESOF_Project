@@ -15,10 +15,11 @@ class ValidityController {
     dbService = dbServiceParam ?? DatabaseForValidity(uid: user.uid);
   }
 
-  Future<void> CreateValidity(
-      String productId, int quantity, int day, int month, int year) async {
+  Future<void> CreateValidity(String productId, int quantity, int day,
+      int month, int year, String name) async {
     isLoading.value = true;
     Validity validity = Validity(
+      name,
       productId,
       const Uuid().v4(),
       quantity: quantity,

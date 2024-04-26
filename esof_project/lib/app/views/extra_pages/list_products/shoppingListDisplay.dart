@@ -139,8 +139,6 @@ class ShoppingListDisplay extends StatelessWidget {
                     onPressed: () async {
                       await ShoppingListControllers()
                           .resetProductStatus(shoppingList, context);
-                      Navigator.pushReplacementNamed(
-                          context, '/start/shopping_list');
                     },
                     child: const Text(
                       'Finish your Shopps :)',

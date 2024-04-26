@@ -1,7 +1,6 @@
 import 'package:esof_project/app/controllers/shoppingListControllers.dart';
 import 'package:esof_project/app/controllers/validityControllers.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
-import 'package:esof_project/services/database_shopping_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
@@ -54,6 +53,14 @@ class ProductControllers {
     _threshold ??= product.threshold;
     _quantity ??= product.quantity;
     _validity ??= product.validity;
+
+    if (_validity != product.validity) {
+      if (!_validity) {
+        ValidityController validityController = ValidityController();
+        validityController.deleteAllValiditiesOfProduct(product.id);
+      }
+      _quantity = 0;
+    }
 
     Product newProduct = Product(
         id: product.id,
