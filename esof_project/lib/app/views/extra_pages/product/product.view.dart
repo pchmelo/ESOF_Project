@@ -7,25 +7,75 @@ import '../../../controllers/shoppingListControllers.dart';
 import '../../main_pages/shopping_list/shoppingList.widgetViewList.dart';
 import '../list_products/shoppingListDisplay.dart';
 
-class ProducDetailsPage extends StatelessWidget {
+class ProducDetailsPage extends StatefulWidget {
   final Function controller;
   final Product product;
   const ProducDetailsPage(
       {super.key, required this.product, required this.controller});
 
   @override
+  _ProducDetailsPageState createState() => _ProducDetailsPageState();
+}
+
+class _ProducDetailsPageState extends State<ProducDetailsPage> {
+  bool isInProductInfo = true;
+
+  Future<void> deleteProduct() async {
+    User user = FirebaseAuth.instance.currentUser!;
+    DatabaseForProducts dbService = DatabaseForProducts(uid: user.uid);
+
+    await dbService.deleteProductById(widget.product.id);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Future<void> deleteProduct() async {
-      User user = FirebaseAuth.instance.currentUser!;
-      DatabaseForProducts dbService = DatabaseForProducts(uid: user.uid);
-
-      await dbService.deleteProductById(product.id);
-    }
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Info'),
-        centerTitle: true,
+        title: widget.product.validity
+            ? Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: () {
+                if (!isInProductInfo) {
+                  setState(() {
+                    isInProductInfo = true;
+                  });
+                }
+              },
+              child: Text(
+                'Product Info',
+                style: TextStyle(
+                  fontSize: 20,
+                  decoration: isInProductInfo ? TextDecoration.underline : null,
+                ),
+              ),
+            ),
+            const Text(' | ', style: TextStyle(fontSize: 20)),
+            TextButton(
+              onPressed: () {
+                if (isInProductInfo) {
+                  setState(() {
+                    isInProductInfo = false;
+                  });
+                }
+              },
+              child: Text(
+                'Expiration Dates',
+                style: TextStyle(
+                  fontSize: 20,
+                  decoration: isInProductInfo ? null : TextDecoration.underline,
+                ),
+              ),
+            ),
+          ],
+        )
+            : const Center(
+          child: Text(
+            'Product Info',
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
         actions: <Widget>[
           PopupMenuButton(
             itemBuilder: (context) => [
@@ -41,8 +91,8 @@ class ProducDetailsPage extends StatelessWidget {
                   ],
                 ),
                 onTap: () async {
-                  await ProductForm(product: product, context: context)
-                      .EditProductForm(controller);
+                  await ProductForm(product: widget.product, context: context)
+                      .EditProductForm(widget.controller);
                   Navigator.pop(context);
                 },
               ),
@@ -66,7 +116,8 @@ class ProducDetailsPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
+      body: isInProductInfo ?
+      Column(
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.1,
@@ -89,7 +140,7 @@ class ProducDetailsPage extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                   child: Center(
                     child: Text(
-                      '${product.name}',
+                      '${widget.product.name}',
                       style: const TextStyle(
                         fontSize: 35.0,
                         fontWeight: FontWeight.bold,
@@ -101,7 +152,7 @@ class ProducDetailsPage extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                   child: Center(
                     child: Text(
-                      'Threshold: ${product.threshold}',
+                      'Threshold: ${widget.product.threshold}',
                       style: const TextStyle(
                         fontSize: 35.0,
                         fontWeight: FontWeight.bold,
@@ -111,7 +162,7 @@ class ProducDetailsPage extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    'Quantity: ${product.quantity}',
+                    'Quantity: ${widget.product.quantity}',
                     style: const TextStyle(
                       fontSize: 35.0,
                       fontWeight: FontWeight.bold,
@@ -128,21 +179,20 @@ class ProducDetailsPage extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) =>
                               ShoppingListForm(context: context)
-                                  .SelectShoppingListForm(this.product)),
+                                  .SelectShoppingListForm(widget.product)),
                     );
                   },
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.amber),
+                    MaterialStateProperty.all<Color>(Colors.amber),
                     foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black),
+                    MaterialStateProperty.all<Color>(Colors.black),
                     minimumSize: MaterialStateProperty.all<Size>(
                       const Size(50.0, 50.0),
                     ),
                     shape: MaterialStateProperty.all<OutlinedBorder>(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            50.0), // Decreasing border radius
+                        borderRadius: BorderRadius.circular(50.0),
                       ),
                     ),
                   ),
@@ -153,7 +203,8 @@ class ProducDetailsPage extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      )
+          : const Text('You are in Expiration Dates menus'),
     );
   }
 }

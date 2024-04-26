@@ -2,70 +2,64 @@ import 'package:esof_project/app/models/product.model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('Product Model Tests', () {
-    test('Product to Json test', () {
-      const expectedId = 'test-id';
-      const expectedName = 'Test Product';
-      const expectedThreshold = 10;
-      const expectedQuantity = 20;
-      const expectedValidity = false;
-      final expectedBarcodes = ['1234567890'];
+  group('ProductModel', () {
+    final product = Product(
+      id: '1',
+      name: 'Beans',
+      threshold: 0,
+      quantity: 0,
+      barcodes: ['0123456789', '9876543210'],
+      validity: false,
+    );
 
-      final product = Product(
-        validity: expectedValidity,
-        id: expectedId,
-        name: expectedName,
-        threshold: expectedThreshold,
-        quantity: expectedQuantity,
-        barcodes: expectedBarcodes,
-      );
-
-      expect(product.id, expectedId);
-      expect(product.name, expectedName);
-      expect(product.threshold, expectedThreshold);
-      expect(product.quantity, expectedQuantity);
-      expect(product.barcodes, expectedBarcodes);
-
-      final productJson = product.toJson();
-      expect(productJson['id'], expectedId);
-      expect(productJson['name'], expectedName);
-      expect(productJson['threshold'], expectedThreshold);
-      expect(productJson['quantity'], expectedQuantity);
-      expect(productJson['barcodes'], expectedBarcodes);
+    test('addBarcode adds a barcode to the product', () {
+      product.addBarcode('1032547698');
+      expect(product.barcodes, ['0123456789', '9876543210', '1032547698']);
     });
 
-    test('Json to Product test', () {
-      final json = {
-        'id': 'test-id',
-        'name': 'Test Product',
+    test('isBarcodeExist returns true if barcode exists', () {
+      expect(product.isBarcodeExist('0123456789'), true);
+    });
+
+    test('isBarcodeExist returns false if barcode does not exist', () {
+      expect(product.isBarcodeExist('0000000000'), false);
+    });
+
+    test('toggleCheckedStatus toggles the checked status of the product', () {
+      product.toggleCheckedStatus();
+      expect(product.checked, true);
+    });
+
+    test('toJson returns a map representation of the product', () {
+      expect(product.toJson(), {
+        'id': '1',
+        'name': 'Beans',
+        'threshold': 0,
+        'quantity': 0,
+        'barcodes': ['0123456789', '9876543210', '1032547698'],
+        'checked': 'true',
+        'validity': 'false',
+      });
+    });
+
+    test('Product.fromJson creates a product from a map', () {
+      var productFromJson = Product.fromJson({
+        'id': '2',
+        'name': 'Peas',
         'threshold': 10,
         'quantity': 20,
-        'barcodes': ['1234567890'],
-      };
+        'barcodes': ['012349765'],
+        'checked': 'false',
+        'validity': 'true',
+      });
 
-      final product = Product.fromJson(json);
-
-      expect(product.id, json['id']);
-      expect(product.name, json['name']);
-      expect(product.threshold, json['threshold']);
-      expect(product.quantity, json['quantity']);
-      expect(product.barcodes, json['barcodes']);
-    });
-
-    test('Add var code to a Product test', () {
-      const barcode = '1234567890';
-      final product = Product(
-        validity: false,
-        id: 'test-id',
-        name: 'Test Product',
-        threshold: 10,
-        quantity: 20,
-        barcodes: [],
-      );
-
-      product.addBarcode(barcode);
-
-      expect(product.isBarcodeExist(barcode), true);
+      expect(productFromJson.id, '2');
+      expect(productFromJson.name, 'Peas');
+      expect(productFromJson.threshold, 10);
+      expect(productFromJson.quantity, 20);
+      expect(productFromJson.barcodes, ['012349765']);
+      expect(productFromJson.checked, false);
+      expect(productFromJson.validity, true);
     });
   });
 }
