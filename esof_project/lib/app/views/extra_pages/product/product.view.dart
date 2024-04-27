@@ -1,5 +1,6 @@
 import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:esof_project/app/models/product.model.dart';
+import 'package:esof_project/app/views/extra_pages/validity/validityList.widget.dart';
 import 'package:flutter/material.dart';
 import '../../../components/productForm.component.dart';
 
@@ -132,7 +133,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Center(
                           child: Text(
-                            '${widget.product.name}',
+                            widget.product.name,
                             style: const TextStyle(
                               fontSize: 35.0,
                               fontWeight: FontWeight.bold,
@@ -196,7 +197,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                 ),
               ],
             )
-          : const Text('You are in Expiration Dates menus'),
+          : ValidityListWidget(product: widget.product),
     );
   }
 }

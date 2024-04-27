@@ -65,4 +65,17 @@ class DatabaseForValidity {
       return Validity.fromJson(doc.data() as Map<String, dynamic>);
     }).toList();
   }
+
+  Stream<List<Validity>> getAllValiditiesOfProductStream(String productId) {
+    return validityCollection
+        .doc(uid)
+        .collection('validity')
+        .where('productId', isEqualTo: productId)
+        .snapshots()
+        .map((querySnapshot) {
+      return querySnapshot.docs.map((doc) {
+        return Validity.fromJson(doc.data() as Map<String, dynamic>);
+      }).toList();
+    });
+  }
 }
