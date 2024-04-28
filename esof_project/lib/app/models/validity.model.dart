@@ -7,7 +7,18 @@ class Validity {
   late int month;
   late int year;
 
-  Validity(this.name, this.productId, this.uid,
+  Validity()
+      : name = 'default',
+        uid = 'default',
+        productId = 'default',
+        quantity = 0 {
+    var now = DateTime.now();
+    this.day = now.day;
+    this.month = now.month;
+    this.year = now.year;
+  }
+
+  Validity.withValues(this.name, this.productId, this.uid,
       {this.quantity = 0, int? day, int? month, int? year}) {
     var now = DateTime.now();
     this.day = day ?? now.day;
@@ -28,7 +39,7 @@ class Validity {
   }
 
   factory Validity.fromJson(Map<String, dynamic> json) {
-    return Validity(
+    return Validity.withValues(
       json['name'],
       json['productId'],
       json['uid'],

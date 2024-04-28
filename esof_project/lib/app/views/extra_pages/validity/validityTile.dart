@@ -3,8 +3,29 @@ import 'package:flutter/material.dart';
 import '../../../models/validity.model.dart';
 
 class ValidityTile extends StatelessWidget {
+  final ValueNotifier<bool> editValidity;
+  final ValueNotifier<bool> deleteValidity = ValueNotifier<bool>(false);
   final Validity validity;
-  const ValidityTile({super.key, required this.validity});
+
+  ValidityTile()
+      : validity = Validity(), // Replace with a default Validity object
+        editValidity = ValueNotifier<bool>(false),
+        super();
+
+  ValidityTile.withValidity(
+      {Key? key, required this.validity, required this.editValidity})
+      : super(key: key);
+
+  Map<String, ValidityTile> _values = {};
+  Map<String, bool> _delete = {};
+
+  Validity? getValue(String validityId) {
+    return _values[validityId]?.validity;
+  }
+
+  bool getDelete(String validityId) {
+    return _delete[validityId] ?? false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,20 +56,51 @@ class ValidityTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10.0),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(validity.name),
-                  Text('Quantity: ${validity.quantity}'),
-                  Text(
-                      'Expiration date: ${validity.day}/${validity.month}/${validity.year}'),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(validity.name),
+                    Text('Quantity: ${validity.quantity}'),
+                    Text(
+                        'Expiration date: ${validity.day}/${validity.month}/${validity.year}'),
+                  ],
+                ),
+              ),
+              ValueListenableBuilder(
+                valueListenable: editValidity,
+                builder: (context, bool value, child) {
+                  return value
+                      ? Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () {
+                                // Handle your edit action here
+                              },
+                            ),
+                            ValueListenableBuilder(
+                              valueListenable: deleteValidity,
+                              builder: (context, bool value, child) {
+                                return IconButton(
+                                  icon:
+                                      Icon(value ? Icons.close : Icons.delete),
+                                  onPressed: () {
+                                    deleteValidity.value =
+                                        !deleteValidity.value;
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        )
+                      : Container();
+                },
               ),
             ],
           ),
         ),
       ),
     );
-    ;
   }
 }

@@ -18,7 +18,7 @@ class ValidityController {
   Future<void> CreateValidity(String productId, int quantity, int day,
       int month, int year, String name) async {
     isLoading.value = true;
-    Validity validity = Validity(
+    Validity validity = Validity.withValues(
       name,
       productId,
       const Uuid().v4(),

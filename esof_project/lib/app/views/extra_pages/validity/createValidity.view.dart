@@ -11,7 +11,7 @@ class DateDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Selected date: ${date.toLocal()}'.split(' ')[0],
+      'Selected Date: ${date.day}/${date.month}/${date.year}',
       style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     );
   }
