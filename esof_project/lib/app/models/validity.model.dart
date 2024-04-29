@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Validity {
   final String name;
   final String uid;
@@ -47,6 +49,50 @@ class Validity {
       day: json['day'],
       month: json['month'],
       year: json['year'],
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    print('== operator called');
+    if (identical(this, other)) return true;
+
+    return other is Validity &&
+        other.name == name &&
+        other.uid == uid &&
+        other.productId == productId &&
+        other.quantity == quantity &&
+        other.day == day &&
+        other.month == month &&
+        other.year == year;
+  }
+
+  @override
+  int get hashCode {
+    return name.hashCode ^
+        uid.hashCode ^
+        productId.hashCode ^
+        quantity.hashCode ^
+        day.hashCode ^
+        month.hashCode ^
+        year.hashCode;
+  }
+}
+
+class ValidityNotifier extends ValueNotifier<Validity> {
+  ValidityNotifier(Validity value) : super(value);
+
+  void updateValue(Validity newValue) {
+    print('updateValue called');
+
+    value = Validity.withValues(
+      newValue.name,
+      newValue.productId,
+      newValue.uid,
+      quantity: newValue.quantity,
+      day: newValue.day,
+      month: newValue.month,
+      year: newValue.year,
     );
   }
 }

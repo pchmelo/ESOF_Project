@@ -48,4 +48,11 @@ class ValidityController {
 
     isLoading.value = false;
   }
+
+  Future<List<Validity>> fetchAllValidities() async {
+    isLoading.value = true;
+    List<Validity> validities = await dbService.getAllValidities();
+    isLoading.value = false;
+    return validities;
+  }
 }

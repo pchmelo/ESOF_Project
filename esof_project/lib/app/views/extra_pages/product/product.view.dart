@@ -1,10 +1,12 @@
 import 'package:esof_project/app/controllers/productControllers.dart';
+import 'package:esof_project/app/controllers/validityControllers.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/views/extra_pages/validity/validityList.widget.dart';
 import 'package:esof_project/app/views/extra_pages/validity/validityTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../components/productForm.component.dart';
+import '../../../models/validity.model.dart';
 
 class ProducDetailsPage extends StatefulWidget {
   final Function controller;
@@ -12,9 +14,6 @@ class ProducDetailsPage extends StatefulWidget {
   final Function controller_delete = ProductControllers().deleteProduct;
   ProducDetailsPage(
       {super.key, required this.product, required this.controller});
-
-  final ValidityTile validityTile = ValidityTile();
-
   @override
   _ProducDetailsPageState createState() => _ProducDetailsPageState();
 }
@@ -221,41 +220,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
               children: [
                 Expanded(
                   child: ValidityListWidget(
-                      validityTile: widget.validityTile,
-                      product: widget.product,
-                      editValidity: editValidity),
-                ),
-                ValueListenableBuilder(
-                  valueListenable: editValidity,
-                  builder: (context, bool value, child) {
-                    return value
-                        ? Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: TextButton(
-                              onPressed: () async {},
-                              child: const Text(
-                                'Confirm',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container();
-                  },
+                      product: widget.product, editValidity: editValidity),
                 ),
               ],
             ),

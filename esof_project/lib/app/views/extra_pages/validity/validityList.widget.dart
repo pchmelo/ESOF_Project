@@ -5,19 +5,20 @@ import 'package:esof_project/services/database_validity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../../controllers/validityControllers.dart';
 import '../../../models/validity.model.dart';
 import '../../../shared/filter.dart';
 import '../../../shared/loading.dart';
 
 class ValidityListWidget extends StatefulWidget {
-  final ValidityTile validityTile;
+  List<Map<String, bool>> list_delete = [];
   final Product product;
   final ValueNotifier<bool> editValidity;
-  ValidityListWidget(
-      {Key? key,
-      required this.product,
-      required this.editValidity,
-      required this.validityTile});
+  ValidityListWidget({
+    Key? key,
+    required this.product,
+    required this.editValidity,
+  });
   Function filter = ValidityFilter().emptyFilter;
 
   @override
@@ -196,8 +197,7 @@ class _ValidityListWidgetState extends State<ValidityListWidget> {
                         builder: (BuildContext context,
                             List<Map<String, dynamic>> value, Widget? child) {
                           return ValidityListBuilder(
-                              validityTile: widget.validityTile,
-                              foundProducts: value,
+                              foundValidities: value,
                               editValidity: widget.editValidity);
                         },
                       )),

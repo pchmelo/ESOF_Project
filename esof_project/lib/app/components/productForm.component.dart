@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:esof_project/app/models/validity.model.dart';
 import 'package:esof_project/app/shared/plusButton.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -11,6 +12,7 @@ import '../views/extra_pages/product/changeQuantity.widget.dart';
 import '../views/extra_pages/product/createProduct.widget.dart';
 import '../views/extra_pages/product/editProduct.widget.dart';
 import '../views/extra_pages/validity/createValidity.view.dart';
+import '../views/extra_pages/validity/editValidity.widget.dart';
 import '../views/main_pages/shopping_list/shoppingList.widgetViewList.dart';
 
 class ProductForm {
@@ -132,5 +134,25 @@ class ShoppingListForm {
       return const SizedBox
           .shrink(); // Return an empty widget if there's no data
     });
+  }
+}
+
+class ValidityForm {
+  final context;
+  ValidityForm({this.context});
+
+  Future<void> EditValidityForm(
+      Validity validity, EditValidity editValidity) async {
+    await showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: editValidity,
+        );
+      },
+    );
   }
 }
