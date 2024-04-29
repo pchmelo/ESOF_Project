@@ -83,16 +83,27 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                     ValueListenableBuilder(
                       valueListenable: editValidity,
                       builder: (context, bool value, child) {
-                        return Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                          child: Icon(value ? Icons.cancel : Icons.edit),
-                        );
+                        if (value && !isInProductInfo) {
+                          return const Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                            child: Icon(Icons.cancel),
+                          );
+                        } else {
+                          return const Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                            child: Icon(Icons.edit),
+                          );
+                        }
                       },
                     ),
                     ValueListenableBuilder(
                       valueListenable: editValidity,
                       builder: (context, bool value, child) {
-                        return Text(value ? 'Cancel' : 'Edit');
+                        if (value && !isInProductInfo) {
+                          return const Text('Cancel');
+                        } else {
+                          return const Text('Edit');
+                        }
                       },
                     ),
                   ],

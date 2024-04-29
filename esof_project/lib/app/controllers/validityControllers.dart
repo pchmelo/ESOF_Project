@@ -55,4 +55,10 @@ class ValidityController {
     isLoading.value = false;
     return validities;
   }
+
+  Future<void> updateValidity(Validity validity) async {
+    isLoading.value = true;
+    await dbService.updateValidity(validity);
+    isLoading.value = false;
+  }
 }

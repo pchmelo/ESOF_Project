@@ -28,11 +28,11 @@ class DatabaseForValidity {
     }
   }
 
-  Future<void> updateValidity(String validityId, Validity validity) async {
+  Future<void> updateValidity(Validity validity) async {
     await validityCollection
         .doc(uid)
         .collection('validity')
-        .doc(validityId)
+        .doc(validity.uid)
         .update(validity.toJson());
   }
 

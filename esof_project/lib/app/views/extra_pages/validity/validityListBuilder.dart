@@ -95,15 +95,15 @@ class _ValidityListBuilderState extends State<ValidityListBuilder> {
                       onPressed: () async {
                         ValidityController validityController =
                             ValidityController();
-                        List<Validity> validities_p =
-                            await validityController.fetchAllValidities();
-
                         getDeleteValidityFromTiles();
-                        getValuesValidityFromTiles();
 
-                        var i = 0;
-
-                        for (var validity in validities_p) {}
+                        for (var entry in list_delete) {
+                          if (entry.values.first) {
+                            await validityController
+                                .deleteValidity(entry.keys.first);
+                          }
+                        }
+                        widget.editValidity.value = false;
                       },
                       child: const Text(
                         'Confirm',
