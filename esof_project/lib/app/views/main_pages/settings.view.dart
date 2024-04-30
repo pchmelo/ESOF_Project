@@ -13,9 +13,17 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(name),
+      appBar: AppBar(automaticallyImplyLeading: false,
+        title: const Text(
+          'Settings',
+          style: TextStyle(
+            fontFamily: 'CrimsonPro',
+            fontSize: 31,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.cyan,
+        foregroundColor: Colors.white,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

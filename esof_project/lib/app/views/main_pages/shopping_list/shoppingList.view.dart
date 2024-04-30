@@ -27,9 +27,17 @@ class ShoppingListView extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(name),
+      appBar: AppBar(automaticallyImplyLeading: false,
+        title: const Text(
+          'Shopping Lists',
+          style: TextStyle(
+            fontFamily: 'CrimsonPro',
+            fontSize: 31,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.cyan,
+        foregroundColor: Colors.white,
       ),
       body: Container(
         width: double.infinity,
