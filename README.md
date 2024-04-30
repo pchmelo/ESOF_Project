@@ -245,6 +245,8 @@ Estas etapas são:
 - Done: Secção onde guardamos todas as funcionalidades que foram desenvolvidas e à espera de aprovação
 - Accepted: Secção onde guardamos todas as funcionalidades que foram desenvolvidas e aceites pelo cliente
 
+Também compilamos todas as adições e mudanças ao longo do projeto neste **<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/CHANGELOG.md">ChangeLog</a>**
+
 ### Sprint 1:
 - Print da scrum board no início a realização do primeiro sprint:
 <img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/sprint1.png?raw=true">
@@ -275,6 +277,8 @@ Estas etapas são:
 - Continuar a tentar dedicar mais tempo a este projecto
 - Aumentar a quantidade de pesquisa relativa à dificuldade da implementação de uma feature antes de realmente a criar
 - Comunicar mais e mais frequentemente relativamente às branches no github
+
+#### <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/releases/tag/Sprint_1">Sprint 1 Release</a>
 
 ### Sprint 2:
 - Print da scrum board no início a realização do segundo sprint:
