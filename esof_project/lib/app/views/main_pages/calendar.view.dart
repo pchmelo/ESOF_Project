@@ -45,7 +45,16 @@ class _CalenderViewState extends State<CalenderView> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text(name),
+        title: const Text(
+          name,
+          style: TextStyle(
+            fontFamily: 'CrimsonPro',
+            fontSize: 31,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.cyan,
+        foregroundColor: Colors.white,
       ),
       /*
         floatingActionButton: FloatingActionButton(
