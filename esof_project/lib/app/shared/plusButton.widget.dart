@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../../main.dart';
+import '../views/main_pages/addProduct/barCodeProcess.dart';
 
 class PlusButton extends StatefulWidget {
   final Function controller;
@@ -12,6 +15,27 @@ class PlusButton extends StatefulWidget {
 
 class _PlusButtonState extends State<PlusButton> {
   final _formKey = GlobalKey<FormState>();
+
+  void readCodeBar() async {
+    String code = await FlutterBarcodeScanner.scanBarcode(
+        '#FF0000', "Cancel", false, ScanMode.BARCODE);
+
+    if (code != '-1' && isValidBarcode(code)) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BarCodeProcess(barCode: code),
+          ),
+        );
+      });
+    }
+  }
+
+  bool isValidBarcode(String barcode) {
+    final regex = RegExp(r'^\d+$');
+    return regex.hasMatch(barcode) && barcode.length == 13;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +95,8 @@ class _PlusButtonState extends State<PlusButton> {
                             icon: const Icon(Icons.add),
                             iconSize: 80,
                             onPressed: () {
-                              String? currentRoute = ModalRoute.of(context)!.settings.name;
+                              String? currentRoute =
+                                  ModalRoute.of(context)!.settings.name;
                               if (currentRoute != '/start/add_product') {
                                 Navigator.pushReplacementNamed(context,
                                     '/start/add_product/manual_add_product');
@@ -109,8 +134,7 @@ class _PlusButtonState extends State<PlusButton> {
                               String? currentRoute =
                                   ModalRoute.of(context)!.settings.name;
                               if (currentRoute != '/start/add_product') {
-                                Navigator.pushReplacementNamed(
-                                    context, '/start/add_product/bar_scanner');
+                                return readCodeBar();
                               }
                             },
                           ),

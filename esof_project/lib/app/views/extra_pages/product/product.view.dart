@@ -1,12 +1,9 @@
 import 'package:esof_project/app/controllers/productControllers.dart';
-import 'package:esof_project/app/controllers/validityControllers.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/views/extra_pages/validity/validityList.widget.dart';
-import 'package:esof_project/app/views/extra_pages/validity/validityTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../components/productForm.component.dart';
-import '../../../models/validity.model.dart';
 
 class ProducDetailsPage extends StatefulWidget {
   final Function controller;
