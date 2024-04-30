@@ -64,7 +64,7 @@ class _CreateProdutState extends State<CreateProdut> {
                       setState(() => _threshold = int.parse(val)),
                 ),
                 CheckboxListTile(
-                  title: const Text('Validity'),
+                  title: const Text('Expires'),
                   value: _validity,
                   onChanged: (bool? value) {
                     setState(() {
