@@ -275,3 +275,10 @@ Estas etapas são:
 - Continuar a tentar dedicar mais tempo a este projecto
 - Aumentar a quantidade de pesquisa relativa à dificuldade da implementação de uma feature antes de realmente a criar
 - Comunicar mais e mais frequentemente relativamente às branches no github
+
+### Sprint 2:
+- Print da scrum board no início a realização do segundo sprint:
+<img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/sprint2.png?raw=true">
+
+- Print da scrum board após a realização do segundo sprint:
+<img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/sprint2_conclusion.png?raw=true">
