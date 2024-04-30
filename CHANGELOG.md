@@ -38,7 +38,7 @@ Uma vez que, tal como no Sprint anterior, a interface do Calendário ainda não 
 
 ## Links para as releases:
 
-- <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/releases/tag/Sprint_1">Sprint2</a>
+- <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/releases/tag/Sprint_2">Sprint2</a>
 
 
 
