@@ -286,3 +286,6 @@ Também compilamos todas as adições e mudanças ao longo do projeto neste **<a
 
 - Print da scrum board após a realização do segundo sprint:
 <img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/sprint2_conclusion.png?raw=true">
+
+#### <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/releases/tag/Sprint_2">Sprint 2 Release</a>
+
