@@ -287,9 +287,6 @@ Também compilamos todas as adições e mudanças ao longo do projeto neste **<a
 - Print da scrum board após a realização do segundo sprint:
 <img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/sprint2_conclusion.png?raw=true">
 
-#### <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/releases/tag/Sprint_2">Sprint 2 Release</a>
-
-
 #### Sprint 2 retrospective:
 
 ##### O que correu bem:
@@ -304,3 +301,4 @@ As dúvidas relativamente aos testes de Gherklin mantiveram-se e/ou agravaram-se
 ##### O que vamos fazer para melhorar:
 Continuar com uma abordagem similar à anterior na maioria dos assuntos, pois funcionou, e adaptarmo-nos naquilo que não correu tão bem, seja no que toca ao tempo dedicado por cada elemento como à divisão de tarefas.
 
+#### <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/releases/tag/Sprint_2">Sprint 2 Release</a>
