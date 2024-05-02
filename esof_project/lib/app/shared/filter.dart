@@ -1,3 +1,5 @@
+import '../models/validity.model.dart';
+
 class ProductFilter {
   List<Map<String, dynamic>> emptyFilter(
       List<Map<String, dynamic>> allProducts) {
@@ -131,6 +133,15 @@ class ValidityFilter {
       DateTime dateA = DateTime(a['year'], a['month'], a['day']);
       DateTime dateB = DateTime(b['year'], b['month'], b['day']);
       return dateB.compareTo(dateA);
+    });
+    return allValidities;
+  }
+
+  List<Validity> sortValiditiesByDateAsc(List<Validity> allValidities) {
+    allValidities.sort((a, b) {
+      DateTime dateA = DateTime(a.year, a.month, a.day);
+      DateTime dateB = DateTime(b.year, b.month, b.day);
+      return dateA.compareTo(dateB);
     });
     return allValidities;
   }

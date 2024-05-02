@@ -1,7 +1,10 @@
 import 'package:esof_project/app/components/footer.component.dart';
+import 'package:esof_project/app/controllers/validityControllers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../../models/event.model.dart';
+import '../../models/validity.model.dart';
+import '../../shared/filter.dart';
 
 class CalenderView extends StatefulWidget {
   const CalenderView({super.key});
@@ -11,42 +14,82 @@ class CalenderView extends StatefulWidget {
 }
 
 class _CalenderViewState extends State<CalenderView> {
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
-  Map<DateTime, List<Event>> events = {};
-  final TextEditingController _eventController = TextEditingController();
-  late final ValueNotifier<List<Event>> _slectedEvents;
+  DateTime today = DateTime.now();
+  DateTime? selectedDay;
+  int currentPage = 0;
+  List<Validity> allValidities = [];
+  List<Validity> displayedValidities = [];
+
+  List<Validity> getValiditiesForCurrentPage() {
+    int start = currentPage * 5;
+    int end = start + 5;
+
+    if (end > displayedValidities.length) {
+      end = displayedValidities.length;
+    }
+
+    return displayedValidities.sublist(start, end);
+  }
+
+  void nextPage() {
+    setState(() {
+      int maxPage = (displayedValidities.length / 5).ceil() - 1;
+      if (currentPage < maxPage) {
+        currentPage++;
+      }
+    });
+  }
+
+  void previousPage() {
+    setState(() {
+      if (currentPage > 0) {
+        currentPage--;
+      }
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    _selectedDay = _focusedDay;
-    _slectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+    loadValidities();
   }
 
-  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-    if (!isSameDay(_selectedDay, selectedDay)) {
+  bool isSameDay(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
+  }
+
+  Map<DateTime, List<Validity>> validitiesMap = {};
+
+  void loadValidities() async {
+    ValidityController validityController = ValidityController();
+    await validityController.fetchAllValidities().then((validities) {
       setState(() {
-        _selectedDay = selectedDay;
-        _focusedDay = focusedDay;
-        _slectedEvents.value = _getEventsForDay(selectedDay);
+        allValidities = validities;
+        validities.forEach((validity) {
+          DateTime validityDate =
+              DateTime(validity.year, validity.month, validity.day);
+          if (validitiesMap[validityDate] == null) {
+            validitiesMap[validityDate] = [];
+          }
+          validitiesMap[validityDate]!.add(validity);
+        });
       });
-    }
-  }
+    });
 
-  List<Event> _getEventsForDay(DateTime day) {
-    return events[day] ?? [];
+    ValidityFilter filter = ValidityFilter();
+    allValidities = filter.sortValiditiesByDateAsc(allValidities);
+    displayedValidities = allValidities;
   }
 
   @override
   Widget build(BuildContext context) {
-    const name = 'Calendar';
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
-          name,
+          "Calender",
           style: TextStyle(
             fontFamily: 'CrimsonPro',
             fontSize: 31,
@@ -56,108 +99,113 @@ class _CalenderViewState extends State<CalenderView> {
         backgroundColor: Colors.cyan,
         foregroundColor: Colors.white,
       ),
-      /*
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    scrollable: true,
-                    title: const Text("Event Name"),
-                    content: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: TextField(
-                        controller: _eventController,
-                      ),
-                    ),
-                    actions: [
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_selectedDay != null) {
-                            events[_selectedDay!] = [
-                              Event(_eventController.text)
-                            ];
-                            Navigator.of(context).pop();
-                            _slectedEvents.value =
-                                _getEventsForDay(_selectedDay!);
-                          } else {
-                            print('Error: _selectedDay is null');
-                          }
-                        },
-                        child: const Text("Introducer"),
-                      )
-                    ],
-                  );
+      body: Column(
+        children: <Widget>[
+          const SizedBox(height: 20),
+          Expanded(
+              child: TableCalendar(
+            calendarStyle: const CalendarStyle(
+              markerDecoration: BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+              ),
+            ),
+            focusedDay: today,
+            firstDay: DateTime.utc(today.year - 2, 1, 1),
+            lastDay: DateTime.utc(today.year + 30, 12, 31),
+            locale: 'en_US',
+            rowHeight: 40,
+            headerStyle: const HeaderStyle(
+              formatButtonVisible: false,
+              titleCentered: true,
+              headerPadding: EdgeInsets.all(0),
+              headerMargin: EdgeInsets.all(0),
+              titleTextStyle: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onDaySelected: (selectedDay, focusedDay) {
+              setState(() {
+                this.selectedDay = selectedDay.toLocal();
+                displayedValidities = [];
+                validitiesMap.forEach((key, value) {
+                  if (isSameDay(this.selectedDay!, key)) {
+                    displayedValidities = value;
+                  }
                 });
-          },
-          child: const Icon(Icons.add),
-        ),
-        */
-      body: Expanded(
-        child: Column(
-          children: [
-            Expanded(child: calendar()),
-          ],
-        ),
+                if (displayedValidities.isEmpty) {
+                  currentPage = 0;
+                }
+              });
+            },
+            selectedDayPredicate: (day) {
+              if (this.selectedDay == null) {
+                return false; // or true, depending on your requirements
+              } else {
+                return isSameDay(this.selectedDay!, day);
+              }
+            },
+            eventLoader: (day) {
+              for (DateTime key in validitiesMap.keys) {
+                if (isSameDay(key, day)) {
+                  return validitiesMap[key] ?? [];
+                }
+              }
+              return [];
+            },
+            availableGestures: AvailableGestures.all,
+          )),
+          Expanded(
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: getValiditiesForCurrentPage().length,
+                    itemBuilder: (context, index) {
+                      Validity validity = getValiditiesForCurrentPage()[index];
+                      return ListTile(
+                        title: Text(validity.name),
+                        subtitle: Text('Quantity: ${validity.quantity}'),
+                        trailing: Text(
+                            '${validity.day}/${validity.month}/${validity.year}'),
+                      );
+                    },
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: previousPage,
+                    ),
+                    Text(
+                      '${currentPage + 1} / ${(displayedValidities.length / 5).ceil()}',
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.arrow_forward),
+                      onPressed: nextPage,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          displayedValidities = allValidities;
+                          currentPage = 0;
+                        });
+                      },
+                      tooltip: 'Display all products',
+                      icon: const Icon(Icons.all_inclusive),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
       ),
       bottomNavigationBar: const Footer(),
-    );
-  }
-
-  Widget calendar() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: TableCalendar(
-            rowHeight: 43,
-            headerStyle: const HeaderStyle(
-                formatButtonVisible: false, titleCentered: true),
-            availableGestures: AvailableGestures.all,
-            selectedDayPredicate: (day) => isSameDay(day, _focusedDay),
-            focusedDay: _focusedDay,
-            firstDay: DateTime.utc(_focusedDay.year - 5, 1, 1),
-            lastDay: DateTime.utc(_focusedDay.year + 10, 31, 12),
-            onDaySelected: _onDaySelected,
-            eventLoader: _getEventsForDay,
-          ),
-        ),
-        Text("Dia selection = ${_focusedDay.toString().split(" ")[0]}"),
-        Expanded(
-          child: ValueListenableBuilder<List<Event>>(
-              valueListenable: _slectedEvents,
-              builder: (context, value, _) {
-                return ListView.builder(
-                    itemCount: value.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 4),
-                        decoration: BoxDecoration(
-                          border: Border.all(),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: ListTile(
-                          onTap: () => print(""),
-                          title: Text(value[index].title),
-                        ),
-                      );
-                    });
-              }),
-        ),
-        Transform.rotate(
-            angle: -0.785,
-            child: const Text(
-                'IN PROGRESS',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: 50 )
-            )
-        ),
-        const SizedBox(height:100),
-      ],
     );
   }
 }
