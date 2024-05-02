@@ -30,7 +30,7 @@ class _EditShoppingListState extends State<EditShoppingList> {
           child: TextField(
             controller: _nameController,
             decoration: InputDecoration(
-              hintText: 'Change the Shopping List: ${widget.shoppingList.name}',
+              hintText: 'Editing Shopping List: ${widget.shoppingList.name}',
               border: InputBorder.none,
               hintStyle: const TextStyle(color: Colors.black),
             ),
@@ -48,8 +48,15 @@ class _EditShoppingListState extends State<EditShoppingList> {
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.all(15),
+            backgroundColor: Colors.yellow,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5), // This is the border radius
+            ),
+          ),
           onPressed: () async {
             ShoppingListControllers shoppingListControllers =
                 ShoppingListControllers();
@@ -81,9 +88,15 @@ class _EditShoppingListState extends State<EditShoppingList> {
 
             Navigator.pushReplacementNamed(context, '/start/shopping_list');
           },
-          child: const Text('Confirm'),
+          child: const Text('Confirm',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 18.0,
+          ),
         ),
       ),
+      )
     );
   }
 }
