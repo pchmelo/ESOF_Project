@@ -1,4 +1,6 @@
+import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:esof_project/app/models/validity.model.dart';
+import 'package:esof_project/services/database_product.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
@@ -33,7 +35,13 @@ class ValidityController {
 
   Future<void> deleteValidity(String validityId) async {
     isLoading.value = true;
+    Validity validity = await dbService.getValidity(validityId);
     await dbService.deleteValidity(validityId);
+
+    ProductControllers productControllers = ProductControllers();
+    productControllers.removeQuantityFromProduct(
+        validity.productId, validity.quantity);
+
     isLoading.value = false;
   }
 

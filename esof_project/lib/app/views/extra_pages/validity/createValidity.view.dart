@@ -49,6 +49,7 @@ class _CreateValidityState extends State<CreateValidity> {
 
   @override
   Widget build(BuildContext context) {
+    _name = widget.product.name;
     return Container(
       height: 425,
       padding: const EdgeInsets.all(15.0),

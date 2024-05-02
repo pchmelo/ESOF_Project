@@ -22,7 +22,7 @@ class ShoppingListTile extends StatelessWidget {
       child: InkWell(
         onTap: () {
           print(onShoppingListTap);
-          onShoppingListTap(shoppingList.uid, controller, product, '');
+          onShoppingListTap(shoppingList.uid, controller, product, '', 'info');
         },
         child: Stack(
           children: [

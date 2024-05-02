@@ -119,4 +119,36 @@ class ProductControllers {
     await dbService.deleteProductById(productId);
     isLoading.value = false;
   }
+
+  Future<void> removeQuantityFromProduct(
+      String productId, int quantityToRemove) async {
+    isLoading.value = true;
+
+    Product product = await dbService.getProductById(productId);
+    int newQuantity = product.quantity! - quantityToRemove;
+
+    newQuantity = newQuantity < 0 ? 0 : newQuantity;
+
+    Product updatedProduct = Product(
+      validity: product.validity,
+      id: product.id,
+      name: product.name,
+      threshold: product.threshold,
+      quantity: newQuantity,
+      barcodes: product.barcodes,
+    );
+
+    await dbService.updateProduct(updatedProduct);
+
+    isLoading.value = false;
+  }
+
+  Future<Product> getProductById(String productId) async {
+    isLoading.value = true;
+
+    Product product = await dbService.getProductById(productId);
+    isLoading.value = false;
+
+    return product;
+  }
 }
