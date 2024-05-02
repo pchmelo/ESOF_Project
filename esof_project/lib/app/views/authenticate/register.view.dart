@@ -91,8 +91,11 @@ class _RegisterViewState extends State<RegisterView> {
                         height: 20.0,
                       ),
                       TextFormField(
-                        decoration:
-                            TextInputDecoration.copyWith(hintText: 'Email'),
+                        decoration: TextInputDecoration.copyWith(hintText: 'Email',
+                          errorStyle: TextStyle(color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              backgroundColor: Colors.red[200]),
+                        ),
                         validator: (val) {
                           if(val!.isEmpty){
                             return 'Enter an email';
@@ -110,9 +113,11 @@ class _RegisterViewState extends State<RegisterView> {
                         height: 20.0,
                       ),
                       TextFormField(
-                        decoration:
-                            TextInputDecoration.copyWith(hintText: 'Password'),
-                        obscureText: true,
+                        decoration: TextInputDecoration.copyWith(hintText: 'Email',
+                          errorStyle: TextStyle(color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              backgroundColor: Colors.red[200]),
+                        ),
                         validator: (val) => val!.length < 6
                             ? 'Enter a password 6+ chars long'
                             : null,
