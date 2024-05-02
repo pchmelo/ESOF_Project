@@ -24,25 +24,63 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
+
+    String? validateEmail(String? value) {
+      const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
+          r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
+          r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
+          r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
+          r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
+          r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
+          r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])';
+      final regex = RegExp(pattern);
+
+      return value!.isNotEmpty && !regex.hasMatch(value)
+          ? 'Enter a valid email address'
+          : null;
+    }
+
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.yellow[50],
             appBar: AppBar(
-              backgroundColor: Colors.yellow[100],
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.cyan,
+              foregroundColor: Colors.white,
               elevation: 0.0,
-              title: const Text('Sign up to Stock Overflow'),
+              title: const Text(
+                'Sign Up',
+                style: TextStyle(
+                  fontFamily: 'CrimsonPro',
+                  fontSize: 31,
+                ),
+              ),
+              centerTitle: true,
               actions: [
                 TextButton.icon(
                   onPressed: () {
                     widget.toggleView();
                   },
-                  icon: const Icon(Icons.person),
-                  label: const Text('Sign In'),
+                  icon: const Icon(Icons.person,
+                    color: Colors.white,
+                  ),
+                  label: const Text('Login',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ],
             ),
             body: Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/boxes_background.png"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 padding: const EdgeInsets.symmetric(
                     vertical: 20.0, horizontal: 50.0),
                 child: Form(
@@ -55,8 +93,13 @@ class _RegisterViewState extends State<RegisterView> {
                       TextFormField(
                         decoration:
                             TextInputDecoration.copyWith(hintText: 'Email'),
-                        validator: (val) =>
-                            val!.isEmpty ? 'Enter an email' : null,
+                        validator: (val) {
+                          if(val!.isEmpty){
+                            return 'Enter an email';
+                          }else{
+                            return validateEmail(val);
+                          }
+                        },
                         onChanged: (val) {
                           setState(() {
                             email = val;
@@ -100,11 +143,11 @@ class _RegisterViewState extends State<RegisterView> {
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.blue),
+                          MaterialStateProperty.all<Color>(Colors.yellow),
                         ),
                         child: const Text(
                           'Register',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                       const SizedBox(

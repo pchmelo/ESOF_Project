@@ -1,3 +1,4 @@
+import 'package:esof_project/app/components/productForm.component.dart';
 import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:esof_project/app/controllers/validityControllers.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
@@ -121,11 +122,8 @@ class ShoppingListControllers {
         Product product = await dbServiceProduct.getProductById(productId);
 
         if (product.validity) {
-          DateTime? dateTime = await _showDatePicker(context);
-          if (dateTime != null) {
-            await ValidityController().CreateValidity(product.id,
-                currentQuantity, dateTime.day, dateTime.month, dateTime.year);
-          }
+          await ProductForm(context: context)
+              .CreateValidityForm(product, currentQuantity);
         }
 
         await ProductControllers()
@@ -135,5 +133,21 @@ class ShoppingListControllers {
     }
 
     await dbService.updateShoppingList(new_shoppingList.uid, new_shoppingList);
+  }
+
+  Future<void> deleteProductFromAllLists(String id) async {
+    isLoading.value = true;
+
+    List<ShoppingList> allShoppingLists =
+        await dbService.getShoppingListStream().first;
+
+    for (var shoppingList in allShoppingLists) {
+      if (shoppingList.products.containsKey(id)) {
+        shoppingList.products.remove(id);
+        await dbService.updateShoppingList(shoppingList.uid, shoppingList);
+      }
+    }
+
+    isLoading.value = false;
   }
 }

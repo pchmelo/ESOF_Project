@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../../services/database_product.dart';
 import '../../../models/product.model.dart';
 import '../../../shared/filter.dart';
-import 'ProductListBuilder.dart';
+import 'productListBuilder.dart';
 
 class ProductList extends StatefulWidget {
   final Function controller;
@@ -93,78 +93,90 @@ class _ProductListState extends State<ProductList> {
                                 onPressed: _runFilter,
                                 icon: const Icon(Icons.search),
                               ),
-                          PopupMenuButton(
-                            icon: const Icon(Icons.filter_list_alt),
-                            itemBuilder: (context) => [
-                              PopupMenuItem<int>(
-                                value: 0,
-                                child: Row(
-                                  children: <Widget>[
-                                    const Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                                      child: Icon(Icons.sort_by_alpha),
+                              PopupMenuButton(
+                                icon: const Icon(Icons.filter_list_alt),
+                                itemBuilder: (context) => [
+                                  PopupMenuItem<int>(
+                                    value: 0,
+                                    child: Row(
+                                      children: <Widget>[
+                                        const Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                                          child: Icon(Icons.sort_by_alpha),
+                                        ),
+                                        ValueListenableBuilder(
+                                          valueListenable: alphaDesc,
+                                          builder: (context, alphaDesc, child) {
+                                            return Text(alphaDesc
+                                                ? 'Sort Alphabetically Asc'
+                                                : 'Sort Alphabetically Desc');
+                                          },
+                                        ),
+                                      ],
                                     ),
-                                    ValueListenableBuilder(
-                                      valueListenable: alphaDesc,
-                                      builder: (context, alphaDesc, child) {
-                                        return Text(alphaDesc ? 'Sort Alphabetically Asc' : 'Sort Alphabetically Desc');
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                onTap: () {
-                                  if (switchAlpha) {
-                                    widget.filter = ProductFilter().sortAlphabeticallyAsc;
-                                    alphaDesc = ValueNotifier(false);
-                                    switchAlpha = false;
-                                  }
-                                  else {
-                                    widget.filter = ProductFilter().sortAlphabeticallyDesc;
-                                    alphaDesc = ValueNotifier(true);
-                                    switchAlpha = true;
-                                  }
+                                    onTap: () {
+                                      if (switchAlpha) {
+                                        widget.filter = ProductFilter()
+                                            .sortAlphabeticallyAsc;
+                                        alphaDesc = ValueNotifier(false);
+                                        switchAlpha = false;
+                                      } else {
+                                        widget.filter = ProductFilter()
+                                            .sortAlphabeticallyDesc;
+                                        alphaDesc = ValueNotifier(true);
+                                        switchAlpha = true;
+                                      }
 
-                                  _runFilter();
-                                },
-                              ),
-                              PopupMenuItem<int>(
-                                value: 1,
-                                child: Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                                      child: ValueListenableBuilder<bool>(
-                                        valueListenable: quantityDesc,
-                                        builder: (context, quantityDesc, child) {
-                                          return Icon(quantityDesc ? Icons.arrow_downward : Icons.arrow_upward);
-                                        },
-                                      ),
+                                      _runFilter();
+                                    },
+                                  ),
+                                  PopupMenuItem<int>(
+                                    value: 1,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 5.0, 0),
+                                          child: ValueListenableBuilder<bool>(
+                                            valueListenable: quantityDesc,
+                                            builder:
+                                                (context, quantityDesc, child) {
+                                              return Icon(quantityDesc
+                                                  ? Icons.arrow_downward
+                                                  : Icons.arrow_upward);
+                                            },
+                                          ),
+                                        ),
+                                        ValueListenableBuilder(
+                                          valueListenable: quantityDesc,
+                                          builder:
+                                              (context, quantityDesc, child) {
+                                            return Text(quantityDesc
+                                                ? 'Sort by Quantity Desc'
+                                                : 'Sort by Quantity Asc');
+                                          },
+                                        ),
+                                      ],
                                     ),
-                                    ValueListenableBuilder(
-                                        valueListenable: quantityDesc,
-                                        builder: (context, quantityDesc, child) {
-                                          return Text(quantityDesc ? 'Sort by Quantity Desc' : 'Sort by Quantity Asc');
-                                        },
-                                    ),
-                                  ],
-                                ),
-                                onTap: () {
-                                  if (switchQuantity) {
-                                    widget.filter = ProductFilter().sortByQuantityDesc;
-                                    quantityDesc = ValueNotifier(false);
-                                    switchQuantity = false;
-                                  }
-                                  else {
-                                    widget.filter = ProductFilter().sortByQuantityAsc;
-                                    quantityDesc = ValueNotifier(true);
-                                    switchQuantity = true;
-                                  }
+                                    onTap: () {
+                                      if (switchQuantity) {
+                                        widget.filter =
+                                            ProductFilter().sortByQuantityDesc;
+                                        quantityDesc = ValueNotifier(false);
+                                        switchQuantity = false;
+                                      } else {
+                                        widget.filter =
+                                            ProductFilter().sortByQuantityAsc;
+                                        quantityDesc = ValueNotifier(true);
+                                        switchQuantity = true;
+                                      }
 
-                                  _runFilter();
-                                },
+                                      _runFilter();
+                                    },
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
                             ],
                           ),
                           border: const OutlineInputBorder(
@@ -172,7 +184,8 @@ class _ProductListState extends State<ProductList> {
                           ),
                         ),
                       ),
-                    ), const SizedBox(
+                    ),
+                    const SizedBox(
                       height: 5,
                     ),
                   ],

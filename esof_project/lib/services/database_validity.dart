@@ -17,18 +17,22 @@ class DatabaseForValidity {
   }
 
   Future<void> deleteValidity(String validityId) async {
-    await validityCollection
-        .doc(uid)
-        .collection('validity')
-        .doc(validityId)
-        .delete();
+    try {
+      await validityCollection
+          .doc(uid)
+          .collection('validity')
+          .doc(validityId)
+          .delete();
+    } catch (e) {
+      print(e);
+    }
   }
 
-  Future<void> updateValidity(String validityId, Validity validity) async {
+  Future<void> updateValidity(Validity validity) async {
     await validityCollection
         .doc(uid)
         .collection('validity')
-        .doc(validityId)
+        .doc(validity.uid)
         .update(validity.toJson());
   }
 
@@ -60,5 +64,18 @@ class DatabaseForValidity {
     return querySnapshot.docs.map((doc) {
       return Validity.fromJson(doc.data() as Map<String, dynamic>);
     }).toList();
+  }
+
+  Stream<List<Validity>> getAllValiditiesOfProductStream(String productId) {
+    return validityCollection
+        .doc(uid)
+        .collection('validity')
+        .where('productId', isEqualTo: productId)
+        .snapshots()
+        .map((querySnapshot) {
+      return querySnapshot.docs.map((doc) {
+        return Validity.fromJson(doc.data() as Map<String, dynamic>);
+      }).toList();
+    });
   }
 }

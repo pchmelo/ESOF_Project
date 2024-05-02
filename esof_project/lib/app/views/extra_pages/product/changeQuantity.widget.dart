@@ -1,5 +1,8 @@
 import 'package:esof_project/app/components/changeQuantitity.component.dart';
+import 'package:esof_project/app/components/productForm.component.dart';
 import 'package:esof_project/app/controllers/validityControllers.dart';
+import 'package:esof_project/app/views/extra_pages/validity/createValidity.view.dart';
+import 'package:esof_project/app/views/main_pages/storage/storage.view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:esof_project/services/database_product.dart';
@@ -106,25 +109,18 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       if (widget.spec == 'middle') {
+                        await widget.controller(widget.listUid, widget.product,
+                            _value, widget.scancode);
+                        Navigator.pop(context);
                         if (widget.product.validity) {
-                          DateTime? selectedDate = await _showDatePicker();
-                          if (selectedDate != null) {
-                            await ValidityController().CreateValidity(
-                                widget.product.id,
-                                _value!,
-                                selectedDate.day,
-                                selectedDate.month,
-                                selectedDate.year);
-                          }
-                          await widget.controller(widget.listUid,
-                              widget.product, _value, widget.scancode);
+                          ProductForm(context: context)
+                              .CreateValidityForm(widget.product, _value!);
                         }
                       } else {
                         await widget.controller(widget.listUid, widget.product,
                             _value, widget.scancode);
+                        Navigator.pop(context);
                       }
-
-                      Navigator.pop(context);
                     }
                   },
                 ),

@@ -15,10 +15,11 @@ class ValidityController {
     dbService = dbServiceParam ?? DatabaseForValidity(uid: user.uid);
   }
 
-  Future<void> CreateValidity(
-      String productId, int quantity, int day, int month, int year) async {
+  Future<void> CreateValidity(String productId, int quantity, int day,
+      int month, int year, String name) async {
     isLoading.value = true;
-    Validity validity = Validity(
+    Validity validity = Validity.withValues(
+      name,
       productId,
       const Uuid().v4(),
       quantity: quantity,
@@ -27,6 +28,37 @@ class ValidityController {
       year: year,
     );
     await dbService.createValidity(validity);
+    isLoading.value = false;
+  }
+
+  Future<void> deleteValidity(String validityId) async {
+    isLoading.value = true;
+    await dbService.deleteValidity(validityId);
+    isLoading.value = false;
+  }
+
+  Future<void> deleteAllValiditiesOfProduct(String productId) async {
+    isLoading.value = true;
+    List<Validity> validities =
+        await dbService.getAllValiditiesOfProduct(productId);
+    for (Validity validity in validities) {
+      await dbService.deleteValidity(validity.uid);
+    }
+    validities = await dbService.getAllValiditiesOfProduct(productId);
+
+    isLoading.value = false;
+  }
+
+  Future<List<Validity>> fetchAllValidities() async {
+    isLoading.value = true;
+    List<Validity> validities = await dbService.getAllValidities();
+    isLoading.value = false;
+    return validities;
+  }
+
+  Future<void> updateValidity(Validity validity) async {
+    isLoading.value = true;
+    await dbService.updateValidity(validity);
     isLoading.value = false;
   }
 }

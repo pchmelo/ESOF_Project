@@ -74,7 +74,15 @@ class ShoppingListDisplay extends StatelessWidget {
                   itemBuilder: (context) => [
                     PopupMenuItem<int>(
                       value: 0,
-                      child: const Text('Add Product'),
+                      child: const Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                            child: Icon(Icons.add),
+                          ),
+                          Text('Add Product'),
+                        ],
+                      ),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -90,7 +98,15 @@ class ShoppingListDisplay extends StatelessWidget {
                     ),
                     PopupMenuItem<int>(
                       value: 0,
-                      child: const Text('Edit'),
+                      child: const Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                            child: Icon(Icons.edit),
+                          ),
+                          Text('Edit'),
+                        ],
+                      ),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -104,7 +120,15 @@ class ShoppingListDisplay extends StatelessWidget {
                     ),
                     PopupMenuItem<int>(
                       value: 1,
-                      child: const Text('Delete'),
+                      child: const Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                            child: Icon(Icons.delete),
+                          ),
+                          Text('Delete'),
+                        ],
+                      ),
                       onTap: () {
                         deleteshoppingList(context);
                       },
@@ -141,8 +165,6 @@ class ShoppingListDisplay extends StatelessWidget {
                     onPressed: () async {
                       await ShoppingListControllers()
                           .resetProductStatus(shoppingList, context);
-                      Navigator.pushReplacementNamed(
-                          context, '/start/shopping_list');
                     },
                     child: const Text(
                       'CHECKOUT',

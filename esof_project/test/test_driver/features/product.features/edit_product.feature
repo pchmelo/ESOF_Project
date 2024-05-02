@@ -5,7 +5,7 @@ Feature: Edit products
   Scenario Outline: Edit a product's name
     Given I'm in the stock tab
     When I tap the product I want to edit
-    And I tap the three dots button in the top-right corner
+    And I tap the three vertical dots button in the top-right corner
     And I tap "Edit"
     And I insert the product's new <name>
     And I tap "Confirm"

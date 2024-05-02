@@ -2,7 +2,7 @@ import 'package:uuid/uuid.dart';
 
 class Product {
   final String id;
-  final String? name;
+  final String name;
   final int? threshold;
   final int? quantity;
   final List<String>? barcodes;
@@ -11,7 +11,7 @@ class Product {
 
   Product({
     required this.id,
-    this.name,
+    required this.name,
     this.threshold,
     this.quantity,
     this.barcodes,
