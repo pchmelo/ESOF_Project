@@ -1,5 +1,8 @@
+import 'package:esof_project/app/components/notificationForm.component.dart';
+import 'package:esof_project/app/models/product.model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:uuid/uuid.dart';
 
 class CreateProdut extends StatefulWidget {
   final Function controller;
@@ -15,6 +18,7 @@ class _CreateProdutState extends State<CreateProdut> {
   String _name = '';
   int _threshold = 0;
   bool _validity = false;
+  bool _notification = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +76,15 @@ class _CreateProdutState extends State<CreateProdut> {
                     });
                   },
                 ),
+                CheckboxListTile(
+                  title: const Text('Notification'),
+                  value: _notification,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      _notification = value!;
+                    });
+                  },
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -100,7 +113,23 @@ class _CreateProdutState extends State<CreateProdut> {
                   child: const Text('Confirm'),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      widget.controller(_name, _threshold, 0, _validity);
+                      Product product = Product(
+                        validity: _validity,
+                        id: const Uuid().v4(),
+                        name: _name,
+                        threshold: _threshold,
+                        quantity: 0,
+                        barcodes: [],
+                        notification: _notification,
+                      );
+
+                      widget.controller(product);
+
+                      if (_notification) {
+                        await NotificationForm(context: context)
+                            .createNotificationForm(product);
+                      }
+
                       Navigator.pop(context);
                     }
                   },

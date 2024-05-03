@@ -8,6 +8,7 @@ class Product {
   final List<String>? barcodes;
   bool checked;
   final bool validity;
+  final bool notification;
 
   Product({
     required this.id,
@@ -17,6 +18,7 @@ class Product {
     this.barcodes,
     this.checked = false,
     required this.validity,
+    required this.notification,
   });
 
   void main() {
@@ -28,7 +30,7 @@ class Product {
       quantity: 0,
       barcodes: [],
       validity: false,
-      checked: false,
+      checked: false, notification: false,
     );
   }
 
@@ -49,6 +51,7 @@ class Product {
       'barcodes': barcodes,
       'checked': checked ? 'true' : 'false',
       'validity': validity ? 'true' : 'false',
+      'notification': notification ? 'true' : 'false',
     };
   }
 
@@ -61,6 +64,7 @@ class Product {
       barcodes: List<String>.from(json['barcodes']),
       validity: json['validity'] == 'true',
       checked: json['checked'] == 'true',
+      notification: json['notification'] == 'true',
     );
   }
 

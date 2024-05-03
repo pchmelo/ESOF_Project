@@ -38,6 +38,7 @@ class DatabaseForProducts {
             threshold: data['threshold'] ?? 0,
             barcodes: List<String>.from(data['barcodes'] ?? []),
             validity: data['validity'] == 'true',
+            notification: data['notification'] == 'true',
           );
         })
         .where((product) => product != null)

@@ -18,16 +18,8 @@ class ProductControllers {
     dbService = dbServiceParam ?? DatabaseForProducts(uid: user.uid);
   }
 
-  Future<void> CreateProduct(
-      String name, int threshold, int quantity, bool validity) async {
+  Future<void> CreateProduct(Product product) async {
     isLoading.value = true;
-    Product product = Product(
-        validity: validity,
-        id: const Uuid().v4(),
-        name: name,
-        threshold: threshold,
-        quantity: quantity,
-        barcodes: []);
     await dbService.addProduct(product);
     isLoading.value = false;
   }
@@ -35,6 +27,7 @@ class ProductControllers {
   Future<void> PlusButton(context, _name, _threshold, _quantity) async {
     isLoading.value = true;
     Product product = Product(
+        notification: false,
         validity: false,
         id: const Uuid().v4(),
         name: _name,
@@ -46,8 +39,8 @@ class ProductControllers {
     isLoading.value = false;
   }
 
-  Future<void> EditProduct(
-      context, product, _name, _threshold, _quantity, _validity) async {
+  Future<void> EditProduct(context, product, _name, _threshold, _quantity,
+      _validity, _notification) async {
     isLoading.value = true;
     _name ??= product.name;
     _threshold ??= product.threshold;
@@ -63,15 +56,16 @@ class ProductControllers {
     }
 
     Product newProduct = Product(
-        id: product.id,
-        name: _name,
-        threshold: _threshold!.toInt(),
-        quantity: _quantity!.toInt(),
-        barcodes: product.barcodes,
-        validity: _validity);
+      id: product.id,
+      name: _name,
+      threshold: _threshold!.toInt(),
+      quantity: _quantity!.toInt(),
+      barcodes: product.barcodes,
+      validity: _validity,
+      notification: _notification,
+    );
 
     await dbService.updateProduct(newProduct);
-    Navigator.pop(context);
     isLoading.value = false;
   }
 
@@ -91,6 +85,7 @@ class ProductControllers {
       threshold: product.threshold,
       quantity: product.quantity + _value!,
       barcodes: barcodes,
+      notification: product.notification,
     );
 
     await dbService.updateProduct(newProduct);
@@ -136,6 +131,7 @@ class ProductControllers {
       threshold: product.threshold,
       quantity: newQuantity,
       barcodes: product.barcodes,
+      notification: product.notification,
     );
 
     await dbService.updateProduct(updatedProduct);
