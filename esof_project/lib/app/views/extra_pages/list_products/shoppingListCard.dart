@@ -27,55 +27,56 @@ class ShoppingListCard {
     Map<int, bool> productDetails = entry.value;
     int quantity = productDetails.keys.first;
     bool checked = productDetails.values.first;
-
     return SizedBox(
-      height: 115, // Set the height of the card
+      height: 80,
       child: Card(
-        color: checked ? Colors.green[100] : Colors.white,
+        color: checked ? Colors.yellow[100] : Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(
-              16.0), // Increase padding to make the card look bigger
-          child: Row(
+              0),
+          child: Row (
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
+              Row (
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  ValueListenableBuilder(
+                    valueListenable: ShoppingListControllers().isLoading,
+                    builder: (BuildContext context, bool isLoading, Widget? child) {
+                      if (isLoading) {
+                        return Loading();
+                      } else {
+                        return Checkbox(
+                          activeColor: Colors.green,
+                          value: checked,
+                          onChanged: (bool? value) {
+                            if (value != null) {
+                              ShoppingListControllers().updateProductCheckedStatus(
+                                shoppingList.uid,
+                                product?.id ?? '',
+                                value,
+                              );
+                            }
+                          },
+                        );
+                      }
+                    },
+                  ),
                   Text(
                     product?.name ?? 'Unknown product',
                     style: const TextStyle(
                         fontSize:
-                            25.0), // Increase font size to make the card look bigger
+                        25.0), // Increase font size to make the card look bigger
                   ),
                   Text(
-                    'x$quantity',
+                    ' (x$quantity)',
                     style: const TextStyle(
                         fontSize:
                             25.0), // Increase font size to make the card look bigger
                   ),
                 ],
               ),
-              ValueListenableBuilder(
-                valueListenable: ShoppingListControllers().isLoading,
-                builder: (BuildContext context, bool isLoading, Widget? child) {
-                  if (isLoading) {
-                    return Loading();
-                  } else {
-                    return Checkbox(
-                      value: checked,
-                      onChanged: (bool? value) {
-                        if (value != null) {
-                          ShoppingListControllers().updateProductCheckedStatus(
-                            shoppingList.uid,
-                            product?.id ?? '',
-                            value,
-                          );
-                        }
-                      },
-                    );
-                  }
-                },
-              ),
+
             ],
           ),
         ),

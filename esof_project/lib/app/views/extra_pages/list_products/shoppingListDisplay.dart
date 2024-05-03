@@ -14,6 +14,7 @@ import 'editShoppingList.widget.dart';
 class ShoppingListDisplay extends StatelessWidget {
   String? a;
   Product? b;
+  String? c;
   final String uid;
   late ShoppingList shoppingList;
   final Function controller;
@@ -23,7 +24,12 @@ class ShoppingListDisplay extends StatelessWidget {
   final Function shoppingListCard = ShoppingListCard().shoppingListCard;
 
   ShoppingListDisplay(
-      {super.key, required this.uid, required this.controller, this.b, this.a});
+      {super.key,
+      required this.uid,
+      required this.controller,
+      this.b,
+      this.a,
+      this.c});
 
   SelectedItem(BuildContext context, item) async {
     switch (item) {
@@ -146,9 +152,11 @@ class ShoppingListDisplay extends StatelessWidget {
                       shoppingListCard: shoppingListCard),
                 ),
                 Container(
-                  padding: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.only(bottom: 30),
+                  padding: const EdgeInsets.only(
+                      left: 50, right: 50, bottom: 20, top: 20),
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.yellow,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
@@ -165,9 +173,10 @@ class ShoppingListDisplay extends StatelessWidget {
                           .resetProductStatus(shoppingList, context);
                     },
                     child: const Text(
-                      'Finish your Shopps :)',
+                      'CHECKOUT',
                       style: TextStyle(
-                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                         fontSize: 20,
                       ),
                     ),

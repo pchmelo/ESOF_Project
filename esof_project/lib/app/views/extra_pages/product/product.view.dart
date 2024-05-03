@@ -7,7 +7,7 @@ import '../../../components/productForm.component.dart';
 
 class ProducDetailsPage extends StatefulWidget {
   final Function controller;
-  final Product product;
+  Product product;
   final Function controller_delete = ProductControllers().deleteProduct;
   ProducDetailsPage(
       {super.key, required this.product, required this.controller});
@@ -28,9 +28,15 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (!isInProductInfo) {
+                        ProductControllers productController =
+                            ProductControllers();
+                        Product updatedProduct = await productController
+                            .getProductById(widget.product.id);
+
                         setState(() {
+                          widget.product = updatedProduct;
                           isInProductInfo = true;
                         });
                       }
