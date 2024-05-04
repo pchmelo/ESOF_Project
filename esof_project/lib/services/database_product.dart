@@ -31,13 +31,15 @@ class DatabaseForProducts {
             return null;
           }
 
-          return Product(
+          return Product.withImage(
             id: data['id'] ?? '',
             name: data['name'] ?? '',
             quantity: data['quantity'] ?? 0,
             threshold: data['threshold'] ?? 0,
             barcodes: List<String>.from(data['barcodes'] ?? []),
             validity: data['validity'] == 'true',
+            notification: data['notification'] == 'true',
+            imageURL: data['imageURL'] ?? 'placeholder.png',
           );
         })
         .where((product) => product != null)

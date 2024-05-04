@@ -1,6 +1,7 @@
-import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:esof_project/app/components/notificationForm.component.dart';
+import 'package:esof_project/app/controllers/notificationController.dart';
 import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/views/extra_pages/validity/validityList.widget.dart';
@@ -10,10 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../services/image_selector.dart';
 import '../../../components/productForm.component.dart';
+import '../../../models/notication.model.dart';
 
 class ProducDetailsPage extends StatefulWidget {
   final Function controller;
-  final Product product;
+  Product product;
   final Function controller_delete = ProductControllers().deleteProduct;
   ProducDetailsPage(
       {super.key, required this.product, required this.controller});
@@ -36,9 +38,15 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (!isInProductInfo) {
+                        ProductControllers productController =
+                            ProductControllers();
+                        Product updatedProduct = await productController
+                            .getProductById(widget.product.id);
+
                         setState(() {
+                          widget.product = updatedProduct;
                           isInProductInfo = true;
                         });
                       }
@@ -117,7 +125,13 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                   if (isInProductInfo) {
                     await ProductForm(product: widget.product, context: context)
                         .EditProductForm(widget.controller);
-                    Navigator.pop(context);
+                    ProductControllers productController = ProductControllers();
+                    Product updatedProduct = await productController
+                        .getProductById(widget.product.id);
+
+                    setState(() {
+                      widget.product = updatedProduct;
+                    });
                   } else {
                     editValidity.value = !editValidity.value;
                   }
@@ -153,6 +167,26 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                   ],
                 ),
               ),
+              if (widget.product.notification)
+                PopupMenuItem<int>(
+                  value: 3,
+                  child: const Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                        child: Icon(Icons.notifications),
+                      ),
+                      Text('Edit Notification'),
+                    ],
+                  ),
+                  onTap: () async {
+                    NotificationModel? notification =
+                        await NotificationController()
+                            .findNotificationByProduct(widget.product);
+                    await NotificationForm(context: context)
+                        .updateNotificationForm(widget.product, notification!);
+                  },
+                ),
             ],
             onSelected: (item) => SelectedItem(context, item),
           ),
@@ -167,15 +201,10 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                 SizedBox(
                   height: 100,
                   width: 100,
-                  child: productIcon != null
-                      ? CircleAvatar(
-                          backgroundImage: MemoryImage(productIcon!),
-                          radius: 50,
-                        )
-                      : const CircleAvatar(
-                          backgroundImage: AssetImage('assets/images/food.png'),
-                          radius: 50,
-                        ),
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(widget.product.imageURL),
+                    radius: 50,
+                  ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.03,
@@ -224,13 +253,8 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                       ),
                       IconButton(
                         onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ShoppingListForm(
-                                        context: context)
-                                    .SelectShoppingListForm(widget.product)),
-                          );
+                          await ShoppingListForm(context: context)
+                              .SelectShoppingListForm(widget.product);
                         },
                         style: ButtonStyle(
                           backgroundColor:
@@ -277,7 +301,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
     }
   }
 
-  void saveIcon() async{
+  void saveIcon() async {
     String resp = await UploadData().saveImage(image: productIcon!);
   }
 }

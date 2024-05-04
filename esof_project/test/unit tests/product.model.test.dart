@@ -10,6 +10,7 @@ void main() {
       quantity: 0,
       barcodes: ['0123456789', '9876543210'],
       validity: false,
+      notification: false,
     );
 
     test('addBarcode adds a barcode to the product', () {

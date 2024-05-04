@@ -17,17 +17,22 @@ class ShoppingListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final create_controller = ShoppingListControllers().CreateProduct;
 
-    void handleShoppingListTap(
-        String uid, Function controller, Product? product, String scan) {
+    void handleShoppingListTap(String uid, Function controller,
+        Product? product, String scan, String spec) {
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => ShoppingListDisplay(
-                  uid: uid, controller: controller, b: product, a: scan)));
+                  uid: uid,
+                  controller: controller,
+                  b: product,
+                  a: scan,
+                  c: '')));
     }
 
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           'Shopping Lists',
           style: TextStyle(
