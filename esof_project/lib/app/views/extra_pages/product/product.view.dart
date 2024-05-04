@@ -156,20 +156,33 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
               if (isInProductInfo)
               PopupMenuItem<int>(
                 value: 2,
-                onTap: selectIconCamera,
+                onTap: () => selectIcon(ImageSource.camera),
                 child: const Row(
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
                       child: Icon(Icons.camera_alt),
                     ),
-                    Text('Change Icon'),
+                    Text('Change Icon From Camera'),
+                  ],
+                ),
+              ),
+              PopupMenuItem<int>(
+                value: 3,
+                onTap: () => selectIcon(ImageSource.gallery),
+                child: const Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                      child: Icon(Icons.photo_library),
+                    ),
+                    Text('Change Icon From Gallery'),
                   ],
                 ),
               ),
               if (widget.product.notification)
                 PopupMenuItem<int>(
-                  value: 3,
+                  value: 4,
                   child: const Row(
                     children: <Widget>[
                       Padding(
@@ -289,12 +302,10 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
     );
   }
 
-  void selectIconCamera() async {
-    Uint8List cameraIcon = await selectImage(ImageSource.camera);
+  void selectIcon(ImageSource src) async {
+    Uint8List cameraIcon = await selectImage(src);
 
-    setState(() {
-      productIcon = cameraIcon;
-    });
+    productIcon = cameraIcon;
 
     if (productIcon != null) {
       saveIcon();
@@ -302,7 +313,15 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
   }
 
   void saveIcon() async {
-    String resp = await UploadData().saveImage(image: productIcon!);
+    String imageURL = await UploadData().uploadImage('products/${widget.product.id}/icon', productIcon!);
+    ProductControllers productController = ProductControllers();
+    await productController.updateImageURL(widget.product, imageURL);
+
+    Product newProduct = await productController.getProductById(widget.product.id);
+
+    setState(() {
+      widget.product = newProduct;
+    });
   }
 }
 

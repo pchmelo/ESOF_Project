@@ -47,10 +47,32 @@ class NotificationController {
     return null;
   }
 
+  Future<notif.NotificationModel?> findNotificationByProductById(
+      String productId) async {
+    List<notif.NotificationModel> allNotifications =
+        await dbService.getAllNotifications();
+
+    for (notif.NotificationModel notification in allNotifications) {
+      if (notification.productId == productId) {
+        return notification;
+      }
+    }
+
+    return null;
+  }
+
   Future<void> deleteNotification(Product product) async {
     isLoading.value = true;
     notif.NotificationModel? notification =
         await findNotificationByProduct(product);
+    await dbService.deleteNotification(notification!);
+    isLoading.value = false;
+  }
+
+  Future<void> deleteNotificationById(String productId) async {
+    isLoading.value = true;
+    notif.NotificationModel? notification =
+        await findNotificationByProductById(productId);
     await dbService.deleteNotification(notification!);
     isLoading.value = false;
   }
@@ -64,5 +86,13 @@ class NotificationController {
     notification.time = quantity;
     await dbService.updateNotification(notification);
     isLoading.value = false;
+  }
+
+  Future<List<NotificationModel>> getAllNotifications() async {
+    return await dbService.getAllNotifications();
+  }
+
+  Stream<List<NotificationModel>> getNotificationsStream() {
+    return dbService.getNotificationsStream();
   }
 }

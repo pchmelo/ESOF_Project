@@ -74,7 +74,7 @@ class _UpdateNotificationState extends State<UpdateNotification> {
                     Flexible(
                       child: DropdownButton<String>(
                         value: timeUnit,
-                        items: <String>['days', 'weeks', 'years']
+                        items: <String>['days', 'weeks', 'months']
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,

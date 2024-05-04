@@ -69,4 +69,12 @@ class ValidityController {
     await dbService.updateValidity(validity);
     isLoading.value = false;
   }
+
+  Future<List<Validity>> fetchAllValiditiesOfProduct(String productId) async {
+    isLoading.value = true;
+    List<Validity> validities =
+        await dbService.getAllValiditiesOfProduct(productId);
+    isLoading.value = false;
+    return validities;
+  }
 }
