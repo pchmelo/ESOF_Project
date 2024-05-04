@@ -1,8 +1,14 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/views/extra_pages/validity/validityList.widget.dart';
+import 'package:esof_project/services/upload_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import '../../../../services/image_selector.dart';
 import '../../../components/productForm.component.dart';
 
 class ProducDetailsPage extends StatefulWidget {
@@ -18,6 +24,8 @@ class ProducDetailsPage extends StatefulWidget {
 class _ProducDetailsPageState extends State<ProducDetailsPage> {
   bool isInProductInfo = true;
   ValueNotifier<bool> editValidity = ValueNotifier<bool>(false);
+
+  Uint8List? productIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +123,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                   }
                 },
               ),
-              if (isInProductInfo) // Add this condition
+              if (isInProductInfo)
                 PopupMenuItem<int>(
                   value: 1,
                   child: const Row(
@@ -131,6 +139,20 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                     widget.controller_delete(widget.product.id);
                   },
                 ),
+              if (isInProductInfo)
+              PopupMenuItem<int>(
+                value: 2,
+                onTap: selectIconCamera,
+                child: const Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                      child: Icon(Icons.camera_alt),
+                    ),
+                    Text('Change Icon'),
+                  ],
+                ),
+              ),
             ],
             onSelected: (item) => SelectedItem(context, item),
           ),
@@ -142,10 +164,18 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 100,
                   width: 100,
-                  child: Placeholder(),
+                  child: productIcon != null
+                      ? CircleAvatar(
+                          backgroundImage: MemoryImage(productIcon!),
+                          radius: 50,
+                        )
+                      : const CircleAvatar(
+                          backgroundImage: AssetImage('assets/images/food.png'),
+                          radius: 50,
+                        ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.03,
@@ -233,6 +263,22 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
               ],
             ),
     );
+  }
+
+  void selectIconCamera() async {
+    Uint8List cameraIcon = await selectImage(ImageSource.camera);
+
+    setState(() {
+      productIcon = cameraIcon;
+    });
+
+    if (productIcon != null) {
+      saveIcon();
+    }
+  }
+
+  void saveIcon() async{
+    String resp = await UploadData().saveImage(image: productIcon!);
   }
 }
 
