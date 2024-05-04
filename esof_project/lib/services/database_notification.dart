@@ -57,4 +57,16 @@ class DatabaseForNotifications {
       return null;
     }
   }
+
+  Stream<List<NotificationModel>> getNotificationsStream() {
+    return notificationCollection
+        .doc(uid)
+        .collection('notifications')
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return NotificationModel.fromJson(doc.data());
+      }).toList();
+    });
+  }
 }

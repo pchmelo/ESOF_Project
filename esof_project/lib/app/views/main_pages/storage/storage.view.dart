@@ -1,6 +1,7 @@
 import 'package:esof_project/app/components/footer.component.dart';
 import 'package:esof_project/app/components/productForm.component.dart';
 import 'package:esof_project/app/views/main_pages/storage/productList.widget.dart';
+import 'package:esof_project/services/notificationService.dart';
 import 'package:flutter/material.dart';
 
 import '../../../controllers/productControllers.dart';
@@ -39,6 +40,8 @@ class _StorageViewState extends State<StorageView> {
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
         onPressed: () {
+          //NotificationsService notificationsService = NotificationsService();
+          //notificationsService.testNotification();
           return ProductForm(context: context)
               .CreateProductForm(create_controller);
         },

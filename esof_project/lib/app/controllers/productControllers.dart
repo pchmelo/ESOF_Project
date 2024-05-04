@@ -1,3 +1,4 @@
+import 'package:esof_project/app/controllers/notificationController.dart';
 import 'package:esof_project/app/controllers/shoppingListControllers.dart';
 import 'package:esof_project/app/controllers/validityControllers.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
@@ -111,6 +112,9 @@ class ProductControllers {
     ValidityController validityController = ValidityController();
     validityController.deleteAllValiditiesOfProduct(productId);
 
+    NotificationController notification = NotificationController();
+    notification.deleteNotificationById(productId);
+
     await dbService.deleteProductById(productId);
     isLoading.value = false;
   }
@@ -146,5 +150,14 @@ class ProductControllers {
     isLoading.value = false;
 
     return product;
+  }
+
+  Future<void> updateImageURL(Product product, String imageURL) async {
+    isLoading.value = true;
+
+    product.imageURL = imageURL;
+    await dbService.updateProduct(product);
+
+    isLoading.value = false;
   }
 }
