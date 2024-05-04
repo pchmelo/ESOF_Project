@@ -73,18 +73,20 @@ class _CreateProdutState extends State<CreateProdut> {
                   onChanged: (bool? value) {
                     setState(() {
                       _validity = value!;
+                      _notification = false;
                     });
                   },
                 ),
-                CheckboxListTile(
-                  title: const Text('Notification'),
-                  value: _notification,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      _notification = value!;
-                    });
-                  },
-                ),
+                if (_validity) // If "Expires" is checked, then show "Notification" checkbox
+                  CheckboxListTile(
+                    title: const Text('Notification'),
+                    value: _notification,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _notification = value!;
+                      });
+                    },
+                  ),
                 const SizedBox(
                   height: 20,
                 ),

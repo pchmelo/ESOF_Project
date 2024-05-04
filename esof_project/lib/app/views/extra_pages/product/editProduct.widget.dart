@@ -82,18 +82,20 @@ class _EditProdutState extends State<EditProduct> {
                   onChanged: (bool? value) {
                     setState(() {
                       _validity = value!;
+                      _notification = false;
                     });
                   },
                 ),
-                CheckboxListTile(
-                  title: const Text('Notification'),
-                  value: _notification,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      _notification = value!;
-                    });
-                  },
-                ),
+                if (_validity)
+                  CheckboxListTile(
+                    title: const Text('Notification'),
+                    value: _notification,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _notification = value!;
+                      });
+                    },
+                  ),
                 Container(
                   margin: const EdgeInsets.only(top: 16.0),
                   child: ElevatedButton(

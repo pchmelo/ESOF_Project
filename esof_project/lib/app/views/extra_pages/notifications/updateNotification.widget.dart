@@ -36,9 +36,9 @@ class _UpdateNotificationState extends State<UpdateNotification> {
       padding: const EdgeInsets.all(15.0),
       child: Column(
         children: <Widget>[
-          const Text(
-            'Add a Notification',
-            style: TextStyle(
+          Text(
+            'Edit the Notification of the product ${widget.product.name}',
+            style: const TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
               color: Colors.black,
@@ -64,6 +64,11 @@ class _UpdateNotificationState extends State<UpdateNotification> {
                           border: OutlineInputBorder(),
                           labelText: 'Enter a number',
                         ),
+                        onChanged: (String value) {
+                          setState(() {
+                            time = int.parse(value);
+                          });
+                        },
                       ),
                     ),
                     Flexible(
@@ -111,8 +116,8 @@ class _UpdateNotificationState extends State<UpdateNotification> {
                   child: const Text('Confirm'),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      await NotificationController().CreateNotification(
-                          widget.product.id, timeUnit, time);
+                      await NotificationController()
+                          .updateNotification(widget.product, timeUnit, time);
                       Navigator.pop(context);
                     }
                   },

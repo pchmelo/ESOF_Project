@@ -9,6 +9,7 @@ class Product {
   bool checked;
   final bool validity;
   final bool notification;
+  String imageURL;
 
   Product({
     required this.id,
@@ -19,6 +20,19 @@ class Product {
     this.checked = false,
     required this.validity,
     required this.notification,
+    this.imageURL = 'placeholder.png',
+  });
+
+  Product.withImage({
+    required this.id,
+    required this.name,
+    this.threshold,
+    this.quantity,
+    this.barcodes,
+    this.checked = false,
+    required this.validity,
+    required this.notification,
+    required this.imageURL,
   });
 
   void main() {
@@ -52,11 +66,12 @@ class Product {
       'checked': checked ? 'true' : 'false',
       'validity': validity ? 'true' : 'false',
       'notification': notification ? 'true' : 'false',
+      'imageURL': imageURL,
     };
   }
 
   factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
+    return Product.withImage(
       id: json['id'],
       name: json['name'],
       threshold: json['threshold'],
@@ -65,10 +80,15 @@ class Product {
       validity: json['validity'] == 'true',
       checked: json['checked'] == 'true',
       notification: json['notification'] == 'true',
+      imageURL: json['imageURL'],
     );
   }
 
   void toggleCheckedStatus() {
     checked = !checked;
+  }
+
+  void updateImageURL(String url) {
+    imageURL = url;
   }
 }

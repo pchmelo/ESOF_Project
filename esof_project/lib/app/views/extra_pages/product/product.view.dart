@@ -1,9 +1,12 @@
+import 'package:esof_project/app/components/notificationForm.component.dart';
+import 'package:esof_project/app/controllers/notificationController.dart';
 import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/views/extra_pages/validity/validityList.widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../components/productForm.component.dart';
+import '../../../models/notication.model.dart';
 
 class ProducDetailsPage extends StatefulWidget {
   final Function controller;
@@ -115,7 +118,13 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                   if (isInProductInfo) {
                     await ProductForm(product: widget.product, context: context)
                         .EditProductForm(widget.controller);
-                    Navigator.pop(context);
+                    ProductControllers productController = ProductControllers();
+                    Product updatedProduct = await productController
+                        .getProductById(widget.product.id);
+
+                    setState(() {
+                      widget.product = updatedProduct;
+                    });
                   } else {
                     editValidity.value = !editValidity.value;
                   }
@@ -135,6 +144,26 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                   ),
                   onTap: () {
                     widget.controller_delete(widget.product.id);
+                  },
+                ),
+              if (widget.product.notification)
+                PopupMenuItem<int>(
+                  value: 2,
+                  child: const Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                        child: Icon(Icons.notifications),
+                      ),
+                      Text('Edit Notification'),
+                    ],
+                  ),
+                  onTap: () async {
+                    NotificationModel? notification =
+                        await NotificationController()
+                            .findNotificationByProduct(widget.product);
+                    await NotificationForm(context: context)
+                        .updateNotificationForm(widget.product, notification!);
                   },
                 ),
             ],
@@ -200,13 +229,8 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                       ),
                       IconButton(
                         onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ShoppingListForm(
-                                        context: context)
-                                    .SelectShoppingListForm(widget.product)),
-                          );
+                          await ShoppingListForm(context: context)
+                              .SelectShoppingListForm(widget.product);
                         },
                         style: ButtonStyle(
                           backgroundColor:
