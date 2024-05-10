@@ -40,8 +40,6 @@ class _StorageViewState extends State<StorageView> {
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
         onPressed: () {
-          //NotificationsService notificationsService = NotificationsService();
-          //notificationsService.testNotification();
           return ProductForm(context: context)
               .CreateProductForm(create_controller);
         },

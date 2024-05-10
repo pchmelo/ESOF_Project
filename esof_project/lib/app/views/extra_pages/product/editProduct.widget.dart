@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 
 class EditProduct extends StatefulWidget {
   final Function controller;
-  final product;
+  final Product product;
   const EditProduct(
       {super.key, required this.product, required this.controller});
 
@@ -125,13 +125,15 @@ class _EditProdutState extends State<EditProduct> {
                       if (_formKey.currentState!.validate()) {
                         _validity ??= widget.product.validity;
                         widget.controller(
-                            context,
-                            widget.product,
-                            _name,
-                            _threshold,
-                            widget.product.quantity,
-                            _validity,
-                            _notification);
+                          context,
+                          widget.product,
+                          _name,
+                          _threshold,
+                          widget.product.quantity,
+                          _validity,
+                          _notification,
+                          widget.product.imageURL,
+                        );
                       }
 
                       if (widget.product.notification != _notification) {
