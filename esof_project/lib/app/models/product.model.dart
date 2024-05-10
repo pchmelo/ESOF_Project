@@ -20,7 +20,7 @@ class Product {
     this.checked = false,
     required this.validity,
     required this.notification,
-    this.imageURL = 'placeholder.png',
+    this.imageURL = 'https://firebasestorage.googleapis.com/v0/b/stockoverflow2-4f45a.appspot.com/o/defaultIcon.png?alt=media&token=6915ad4e-2d6d-42de-b196-180da883f6c7',
   });
 
   Product.withImage({
