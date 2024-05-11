@@ -113,11 +113,12 @@ class _RegisterViewState extends State<RegisterView> {
                         height: 20.0,
                       ),
                       TextFormField(
-                        decoration: TextInputDecoration.copyWith(hintText: 'Email',
+                        decoration: TextInputDecoration.copyWith(hintText: 'Password',
                           errorStyle: TextStyle(color: Colors.black,
                               fontWeight: FontWeight.bold,
                               backgroundColor: Colors.red[200]),
                         ),
+                        obscureText: true,
                         validator: (val) => val!.length < 6
                             ? 'Enter a password 6+ chars long'
                             : null,

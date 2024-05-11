@@ -123,6 +123,7 @@ class _SignInView extends State<SignInView> {
                           fontWeight: FontWeight.bold,
                           backgroundColor: Colors.red[200]),
                     ),
+                    obscureText: true,
                     validator: (val) => val!.length < 6
                         ? 'Enter a password 6+ chars long'
                         : null,
