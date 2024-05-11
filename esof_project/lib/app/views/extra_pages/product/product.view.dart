@@ -1,9 +1,17 @@
+import 'dart:typed_data';
+
+import 'package:esof_project/app/components/notificationForm.component.dart';
+import 'package:esof_project/app/controllers/notificationController.dart';
 import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/views/extra_pages/validity/validityList.widget.dart';
+import 'package:esof_project/services/upload_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import '../../../../services/image_selector.dart';
 import '../../../components/productForm.component.dart';
+import '../../../models/notication.model.dart';
 
 class ProducDetailsPage extends StatefulWidget {
   final Function controller;
@@ -18,6 +26,8 @@ class ProducDetailsPage extends StatefulWidget {
 class _ProducDetailsPageState extends State<ProducDetailsPage> {
   bool isInProductInfo = true;
   ValueNotifier<bool> editValidity = ValueNotifier<bool>(false);
+
+  Uint8List? productIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -115,13 +125,19 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                   if (isInProductInfo) {
                     await ProductForm(product: widget.product, context: context)
                         .EditProductForm(widget.controller);
-                    Navigator.pop(context);
+                    ProductControllers productController = ProductControllers();
+                    Product updatedProduct = await productController
+                        .getProductById(widget.product.id);
+
+                    setState(() {
+                      widget.product = updatedProduct;
+                    });
                   } else {
                     editValidity.value = !editValidity.value;
                   }
                 },
               ),
-              if (isInProductInfo) // Add this condition
+              if (isInProductInfo)
                 PopupMenuItem<int>(
                   value: 1,
                   child: const Row(
@@ -137,6 +153,53 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                     widget.controller_delete(widget.product.id);
                   },
                 ),
+              if (isInProductInfo)
+              PopupMenuItem<int>(
+                value: 2,
+                onTap: () => selectIcon(ImageSource.camera),
+                child: const Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                      child: Icon(Icons.camera_alt),
+                    ),
+                    Text('Change Icon From Camera'),
+                  ],
+                ),
+              ),
+              PopupMenuItem<int>(
+                value: 3,
+                onTap: () => selectIcon(ImageSource.gallery),
+                child: const Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                      child: Icon(Icons.photo_library),
+                    ),
+                    Text('Change Icon From Gallery'),
+                  ],
+                ),
+              ),
+              if (widget.product.notification)
+                PopupMenuItem<int>(
+                  value: 4,
+                  child: const Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                        child: Icon(Icons.notifications),
+                      ),
+                      Text('Edit Notification'),
+                    ],
+                  ),
+                  onTap: () async {
+                    NotificationModel? notification =
+                        await NotificationController()
+                            .findNotificationByProduct(widget.product);
+                    await NotificationForm(context: context)
+                        .updateNotificationForm(widget.product, notification!);
+                  },
+                ),
             ],
             onSelected: (item) => SelectedItem(context, item),
           ),
@@ -148,10 +211,13 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 100,
                   width: 100,
-                  child: Placeholder(),
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(widget.product.imageURL),
+                    radius: 50,
+                  ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.03,
@@ -200,13 +266,8 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                       ),
                       IconButton(
                         onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ShoppingListForm(
-                                        context: context)
-                                    .SelectShoppingListForm(widget.product)),
-                          );
+                          await ShoppingListForm(context: context)
+                              .SelectShoppingListForm(widget.product);
                         },
                         style: ButtonStyle(
                           backgroundColor:
@@ -239,6 +300,28 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
               ],
             ),
     );
+  }
+
+  void selectIcon(ImageSource src) async {
+    Uint8List cameraIcon = await selectImage(src);
+
+    productIcon = cameraIcon;
+
+    if (productIcon != null) {
+      saveIcon();
+    }
+  }
+
+  void saveIcon() async {
+    String imageURL = await UploadData().uploadImage('products/${widget.product.id}/icon', productIcon!);
+    ProductControllers productController = ProductControllers();
+    await productController.updateImageURL(widget.product, imageURL);
+
+    Product newProduct = await productController.getProductById(widget.product.id);
+
+    setState(() {
+      widget.product = newProduct;
+    });
   }
 }
 

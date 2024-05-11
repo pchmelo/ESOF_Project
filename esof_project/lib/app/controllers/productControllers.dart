@@ -1,3 +1,4 @@
+import 'package:esof_project/app/controllers/notificationController.dart';
 import 'package:esof_project/app/controllers/shoppingListControllers.dart';
 import 'package:esof_project/app/controllers/validityControllers.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
@@ -18,36 +19,31 @@ class ProductControllers {
     dbService = dbServiceParam ?? DatabaseForProducts(uid: user.uid);
   }
 
-  Future<void> CreateProduct(
-      String name, int threshold, int quantity, bool validity) async {
+  Future<void> CreateProduct(Product product) async {
     isLoading.value = true;
-    Product product = Product(
-        validity: validity,
-        id: const Uuid().v4(),
-        name: name,
-        threshold: threshold,
-        quantity: quantity,
-        barcodes: []);
     await dbService.addProduct(product);
     isLoading.value = false;
   }
 
-  Future<void> PlusButton(context, _name, _threshold, _quantity) async {
+  Future<void> PlusButton(
+      context, _name, _threshold, _quantity, _imageURL) async {
     isLoading.value = true;
-    Product product = Product(
+    Product product = Product.withImage(
+        notification: false,
         validity: false,
         id: const Uuid().v4(),
         name: _name,
         threshold: _threshold.toInt(),
         quantity: _quantity.toInt(),
-        barcodes: <String>[]);
+        barcodes: <String>[],
+        imageURL: _imageURL);
     await dbService.addProduct(product);
     Navigator.pop(context);
     isLoading.value = false;
   }
 
-  Future<void> EditProduct(
-      context, product, _name, _threshold, _quantity, _validity) async {
+  Future<void> EditProduct(context, product, _name, _threshold, _quantity,
+      _validity, _notification, _imageURL) async {
     isLoading.value = true;
     _name ??= product.name;
     _threshold ??= product.threshold;
@@ -62,16 +58,18 @@ class ProductControllers {
       _quantity = 0;
     }
 
-    Product newProduct = Product(
-        id: product.id,
-        name: _name,
-        threshold: _threshold!.toInt(),
-        quantity: _quantity!.toInt(),
-        barcodes: product.barcodes,
-        validity: _validity);
+    Product newProduct = Product.withImage(
+      id: product.id,
+      name: _name,
+      threshold: _threshold!.toInt(),
+      quantity: _quantity!.toInt(),
+      barcodes: product.barcodes,
+      validity: _validity,
+      notification: _notification,
+      imageURL: _imageURL,
+    );
 
     await dbService.updateProduct(newProduct);
-    Navigator.pop(context);
     isLoading.value = false;
   }
 
@@ -84,13 +82,15 @@ class ProductControllers {
 
     _value ??= 0;
 
-    Product newProduct = Product(
+    Product newProduct = Product.withImage(
       validity: product.validity,
       id: product.id,
       name: product.name,
       threshold: product.threshold,
       quantity: product.quantity + _value!,
       barcodes: barcodes,
+      notification: product.notification,
+      imageURL: product.imageURL,
     );
 
     await dbService.updateProduct(newProduct);
@@ -116,6 +116,9 @@ class ProductControllers {
     ValidityController validityController = ValidityController();
     validityController.deleteAllValiditiesOfProduct(productId);
 
+    NotificationController notification = NotificationController();
+    notification.deleteNotificationById(productId);
+
     await dbService.deleteProductById(productId);
     isLoading.value = false;
   }
@@ -136,6 +139,7 @@ class ProductControllers {
       threshold: product.threshold,
       quantity: newQuantity,
       barcodes: product.barcodes,
+      notification: product.notification,
     );
 
     await dbService.updateProduct(updatedProduct);
@@ -150,5 +154,14 @@ class ProductControllers {
     isLoading.value = false;
 
     return product;
+  }
+
+  Future<void> updateImageURL(Product product, String imageURL) async {
+    isLoading.value = true;
+
+    product.imageURL = imageURL;
+    await dbService.updateProduct(product);
+
+    isLoading.value = false;
   }
 }

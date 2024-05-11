@@ -48,8 +48,13 @@ class _CreateValidityState extends State<CreateValidity> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     _name = widget.product.name;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       height: 425,
       padding: const EdgeInsets.all(15.0),
@@ -75,10 +80,16 @@ class _CreateValidityState extends State<CreateValidity> {
                     labelText: 'Expiration Date Name',
                     border: OutlineInputBorder(),
                   ),
-                  validator: (val) => val!.isEmpty
-                      ? 'Enter a name to the expiration date'
-                      : null,
-                  onChanged: (val) => setState(() => _name = val),
+                  validator: (val) {
+                    print('Validator called with value: $val');
+                    return val!.isEmpty
+                        ? 'Enter a name to the expiration date'
+                        : null;
+                  },
+                  onChanged: (val) {
+                    print('onChanged called with value: $val');
+                    setState(() => _name = val);
+                  },
                 ),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 DateDisplay(date: _selectedDate),

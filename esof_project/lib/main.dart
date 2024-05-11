@@ -1,4 +1,3 @@
-import 'package:esof_project/app/views/main_pages/addProduct/addProduct.view.dart';
 import 'package:esof_project/app/views/main_pages/addProduct/barScanner.view.dart';
 import 'package:esof_project/app/views/main_pages/calendar.view.dart';
 import 'package:esof_project/app/views/main_pages/settings.view.dart';
@@ -10,7 +9,7 @@ import 'package:esof_project/services/navigationService.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:timezone/data/latest.dart' as tz;
 import 'app/components/transitionAnimation.component.dart';
 import 'app/controllers/productControllers.dart';
 import 'app/models/user.mode.dart';
@@ -28,7 +27,7 @@ void main() async {
     projectId: 'stockoverflow2-4f45a',
     storageBucket: 'stockoverflow2-4f45a.appspot.com',
   ));
-
+  tz.initializeTimeZones();
   runApp(const MyApp());
 }
 

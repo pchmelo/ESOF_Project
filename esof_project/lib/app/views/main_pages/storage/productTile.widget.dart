@@ -38,8 +38,7 @@ class ProductTile extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 25.0,
                     backgroundColor: Colors.yellow[100],
-                    backgroundImage: const AssetImage(
-                        'assets/images/default_product_image.png'),
+                    backgroundImage: NetworkImage(product.imageURL),
                   ),
                 ),
               ),

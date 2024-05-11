@@ -1,4 +1,7 @@
+import 'package:esof_project/app/components/notificationForm.component.dart';
+import 'package:esof_project/app/controllers/notificationController.dart';
 import 'package:esof_project/app/controllers/productControllers.dart';
+import 'package:esof_project/app/models/notication.model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:esof_project/app/models/product.model.dart';
@@ -7,7 +10,7 @@ import 'package:flutter/services.dart';
 
 class EditProduct extends StatefulWidget {
   final Function controller;
-  final product;
+  final Product product;
   const EditProduct(
       {super.key, required this.product, required this.controller});
 
@@ -21,11 +24,13 @@ class _EditProdutState extends State<EditProduct> {
   String? _name;
   int? _threshold;
   late bool _validity;
+  late bool _notification;
 
   @override
   void initState() {
     super.initState();
     _validity = widget.product.validity;
+    _notification = widget.product.notification;
   }
 
   @override
@@ -77,9 +82,20 @@ class _EditProdutState extends State<EditProduct> {
                   onChanged: (bool? value) {
                     setState(() {
                       _validity = value!;
+                      _notification = false;
                     });
                   },
                 ),
+                if (_validity)
+                  CheckboxListTile(
+                    title: const Text('Notification'),
+                    value: _notification,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _notification = value!;
+                      });
+                    },
+                  ),
                 Container(
                   margin: const EdgeInsets.only(top: 16.0),
                   child: ElevatedButton(
@@ -108,9 +124,29 @@ class _EditProdutState extends State<EditProduct> {
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         _validity ??= widget.product.validity;
-                        widget.controller(context, widget.product, _name,
-                            _threshold, widget.product.quantity, _validity);
+                        widget.controller(
+                          context,
+                          widget.product,
+                          _name,
+                          _threshold,
+                          widget.product.quantity,
+                          _validity,
+                          _notification,
+                          widget.product.imageURL,
+                        );
                       }
+
+                      if (widget.product.notification != _notification) {
+                        if (_notification) {
+                          await NotificationForm(context: context)
+                              .createNotificationForm(widget.product);
+                        } else {
+                          await NotificationController()
+                              .deleteNotification(widget.product);
+                        }
+                      }
+
+                      Navigator.pop(context);
                     },
                   ),
                 ),
