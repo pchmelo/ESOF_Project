@@ -18,87 +18,92 @@ class ChangeQuantityComponent extends StatefulWidget {
 
 class _ChangeQuantityComponentState extends State<ChangeQuantityComponent> {
   late int quantity;
-  late TextEditingController quantityController; // Declare the controller
+  late TextEditingController quantityController;
 
   @override
   void initState() {
     super.initState();
     quantity = widget.initialValue;
     quantityController =
-        TextEditingController(text: '$quantity'); // Initialize the controller
+        TextEditingController(text: '$quantity');
   }
 
   void updateQuantity(int change) {
     setState(() {
       quantity += change;
-      quantityController.text = '$quantity'; // Update the controller
+      quantityController.text = '$quantity';
     });
     widget.onQuantityChanged(quantity);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.red, // Set the background color to red
-            border: Border.all(color: Colors.black), // Add this line
-          ),
-          child: IconButton(
-            onPressed: () {
-              if (quantity > 0) {
-                updateQuantity(-1);
-              }
-            },
-            icon: const Icon(
-              Icons.remove,
-              color: Colors.white, // Set the icon color to white
+    return Card(
+      elevation: 5,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                if (quantity > 0) {
+                  updateQuantity(-1);
+                }
+              },
+              child: const Icon(
+                Icons.remove,
+                color: Colors.white,
+                size: 30,
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber,
+                shape: CircleBorder(),
+                padding: EdgeInsets.all(15),
+              ),
             ),
-          ),
-        ),
-        Container(
-          width: (quantity >= 10)
-              ? 50
-              : 25, // Adjust the width based on the quantity
-          height: 50,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
-          ),
-          child: TextField(
-            controller: quantityController, // Use the controller
-            onSubmitted: (value) {
-              quantity = int.parse(value);
-              widget.onQuantityChanged(quantity);
-            },
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly,
-            ],
-            decoration: const InputDecoration(
-              border: InputBorder.none,
+            Container(
+              width: 70,
+              height: 70,
+              alignment: Alignment.center,
+              child: TextField(
+                controller: quantityController,
+                onSubmitted: (value) {
+                  quantity = int.parse(value);
+                  widget.onQuantityChanged(quantity);
+                },
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 20),
+                ),
+                style: TextStyle(fontSize: 20),
+              ),
             ),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.green, // Set the background color to green
-            border: Border.all(color: Colors.black), // Add this line
-          ),
-          child: IconButton(
-            onPressed: () {
-              updateQuantity(1);
-            },
-            icon: const Icon(
-              Icons.add,
-              color: Colors.white, // Set the icon color to white
+            ElevatedButton(
+              onPressed: () {
+                updateQuantity(1);
+              },
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 30,
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber,
+                shape: CircleBorder(),
+                padding: EdgeInsets.all(15),
+              ),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
+
