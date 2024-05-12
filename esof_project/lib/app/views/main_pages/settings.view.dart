@@ -17,12 +17,13 @@ class SettingsView extends StatelessWidget {
         title: const Text(
           'Settings',
           style: TextStyle(
-            fontFamily: 'CrimsonPro',
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.bold,
             fontSize: 31,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.cyan,
+        backgroundColor: const Color(0xFFC0C0C0),
         foregroundColor: Colors.white,
       ),
       body: Column(

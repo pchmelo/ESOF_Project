@@ -77,27 +77,27 @@ class _ChangeQuantityComponentState extends State<ChangeQuantityComponent> {
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.digitsOnly,
                 ],
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.symmetric(horizontal: 10),
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 20),
                 ),
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20),
               ),
             ),
             ElevatedButton(
               onPressed: () {
                 updateQuantity(1);
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber,
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(15),
+              ),
               child: const Icon(
                 Icons.add,
                 color: Colors.white,
                 size: 30,
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.amber,
-                shape: CircleBorder(),
-                padding: EdgeInsets.all(15),
               ),
             ),
           ],

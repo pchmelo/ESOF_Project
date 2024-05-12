@@ -28,9 +28,9 @@ class ShoppingListTile extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Colors.white, // This gives the tile a white background
+                color: Colors.white,
                 border: Border.all(
-                    color: Colors.black), // This gives the tile a black border
+                    color: Colors.black),
                 borderRadius: BorderRadius.circular(10.0),
               ),
             ),

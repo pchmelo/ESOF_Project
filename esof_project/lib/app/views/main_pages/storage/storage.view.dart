@@ -21,7 +21,7 @@ class _StorageViewState extends State<StorageView> {
 
   final edit_controller = ProductControllers().EditProduct;
 
-  static const name = 'STORAGE';
+  static const name = 'Storage';
   String currentRoute = '/start/storage';
 
   @override

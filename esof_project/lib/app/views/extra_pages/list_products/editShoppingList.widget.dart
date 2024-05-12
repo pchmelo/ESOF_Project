@@ -23,21 +23,22 @@ class _EditShoppingListState extends State<EditShoppingList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: SizedBox(
-          width: double.infinity,
-          child: TextField(
-            controller: _nameController,
-            decoration: InputDecoration(
-              hintText: 'Editing Shopping List: ${widget.shoppingList.name}',
-              border: InputBorder.none,
-              hintStyle: const TextStyle(color: Colors.black),
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: const Color(0xFF4CAF50),
+          title: SizedBox(
+            width: double.infinity,
+            child: TextField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                hintText: 'Editing Shopping List: ${widget.shoppingList.name}',
+                border: InputBorder.none,
+                hintStyle: const TextStyle(color: Colors.white),
+              ),
+              style: const TextStyle(color: Colors.white),
             ),
-            style: const TextStyle(color: Colors.black),
           ),
         ),
-      ),
       body: Column(
         children: <Widget>[
           Expanded(
@@ -52,9 +53,10 @@ class _EditShoppingListState extends State<EditShoppingList> {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.all(15),
-            backgroundColor: Colors.yellow,
+            backgroundColor: const Color(0xFF4CAF50),
+
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5), // This is the border radius
+              borderRadius: BorderRadius.circular(5),
             ),
           ),
           onPressed: () async {
@@ -90,7 +92,7 @@ class _EditShoppingListState extends State<EditShoppingList> {
           },
           child: const Text('Confirm',
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 18.0,
           ),

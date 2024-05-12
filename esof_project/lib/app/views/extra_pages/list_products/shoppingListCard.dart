@@ -32,7 +32,7 @@ class ShoppingListCard {
     return SizedBox(
       height: 80,
       child: Card(
-        color: checked ? Colors.yellow[100] : Colors.white,
+        color: checked ? const Color(0xFF4CAF50) : Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(
               0),
@@ -108,11 +108,12 @@ class ShoppingListCard {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    product.name ?? 'Unknown product',
-                    style: const TextStyle(fontSize: 25.0),
+                    (product.name?.length ?? 0) > 6
+                        ? '${product.name.substring(0, 6) ?? ''}...'
+                        : product.name ?? 'Unknown product',
+                    style: const TextStyle(fontSize: 20.0),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(left: 15.0),
                     width: 235,
                     height: 85,
                     child: ChangeQuantityComponent(

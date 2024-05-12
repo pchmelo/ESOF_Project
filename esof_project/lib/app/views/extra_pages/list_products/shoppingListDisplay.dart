@@ -75,12 +75,12 @@ class ShoppingListDisplay extends StatelessWidget {
           return Scaffold(
             backgroundColor: Colors.grey[200], // Set a background color for the scaffold
             appBar: AppBar(
-              title: Text(shoppingList.name, style: const TextStyle(color: Colors.black)), // Set the color of the title
+              title: Text(shoppingList.name, style: const TextStyle(color: Colors.white)),
               centerTitle: true,
-              backgroundColor: Colors.amber,
+              backgroundColor: const Color(0xFF4CAF50),
               actions: <Widget>[
                 PopupMenuButton(
-                  color: Colors.amber,
+                  color: const Color(0xFF4CAF50),
                   itemBuilder: (context) => [
                     PopupMenuItem<int>(
                       value: 0,
@@ -161,7 +161,7 @@ class ShoppingListDisplay extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         left: 110, right: 110, bottom: 10, top: 10),
                     decoration: BoxDecoration(
-                      color: Colors.amber,
+                      color: const Color(0xFF4CAF50),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextButton(
@@ -173,7 +173,7 @@ class ShoppingListDisplay extends StatelessWidget {
                         'CHECKOUT',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: 20,
                         ),
                       ),

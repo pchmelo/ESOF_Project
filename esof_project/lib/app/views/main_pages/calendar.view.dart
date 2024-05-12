@@ -91,12 +91,13 @@ class _CalenderViewState extends State<CalenderView> {
         title: const Text(
           "Calendar",
           style: TextStyle(
-            fontFamily: 'CrimsonPro',
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.bold,
             fontSize: 31,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.lightBlue,
         foregroundColor: Colors.white,
       ),
       body: Column(
