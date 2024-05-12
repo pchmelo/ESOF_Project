@@ -33,128 +33,136 @@ class _EditProdutState extends State<EditProduct> {
     _notification = widget.product.notification;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 425,
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        children: <Widget>[
-          const Text(
-            'Edit Product',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+@override
+Widget build(BuildContext context) {
+  double screenHeight = MediaQuery.of(context).size.height;
+  double screenWidth = MediaQuery.of(context).size.width;
+
+  return Container(
+    height: screenHeight * 0.55,
+    padding: const EdgeInsets.all(15.0),
+    child: Column(
+      children: <Widget>[
+        const Text(
+          'Edit Product',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
           ),
-          const SizedBox(height: 20),
-          Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                TextFormField(
-                  initialValue: widget.product.name,
-                  decoration: const InputDecoration(
-                    labelText: 'Product Name',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (val) =>
-                      val!.isEmpty ? 'Enter a product name' : null,
-                  onChanged: (val) => setState(() => _name = val),
+        ),
+        const SizedBox(height: 20),
+        Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                initialValue: widget.product.name,
+                decoration: const InputDecoration(
+                  labelText: 'Product Name',
+                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(color: Colors.black),
                 ),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  initialValue: widget.product.threshold.toString(),
-                  decoration: const InputDecoration(
-                    labelText: 'Threshold',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (val) => val!.isEmpty ? 'Enter a threshold' : null,
-                  onChanged: (val) =>
-                      setState(() => _threshold = int.parse(val)),
+                validator: (val) =>
+                    val!.isEmpty ? 'Enter a product name' : null,
+                onChanged: (val) => setState(() => _name = val),
+              ),
+              const Padding(padding: EdgeInsets.only(top: 20)),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                initialValue: widget.product.threshold.toString(),
+                decoration: const InputDecoration(
+                  labelText: 'Threshold',
+                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(color: Colors.black),
                 ),
+                validator: (val) => val!.isEmpty ? 'Enter a threshold' : null,
+                onChanged: (val) =>
+                    setState(() => _threshold = int.parse(val)),
+              ),
+              CheckboxListTile(
+                title: const Text('Validity'),
+                value: _validity,
+                activeColor: Colors.amber,
+                checkColor: Colors.black,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _validity = value!;
+                    _notification = false;
+                  });
+                },
+              ),
+              if (_validity)
                 CheckboxListTile(
-                  title: const Text('Validity'),
-                  value: _validity,
+                  title: const Text('Notification'),
+                  value: _notification,
+                  activeColor: Colors.amber,
+                  checkColor: Colors.black,
                   onChanged: (bool? value) {
                     setState(() {
-                      _validity = value!;
-                      _notification = false;
+                      _notification = value!;
                     });
                   },
                 ),
-                if (_validity)
-                  CheckboxListTile(
-                    title: const Text('Notification'),
-                    value: _notification,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _notification = value!;
-                      });
-                    },
-                  ),
-                Container(
-                  margin: const EdgeInsets.only(top: 16.0),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.yellow),
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.black),
-                      textStyle: MaterialStateProperty.all<TextStyle>(
-                        const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                      minimumSize: MaterialStateProperty.all<Size>(
-                        const Size(150.0, 50.0),
-                      ),
-                      shape: MaterialStateProperty.all<OutlinedBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              10.0), // Decreasing border radius
-                        ),
+              Container(
+                margin: const EdgeInsets.only(top: 16.0),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.amber),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.black),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
                       ),
                     ),
-                    child: const Text('Confirm'),
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        _validity ??= widget.product.validity;
-                        widget.controller(
-                          context,
-                          widget.product,
-                          _name,
-                          _threshold,
-                          widget.product.quantity,
-                          _validity,
-                          _notification,
-                          widget.product.imageURL,
-                        );
-                      }
-
-                      if (widget.product.notification != _notification) {
-                        if (_notification) {
-                          await NotificationForm(context: context)
-                              .createNotificationForm(widget.product);
-                        } else {
-                          await NotificationController()
-                              .deleteNotification(widget.product);
-                        }
-                      }
-
-                      Navigator.pop(context);
-                    },
+                    minimumSize: MaterialStateProperty.all<Size>(
+                      Size(screenWidth * 0.9, 60.0),
+                    ),
+                    shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
                   ),
+                  child: const Text('Confirm'),
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      _validity ??= widget.product.validity;
+                      widget.controller(
+                        context,
+                        widget.product,
+                        _name,
+                        _threshold,
+                        widget.product.quantity,
+                        _validity,
+                        _notification,
+                        widget.product.imageURL,
+                      );
+                    }
+
+                    if (widget.product.notification != _notification) {
+                      if (_notification) {
+                        await NotificationForm(context: context)
+                            .createNotificationForm(widget.product);
+                      } else {
+                        await NotificationController()
+                            .deleteNotification(widget.product);
+                      }
+                    }
+
+                    Navigator.pop(context);
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 }

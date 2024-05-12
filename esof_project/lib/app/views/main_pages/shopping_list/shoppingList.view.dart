@@ -13,46 +13,44 @@ class ShoppingListView extends StatelessWidget {
 
   ShoppingListView({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    final create_controller = ShoppingListControllers().CreateProduct;
+ @override
+Widget build(BuildContext context) {
+  final create_controller = ShoppingListControllers().CreateProduct;
 
-    void handleShoppingListTap(String uid, Function controller,
-        Product? product, String scan, String spec) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ShoppingListDisplay(
-                  uid: uid,
-                  controller: controller,
-                  b: product,
-                  a: scan,
-                  c: '')));
-    }
+  void handleShoppingListTap(String uid, Function controller,
+      Product? product, String scan, String spec) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ShoppingListDisplay(
+                uid: uid,
+                controller: controller,
+                b: product,
+                a: scan,
+                c: '')));
+  }
 
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text(
-          'Shopping Lists',
-          style: TextStyle(
-            fontFamily: 'CrimsonPro',
-            fontSize: 31,
-          ),
+  return Scaffold(
+    appBar: AppBar(
+      automaticallyImplyLeading: false,
+      title: const Text(
+        'Shopping Lists',
+        style: TextStyle(
+          fontFamily: 'Roboto',
+          fontSize: 31,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
         ),
-        centerTitle: true,
-        backgroundColor: Colors.cyan,
-        foregroundColor: Colors.white,
       ),
-      body: Container(
+      centerTitle: true,
+      backgroundColor: Colors.amber,
+      foregroundColor: Colors.black,
+    ),
+    body: Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/shopping_cart.png"),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -63,7 +61,8 @@ class ShoppingListView extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const Footer(),
-    );
-  }
+    ),
+    bottomNavigationBar: const Footer(),
+  );
+}
 }

@@ -58,100 +58,106 @@ class _EditValidityState extends State<EditValidity> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 425,
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        children: <Widget>[
-          Text(
-            'Add a Expiration Date to ${widget.validity.name}',
-            style: const TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-          const SizedBox(height: 20), // Adjust as needed for spacing
+ @override
+Widget build(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
 
-          Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                TextFormField(
-                  initialValue: widget.validity.name,
-                  decoration: const InputDecoration(
-                    labelText: 'Expiration Date Name',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (val) => val!.isEmpty
-                      ? 'Enter a name to the expiration date'
-                      : null,
-                  onChanged: (val) => setState(() => _name = val),
+  return SingleChildScrollView(
+    padding: const EdgeInsets.all(15.0),
+    child: Column(
+      children: <Widget>[
+        Text(
+          'Edit the Expiration Date of ${widget.validity.name}',
+          style: const TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        const SizedBox(height: 20),
+        Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                initialValue: widget.validity.name,
+                decoration: const InputDecoration(
+                  labelText: 'Expiration Date Name',
+                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(color: Colors.black),
                 ),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                DateDisplay(date: _selectedDate),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                ElevatedButton(
-                  onPressed: () => _selectDate(context),
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.greenAccent),
+                validator: (val) =>
+                    val!.isEmpty ? 'Enter a name to the expiration date' : null,
+                onChanged: (val) => setState(() => _name = val),
+              ),
+              const Padding(padding: EdgeInsets.only(top: 20)),
+              DateDisplay(date: _selectedDate),
+              const SizedBox(
+                height: 20.0,
+              ),
+              ElevatedButton(
+                onPressed: () => _selectDate(context),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.greenAccent),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                  minimumSize: MaterialStateProperty.all<Size>(
+                    Size(screenWidth * 0.9, 60.0),
                   ),
-                  child: const Text(
-                    'Select date',
-                    style: TextStyle(
-                      color: Colors.black,
+                ),
+                child: const Text(
+                  'Select date',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.amber),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                  textStyle: MaterialStateProperty.all<TextStyle>(
+                    const TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  minimumSize: MaterialStateProperty.all<Size>(
+                    Size(screenWidth * 0.9, 60.0),
+                  ),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                 ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.yellow),
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black),
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                      const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                    minimumSize: MaterialStateProperty.all<Size>(
-                      const Size(150.0, 50.0),
-                    ),
-                    shape: MaterialStateProperty.all<OutlinedBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            10.0), // Decreasing border radius
-                      ),
-                    ),
-                  ),
-                  child: const Text('Confirm'),
-                  onPressed: () async {
-                    widget.validity = Validity.withValues(
-                      _name,
-                      widget.validity.productId,
-                      widget.validity.uid,
-                      quantity: widget.validity.quantity,
-                      day: _selectedDate.day,
-                      month: _selectedDate.month,
-                      year: _selectedDate.year,
-                    );
+                child: const Text('Confirm'),
+                onPressed: () async {
+                  widget.validity = Validity.withValues(
+                    _name,
+                    widget.validity.productId,
+                    widget.validity.uid,
+                    quantity: widget.validity.quantity,
+                    day: _selectedDate.day,
+                    month: _selectedDate.month,
+                    year: _selectedDate.year,
+                  );
 
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
+                  Navigator.pop(context);
+                },
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-    ;
-  }
+        ),
+      ],
+    ),
+  );
+}
 }

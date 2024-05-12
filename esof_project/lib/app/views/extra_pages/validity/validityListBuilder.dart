@@ -37,60 +37,52 @@ class _ValidityListBuilderState extends State<ValidityListBuilder> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: widget.foundValidities.length,
-            itemBuilder: (context, index) {
-              widget.validityTile = ValidityTile.withValidity(
-                validity: Validity.fromJson(
-                  widget.foundValidities[index],
-                ),
-                editValidity: widget.editValidity,
-              );
+ @override
+Widget build(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
 
-              validityTiles.add(widget.validityTile!);
+  return Column(
+    children: [
+      Expanded(
+        child: ListView.builder(
+          itemCount: widget.foundValidities.length,
+          itemBuilder: (context, index) {
+            widget.validityTile = ValidityTile.withValidity(
+              validity: Validity.fromJson(
+                widget.foundValidities[index],
+              ),
+              editValidity: widget.editValidity,
+            );
 
-              return Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                    margin: const EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 3,
-                          blurRadius: 10,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: widget.validityTile),
-              );
-            },
-          ),
+            validityTiles.add(widget.validityTile!);
+
+            return Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                  margin: const EdgeInsets.all(5.0),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 3,
+                        blurRadius: 10,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: widget.validityTile),
+            );
+          },
         ),
-        ValueListenableBuilder(
-          valueListenable: widget.editValidity,
-          builder: (context, bool value, child) {
-            return value
-                ? Container(
+      ),
+      ValueListenableBuilder(
+        valueListenable: widget.editValidity,
+        builder: (context, bool value, child) {
+          return value
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: 5.0),
+                  child: Container(
                     padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
-                    ),
                     child: TextButton(
                       onPressed: () async {
                         ValidityController validityController =
@@ -105,20 +97,27 @@ class _ValidityListBuilderState extends State<ValidityListBuilder> {
                         }
                         widget.editValidity.value = false;
                       },
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.amber,
+                        minimumSize: Size(screenWidth * 0.9, 60.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
                       child: const Text(
                         'Confirm',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 20,
                         ),
                       ),
                     ),
-                  )
-                : Container();
-          },
-        ),
-      ],
-    );
-    ;
-  }
+                  ),
+                )
+              : Container();
+        },
+      ),
+    ],
+  );
+}
 }
