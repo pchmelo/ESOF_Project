@@ -51,15 +51,15 @@ class _ChangeQuantityComponentState extends State<ChangeQuantityComponent> {
                   updateQuantity(-1);
                 }
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber,
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(15),
+              ),
               child: const Icon(
                 Icons.remove,
                 color: Colors.white,
                 size: 30,
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.amber,
-                shape: CircleBorder(),
-                padding: EdgeInsets.all(15),
               ),
             ),
             Container(

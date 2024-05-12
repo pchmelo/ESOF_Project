@@ -77,7 +77,7 @@ class _CreateProdutState extends State<CreateProdut> {
                     });
                   },
                 ),
-                if (_validity) // If "Expires" is checked, then show "Notification" checkbox
+                if (_validity)
                   CheckboxListTile(
                     title: const Text('Notification'),
                     value: _notification,

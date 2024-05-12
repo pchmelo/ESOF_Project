@@ -66,7 +66,7 @@ Widget build(BuildContext context) {
       backgroundColor: Colors.amber,
     ),
     body: Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Form(
         key: _formKey,
         child: Column(
@@ -74,7 +74,7 @@ Widget build(BuildContext context) {
             const SizedBox(height: 100),
             Text(
               'Product Name: ${widget.product.name}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18.0,
                 color: Colors.black,
               ),
