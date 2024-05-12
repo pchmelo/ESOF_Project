@@ -17,70 +17,75 @@ class _CreateProdutListState extends State<CreateProdutList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 425,
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        children: <Widget>[
-          const Text(
-            'Create Shopping List',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+      margin: const EdgeInsets.all(15.0),
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const Text(
+              'Create Shopping List',
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
             ),
-          ),
-          const SizedBox(height: 20), // Adjust as needed for spacing
-
-          Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Shopping List Name',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (val) =>
+            const Divider(color: Colors.grey),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Shopping List Name',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (val) =>
                       val!.isEmpty ? 'Enter a Shopping List name' : null,
-                  onChanged: (val) => setState(() => _name = val),
-                ),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.yellow),
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black),
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                      const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
-                      ),
+                      onChanged: (val) => setState(() => _name = val),
                     ),
-                    minimumSize: MaterialStateProperty.all<Size>(
-                      Size(150.0, 50.0),
-                    ),
-                    shape: MaterialStateProperty.all<OutlinedBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            10.0), // Decreasing border radius
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: SizedBox(
+                      height: 50,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.amber),
+                          foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.black),
+                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          'Confirm',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            widget.controller(context, _name);
+                            Navigator.pop(context); // Close the current screen
+                          }
+                        },
                       ),
                     ),
                   ),
-                  child: const Text('Confirm'),
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      widget.controller(context, _name);
-                    }
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

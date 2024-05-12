@@ -20,6 +20,8 @@ class ShoppingListCard {
     return _values[productId]?.values.first ?? false;
   }
 
+
+
   Widget shoppingListCard(
       {required MapEntry<Product?, Map<int, bool>> entry,
       required ShoppingList shoppingList}) {
