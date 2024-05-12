@@ -94,9 +94,9 @@ Widget build(BuildContext context) {
                 onPressed: () => _selectDate(context),
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.greenAccent),
+                      MaterialStateProperty.all<Color>(Colors.lightBlue),
                   foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.black),
+                      MaterialStateProperty.all<Color>(Colors.white),
                   minimumSize: MaterialStateProperty.all<Size>(
                     Size(screenWidth * 0.9, 60.0),
                   ),
@@ -104,7 +104,8 @@ Widget build(BuildContext context) {
                 child: const Text(
                   'Select date',
                   style: TextStyle(
-                    color: Colors.black,
+                    fontSize: 18.0,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
