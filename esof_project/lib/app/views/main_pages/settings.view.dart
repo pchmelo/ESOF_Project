@@ -17,144 +17,200 @@ class _SettingsViewState extends State<SettingsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false,
-        title: const Text(
-          'Settings',
-          style: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.bold,
-            fontSize: 31,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: const Color(0xFFC0C0C0),
-        foregroundColor: Colors.white,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 20,),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Text('Account', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500,),),
-          ),
-          const SizedBox(height: 20,),
-          Container(
-            width: double.infinity,
-            child: Row(
-              children: [
-                Icon(Icons.person, size: 50,),
-                const SizedBox(width: 20,),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Name: ' + 'User', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                    Text('Change Settings', style: TextStyle(fontSize: 16, color: Colors.grey),),
-                  ],
-                ),
-                const Spacer(),
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_forward_ios,
-                      size: 50,
-                      color: Colors.white,),
-                    onPressed: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ChangeEmailPasswordPage()),
-                      );
-                    },
-                  ),
-                ),
-              ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text(
+            'Settings',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+              fontSize: 31,
             ),
           ),
-          const SizedBox(height: 40,),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Text('Settings', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500,),),
-          ),
-          const SizedBox(height: 20,),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Container(
+          centerTitle: true,
+          backgroundColor: const Color(0xFFC0C0C0),
+          foregroundColor: Colors.white,
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text(
+                'Account',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
               width: double.infinity,
               child: Row(
                 children: [
-                  Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.red.shade200,
-                    ),
-                    child: Icon(Icons.circle_notifications_rounded, size: 50, color: Colors.black,),
+                  const Icon(
+                    Icons.person,
+                    size: 50,
                   ),
-                  const SizedBox(width: 20,),
-                  Text('Notifications', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Name: ' + 'User',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'Change Settings',
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                    ],
+                  ),
                   const Spacer(),
-                  Checkbox(
-                    value: _notifications,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _notifications = value!;
-                      });
-                    },
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 50,
+                        color: Colors.white,
+                      ),
+                      onPressed: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChangeEmailPasswordPage()),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-          const SizedBox(height: 20,),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                alignment: Alignment.centerLeft,
-                child: TextButton(
-                  onPressed: () async {
-                    try {
-                      await _auth.signOut();
-                      Navigator.pushReplacementNamed(context, '/start'); // assuming '/start' is your sign-in route
-                    } catch (e) {
-                      print('Error signing out: $e');
-                    }
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.person, color: Colors.black, size: 50),
-                      const SizedBox(width: 20,), // Adjust the width to increase or decrease the space
-                      const Text('Logout',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
+            const SizedBox(
+              height: 40,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text(
+                'Settings',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-            ],
-          ),
-        ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: SizedBox(
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.red.shade200,
+                      ),
+                      child: const Icon(
+                        Icons.circle_notifications_rounded,
+                        size: 50,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    const Text(
+                      'Notifications',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                    const Spacer(),
+                    Checkbox(
+                      value: _notifications,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _notifications = value!;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton(
+                    onPressed: () async {
+                      try {
+                        await _auth.signOut();
+                        Navigator.pushReplacementNamed(context,
+                            '/start'); // assuming '/start' is your sign-in route
+                      } catch (e) {
+                        print('Error signing out: $e');
+                      }
+                    },
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.person, color: Colors.black, size: 50),
+                        SizedBox(
+                          width: 20,
+                        ), // Adjust the width to increase or decrease the space
+                        Text(
+                          'Logout',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        bottomNavigationBar: const Footer(),
       ),
-      bottomNavigationBar: const Footer(),
     );
   }
 }
 
 class ChangeEmailPasswordPage extends StatefulWidget {
   @override
-  _ChangeEmailPasswordPageState createState() => _ChangeEmailPasswordPageState();
+  _ChangeEmailPasswordPageState createState() =>
+      _ChangeEmailPasswordPageState();
 }
 
 class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
@@ -180,114 +236,120 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
           ? 'Enter a valid email address'
           : null;
     }
+
     return loading
         ? Loading()
         : Scaffold(
-      appBar: AppBar(
-        title: Text('Change Email and Password'),
-      ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20.0,
+            appBar: AppBar(
+              title: const Text('Change Email and Password'),
             ),
-            TextFormField(
-              decoration: TextInputDecoration.copyWith(hintText: 'Email',
-                errorStyle: TextStyle(color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    backgroundColor: Colors.red[200]),
-              ),
-              validator: (val) {
-                if(val!.isEmpty){
-                  return 'Enter an email';
-                }else{
-                  return validateEmail(val);
-                }
-              },
-              onChanged: (val) {
-                setState(() {
-                  email = val;
-                });
-              },
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            TextFormField(
-              decoration: TextInputDecoration.copyWith(hintText: 'Password',
-                errorStyle: TextStyle(color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    backgroundColor: Colors.red[200]),
-              ),
-              obscureText: true,
-              validator: (val) => val!.length < 6
-                  ? 'Enter a password 6+ chars long'
-                  : null,
-              onChanged: (val) {
-                setState(() {
-                  password = val;
-                });
-              },
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            TextFormField(
-              decoration: TextInputDecoration.copyWith(
-                hintText: 'Confirm Password',
-                errorStyle: TextStyle(color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    backgroundColor: Colors.red[200]),
-              ),
-              obscureText: true,
-              validator: (val) => val!.length < 6
-                  ? 'Enter a password 6+ chars long'
-                  : null,
-              onChanged: (val) {
-                setState(() {
-                  password = val;
-                });
-              },
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  setState(() {
-                    loading = true;
-                  });
-                  /*if (result == null) {
+            body: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  TextFormField(
+                    decoration: TextInputDecoration.copyWith(
+                      hintText: 'Email',
+                      errorStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          backgroundColor: Colors.red[200]),
+                    ),
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return 'Enter an email';
+                      } else {
+                        return validateEmail(val);
+                      }
+                    },
+                    onChanged: (val) {
+                      setState(() {
+                        email = val;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  TextFormField(
+                    decoration: TextInputDecoration.copyWith(
+                      hintText: 'Password',
+                      errorStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          backgroundColor: Colors.red[200]),
+                    ),
+                    obscureText: true,
+                    validator: (val) => val!.length < 6
+                        ? 'Enter a password 6+ chars long'
+                        : null,
+                    onChanged: (val) {
+                      setState(() {
+                        password = val;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  TextFormField(
+                    decoration: TextInputDecoration.copyWith(
+                      hintText: 'Confirm Password',
+                      errorStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          backgroundColor: Colors.red[200]),
+                    ),
+                    obscureText: true,
+                    validator: (val) => val!.length < 6
+                        ? 'Enter a password 6+ chars long'
+                        : null,
+                    onChanged: (val) {
+                      setState(() {
+                        password = val;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          loading = true;
+                        });
+                        /*if (result == null) {
                     setState(() {
                       loading = false;
                       error = 'Please supply a valid email';
                     });
                   }*/
-                  Navigator.pop(context);
-                }
-              },
-              style: ButtonStyle(
-                backgroundColor:
-                MaterialStateProperty.all<Color>(Colors.yellow),
+                        Navigator.pop(context);
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.yellow),
+                    ),
+                    child: const Text(
+                      'Save',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    error,
+                    style: const TextStyle(color: Colors.red, fontSize: 14),
+                  ),
+                ],
               ),
-              child: const Text(
-                'Save',
-                style: TextStyle(color: Colors.black),
-              ),
             ),
-            const SizedBox(
-              height: 12,
-            ),
-            Text(
-              error,
-              style: const TextStyle(color: Colors.red, fontSize: 14),
-            ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }
