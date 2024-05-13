@@ -25,6 +25,22 @@ class ProductControllers {
     isLoading.value = false;
   }
 
+  Future<void> EditQuantity(Product product, int quantity) async {
+    isLoading.value = true;
+    Product newProduct = Product.withImage(
+      id: product.id,
+      name: product.name,
+      threshold: product.threshold,
+      quantity: quantity,
+      barcodes: product.barcodes,
+      validity: product.validity,
+      notification: product.notification,
+      imageURL: product.imageURL,
+    );
+    dbService.updateProduct(newProduct);
+    isLoading.value = false;
+  }
+
   Future<void> PlusButton(
       context, _name, _threshold, _quantity, _imageURL) async {
     isLoading.value = true;
@@ -163,5 +179,12 @@ class ProductControllers {
     await dbService.updateProduct(product);
 
     isLoading.value = false;
+  }
+
+  Future<Product> fetchProduct(Product product) async {
+    isLoading.value = true;
+    Product fetched_product = await dbService.getProductById(product.id);
+    isLoading.value = false;
+    return fetched_product;
   }
 }

@@ -2,15 +2,12 @@ import 'package:esof_project/app/models/validity.model.dart';
 import 'package:esof_project/app/shared/plusButton.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import '../controllers/productControllers.dart';
 import '../controllers/shoppingListControllers.dart';
 import '../models/product.model.dart';
-import '../models/shoppingList.model.dart';
-import '../views/extra_pages/list_products/shoppingListDisplay.dart';
 import '../views/extra_pages/product/changeQuantity.widget.dart';
 import '../views/extra_pages/product/createProduct.widget.dart';
 import '../views/extra_pages/product/editProduct.widget.dart';
-import '../views/extra_pages/product/product.view.dart';
+import '../views/extra_pages/product/removeQuantity.widget.dart';
 import '../views/extra_pages/validity/createValidity.view.dart';
 import '../views/extra_pages/validity/editValidity.widget.dart';
 import '../views/main_pages/shopping_list/shoppingList.widgetViewList.dart';
@@ -94,6 +91,20 @@ class ProductForm {
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: CreateValidity(product: product, quantity: quantity),
+        );
+      },
+    );
+  }
+
+  Future<void> removeQuantityForm() {
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: RemoveQuantityProduct(product: product),
         );
       },
     );

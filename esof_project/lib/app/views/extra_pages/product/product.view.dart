@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:esof_project/app/components/notificationForm.component.dart';
 import 'package:esof_project/app/controllers/notificationController.dart';
 import 'package:esof_project/app/controllers/productControllers.dart';
@@ -29,295 +28,348 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
 
   Uint8List? productIcon;
 
+  void initState() {
+    super.initState();
+    fetchProduct();
+  }
+
+  fetchProduct() async {
+    ProductControllers productController = ProductControllers();
+    Product updatedProduct =
+        await productController.fetchProduct(widget.product);
+    setState(() {
+      widget.product = updatedProduct;
+    });
+  }
+
   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: widget.product.validity
-          ? Row(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-    TextButton(
-      onPressed: () async {
-        if (!isInProductInfo) {
-          ProductControllers productController = ProductControllers();
-          Product updatedProduct = await productController.getProductById(widget.product.id);
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: widget.product.validity
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () async {
+                      if (!isInProductInfo) {
+                        ProductControllers productController =
+                            ProductControllers();
+                        Product updatedProduct = await productController
+                            .getProductById(widget.product.id);
 
-          setState(() {
-            widget.product = updatedProduct;
-            isInProductInfo = true;
-          });
-        }
-      },
-      child: Text(
-        'Product Info',
-        style: TextStyle(
-          fontSize: 15.95,
-          fontWeight: FontWeight.bold, // Make the font bold
-          color: isInProductInfo ? Colors.amber : Colors.black, // Change the color based on the state
-        ),
-      ),
-    ),
-    TextButton(
-      onPressed: () {
-        if (isInProductInfo) {
-          setState(() {
-            isInProductInfo = false;
-          });
-        }
-      },
-      child: Text(
-        'Expiration Dates',
-        style: TextStyle(
-          fontSize: 15.95,
-          fontWeight: FontWeight.bold, // Make the font bold
-          color: isInProductInfo ? Colors.black : Colors.amber, // Change the color based on the state
-        ),
-      ),
-    ),
-  ],
-)
-          : const Center(
-              child: Text(
-                'Product Info',
-                style: TextStyle(fontSize: 15),
-              ),
-            ),
-      actions: <Widget>[
-        PopupMenuButton(
-          itemBuilder: (context) => [
-            PopupMenuItem<int>(
-              value: 0,
-              child: Row(
-                children: <Widget>[
-                  ValueListenableBuilder(
-                    valueListenable: editValidity,
-                    builder: (context, bool value, child) {
-                      if (value && !isInProductInfo) {
-                        return const Padding(
-                          padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                          child: Icon(Icons.cancel),
-                        );
-                      } else {
-                        return const Padding(
-                          padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                          child: Icon(Icons.edit),
-                        );
+                        setState(() {
+                          widget.product = updatedProduct;
+                          isInProductInfo = true;
+                        });
                       }
                     },
+                    child: Text(
+                      'Product Info',
+                      style: TextStyle(
+                        fontSize: 15.95,
+                        fontWeight: FontWeight.bold, // Make the font bold
+                        color: isInProductInfo
+                            ? Colors.amber
+                            : Colors
+                                .black, // Change the color based on the state
+                      ),
+                    ),
                   ),
-                  ValueListenableBuilder(
-                    valueListenable: editValidity,
-                    builder: (context, bool value, child) {
-                      if (value && !isInProductInfo) {
-                        return const Text('Cancel');
-                      } else {
-                        return const Text('Edit');
+                  TextButton(
+                    onPressed: () {
+                      if (isInProductInfo) {
+                        setState(() {
+                          isInProductInfo = false;
+                        });
                       }
                     },
+                    child: Text(
+                      'Expiration Dates',
+                      style: TextStyle(
+                        fontSize: 15.95,
+                        fontWeight: FontWeight.bold, // Make the font bold
+                        color: isInProductInfo
+                            ? Colors.black
+                            : Colors
+                                .amber, // Change the color based on the state
+                      ),
+                    ),
                   ),
                 ],
-              ),
-              onTap: () async {
-                if (isInProductInfo) {
-                  await ProductForm(
-                          product: widget.product, context: context)
-                      .EditProductForm(widget.controller);
-                  ProductControllers productController = ProductControllers();
-                  Product updatedProduct = await productController
-                      .getProductById(widget.product.id);
-
-                  setState(() {
-                    widget.product = updatedProduct;
-                  });
-                } else {
-                  editValidity.value = !editValidity.value;
-                }
-              },
-            ),
-            if (isInProductInfo)
-              PopupMenuItem<int>(
-                value: 1,
-                child: const Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                      child: Icon(Icons.delete),
-                    ),
-                    Text('Delete'),
-                  ],
-                ),
-                onTap: () {
-                  widget.controller_delete(widget.product.id);
-                },
-              ),
-            if (isInProductInfo)
-              PopupMenuItem<int>(
-                value: 2,
-                onTap: () => selectIcon(ImageSource.camera),
-                child: const Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                      child: Icon(Icons.camera_alt),
-                    ),
-                    Text('Change Icon From Camera'),
-                  ],
+              )
+            : const Center(
+                child: Text(
+                  'Product Info',
+                  style: TextStyle(fontSize: 15),
                 ),
               ),
-            PopupMenuItem<int>(
-              value: 3,
-              onTap: () => selectIcon(ImageSource.gallery),
-              child: const Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                    child: Icon(Icons.photo_library),
-                  ),
-                  Text('Change Icon From Gallery'),
-                ],
-              ),
-            ),
-            if (widget.product.notification)
+        actions: <Widget>[
+          PopupMenuButton(
+            itemBuilder: (context) => [
               PopupMenuItem<int>(
-                value: 4,
-                child: const Row(
+                value: 0,
+                child: Row(
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                      child: Icon(Icons.notifications),
+                    ValueListenableBuilder(
+                      valueListenable: editValidity,
+                      builder: (context, bool value, child) {
+                        if (value && !isInProductInfo) {
+                          return const Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                            child: Icon(Icons.cancel),
+                          );
+                        } else {
+                          return const Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                            child: Icon(Icons.edit),
+                          );
+                        }
+                      },
                     ),
-                    Text('Edit Notification'),
+                    ValueListenableBuilder(
+                      valueListenable: editValidity,
+                      builder: (context, bool value, child) {
+                        if (value && !isInProductInfo) {
+                          return const Text('Cancel');
+                        } else {
+                          return const Text('Edit');
+                        }
+                      },
+                    ),
                   ],
                 ),
                 onTap: () async {
-                  NotificationModel? notification =
-                      await NotificationController()
-                          .findNotificationByProduct(widget.product);
-                  await NotificationForm(context: context)
-                      .updateNotificationForm(widget.product, notification!);
+                  if (isInProductInfo) {
+                    await ProductForm(product: widget.product, context: context)
+                        .EditProductForm(widget.controller);
+                    ProductControllers productController = ProductControllers();
+                    Product updatedProduct = await productController
+                        .getProductById(widget.product.id);
+
+                    setState(() {
+                      widget.product = updatedProduct;
+                    });
+                  } else {
+                    editValidity.value = !editValidity.value;
+                  }
                 },
               ),
-          ],
-          onSelected: (item) => SelectedItem(context, item),
-        ),
-      ],
-    ),
-    body: isInProductInfo
-        ? Column(
-            children: [
-              Column(
-                children: [
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.1),
-                  Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.grey, width: 2),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(widget.product.imageURL),
-                      radius: 50,
-                    ),
-                  ),
-                  ListTile(
-                    title: Center(
-                      child: Text(
-                        widget.product.name,
-                        style: const TextStyle(
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+              if (isInProductInfo)
+                PopupMenuItem<int>(
+                  value: 1,
+                  child: const Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                        child: Icon(Icons.delete),
                       ),
-                    ),
+                      Text('Delete'),
+                    ],
                   ),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.1),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  onTap: () {
+                    widget.controller_delete(widget.product.id);
+                  },
+                ),
+              if (isInProductInfo)
+                PopupMenuItem<int>(
+                  value: 2,
+                  onTap: () => selectIcon(ImageSource.camera),
+                  child: const Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                        child: Icon(Icons.camera_alt),
+                      ),
+                      Text('Change Icon From Camera'),
+                    ],
+                  ),
+                ),
+              PopupMenuItem<int>(
+                value: 3,
+                onTap: () => selectIcon(ImageSource.gallery),
+                child: const Row(
                   children: <Widget>[
-                  ListTile(
-                    title: Center(
-                      child: Text(
-                        'Quantity: ${widget.product.quantity}',
-                        style: const TextStyle(
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                    const Divider(),
-                    ListTile(
-                      title: Center(
-                        child: Text(
-                          'Threshold: ${widget.product.threshold}',
-                          style: const TextStyle(
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.153,
-                    ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          await ShoppingListForm(context: context)
-                              .SelectShoppingListForm(widget.product);
-                        },
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.amber),
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.black),
-                          minimumSize: MaterialStateProperty.all<Size>(
-                            const Size(70.0, 70.0),
-                          ),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                          elevation: MaterialStateProperty.all<double>(5.0),
-                        ),
-                        child: const Icon(
-                          Icons.shopping_basket_outlined,
-                          size: 50.0,
-                        ),
-                      ),
+                      padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                      child: Icon(Icons.photo_library),
                     ),
+                    Text('Change Icon From Gallery'),
                   ],
                 ),
               ),
+              if (widget.product.notification)
+                PopupMenuItem<int>(
+                  value: 4,
+                  child: const Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                        child: Icon(Icons.notifications),
+                      ),
+                      Text('Edit Notification'),
+                    ],
+                  ),
+                  onTap: () async {
+                    NotificationModel? notification =
+                        await NotificationController()
+                            .findNotificationByProduct(widget.product);
+                    await NotificationForm(context: context)
+                        .updateNotificationForm(widget.product, notification!);
+                  },
+                ),
             ],
-          )
-        : Column(
-            children: [
-              Expanded(
-                child: ValidityListWidget(
-                    product: widget.product, editValidity: editValidity),
-              ),
-            ],
+            onSelected: (item) => SelectedItem(context, item),
           ),
-  );
-}
+        ],
+      ),
+      body: isInProductInfo
+          ? Column(
+              children: [
+                Column(
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                    Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.grey, width: 2),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 7,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(widget.product.imageURL),
+                        radius: 50,
+                      ),
+                    ),
+                    ListTile(
+                      title: Center(
+                        child: Text(
+                          widget.product.name,
+                          style: const TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      ListTile(
+                        title: Center(
+                          child: Text(
+                            'Quantity: ${widget.product.quantity}',
+                            style: const TextStyle(
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const Divider(),
+                      ListTile(
+                        title: Center(
+                          child: Text(
+                            'Threshold: ${widget.product.threshold}',
+                            style: const TextStyle(
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            await ShoppingListForm(context: context)
+                                .SelectShoppingListForm(widget.product);
+                          },
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.amber),
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.black),
+                            minimumSize: MaterialStateProperty.all<Size>(
+                              const Size(70.0, 70.0),
+                            ),
+                            shape: MaterialStateProperty.all<OutlinedBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            elevation: MaterialStateProperty.all<double>(5.0),
+                          ),
+                          child: const Icon(
+                            Icons.shopping_basket_outlined,
+                            size: 50.0,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: widget.product.validity
+                            ? Container()
+                            : ElevatedButton(
+                                onPressed: () async {
+                                  await ProductForm(
+                                          product: widget.product,
+                                          context: context)
+                                      .removeQuantityForm();
+                                  fetchProduct();
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.redAccent),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.black),
+                                  minimumSize: MaterialStateProperty.all<Size>(
+                                    const Size(70.0, 70.0),
+                                  ),
+                                  shape:
+                                      MaterialStateProperty.all<OutlinedBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  elevation:
+                                      MaterialStateProperty.all<double>(5.0),
+                                ),
+                                child: const Icon(
+                                  Icons.remove_circle_outline,
+                                  size: 50.0,
+                                ),
+                              ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          : Column(
+              children: [
+                Expanded(
+                  child: ValidityListWidget(
+                      product: widget.product, editValidity: editValidity),
+                ),
+              ],
+            ),
+    );
+  }
 
   void selectIcon(ImageSource src) async {
     Uint8List cameraIcon = await selectImage(src);
@@ -330,11 +382,13 @@ Widget build(BuildContext context) {
   }
 
   void saveIcon() async {
-    String imageURL = await UploadData().uploadImage('products/${widget.product.id}/icon', productIcon!);
+    String imageURL = await UploadData()
+        .uploadImage('products/${widget.product.id}/icon', productIcon!);
     ProductControllers productController = ProductControllers();
     await productController.updateImageURL(widget.product, imageURL);
 
-    Product newProduct = await productController.getProductById(widget.product.id);
+    Product newProduct =
+        await productController.getProductById(widget.product.id);
 
     setState(() {
       widget.product = newProduct;
