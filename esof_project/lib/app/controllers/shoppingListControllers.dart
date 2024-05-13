@@ -1,6 +1,5 @@
 import 'package:esof_project/app/components/productForm.component.dart';
 import 'package:esof_project/app/controllers/productControllers.dart';
-import 'package:esof_project/app/controllers/validityControllers.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:esof_project/services/database_product.dart';
 import 'package:esof_project/services/database_shopping_list.dart';
@@ -149,5 +148,19 @@ class ShoppingListControllers {
     }
 
     isLoading.value = false;
+  }
+
+  Future<Map<Product, int>> getProductsInShoppingList(
+      ShoppingList shoppingList) async {
+    Map<Product, int> products = {};
+    for (var entry in shoppingList.products.entries) {
+      Product product = await dbServiceProduct.getProductById(entry.key);
+      products.putIfAbsent(product, () => entry.value.keys.first);
+    }
+    return products;
+  }
+
+  Future<ShoppingList> fetchShoppingList(String listId) async {
+    return await dbService.getShoppingList(listId);
   }
 }

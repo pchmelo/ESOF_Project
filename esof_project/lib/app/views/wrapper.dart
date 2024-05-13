@@ -33,14 +33,14 @@ class _WrapperState extends State<Wrapper> {
         future: initFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Loading(); // Replace with your actual loading screen widget
+            return Loading();
           } else if (snapshot.hasError) {
             return Container(
               child: Text('Error: ${snapshot.error}'),
-            ); // Replace with your actual error screen widget
+            );
           } else {
             //notificationsService.testNotification();
-            return StorageView(); // Replace with the widget you want to show after loading
+            return StorageView();
           }
         },
       );
