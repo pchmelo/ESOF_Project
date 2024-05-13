@@ -21,7 +21,7 @@ class _StorageViewState extends State<StorageView> {
 
   final edit_controller = ProductControllers().EditProduct;
 
-  static const name = 'STORAGE';
+  static const name = 'Storage';
   String currentRoute = '/start/storage';
 
   @override
@@ -34,49 +34,48 @@ class _StorageViewState extends State<StorageView> {
                   ProducDetailsPage(product: product, controller: controller)));
     }
 
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amber,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-        onPressed: () {
-          return ProductForm(context: context)
-              .CreateProductForm(create_controller);
-        },
+
+ return Scaffold(
+  floatingActionButton: FloatingActionButton(
+    backgroundColor: Colors.amber,
+    foregroundColor: Colors.black,
+    child: const Icon(Icons.add_circle_outline),
+    onPressed: () {
+      return ProductForm(context: context)
+          .CreateProductForm(create_controller);
+    },
+  ),
+  appBar: AppBar(
+    automaticallyImplyLeading: false,
+    title: const Text(
+      name,
+      style: TextStyle(
+        fontFamily: 'Roboto',
+        fontSize: 31,
+        fontWeight: FontWeight.bold,
       ),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text(
-          name,
-          style: TextStyle(
-            fontFamily: 'CrimsonPro',
-            fontSize: 31,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.cyan,
-        foregroundColor: Colors.white,
+    ),
+    centerTitle: true,
+    backgroundColor: Colors.amber,
+    foregroundColor: Colors.black,
+  ),
+  body: Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ProductList(
+              handleProductTap: handleProductTap,
+              controller: edit_controller),
+        ],
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/boxes_background.png"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ProductList(
-                handleProductTap: handleProductTap,
-                controller: edit_controller),
-          ],
-        ),
-      ),
-      bottomNavigationBar: const Footer(),
-    );
+    ),
+  ),
+  bottomNavigationBar: const Footer(),
+);
   }
 }

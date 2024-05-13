@@ -60,6 +60,7 @@ class ShoppingListDisplay extends StatelessWidget {
     await dbService.deleteShoppingList(shoppingList.uid, context);
   }
 
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -72,11 +73,14 @@ class ShoppingListDisplay extends StatelessWidget {
           return Text('Error: ${snapshot.error}');
         } else {
           return Scaffold(
+            backgroundColor: Colors.grey[200], // Set a background color for the scaffold
             appBar: AppBar(
-              title: Text(shoppingList.name),
+              title: Text(shoppingList.name, style: const TextStyle(color: Colors.white)),
               centerTitle: true,
+              backgroundColor: const Color(0xFF4CAF50),
               actions: <Widget>[
                 PopupMenuButton(
+                  color: const Color(0xFF4CAF50),
                   itemBuilder: (context) => [
                     PopupMenuItem<int>(
                       value: 0,
@@ -144,45 +148,39 @@ class ShoppingListDisplay extends StatelessWidget {
                 ),
               ],
             ),
-            body: Column(
-              children: <Widget>[
-                Expanded(
-                  child: ShowProductsShoppingListBuilder(
-                      shoppingList: shoppingList,
-                      shoppingListCard: shoppingListCard),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 30),
-                  padding: const EdgeInsets.only(
-                      left: 50, right: 50, bottom: 20, top: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.yellow,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
+            body: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: ShowProductsShoppingListBuilder(
+                        shoppingList: shoppingList,
+                        shoppingListCard: shoppingListCard),
                   ),
-                  child: TextButton(
-                    onPressed: () async {
-                      await ShoppingListControllers()
-                          .resetProductStatus(shoppingList, context);
-                    },
-                    child: const Text(
-                      'CHECKOUT',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 20,
+                  Container(
+                    padding: const EdgeInsets.only(
+                        left: 110, right: 110, bottom: 10, top: 10),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF4CAF50),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextButton(
+                      onPressed: () async {
+                        await ShoppingListControllers()
+                            .resetProductStatus(shoppingList, context);
+                      },
+                      child: const Text(
+                        'CHECKOUT',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           );
         }

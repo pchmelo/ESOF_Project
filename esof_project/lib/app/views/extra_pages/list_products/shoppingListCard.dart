@@ -20,6 +20,8 @@ class ShoppingListCard {
     return _values[productId]?.values.first ?? false;
   }
 
+
+
   Widget shoppingListCard(
       {required MapEntry<Product?, Map<int, bool>> entry,
       required ShoppingList shoppingList}) {
@@ -30,7 +32,7 @@ class ShoppingListCard {
     return SizedBox(
       height: 80,
       child: Card(
-        color: checked ? Colors.yellow[100] : Colors.white,
+        color: checked ? const Color(0xFF90EE90) : Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(
               0),
@@ -84,41 +86,64 @@ class ShoppingListCard {
     );
   }
 
+
+
   Widget editShoppingListCard(
       {required MapEntry<Product, Map<int, bool>> entry,
-      required ShoppingList shoppingList}) {
+        required ShoppingList shoppingList}) {
     Product product = entry.key;
     Map<int, bool> productDetails = entry.value;
     int quantity = productDetails.keys.first;
     ValueNotifier<bool> checkedNotifier = ValueNotifier(product.checked);
-    return Card(
-      child: ListTile(
-        title:
-            Text(product.name ?? 'Unknown product'), // Display the product name
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min, // Set the main axis size to minimum
-          children: <Widget>[
-            ChangeQuantityComponent(
-              initialValue: quantity ?? 0,
-              onQuantityChanged: (value) {
-                _values[product.id ?? ''] = {value: product.checked};
-                quantity = value;
-              },
-            ),
-            IconButton(
-              icon: ValueListenableBuilder<bool>(
-                valueListenable: checkedNotifier,
-                builder: (context, value, child) {
-                  return Icon(value ? Icons.close : Icons.delete);
-                },
+    return SizedBox(
+      height: 113,
+      width: double.infinity,
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0), // added padding
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Center(
+                  child: Text(
+                    (product.name?.length ?? 0) > 6
+                        ? '${product.name.substring(0, 6) ?? ''}...'
+                        : product.name ?? 'Unknown product',
+                    style: const TextStyle(fontSize: 20.0),
+                  ),
+                  ),
+                  Container(
+                    width: 235,
+                    height: 85,
+                    child: ChangeQuantityComponent(
+                      initialValue: quantity ?? 0,
+                      onQuantityChanged: (value) {
+                        _values[product.id ?? ''] = {value: product.checked};
+                        quantity = value;
+                      },
+                    ),
+                  ),
+                  IconButton(
+
+                    icon: ValueListenableBuilder<bool>(
+                      valueListenable: checkedNotifier,
+                      builder: (context, value, child) {
+                        return Icon(value ? Icons.close : Icons.delete);
+                      },
+                    ),
+                    onPressed: () {
+                      product.toggleCheckedStatus();
+                      _values[product.id ?? ''] = {quantity: product.checked};
+                      checkedNotifier.value = product.checked;
+                    },
+                  ),
+                ],
               ),
-              onPressed: () {
-                product.toggleCheckedStatus();
-                _values[product.id ?? ''] = {quantity: product.checked};
-                checkedNotifier.value = product.checked;
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

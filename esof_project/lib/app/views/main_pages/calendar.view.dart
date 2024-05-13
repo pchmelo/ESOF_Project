@@ -89,14 +89,15 @@ class _CalenderViewState extends State<CalenderView> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
-          "Calender",
+          "Calendar",
           style: TextStyle(
-            fontFamily: 'CrimsonPro',
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.bold,
             fontSize: 31,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.lightBlue,
         foregroundColor: Colors.white,
       ),
       body: Column(

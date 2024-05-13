@@ -19,8 +19,8 @@ class _WrapperState extends State<Wrapper> {
   @override
   void initState() {
     super.initState();
-    notificationsService = NotificationsService();
-    initFuture = notificationsService.scheduleNotification();
+    //notificationsService = NotificationsService();
+    //initFuture = notificationsService.scheduleNotification();
   }
 
   @override
@@ -39,7 +39,7 @@ class _WrapperState extends State<Wrapper> {
               child: Text('Error: ${snapshot.error}'),
             ); // Replace with your actual error screen widget
           } else {
-            notificationsService.testNotification();
+            //notificationsService.testNotification();
             return StorageView(); // Replace with the widget you want to show after loading
           }
         },

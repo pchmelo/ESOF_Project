@@ -30,130 +30,128 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
   Uint8List? productIcon;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: widget.product.validity
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () async {
-                      if (!isInProductInfo) {
-                        ProductControllers productController =
-                            ProductControllers();
-                        Product updatedProduct = await productController
-                            .getProductById(widget.product.id);
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: widget.product.validity
+          ? Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    TextButton(
+      onPressed: () async {
+        if (!isInProductInfo) {
+          ProductControllers productController = ProductControllers();
+          Product updatedProduct = await productController.getProductById(widget.product.id);
 
-                        setState(() {
-                          widget.product = updatedProduct;
-                          isInProductInfo = true;
-                        });
+          setState(() {
+            widget.product = updatedProduct;
+            isInProductInfo = true;
+          });
+        }
+      },
+      child: Text(
+        'Product Info',
+        style: TextStyle(
+          fontSize: 15.95,
+          fontWeight: FontWeight.bold, // Make the font bold
+          color: isInProductInfo ? Colors.amber : Colors.black, // Change the color based on the state
+        ),
+      ),
+    ),
+    TextButton(
+      onPressed: () {
+        if (isInProductInfo) {
+          setState(() {
+            isInProductInfo = false;
+          });
+        }
+      },
+      child: Text(
+        'Expiration Dates',
+        style: TextStyle(
+          fontSize: 15.95,
+          fontWeight: FontWeight.bold, // Make the font bold
+          color: isInProductInfo ? Colors.black : Colors.amber, // Change the color based on the state
+        ),
+      ),
+    ),
+  ],
+)
+          : const Center(
+              child: Text(
+                'Product Info',
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+      actions: <Widget>[
+        PopupMenuButton(
+          itemBuilder: (context) => [
+            PopupMenuItem<int>(
+              value: 0,
+              child: Row(
+                children: <Widget>[
+                  ValueListenableBuilder(
+                    valueListenable: editValidity,
+                    builder: (context, bool value, child) {
+                      if (value && !isInProductInfo) {
+                        return const Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                          child: Icon(Icons.cancel),
+                        );
+                      } else {
+                        return const Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                          child: Icon(Icons.edit),
+                        );
                       }
                     },
-                    child: Text(
-                      'Product Info',
-                      style: TextStyle(
-                        fontSize: 10,
-                        decoration:
-                            isInProductInfo ? TextDecoration.underline : null,
-                      ),
-                    ),
                   ),
-                  const Text(' | ', style: TextStyle(fontSize: 10)),
-                  TextButton(
-                    onPressed: () {
-                      if (isInProductInfo) {
-                        setState(() {
-                          isInProductInfo = false;
-                        });
+                  ValueListenableBuilder(
+                    valueListenable: editValidity,
+                    builder: (context, bool value, child) {
+                      if (value && !isInProductInfo) {
+                        return const Text('Cancel');
+                      } else {
+                        return const Text('Edit');
                       }
                     },
-                    child: Text(
-                      'Expiration Dates',
-                      style: TextStyle(
-                        fontSize: 10,
-                        decoration:
-                            isInProductInfo ? null : TextDecoration.underline,
-                      ),
-                    ),
                   ),
                 ],
-              )
-            : const Center(
-                child: Text(
-                  'Product Info',
-                  style: TextStyle(fontSize: 10),
-                ),
               ),
-        actions: <Widget>[
-          PopupMenuButton(
-            itemBuilder: (context) => [
+              onTap: () async {
+                if (isInProductInfo) {
+                  await ProductForm(
+                          product: widget.product, context: context)
+                      .EditProductForm(widget.controller);
+                  ProductControllers productController = ProductControllers();
+                  Product updatedProduct = await productController
+                      .getProductById(widget.product.id);
+
+                  setState(() {
+                    widget.product = updatedProduct;
+                  });
+                } else {
+                  editValidity.value = !editValidity.value;
+                }
+              },
+            ),
+            if (isInProductInfo)
               PopupMenuItem<int>(
-                value: 0,
-                child: Row(
+                value: 1,
+                child: const Row(
                   children: <Widget>[
-                    ValueListenableBuilder(
-                      valueListenable: editValidity,
-                      builder: (context, bool value, child) {
-                        if (value && !isInProductInfo) {
-                          return const Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                            child: Icon(Icons.cancel),
-                          );
-                        } else {
-                          return const Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                            child: Icon(Icons.edit),
-                          );
-                        }
-                      },
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                      child: Icon(Icons.delete),
                     ),
-                    ValueListenableBuilder(
-                      valueListenable: editValidity,
-                      builder: (context, bool value, child) {
-                        if (value && !isInProductInfo) {
-                          return const Text('Cancel');
-                        } else {
-                          return const Text('Edit');
-                        }
-                      },
-                    ),
+                    Text('Delete'),
                   ],
                 ),
-                onTap: () async {
-                  if (isInProductInfo) {
-                    await ProductForm(product: widget.product, context: context)
-                        .EditProductForm(widget.controller);
-                    ProductControllers productController = ProductControllers();
-                    Product updatedProduct = await productController
-                        .getProductById(widget.product.id);
-
-                    setState(() {
-                      widget.product = updatedProduct;
-                    });
-                  } else {
-                    editValidity.value = !editValidity.value;
-                  }
+                onTap: () {
+                  widget.controller_delete(widget.product.id);
                 },
               ),
-              if (isInProductInfo)
-                PopupMenuItem<int>(
-                  value: 1,
-                  child: const Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                        child: Icon(Icons.delete),
-                      ),
-                      Text('Delete'),
-                    ],
-                  ),
-                  onTap: () {
-                    widget.controller_delete(widget.product.id);
-                  },
-                ),
-              if (isInProductInfo)
+            if (isInProductInfo)
               PopupMenuItem<int>(
                 value: 2,
                 onTap: () => selectIcon(ImageSource.camera),
@@ -167,104 +165,119 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                   ],
                 ),
               ),
+            PopupMenuItem<int>(
+              value: 3,
+              onTap: () => selectIcon(ImageSource.gallery),
+              child: const Row(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                    child: Icon(Icons.photo_library),
+                  ),
+                  Text('Change Icon From Gallery'),
+                ],
+              ),
+            ),
+            if (widget.product.notification)
               PopupMenuItem<int>(
-                value: 3,
-                onTap: () => selectIcon(ImageSource.gallery),
+                value: 4,
                 child: const Row(
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                      child: Icon(Icons.photo_library),
+                      child: Icon(Icons.notifications),
                     ),
-                    Text('Change Icon From Gallery'),
+                    Text('Edit Notification'),
                   ],
                 ),
+                onTap: () async {
+                  NotificationModel? notification =
+                      await NotificationController()
+                          .findNotificationByProduct(widget.product);
+                  await NotificationForm(context: context)
+                      .updateNotificationForm(widget.product, notification!);
+                },
               ),
-              if (widget.product.notification)
-                PopupMenuItem<int>(
-                  value: 4,
-                  child: const Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                        child: Icon(Icons.notifications),
-                      ),
-                      Text('Edit Notification'),
-                    ],
+          ],
+          onSelected: (item) => SelectedItem(context, item),
+        ),
+      ],
+    ),
+    body: isInProductInfo
+        ? Column(
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1),
+                  Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.grey, width: 2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(widget.product.imageURL),
+                      radius: 50,
+                    ),
                   ),
-                  onTap: () async {
-                    NotificationModel? notification =
-                        await NotificationController()
-                            .findNotificationByProduct(widget.product);
-                    await NotificationForm(context: context)
-                        .updateNotificationForm(widget.product, notification!);
-                  },
-                ),
-            ],
-            onSelected: (item) => SelectedItem(context, item),
-          ),
-        ],
-      ),
-      body: isInProductInfo
-          ? Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
-                ),
-                SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(widget.product.imageURL),
-                    radius: 50,
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.03,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                        child: Center(
-                          child: Text(
-                            widget.product.name,
-                            style: const TextStyle(
-                              fontSize: 35.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                  ListTile(
+                    title: Center(
+                      child: Text(
+                        widget.product.name,
+                        style: const TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                        child: Center(
-                          child: Text(
-                            'Threshold: ${widget.product.threshold}',
-                            style: const TextStyle(
-                              fontSize: 35.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                    ),
+                  ),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                  ListTile(
+                    title: Center(
+                      child: Text(
+                        'Quantity: ${widget.product.quantity}',
+                        style: const TextStyle(
+                          fontSize: 20.0,
                         ),
                       ),
-                      Center(
+                    ),
+                  ),
+                    const Divider(),
+                    ListTile(
+                      title: Center(
                         child: Text(
-                          'Quantity: ${widget.product.quantity}',
+                          'Threshold: ${widget.product.threshold}',
                           style: const TextStyle(
-                            fontSize: 35.0,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.1,
-                      ),
-                      IconButton(
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.153,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: ElevatedButton(
                         onPressed: () async {
                           await ShoppingListForm(context: context)
                               .SelectShoppingListForm(widget.product);
@@ -275,32 +288,36 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                           foregroundColor:
                               MaterialStateProperty.all<Color>(Colors.black),
                           minimumSize: MaterialStateProperty.all<Size>(
-                            const Size(50.0, 50.0),
+                            const Size(70.0, 70.0),
                           ),
                           shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50.0),
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
                           ),
+                          elevation: MaterialStateProperty.all<double>(5.0),
                         ),
-                        icon: const Icon(Icons.shopping_basket_outlined),
-                        iconSize: 80,
+                        child: const Icon(
+                          Icons.shopping_basket_outlined,
+                          size: 50.0,
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            )
-          : Column(
-              children: [
-                Expanded(
-                  child: ValidityListWidget(
-                      product: widget.product, editValidity: editValidity),
-                ),
-              ],
-            ),
-    );
-  }
+              ),
+            ],
+          )
+        : Column(
+            children: [
+              Expanded(
+                child: ValidityListWidget(
+                    product: widget.product, editValidity: editValidity),
+              ),
+            ],
+          ),
+  );
+}
 
   void selectIcon(ImageSource src) async {
     Uint8List cameraIcon = await selectImage(src);
