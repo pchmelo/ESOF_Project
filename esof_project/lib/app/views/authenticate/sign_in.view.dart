@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../services/authenticate.dart';
@@ -36,11 +37,12 @@ class _SignInView extends State<SignInView> {
           r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
           r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])';
       final regex = RegExp(pattern);
-
       return value!.isNotEmpty && !regex.hasMatch(value)
           ? 'Enter a valid email address'
           : null;
+
     }
+
 
     if (loading) {
       return Loading();
@@ -80,7 +82,7 @@ class _SignInView extends State<SignInView> {
             height: double.infinity,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/boxes_background.png"),
+                image: AssetImage("assets/books.png"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -94,7 +96,11 @@ class _SignInView extends State<SignInView> {
                     height: 20.0,
                   ),
                   TextFormField(
-                    decoration: TextInputDecoration.copyWith(hintText: 'Email'),
+                    decoration: TextInputDecoration.copyWith(hintText: 'Email',
+                      errorStyle: TextStyle(color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      backgroundColor: Colors.red[200]),
+                    ),
                     validator: (val) {
                       if(val!.isEmpty){
                         return 'Enter an email';
@@ -112,8 +118,11 @@ class _SignInView extends State<SignInView> {
                     height: 20.0,
                   ),
                   TextFormField(
-                    decoration:
-                        TextInputDecoration.copyWith(hintText: 'Password'),
+                    decoration: TextInputDecoration.copyWith(hintText: 'Password',
+                      errorStyle: TextStyle(color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          backgroundColor: Colors.red[200]),
+                    ),
                     obscureText: true,
                     validator: (val) => val!.length < 6
                         ? 'Enter a password 6+ chars long'
