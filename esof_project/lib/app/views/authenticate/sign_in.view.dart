@@ -50,14 +50,15 @@ class _SignInView extends State<SignInView> {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.cyan,
-          foregroundColor: Colors.white,
+          backgroundColor: Colors.amber,
+          foregroundColor: Colors.black,
           elevation: 0.0,
           title: const Text(
             'Login',
             style: TextStyle(
               fontFamily: 'CrimsonPro',
               fontSize: 31,
+              fontWeight: FontWeight.bold,
             ),
           ),
           centerTitle: true,
@@ -67,25 +68,20 @@ class _SignInView extends State<SignInView> {
                 widget.toggleView();
               },
               icon: const Icon(Icons.person,
-                color: Colors.white,
+                color: Colors.black,
               ),
               label: const Text('Register',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ),
           ],
         ),
         body: Container(
+          color: Colors.grey[200],
             width: double.infinity,
             height: double.infinity,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/books.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
             padding:
                 const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: Form(
