@@ -187,4 +187,21 @@ class ProductControllers {
     isLoading.value = false;
     return fetched_product;
   }
+
+  Future<void> changeQuantity(String id, int quantity) async {
+    isLoading.value = true;
+    Product product = await dbService.getProductById(id);
+    Product newProduct = Product.withImage(
+      id: product.id,
+      name: product.name,
+      threshold: product.threshold,
+      quantity: product.quantity! + quantity,
+      barcodes: product.barcodes,
+      validity: product.validity,
+      notification: product.notification,
+      imageURL: product.imageURL,
+    );
+    await dbService.updateProduct(newProduct);
+    isLoading.value = false;
+  }
 }

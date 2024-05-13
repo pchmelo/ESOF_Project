@@ -46,7 +46,9 @@ class ProductTile extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(product.name!),
+                  Text(product.name,
+                      style: const TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold)),
                   Text('Threshold: ${product.threshold}'),
                   Text('Quantity: ${product.quantity}'),
                 ],
