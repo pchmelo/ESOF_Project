@@ -97,8 +97,8 @@ class _CalenderViewState extends State<CalenderView> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.lightBlue,
-        foregroundColor: Colors.white,
+        backgroundColor: Colors.amber,
+        foregroundColor: Colors.black,
       ),
       body: Column(
         children: <Widget>[

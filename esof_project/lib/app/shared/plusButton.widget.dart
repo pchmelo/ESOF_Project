@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../../main.dart';
 import '../views/main_pages/addProduct/barCodeProcess.dart';
@@ -41,7 +42,7 @@ class _PlusButtonState extends State<PlusButton> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 325,
+      height: 275,
       padding: const EdgeInsets.all(15.0),
       color: Colors.transparent,
       child: Center(
@@ -66,9 +67,11 @@ class _PlusButtonState extends State<PlusButton> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.05,
                     ),
-                    Padding(
+                    Center(
+                    child: Padding(
                       padding: const EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           IconButton(
                             style: ButtonStyle(
@@ -83,12 +86,12 @@ class _PlusButtonState extends State<PlusButton> {
                                 ),
                               ),
                               minimumSize: MaterialStateProperty.all<Size>(
-                                const Size(150.0, 150.0),
+                                const Size(110.0, 110.0),
                               ),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
-                                      50.0), // Decreasing border radius
+                                      20.0), // Decreasing border radius
                                 ),
                               ),
                             ),
@@ -104,7 +107,7 @@ class _PlusButtonState extends State<PlusButton> {
                             },
                           ),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.1,
+                            width: MediaQuery.of(context).size.width * 0.12,
                           ),
                           IconButton(
                             style: ButtonStyle(
@@ -119,16 +122,16 @@ class _PlusButtonState extends State<PlusButton> {
                                 ),
                               ),
                               minimumSize: MaterialStateProperty.all<Size>(
-                                const Size(150.0, 150.0),
+                                const Size(110.0, 110.0),
                               ),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
-                                      50.0), // Decreasing border radius
+                                      20.0), // Decreasing border radius
                                 ),
                               ),
                             ),
-                            icon: const Icon(Icons.qr_code_scanner_outlined),
+                            icon: const Icon(CupertinoIcons.barcode_viewfinder),
                             iconSize: 80,
                             onPressed: () {
                               String? currentRoute =
@@ -140,6 +143,7 @@ class _PlusButtonState extends State<PlusButton> {
                           ),
                         ],
                       ),
+                    ),
                     ),
                   ],
                 ),

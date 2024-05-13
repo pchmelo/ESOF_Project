@@ -1,8 +1,11 @@
-import 'package:esof_project/app/components/footer.component.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
+import 'package:flutter/widgets.dart';
 import '../../../services/authenticate.dart';
 import '../../shared/constants.dart';
 import '../../shared/loading.dart';
+import 'package:esof_project/app/components/footer.component.dart';
+
 
 class SettingsView extends StatefulWidget {
   @override
@@ -28,8 +31,8 @@ class _SettingsViewState extends State<SettingsView> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFFC0C0C0),
-        foregroundColor: Colors.white,
+        backgroundColor: Colors.amber,
+        foregroundColor: Colors.black,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +101,7 @@ class _SettingsViewState extends State<SettingsView> {
                     child: Icon(Icons.circle_notifications_rounded, size: 50, color: Colors.black,),
                   ),
                   const SizedBox(width: 20,),
-                  Text('Notifications', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),),
+                  Text('Alerts', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),),
                   const Spacer(),
                   Checkbox(
                     value: _notifications,
@@ -159,8 +162,10 @@ class ChangeEmailPasswordPage extends StatefulWidget {
 
 class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
   final _formKey = GlobalKey<FormState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   String email = '';
   String password = '';
+  String confirmPassword = '';
   String error = '';
   bool loading = false;
 
@@ -180,6 +185,7 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
           ? 'Enter a valid email address'
           : null;
     }
+
     return loading
         ? Loading()
         : Scaffold(
@@ -188,104 +194,137 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
       ),
       body: Form(
         key: _formKey,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20.0,
-            ),
-            TextFormField(
-              decoration: TextInputDecoration.copyWith(hintText: 'Email',
-                errorStyle: TextStyle(color: Colors.black,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                decoration: TextInputDecoration.copyWith(
+                  hintText: 'Email',
+                  errorStyle: TextStyle(
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
-                    backgroundColor: Colors.red[200]),
-              ),
-              validator: (val) {
-                if(val!.isEmpty){
-                  return 'Enter an email';
-                }else{
-                  return validateEmail(val);
-                }
-              },
-              onChanged: (val) {
-                setState(() {
-                  email = val;
-                });
-              },
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            TextFormField(
-              decoration: TextInputDecoration.copyWith(hintText: 'Password',
-                errorStyle: TextStyle(color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    backgroundColor: Colors.red[200]),
-              ),
-              obscureText: true,
-              validator: (val) => val!.length < 6
-                  ? 'Enter a password 6+ chars long'
-                  : null,
-              onChanged: (val) {
-                setState(() {
-                  password = val;
-                });
-              },
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            TextFormField(
-              decoration: TextInputDecoration.copyWith(
-                hintText: 'Confirm Password',
-                errorStyle: TextStyle(color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    backgroundColor: Colors.red[200]),
-              ),
-              obscureText: true,
-              validator: (val) => val!.length < 6
-                  ? 'Enter a password 6+ chars long'
-                  : null,
-              onChanged: (val) {
-                setState(() {
-                  password = val;
-                });
-              },
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                if (_formKey.currentState!.validate()) {
+                    backgroundColor: Colors.red[200],
+                  ),
+                ),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'Enter an email';
+                  } else {
+                    return validateEmail(val);
+                  }
+                },
+                onChanged: (val) {
                   setState(() {
-                    loading = true;
+                    email = val;
                   });
-                  /*if (result == null) {
-                    setState(() {
-                      loading = false;
-                      error = 'Please supply a valid email';
-                    });
-                  }*/
-                  Navigator.pop(context);
-                }
-              },
-              style: ButtonStyle(
-                backgroundColor:
-                MaterialStateProperty.all<Color>(Colors.yellow),
+                },
               ),
-              child: const Text(
-                'Save',
-                style: TextStyle(color: Colors.black),
+              const SizedBox(
+                height: 20.0,
               ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            Text(
-              error,
-              style: const TextStyle(color: Colors.red, fontSize: 14),
-            ),
-          ],
+              TextFormField(
+                decoration: TextInputDecoration.copyWith(
+                  hintText: 'Password',
+                  errorStyle: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    backgroundColor: Colors.red[200],
+                  ),
+                ),
+                obscureText: true,
+                validator: (val) =>
+                val!.length < 6 ? 'Enter a password 6+ chars long' : null,
+                onChanged: (val) {
+                  setState(() {
+                    password = val;
+                  });
+                },
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              TextFormField(
+                decoration: TextInputDecoration.copyWith(
+                  hintText: 'Confirm Password',
+                  errorStyle: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    backgroundColor: Colors.red[200],
+                  ),
+                ),
+                obscureText: true,
+                validator: (val) {
+                  if (val!.length < 6) {
+                    return 'Enter a password 6+ chars long';
+                  } else if (val != password) {
+                    return 'Passwords do not match';
+                  }
+                  return null;
+                },
+                onChanged: (val) {
+                  setState(() {
+                    confirmPassword = val;
+                  });
+                },
+              ),
+              const SizedBox(height: 30.0),
+              Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.80,
+                  height: MediaQuery.of(context).size.height * 0.06,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          loading = true;
+                        });
+                        try {
+                          // Get current user
+                          User? user = _auth.currentUser;
+
+                          // Verify email matches current email
+                          if (email.isNotEmpty && email != user!.email) {
+                            throw 'Entered email does not match the current email';
+                          }
+
+                          // Update password if provided
+                          if (password.isNotEmpty) {
+                            await user!.updatePassword(password);
+                          }
+
+                          Navigator.pop(context); // Go back to the previous screen
+                        } catch (e) {
+                          setState(() {
+                            loading = false;
+                            error = 'Failed to update email and password: $e';
+                          });
+                        }
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                    child: const Text(
+                      'Save',
+                      style: TextStyle(color: Colors.black, fontSize: 20.0),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12.0),
+              Text(
+                error,
+                style: const TextStyle(color: Colors.red, fontSize: 14.0),
+              ),
+            ],
+          ),
         ),
       ),
     );
