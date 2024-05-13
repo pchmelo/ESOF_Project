@@ -1,4 +1,3 @@
-
 import 'package:esof_project/app/models/validity.model.dart';
 import 'package:esof_project/app/shared/plusButton.widget.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +86,7 @@ class ProductForm {
   }
 
   Future<void> CreateValidityForm(Product product, int quantity) async {
-    showModalBottomSheet(
+    return showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {

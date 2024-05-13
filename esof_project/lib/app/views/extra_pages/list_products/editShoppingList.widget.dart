@@ -39,66 +39,67 @@ class _EditShoppingListState extends State<EditShoppingList> {
             ),
           ),
         ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: ShowProductsShoppingListBuilder(
-                shoppingList: widget.shoppingList,
-                shoppingListCard: widget.shoppingListCard.editShoppingListCard),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.all(15),
-            backgroundColor: const Color(0xFF4CAF50),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: ShowProductsShoppingListBuilder(
+                  shoppingList: widget.shoppingList,
+                  shoppingListCard:
+                      widget.shoppingListCard.editShoppingListCard),
+            ),
+          ],
+        ),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(8),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.all(15),
+              backgroundColor: const Color(0xFF4CAF50),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            onPressed: () async {
+              ShoppingListControllers shoppingListControllers =
+                  ShoppingListControllers();
+              var products_p = await shoppingListControllers
+                  .fetchProducts(widget.shoppingList);
 
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
+              var new_shops = widget.shoppingList;
+              new_shops.updateProducts(products_p);
+
+              for (var entry in products_p.entries) {
+                String productId = entry.key;
+                var quantity =
+                    widget.shoppingListCard.getValue(productId ?? '');
+                bool deletion =
+                    widget.shoppingListCard.getDelete(productId ?? '');
+
+                if (deletion) {
+                  new_shops.removeProduct(productId);
+                } else if (quantity != 0 && !deletion) {
+                  new_shops.updateProductQuantity(productId, quantity);
+                }
+              }
+
+              String newName = _nameController.text.isEmpty
+                  ? widget.shoppingList.name
+                  : _nameController.text;
+
+              widget.controller(
+                  widget.shoppingList.uid, newName, new_shops.products);
+
+              Navigator.pop(context);
+            },
+            child: const Text(
+              'Confirm',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18.0,
+              ),
             ),
           ),
-          onPressed: () async {
-            ShoppingListControllers shoppingListControllers =
-                ShoppingListControllers();
-            var products_p = await shoppingListControllers
-                .fetchProducts(widget.shoppingList);
-
-            var new_shops = widget.shoppingList;
-            new_shops.updateProducts(products_p);
-
-            for (var entry in products_p.entries) {
-              String productId = entry.key;
-              var quantity = widget.shoppingListCard.getValue(productId ?? '');
-              bool deletion =
-                  widget.shoppingListCard.getDelete(productId ?? '');
-
-              if (deletion) {
-                new_shops.removeProduct(productId);
-              } else if (quantity != 0 && !deletion) {
-                new_shops.updateProductQuantity(productId, quantity);
-              }
-            }
-
-            String newName = _nameController.text.isEmpty
-                ? widget.shoppingList.name
-                : _nameController.text;
-
-            widget.controller(
-                widget.shoppingList.uid, newName, new_shops.products);
-
-            Navigator.pushReplacementNamed(context, '/start/shopping_list');
-          },
-          child: const Text('Confirm',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 18.0,
-          ),
-        ),
-      ),
-      )
-    );
+        ));
   }
 }
