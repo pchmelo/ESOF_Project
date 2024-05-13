@@ -1,4 +1,5 @@
 import 'package:esof_project/app/components/footer.component.dart';
+import 'package:esof_project/app/views/extra_pages/notifications/notificationsDisplay.widget.dart';
 import 'package:flutter/material.dart';
 import '../../../services/authenticate.dart';
 import '../../shared/constants.dart';
@@ -124,39 +125,39 @@ class _SettingsViewState extends State<SettingsView> {
               padding: const EdgeInsets.only(left: 10),
               child: SizedBox(
                 width: double.infinity,
-                child: Row(
-                  children: [
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.red.shade200,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const NotificationsDisplay(),
                       ),
-                      child: const Icon(
-                        Icons.circle_notifications_rounded,
-                        size: 50,
-                        color: Colors.black,
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.red.shade200,
+                        ),
+                        child: const Icon(
+                          Icons.circle_notifications_rounded,
+                          size: 50,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    const Text(
-                      'Notifications',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                    ),
-                    const Spacer(),
-                    Checkbox(
-                      value: _notifications,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _notifications = value!;
-                        });
-                      },
-                    ),
-                  ],
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      const Text(
+                        'Alerts',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
