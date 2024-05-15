@@ -52,7 +52,7 @@ class _SettingsViewState extends State<SettingsView> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Name: ' + 'User', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                    Text('User', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                     Text('Change Settings', style: TextStyle(fontSize: 16, color: Colors.grey),),
                   ],
                 ),
@@ -164,6 +164,7 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String email = '';
+  String actualPassword = '';
   String password = '';
   String confirmPassword = '';
   String error = '';
@@ -190,7 +191,7 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
         ? Loading()
         : Scaffold(
       appBar: AppBar(
-        title: Text('Change Email and Password'),
+        title: Text('Change Password'),
       ),
       body: Form(
         key: _formKey,
@@ -226,7 +227,28 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
               ),
               TextFormField(
                 decoration: TextInputDecoration.copyWith(
-                  hintText: 'Password',
+                  hintText: 'Actual Password',
+                  errorStyle: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    backgroundColor: Colors.red[200],
+                  ),
+                ),
+                obscureText: true,
+                validator: (val) =>
+                val!.length < 6 ? 'Enter a password 6+ chars long' : null,
+                onChanged: (val) {
+                  setState(() {
+                    actualPassword = val;
+                  });
+                },
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              TextFormField(
+                decoration: TextInputDecoration.copyWith(
+                  hintText: 'New Password',
                   errorStyle: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -282,23 +304,27 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
                         });
                         try {
                           // Get current user
-                          User? user = _auth.currentUser;
+                          User user = _auth.currentUser!;
 
                           // Verify email matches current email
-                          if (email.isNotEmpty && email != user!.email) {
+                          if (email.isNotEmpty && email != user.email) {
                             throw 'Entered email does not match the current email';
                           }
 
+                          // Reauthenticate user
+                          AuthCredential credential = EmailAuthProvider.credential(email: email, password: actualPassword);
+                          await user.reauthenticateWithCredential(credential);
+
                           // Update password if provided
                           if (password.isNotEmpty) {
-                            await user!.updatePassword(password);
+                            await user.updatePassword(password);
                           }
 
                           Navigator.pop(context); // Go back to the previous screen
                         } catch (e) {
                           setState(() {
                             loading = false;
-                            error = 'Failed to update email and password: $e';
+                            error = 'Failed to update password: Incorrect Email or Password';
                           });
                         }
                       }

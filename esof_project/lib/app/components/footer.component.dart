@@ -102,8 +102,8 @@ class BNBCustomPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     Path path = Path()..moveTo(0, 0);
-    path.lineTo(size.width * 0.5 - 30, 0);
-    path.quadraticBezierTo(size.width * 0.5, size.height / 2 + 50.0, size.width * 0.5 + 30, 0);
+    path.lineTo(size.width * 0.5 - 26, 0);
+    path.quadraticBezierTo(size.width * 0.5, size.height / 2 + 50.0, size.width * 0.5 + 26, 0);
     path.lineTo(size.width, 0);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
