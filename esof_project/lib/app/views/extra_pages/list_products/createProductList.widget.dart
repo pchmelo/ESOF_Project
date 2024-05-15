@@ -44,7 +44,7 @@ class _CreateProdutListState extends State<CreateProdutList> {
                         border: OutlineInputBorder(),
                       ),
                       validator: (val) =>
-                      val!.isEmpty ? 'Enter a Shopping List name' : null,
+                          val!.isEmpty ? 'Enter a Shopping List name' : null,
                       onChanged: (val) => setState(() => _name = val),
                     ),
                   ),
@@ -55,10 +55,10 @@ class _CreateProdutListState extends State<CreateProdutList> {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(const Color(0xFF4CAF50)),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color(0xFF4CAF50)),
                           foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.black),
+                              MaterialStateProperty.all<Color>(Colors.black),
                           shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
@@ -74,8 +74,8 @@ class _CreateProdutListState extends State<CreateProdutList> {
                         ),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            widget.controller(context, _name);
-                            Navigator.pop(context); // Close the current screen
+                            await widget.controller(context, _name);
+                            //Navigator.pop(context);
                           }
                         },
                       ),

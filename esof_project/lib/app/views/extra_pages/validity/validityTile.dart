@@ -55,29 +55,14 @@ class _ValidityTileState extends State<ValidityTile> {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25.0),
-                  child: CircleAvatar(
-                    radius: 25.0,
-                    backgroundColor: Colors.yellow[100],
-                    backgroundImage: const AssetImage(
-                        'assets/images/default_product_image.png'),
-                  ),
-                ),
-              ),
               const SizedBox(width: 10.0),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.validity.value.name),
+                    Text(widget.validity.value.name,
+                        style: const TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.bold)),
                     Text('Quantity: ${widget.validity.value.quantity}'),
                     Text(
                         'Expiration date: ${widget.validity.value.day}/${widget.validity.value.month}/${widget.validity.value.year}'),
@@ -104,7 +89,11 @@ class _ValidityTileState extends State<ValidityTile> {
                                 ValidityController validityController =
                                     ValidityController();
 
-                                validityController.updateValidity(new_one);
+                                int difference = new_one.quantity -
+                                    widget.validity.value.quantity;
+
+                                validityController.updateValidity(
+                                    new_one, difference);
                               },
                             ),
                             ValueListenableBuilder(

@@ -1,4 +1,5 @@
 import 'package:esof_project/app/controllers/productControllers.dart';
+import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/models/validity.model.dart';
 import 'package:esof_project/services/database_product.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -64,9 +65,15 @@ class ValidityController {
     return validities;
   }
 
-  Future<void> updateValidity(Validity validity) async {
+  Future<void> updateValidity(
+      Validity validity, int quantity_difference) async {
     isLoading.value = true;
     await dbService.updateValidity(validity);
+    if (quantity_difference != 0) {
+      ProductControllers productControllers = ProductControllers();
+      productControllers.changeQuantity(
+          validity.productId, quantity_difference);
+    }
     isLoading.value = false;
   }
 

@@ -1,3 +1,4 @@
+import 'package:esof_project/app/controllers/validityControllers.dart';
 import 'package:esof_project/app/models/notication.model.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/views/extra_pages/notifications/createNotification.widget.dart';
@@ -6,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 import 'package:esof_project/app/models/notication.model.dart' as notif;
+
+import '../models/validity.model.dart';
 
 class NotificationController {
   late DatabaseForNotifications dbService;
@@ -94,5 +97,41 @@ class NotificationController {
 
   Stream<List<NotificationModel>> getNotificationsStream() {
     return dbService.getNotificationsStream();
+  }
+
+  Future<Map<Validity, NotificationModel>> getAllNotificationsFiltered() async {
+    List<NotificationModel> notifications =
+        await dbService.getAllNotifications();
+
+    Map<Validity, NotificationModel> res = {};
+    DateTime now = DateTime.now();
+
+    ValidityController validityController = ValidityController();
+
+    for (var notification in notifications) {
+      List<Validity> list_validity = await validityController
+          .fetchAllValiditiesOfProduct(notification.productId);
+
+      for (var validity in list_validity) {
+        DateTime expirationDate =
+            DateTime(validity.year, validity.month, validity.day);
+        if (notification.unitTime == "days") {
+          expirationDate =
+              expirationDate.subtract(Duration(days: notification.time));
+        } else if (notification.unitTime == "weeks") {
+          expirationDate =
+              expirationDate.subtract(Duration(days: notification.time * 7));
+        } else {
+          expirationDate =
+              expirationDate.subtract(Duration(days: notification.time * 30));
+        }
+        if (expirationDate.isBefore(now) ||
+            expirationDate.isAtSameMomentAs(now)) {
+          res.addEntries([MapEntry(validity, notification)]);
+        }
+      }
+    }
+
+    return res;
   }
 }

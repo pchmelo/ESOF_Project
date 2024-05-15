@@ -60,22 +60,22 @@ class ShoppingListDisplay extends StatelessWidget {
     await dbService.deleteShoppingList(shoppingList.uid, context);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: fetchData(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting ||
-            shoppingList.products == null) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return Loading();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
           return Scaffold(
-            backgroundColor: Colors.grey[200], // Set a background color for the scaffold
+            backgroundColor:
+                Colors.grey[200], // Set a background color for the scaffold
             appBar: AppBar(
-              title: Text(shoppingList.name, style: const TextStyle(color: Colors.white)),
+              title: Text(shoppingList.name,
+                  style: const TextStyle(color: Colors.white)),
               centerTitle: true,
               backgroundColor: const Color(0xFF4CAF50),
               actions: <Widget>[

@@ -35,7 +35,7 @@ class _BarCodeProcessState extends State<BarCodeProcess> {
           MaterialPageRoute(
             builder: (context) => Scaffold(
               body: ProductForm(context: context).AddProductQuantityForm(
-                  "", controller, product, widget.barCode, 'middle'),
+                  "", controller, product, widget.barCode, 'scanner'),
             ),
           ));
     });
@@ -59,8 +59,12 @@ class _BarCodeProcessState extends State<BarCodeProcess> {
           return const Center(child: Text('Error occurred'));
         } else if (snapshot.hasData) {
           SchedulerBinding.instance.addPostFrameCallback((_) {
-            ProductForm(context: context).AddProductQuantityForm("0",
-                widget.change_quantity_controller, snapshot.data, '', 'middle');
+            ProductForm(context: context).AddProductQuantityForm(
+                "0",
+                widget.change_quantity_controller,
+                snapshot.data,
+                '',
+                'scanner');
           });
           return Container();
         } else {

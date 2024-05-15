@@ -1,47 +1,26 @@
 import 'package:esof_project/app/components/changeQuantitity.component.dart';
-import 'package:esof_project/app/components/productForm.component.dart';
-import 'package:esof_project/app/controllers/validityControllers.dart';
-import 'package:esof_project/app/views/extra_pages/validity/createValidity.view.dart';
-import 'package:esof_project/app/views/main_pages/storage/storage.view.dart';
+import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:esof_project/services/database_product.dart';
 
-class ChangeQuantityProduct extends StatefulWidget {
-  final String scancode;
-  final Function controller;
+class RemoveQuantityProduct extends StatefulWidget {
   final product;
-  final listUid;
-  final String spec;
-  const ChangeQuantityProduct({
+  const RemoveQuantityProduct({
     super.key,
-    required this.listUid,
-    required this.controller,
     required this.product,
-    required this.scancode,
-    required this.spec,
   });
 
   @override
-  State<ChangeQuantityProduct> createState() => _ChangeQuantityProductState();
+  State<RemoveQuantityProduct> createState() => _RemoveQuantityProductState();
 }
 
-class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
+class _RemoveQuantityProductState extends State<RemoveQuantityProduct> {
   final _formKey = GlobalKey<FormState>();
-  final DateTime _dateTime = DateTime.now();
   late User user;
   late DatabaseForProducts _dbService;
 
   int? _value;
-
-  Future<DateTime?> _showDatePicker() async {
-    return await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(DateTime.now().year),
-      lastDate: DateTime(DateTime.now().year + 10),
-    );
-  }
 
   @override
   void initState() {
@@ -56,7 +35,7 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
-          'Add Quantity to a Product',
+          'Remove Quantity to a Product',
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
@@ -113,30 +92,15 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
                   ),
                   child: const Text('Confirm'),
                   onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      if (widget.spec == 'middle') {
-                        await widget.controller(widget.listUid, widget.product,
-                            _value, widget.scancode);
-                        Navigator.pop(context);
-                        if (widget.product.validity) {
-                          await ProductForm(context: context)
-                              .CreateValidityForm(widget.product, _value!);
-                        }
-                      } else if (widget.spec == 'scanner') {
-                        await widget.controller(widget.listUid, widget.product,
-                            _value, widget.scancode);
-                        if (widget.product.validity) {
-                          await ProductForm(context: context)
-                              .CreateValidityForm(widget.product, _value!);
-                        }
-                        Navigator.pushReplacementNamed(
-                            context, '/start/storage');
-                      } else {
-                        await widget.controller(widget.listUid, widget.product,
-                            _value, widget.scancode);
-                        Navigator.pop(context);
-                      }
+                    int final_quantity = widget.product.quantity - _value!;
+                    if (final_quantity < 0) {
+                      final_quantity = 0;
                     }
+                    ProductControllers controller = ProductControllers();
+                    await controller.EditQuantity(
+                        widget.product, final_quantity);
+
+                    Navigator.pop(context);
                   },
                 ),
               ),

@@ -8,6 +8,7 @@ import 'package:esof_project/services/authenticate.dart';
 import 'package:esof_project/services/navigationService.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'app/components/transitionAnimation.component.dart';
@@ -28,7 +29,10 @@ void main() async {
     storageBucket: 'stockoverflow2-4f45a.appspot.com',
   ));
   tz.initializeTimeZones();
-  runApp(const MyApp());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
