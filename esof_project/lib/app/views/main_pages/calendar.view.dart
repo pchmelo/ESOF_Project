@@ -102,6 +102,21 @@ class _CalenderViewState extends State<CalenderView> {
           backgroundColor: Colors.lightBlue,
           foregroundColor: Colors.white,
         ),
+<<<<<<< diogo2
+        centerTitle: true,
+        backgroundColor: Colors.amber,
+        foregroundColor: Colors.black,
+      ),
+      body: Column(
+        children: <Widget>[
+          const SizedBox(height: 20),
+          Expanded(
+              child: TableCalendar(
+            calendarStyle: const CalendarStyle(
+              markerDecoration: BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+=======
         body: Column(
           children: <Widget>[
             const SizedBox(height: 20),
@@ -112,6 +127,7 @@ class _CalenderViewState extends State<CalenderView> {
                   color: Colors.red,
                   shape: BoxShape.circle,
                 ),
+>>>>>>> main
               ),
               focusedDay: today,
               firstDay: DateTime.utc(today.year - 2, 1, 1),
