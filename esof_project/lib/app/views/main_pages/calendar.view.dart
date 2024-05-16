@@ -69,7 +69,7 @@ class _CalenderViewState extends State<CalenderView> {
         allValidities = validities;
         validities.forEach((validity) {
           DateTime validityDate =
-          DateTime(validity.year, validity.month, validity.day);
+              DateTime(validity.year, validity.month, validity.day);
           if (validitiesMap[validityDate] == null) {
             validitiesMap[validityDate] = [];
           }
@@ -85,128 +85,132 @@ class _CalenderViewState extends State<CalenderView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text(
-          "Calendar",
-          style: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.bold,
-            fontSize: 31,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text(
+            "Calendar",
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+              fontSize: 31,
+            ),
           ),
+          centerTitle: true,
+          backgroundColor: Colors.lightBlue,
+          foregroundColor: Colors.white,
         ),
-        centerTitle: true,
-        backgroundColor: Colors.amber,
-        foregroundColor: Colors.black,
-      ),
-      body: Column(
-        children: <Widget>[
-          const SizedBox(height: 20),
-          Expanded(
-              child: TableCalendar(
-                calendarStyle: const CalendarStyle(
-                  markerDecoration: BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                  ),
+        body: Column(
+          children: <Widget>[
+            const SizedBox(height: 20),
+            Expanded(
+                child: TableCalendar(
+              calendarStyle: const CalendarStyle(
+                markerDecoration: BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle,
                 ),
-                focusedDay: today,
-                firstDay: DateTime.utc(today.year - 2, 1, 1),
-                lastDay: DateTime.utc(today.year + 30, 12, 31),
-                locale: 'en_US',
-                rowHeight: 40,
-                headerStyle: const HeaderStyle(
-                  formatButtonVisible: false,
-                  titleCentered: true,
-                  headerPadding: EdgeInsets.all(0),
-                  headerMargin: EdgeInsets.all(0),
-                  titleTextStyle: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+              ),
+              focusedDay: today,
+              firstDay: DateTime.utc(today.year - 2, 1, 1),
+              lastDay: DateTime.utc(today.year + 30, 12, 31),
+              locale: 'en_US',
+              rowHeight: 40,
+              headerStyle: const HeaderStyle(
+                formatButtonVisible: false,
+                titleCentered: true,
+                headerPadding: EdgeInsets.all(0),
+                headerMargin: EdgeInsets.all(0),
+                titleTextStyle: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-                onDaySelected: (selectedDay, focusedDay) {
-                  setState(() {
-                    this.selectedDay = selectedDay.toLocal();
-                    displayedValidities = [];
-                    validitiesMap.forEach((key, value) {
-                      if (isSameDay(this.selectedDay!, key)) {
-                        displayedValidities = value;
-                      }
-                    });
-                    if (displayedValidities.isEmpty) {
-                      currentPage = 0;
+              ),
+              onDaySelected: (selectedDay, focusedDay) {
+                setState(() {
+                  this.selectedDay = selectedDay.toLocal();
+                  displayedValidities = [];
+                  validitiesMap.forEach((key, value) {
+                    if (isSameDay(this.selectedDay!, key)) {
+                      displayedValidities = value;
                     }
                   });
-                },
-                selectedDayPredicate: (day) {
-                  if (this.selectedDay == null) {
-                    return false; // or true, depending on your requirements
-                  } else {
-                    return isSameDay(this.selectedDay!, day);
+                  if (displayedValidities.isEmpty) {
+                    currentPage = 0;
                   }
-                },
-                eventLoader: (day) {
-                  for (DateTime key in validitiesMap.keys) {
-                    if (isSameDay(key, day)) {
-                      return validitiesMap[key] ?? [];
-                    }
+                });
+              },
+              selectedDayPredicate: (day) {
+                if (this.selectedDay == null) {
+                  return false; // or true, depending on your requirements
+                } else {
+                  return isSameDay(this.selectedDay!, day);
+                }
+              },
+              eventLoader: (day) {
+                for (DateTime key in validitiesMap.keys) {
+                  if (isSameDay(key, day)) {
+                    return validitiesMap[key] ?? [];
                   }
-                  return [];
-                },
-                availableGestures: AvailableGestures.all,
-              )),
-          Expanded(
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: getValiditiesForCurrentPage().length,
-                    itemBuilder: (context, index) {
-                      Validity validity = getValiditiesForCurrentPage()[index];
-                      return ListTile(
-                        title: Text(validity.name),
-                        subtitle: Text('Quantity: ${validity.quantity}'),
-                        trailing: Text(
-                            '${validity.day}/${validity.month}/${validity.year}'),
-                      );
-                    },
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      onPressed: previousPage,
-                    ),
-                    Text(
-                      '${currentPage + 1} / ${(displayedValidities.length / 5).ceil()}',
-                      style: const TextStyle(fontSize: 18),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.arrow_forward),
-                      onPressed: nextPage,
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          displayedValidities = allValidities;
-                          currentPage = 0;
-                        });
+                }
+                return [];
+              },
+              availableGestures: AvailableGestures.all,
+            )),
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: getValiditiesForCurrentPage().length,
+                      itemBuilder: (context, index) {
+                        Validity validity =
+                            getValiditiesForCurrentPage()[index];
+                        return ListTile(
+                          title: Text(validity.name),
+                          subtitle: Text('Quantity: ${validity.quantity}'),
+                          trailing: Text(
+                              '${validity.day}/${validity.month}/${validity.year}'),
+                        );
                       },
-                      tooltip: 'Display all products',
-                      icon: const Icon(Icons.all_inclusive),
                     ),
-                  ],
-                )
-              ],
-            ),
-          )
-        ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: previousPage,
+                      ),
+                      Text(
+                        '${currentPage + 1} / ${(displayedValidities.length / 5).ceil()}',
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.arrow_forward),
+                        onPressed: nextPage,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            displayedValidities = allValidities;
+                            currentPage = 0;
+                          });
+                        },
+                        tooltip: 'Display all products',
+                        icon: const Icon(Icons.all_inclusive),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+        bottomNavigationBar: const Footer(),
       ),
-      bottomNavigationBar: const Footer(),
     );
   }
 }
