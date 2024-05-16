@@ -61,6 +61,7 @@ class _ValidityListWidgetState extends State<ValidityListWidget> {
   Widget build(BuildContext context) {
     ValueNotifier<bool> quantityDesc = ValueNotifier(true);
     ValueNotifier<bool> alphaDesc = ValueNotifier(true);
+    ValueNotifier<bool> sortMethod = ValueNotifier(true);
     bool switchQuantity = true;
     bool switchAlpha = true;
 
@@ -157,6 +158,35 @@ class _ValidityListWidgetState extends State<ValidityListWidget> {
                               switchQuantity = true;
                             }
 
+                            _runFilter();
+                          },
+                        ),
+                        PopupMenuItem<int>(
+                          value: 2,
+                          child: ValueListenableBuilder(
+                            valueListenable: sortMethod,
+                            builder: (context, value, child) {
+                              return Row(
+                                children: <Widget>[
+                                  const Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                                    child: Icon(Icons.calendar_today),
+                                  ),
+                                  Text(value
+                                      ? 'Sort by Expiration Date Asc'
+                                      : 'Sort by Expiration Date Desc'),
+                                ],
+                              );
+                            },
+                          ),
+                          onTap: () {
+                            if (!sortMethod.value) {
+                              widget.filter = ValidityFilter().sortByValidityDateDesc;
+                              sortMethod.value = true;
+                            } else {
+                              widget.filter = ValidityFilter().sortByValidityDateAsc;
+                              sortMethod.value = false;
+                            }
                             _runFilter();
                           },
                         ),
