@@ -62,7 +62,6 @@ class ShoppingListView extends StatelessWidget {
               ],
             ),
           ),
-
         ),
         bottomNavigationBar: const Footer(),
       ),

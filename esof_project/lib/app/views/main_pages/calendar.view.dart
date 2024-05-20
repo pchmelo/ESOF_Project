@@ -19,6 +19,7 @@ class _CalenderViewState extends State<CalenderView> {
   int currentPage = 0;
   List<Validity> allValidities = [];
   List<Validity> displayedValidities = [];
+  bool isClicked = false;
 
   List<Validity> getValiditiesForCurrentPage() {
     int start = currentPage * 5;
@@ -140,11 +141,12 @@ class _CalenderViewState extends State<CalenderView> {
                   if (displayedValidities.isEmpty) {
                     currentPage = 0;
                   }
+                  isClicked = true;
                 });
               },
               selectedDayPredicate: (day) {
                 if (this.selectedDay == null) {
-                  return false; // or true, depending on your requirements
+                  return false;
                 } else {
                   return isSameDay(this.selectedDay!, day);
                 }
@@ -192,16 +194,19 @@ class _CalenderViewState extends State<CalenderView> {
                         icon: const Icon(Icons.arrow_forward),
                         onPressed: nextPage,
                       ),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            displayedValidities = allValidities;
-                            currentPage = 0;
-                          });
-                        },
-                        tooltip: 'Display all products',
-                        icon: const Icon(Icons.all_inclusive),
-                      ),
+                      isClicked
+                          ? IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  displayedValidities = allValidities;
+                                  currentPage = 0;
+                                  isClicked = false;
+                                });
+                              },
+                              tooltip: 'Display all products',
+                              icon: const Icon(Icons.all_inclusive),
+                            )
+                          : Container()
                     ],
                   )
                 ],

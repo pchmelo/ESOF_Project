@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import '../../../controllers/shoppingListControllers.dart';
 import '../../../models/product.model.dart';
 import '../../main_pages/addProduct/manualAddProduct.view.dart';
+import '../../main_pages/shopping_list/shoppingList.view.dart';
 import 'editShoppingList.widget.dart';
 
 class ShoppingListDisplay extends StatelessWidget {
@@ -70,116 +71,130 @@ class ShoppingListDisplay extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
-          return Scaffold(
-            backgroundColor:
-                Colors.grey[200], // Set a background color for the scaffold
-            appBar: AppBar(
-              title: Text(shoppingList.name,
-                  style: const TextStyle(color: Colors.white)),
-              centerTitle: true,
-              backgroundColor: const Color(0xFF4CAF50),
-              actions: <Widget>[
-                PopupMenuButton(
-                  color: const Color(0xFF4CAF50),
-                  itemBuilder: (context) => [
-                    PopupMenuItem<int>(
-                      value: 0,
-                      child: const Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                            child: Icon(Icons.add),
-                          ),
-                          Text('Add Product'),
-                        ],
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: Scaffold(
+              backgroundColor:
+                  Colors.grey[200], // Set a background color for the scaffold
+              appBar: AppBar(
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ShoppingListView(),
                       ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ManualProductView(
-                              listUid: shoppingList.uid,
-                              controller: controller_addProductToList,
-                              spec: 'list',
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    PopupMenuItem<int>(
-                      value: 0,
-                      child: const Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                            child: Icon(Icons.edit),
-                          ),
-                          Text('Edit'),
-                        ],
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditShoppingList(
-                              shoppingList: shoppingList,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    PopupMenuItem<int>(
-                      value: 1,
-                      child: const Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                            child: Icon(Icons.delete),
-                          ),
-                          Text('Delete'),
-                        ],
-                      ),
-                      onTap: () {
-                        deleteshoppingList(context);
-                      },
-                    ),
-                  ],
-                  onSelected: (item) => SelectedItem(context, item),
+                    );
+                  },
                 ),
-              ],
-            ),
-            body: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: ShowProductsShoppingListBuilder(
-                        shoppingList: shoppingList,
-                        shoppingListCard: shoppingListCard),
+                title: Text(shoppingList.name,
+                    style: const TextStyle(color: Colors.white)),
+                centerTitle: true,
+                backgroundColor: const Color(0xFF4CAF50),
+                actions: <Widget>[
+                  PopupMenuButton(
+                    color: const Color(0xFF4CAF50),
+                    itemBuilder: (context) => [
+                      PopupMenuItem<int>(
+                        value: 0,
+                        child: const Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                              child: Icon(Icons.add),
+                            ),
+                            Text('Add Product'),
+                          ],
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ManualProductView(
+                                listUid: shoppingList.uid,
+                                controller: controller_addProductToList,
+                                spec: 'list',
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      PopupMenuItem<int>(
+                        value: 0,
+                        child: const Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                              child: Icon(Icons.edit),
+                            ),
+                            Text('Edit'),
+                          ],
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditShoppingList(
+                                shoppingList: shoppingList,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      PopupMenuItem<int>(
+                        value: 1,
+                        child: const Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                              child: Icon(Icons.delete),
+                            ),
+                            Text('Delete'),
+                          ],
+                        ),
+                        onTap: () {
+                          deleteshoppingList(context);
+                        },
+                      ),
+                    ],
+                    onSelected: (item) => SelectedItem(context, item),
                   ),
-                  Container(
-                    padding: const EdgeInsets.only(
-                        left: 110, right: 110, bottom: 10, top: 10),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF4CAF50),
-                      borderRadius: BorderRadius.circular(10),
+                ],
+              ),
+              body: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: ShowProductsShoppingListBuilder(
+                          shoppingList: shoppingList,
+                          shoppingListCard: shoppingListCard),
                     ),
-                    child: TextButton(
-                      onPressed: () async {
-                        await ShoppingListControllers()
-                            .resetProductStatus(shoppingList, context);
-                      },
-                      child: const Text(
-                        'CHECKOUT',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 20,
+                    Container(
+                      padding: const EdgeInsets.only(
+                          left: 110, right: 110, bottom: 10, top: 10),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF4CAF50),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextButton(
+                        onPressed: () async {
+                          await ShoppingListControllers()
+                              .resetProductStatus(shoppingList, context);
+                        },
+                        child: const Text(
+                          'CHECKOUT',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           );

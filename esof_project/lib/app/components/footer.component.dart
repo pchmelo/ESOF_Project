@@ -4,7 +4,6 @@ import '../controllers/productControllers.dart';
 import '../../main.dart';
 import 'package:flutter/cupertino.dart';
 
-
 class Footer extends StatefulWidget {
   const Footer({super.key});
 
@@ -30,21 +29,30 @@ class _FooterState extends State<Footer> {
               children: [
                 IconButton(
                   onPressed: () {
-                    String? currentRoute = ModalRoute.of(context)!.settings.name;
+                    String? currentRoute =
+                        ModalRoute.of(context)!.settings.name;
                     if (currentRoute != '/start/storage') {
                       navigationService.navigateTo('/start/storage');
                     }
                   },
-                  icon: const Icon(CupertinoIcons.cube_box, color: Colors.black,),
+                  icon: const Icon(
+                    CupertinoIcons.cube_box,
+                    color: Colors.black,
+                  ),
                   iconSize: 40,
                 ),
                 IconButton(
                   onPressed: () {
-                    String? currentRoute = ModalRoute.of(context)!.settings.name;
+                    String? currentRoute =
+                        ModalRoute.of(context)!.settings.name;
                     if (currentRoute != '/start/shopping_list') {
-                      navigationService.navigateTo('/start/shopping_list');            }
+                      navigationService.navigateTo('/start/shopping_list');
+                    }
                   },
-                  icon: const Icon(CupertinoIcons.shopping_cart, color: Colors.black,),
+                  icon: const Icon(
+                    CupertinoIcons.shopping_cart,
+                    color: Colors.black,
+                  ),
                   iconSize: 40,
                 ),
                 const SizedBox(
@@ -52,22 +60,30 @@ class _FooterState extends State<Footer> {
                 ),
                 IconButton(
                   onPressed: () {
-                    String? currentRoute = ModalRoute.of(context)!.settings.name;
+                    String? currentRoute =
+                        ModalRoute.of(context)!.settings.name;
                     if (currentRoute != '/start/calendar') {
                       navigationService.navigateTo('/start/calendar');
                     }
                   },
-                  icon: const Icon(Icons.calendar_month, color: Colors.black,),
+                  icon: const Icon(
+                    Icons.calendar_month,
+                    color: Colors.black,
+                  ),
                   iconSize: 40,
                 ),
                 IconButton(
                   onPressed: () {
-                    String? currentRoute = ModalRoute.of(context)!.settings.name;
+                    String? currentRoute =
+                        ModalRoute.of(context)!.settings.name;
                     if (currentRoute != '/start/settings') {
                       navigationService.navigateTo('/start/settings');
                     }
                   },
-                  icon: const Icon(Icons.person_outline, color: Colors.black,),
+                  icon: const Icon(
+                    Icons.person_outline,
+                    color: Colors.black,
+                  ),
                   iconSize: 40,
                 ),
               ],
@@ -98,12 +114,13 @@ class BNBCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = Colors.amber
+      ..color = Colors.grey[100]!
       ..style = PaintingStyle.fill;
 
     Path path = Path()..moveTo(0, 0);
     path.lineTo(size.width * 0.5 - 26, 0);
-    path.quadraticBezierTo(size.width * 0.5, size.height / 2 + 50.0, size.width * 0.5 + 26, 0);
+    path.quadraticBezierTo(
+        size.width * 0.5, size.height / 2 + 50.0, size.width * 0.5 + 26, 0);
     path.lineTo(size.width, 0);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);

@@ -4,6 +4,7 @@ import 'package:esof_project/app/controllers/notificationController.dart';
 import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/views/extra_pages/validity/validityList.widget.dart';
+import 'package:esof_project/app/views/main_pages/shopping_list/shoppingList.view.dart';
 import 'package:esof_project/services/upload_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -101,7 +102,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
             : const Center(
                 child: Text(
                   'Product Info',
-                  style: TextStyle(fontSize: 15),
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
         actions: <Widget>[
@@ -230,11 +231,14 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                   children: [
                     SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                     Container(
-                      height: 100,
-                      width: 100,
+                      height: 200,
+                      width: 200,
                       decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.grey, width: 2),
+                        borderRadius: BorderRadius.circular(30),
+                        image: DecorationImage(
+                          image: NetworkImage(widget.product.imageURL),
+                          fit: BoxFit.cover,
+                        ),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
@@ -244,23 +248,19 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                           ),
                         ],
                       ),
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(widget.product.imageURL),
-                        radius: 50,
-                      ),
                     ),
                     ListTile(
                       title: Center(
                         child: Text(
                           widget.product.name,
                           style: const TextStyle(
-                            fontSize: 24.0,
+                            fontSize: 30.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   ],
                 ),
                 Padding(
@@ -291,7 +291,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: ElevatedButton(
                           onPressed: () async {
                             await ShoppingListForm(context: context)
@@ -319,7 +319,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: widget.product.validity
                             ? Container()
                             : ElevatedButton(
