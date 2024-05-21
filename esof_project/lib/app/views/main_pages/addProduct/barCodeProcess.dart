@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import '../../../components/productForm.component.dart';
 import '../../../controllers/productControllers.dart';
@@ -17,7 +18,7 @@ class BarCodeProcess extends StatefulWidget {
   final Function change_quantity_controller_scan =
       ProductControllers().ChangeQuantityProduct;
 
-  final String barCode;
+  late final String barCode;
   BarCodeProcess({super.key, required this.barCode});
 
   @override
@@ -27,6 +28,27 @@ class BarCodeProcess extends StatefulWidget {
 class _BarCodeProcessState extends State<BarCodeProcess> {
   late DatabaseForProducts _dbService;
   late User user;
+
+  readCodeBar() async {
+    String code = await FlutterBarcodeScanner.scanBarcode(
+        '#FF0000', "Cancel", false, ScanMode.BARCODE);
+
+    if (code != '-1' && isValidBarcode(code)) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BarCodeProcess(barCode: code),
+          ),
+        );
+      });
+    }
+  }
+
+  bool isValidBarcode(String barcode) {
+    final regex = RegExp(r'^\d+$');
+    return regex.hasMatch(barcode) && barcode.length == 13;
+  }
 
   void handleProductTap(Product product, Function controller) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -80,6 +102,26 @@ class _BarCodeProcessState extends State<BarCodeProcess> {
                     handleProductTap: handleProductTap,
                     controller: widget.change_quantity_controller),
               ],
+            ),
+            bottomNavigationBar: BottomAppBar(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Scan Code: ${widget.barCode}',
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.sync),
+                      onPressed: () {
+                        readCodeBar();
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
           );
         }
