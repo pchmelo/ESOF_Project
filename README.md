@@ -118,7 +118,7 @@ Adicionável à dispensa e às listas de compras, guarda-se a sua quantidade e u
 Associada a um produto, dita quantas unidades desse produto existem cuja data de validade expira numa certa data.
  
 
-<img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/img.png?raw=true" alt="Image">
+<img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/classDiagram.png?raw=true" alt="Image">
 
 
 ## Architecture and Design
