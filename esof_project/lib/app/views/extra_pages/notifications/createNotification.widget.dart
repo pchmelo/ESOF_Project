@@ -17,12 +17,15 @@ class _CreateNotificationState extends State<CreateNotification> {
   String timeUnit = 'days';
   int time = 1;
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 425,
       padding: const EdgeInsets.all(15.0),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           const Text(
             'Add a Notification',
@@ -41,19 +44,28 @@ class _CreateNotificationState extends State<CreateNotification> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Flexible(
-                      child: TextField(
-                        controller:
-                            TextEditingController(text: time.toString()),
+                      child: TextFormField(
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly
                         ],
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black),
+                          ),
                           labelText: 'Enter a number',
                         ),
                         onChanged: (value) {
                           time = int.parse(value);
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a number';
+                          }
+                          return null;
                         },
                       ),
                     ),
@@ -77,35 +89,39 @@ class _CreateNotificationState extends State<CreateNotification> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.yellow),
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black),
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                      const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
+                Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.amber),
+                      foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                      textStyle: MaterialStateProperty.all<TextStyle>(
+                        const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                      minimumSize: MaterialStateProperty.all<Size>(
+                        const Size(double.infinity, 61),
+                      ),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                10.0)
+                        ),
                       ),
                     ),
-                    minimumSize: MaterialStateProperty.all<Size>(
-                      const Size(150.0, 50.0),
-                    ),
-                    shape: MaterialStateProperty.all<OutlinedBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
+                    child: const Text('Confirm'),
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        await NotificationController().CreateNotification(
+                            widget.product.id, timeUnit, time);
+                        Navigator.pop(context);
+                      }
+                    },
                   ),
-                  child: const Text('Confirm'),
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      await NotificationController().CreateNotification(
-                          widget.product.id, timeUnit, time);
-                      Navigator.pop(context);
-                    }
-                  },
                 ),
               ],
             ),
@@ -113,6 +129,5 @@ class _CreateNotificationState extends State<CreateNotification> {
         ],
       ),
     );
-    ;
   }
 }
