@@ -17,69 +17,83 @@ class _CreateNotificationState extends State<CreateNotification> {
   String timeUnit = 'days';
   int time = 1;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 425,
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        children: <Widget>[
-          const Text(
-            'Add a Notification',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-          const SizedBox(height: 20), // Adjust as needed for spacing
 
-          Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Flexible(
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
-                        ], // Only numbers can be entered
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Enter a number',
+
+@override
+Widget build(BuildContext context) {
+  return Container(
+    padding: const EdgeInsets.all(15.0),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const Text(
+          'Add a Notification',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        const SizedBox(height: 20),
+        Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Flexible(
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
                         ),
-                        onChanged: (value) {
-                          time = int.parse(value);
-                        },
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
+                        labelText: 'Enter a number',
                       ),
+                      onChanged: (value) {
+                        time = int.parse(value);
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a number';
+                        }
+                        return null;
+                      },
                     ),
-                    Flexible(
-                      child: DropdownButton<String>(
-                        value: timeUnit,
-                        items: <String>['days', 'weeks', 'months']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            timeUnit = newValue!;
-                          });
-                        },
-                      ),
+                  ),
+                  Flexible(
+                    child: DropdownButton<String>(
+                      value: timeUnit,
+                      items: <String>['days', 'weeks', 'months']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          timeUnit = newValue!;
+                        });
+                      },
                     ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Container(
+                width: double.infinity,
+                child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.yellow),
+                        MaterialStateProperty.all<Color>(Colors.amber),
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.black),
                     textStyle: MaterialStateProperty.all<TextStyle>(
@@ -89,12 +103,12 @@ class _CreateNotificationState extends State<CreateNotification> {
                       ),
                     ),
                     minimumSize: MaterialStateProperty.all<Size>(
-                      const Size(150.0, 50.0),
+                      const Size(double.infinity, 61),
                     ),
                     shape: MaterialStateProperty.all<OutlinedBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
-                            10.0), // Decreasing border radius
+                            10.0)
                       ),
                     ),
                   ),
@@ -107,12 +121,12 @@ class _CreateNotificationState extends State<CreateNotification> {
                     }
                   },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-    ;
-  }
+        ),
+      ],
+    ),
+  );
+}
 }
