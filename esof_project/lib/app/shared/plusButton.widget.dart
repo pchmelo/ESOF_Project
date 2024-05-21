@@ -76,7 +76,7 @@ class _PlusButtonState extends State<PlusButton> {
                           IconButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.yellow),
+                                  Colors.amber),
                               foregroundColor: MaterialStateProperty.all<Color>(
                                   Colors.black),
                               textStyle: MaterialStateProperty.all<TextStyle>(
@@ -112,7 +112,7 @@ class _PlusButtonState extends State<PlusButton> {
                           IconButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.yellow),
+                                  Colors.amber),
                               foregroundColor: MaterialStateProperty.all<Color>(
                                   Colors.black),
                               textStyle: MaterialStateProperty.all<TextStyle>(

@@ -26,48 +26,48 @@ Widget build(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;
 
   return Container(
-    height: screenHeight * 0.55,
-    padding: const EdgeInsets.all(15.0),
+    height: screenHeight * 0.5,
+    padding: EdgeInsets.all(screenWidth * 0.02),
     child: Column(
       children: <Widget>[
-        const Text(
+        Text(
           'Add Product',
           style: TextStyle(
-            fontSize: 20.0,
+            fontSize: screenHeight * 0.025,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: screenHeight * 0.025),
         Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Product Name',
                   border: OutlineInputBorder(),
-                  labelStyle: TextStyle(color: Colors.black),
+                  labelStyle: TextStyle(color: Colors.black, fontSize: screenHeight * 0.025),
                 ),
                 validator: (val) =>
                     val!.isEmpty ? 'Enter a product name' : null,
                 onChanged: (val) => setState(() => _name = val),
               ),
-              const Padding(padding: EdgeInsets.only(top: 20)),
+              Padding(padding: EdgeInsets.only(top: screenHeight * 0.025)),
               TextFormField(
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Threshold',
                   border: OutlineInputBorder(),
-                  labelStyle: TextStyle(color: Colors.black),
+                  labelStyle: TextStyle(color: Colors.black, fontSize: screenHeight * 0.025),
                 ),
                 validator: (val) => val!.isEmpty ? 'Enter a threshold' : null,
                 onChanged: (val) =>
                     setState(() => _threshold = int.parse(val)),
               ),
               CheckboxListTile(
-                title: const Text('Expires'),
+                title: Text('Expires', style: TextStyle(fontSize: screenHeight * 0.025)),
                 value: _validity,
                 activeColor: Colors.amber,
                 checkColor: Colors.black,
@@ -80,7 +80,7 @@ Widget build(BuildContext context) {
               ),
               if (_validity)
                 CheckboxListTile(
-                  title: const Text('Notification'),
+                  title: Text('Notification', style: TextStyle(fontSize: screenHeight * 0.025)),
                   value: _notification,
                   activeColor: Colors.amber,
                   checkColor: Colors.black,
@@ -90,8 +90,8 @@ Widget build(BuildContext context) {
                     });
                   },
                 ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: screenHeight * 0.025,
               ),
               ElevatedButton(
                 style: ButtonStyle(
@@ -100,13 +100,13 @@ Widget build(BuildContext context) {
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.black),
                   textStyle: MaterialStateProperty.all<TextStyle>(
-                    const TextStyle(
+                    TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
+                      fontSize: screenHeight * 0.018,
                     ),
                   ),
                   minimumSize: MaterialStateProperty.all<Size>(
-                    Size(screenWidth * 0.9, 60.0), // 80% of the screen width
+                    Size(screenWidth * 0.9, screenHeight * 0.07),
                   ),
                   shape: MaterialStateProperty.all<OutlinedBorder>(
                     RoundedRectangleBorder(
@@ -114,7 +114,7 @@ Widget build(BuildContext context) {
                     ),
                   ),
                 ),
-                child: const Text('Confirm'),
+                child: Text('Confirm', style: TextStyle(fontSize: screenHeight * 0.025)),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     Product product = Product(

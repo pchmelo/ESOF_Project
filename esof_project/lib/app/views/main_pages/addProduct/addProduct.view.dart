@@ -17,7 +17,7 @@ Widget build(BuildContext context) {
     appBar: AppBar(
       title: Text(
         name,
-        style: TextStyle(
+        style: const TextStyle(
           fontFamily: 'Roboto',
           fontSize: 31,
           fontWeight: FontWeight.bold,
