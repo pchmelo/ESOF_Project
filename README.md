@@ -147,7 +147,7 @@ Incluem apenas uma base de dados externa, para acesso quando necessário.
 Banco de dados externo ao sistema, com o qual o sistema interage para adquirir informação que não está presente na base de dados interna
 
 #### Package diagram
-<img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/packdiagram.png?raw=true" alt="Image">
+<img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/PackageDiagram.png?raw=true" alt="Image">
 
 ### Physical Architecture
 
@@ -171,7 +171,7 @@ Necessário para todas as funcionalidades envolvendo Datas de Validade e notific
 * API de leitura de código de barras:
 Possibilita a leitura de códigos de barras.
 
-* Estrutura Principal e Base de Dados Interna (verificar o [Package Diagram](#Package-Diagram)
+* Estrutura Principal e Base de Dados Interna (verificar o [Package Diagram](#Package-Diagram))
 
 
 #### Deployment diagram
