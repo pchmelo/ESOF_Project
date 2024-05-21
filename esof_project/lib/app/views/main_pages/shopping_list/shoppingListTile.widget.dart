@@ -45,8 +45,9 @@ class _ShoppingListTileState extends State<ShoppingListTile> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1.0,
+    return Container(
+      width: 200,
+      height: 200,
       child: InkWell(
         onTap: () {
           print(widget.onShoppingListTap);
@@ -70,10 +71,12 @@ class _ShoppingListTileState extends State<ShoppingListTile> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.shoppingList.name,
-                    style: const TextStyle(
-                        fontSize: 20.0, fontWeight: FontWeight.bold),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      widget.shoppingList.name,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                   for (var entry in products.entries.take(3))
                     Row(

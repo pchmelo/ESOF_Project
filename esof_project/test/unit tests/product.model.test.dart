@@ -2,65 +2,160 @@ import 'package:esof_project/app/models/product.model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('ProductModel', () {
-    final product = Product(
+  group('Product', () {
+    test('Product constructor', () {
+      var product = Product(
+        id: '1',
+        name: 'Product Name',
+        threshold: 0,
+        quantity: 0,
+        barcodes: [],
+        validity: false,
+        notification: false,
+      );
+
+      expect(product.id, '1');
+      expect(product.name, 'Product Name');
+      expect(product.threshold, 0);
+      expect(product.quantity, 0);
+      expect(product.barcodes, []);
+      expect(product.validity, false);
+      expect(product.notification, false);
+    });
+
+    test('Product.withImage constructor', () {
+      var product = Product.withImage(
+        id: '1',
+        name: 'Product Name',
+        threshold: 0,
+        quantity: 0,
+        barcodes: [],
+        validity: false,
+        notification: false,
+        imageURL: 'https://example.com/image.png',
+      );
+
+      expect(product.id, '1');
+      expect(product.name, 'Product Name');
+      expect(product.threshold, 0);
+      expect(product.quantity, 0);
+      expect(product.barcodes, []);
+      expect(product.validity, false);
+      expect(product.notification, false);
+      expect(product.imageURL, 'https://example.com/image.png');
+    });
+
+    test('addBarcode', () {
+      var product = Product(
+        id: '1',
+        name: 'Product Name',
+        threshold: 0,
+        quantity: 0,
+        barcodes: [],
+        validity: false,
+        notification: false,
+      );
+
+      product.addBarcode('123456');
+      expect(product.barcodes, ['123456']);
+    });
+
+    test('isBarcodeExist', () {
+      var product = Product(
+        id: '1',
+        name: 'Product Name',
+        threshold: 0,
+        quantity: 0,
+        barcodes: ['123456'],
+        validity: false,
+        notification: false,
+      );
+
+      expect(product.isBarcodeExist('123456'), true);
+      expect(product.isBarcodeExist('654321'), false);
+    });
+
+    test('toggleCheckedStatus', () {
+      var product = Product(
+        id: '1',
+        name: 'Product Name',
+        threshold: 0,
+        quantity: 0,
+        barcodes: [],
+        validity: false,
+        notification: false,
+      );
+
+      product.toggleCheckedStatus();
+      expect(product.checked, true);
+
+      product.toggleCheckedStatus();
+      expect(product.checked, false);
+    });
+
+    test('updateImageURL', () {
+      var product = Product(
+        id: '1',
+        name: 'Product Name',
+        threshold: 0,
+        quantity: 0,
+        barcodes: [],
+        validity: false,
+        notification: false,
+      );
+
+      product.updateImageURL('https://example.com/new_image.png');
+      expect(product.imageURL, 'https://example.com/new_image.png');
+    });
+  });
+
+  test('toJson', () {
+    var product = Product(
       id: '1',
-      name: 'Beans',
+      name: 'Product Name',
       threshold: 0,
       quantity: 0,
-      barcodes: ['0123456789', '9876543210'],
+      barcodes: ['123456'],
       validity: false,
       notification: false,
     );
 
-    test('addBarcode adds a barcode to the product', () {
-      product.addBarcode('1032547698');
-      expect(product.barcodes, ['0123456789', '9876543210', '1032547698']);
+    expect(product.toJson(), {
+      'id': '1',
+      'name': 'Product Name',
+      'threshold': 0,
+      'quantity': 0,
+      'barcodes': ['123456'],
+      'checked': 'false',
+      'validity': 'false',
+      'notification': 'false',
+      'imageURL':
+          'https://firebasestorage.googleapis.com/v0/b/stockoverflow2-4f45a.appspot.com/o/defaultIcon.png?alt=media&token=6915ad4e-2d6d-42de-b196-180da883f6c7',
     });
+  });
 
-    test('isBarcodeExist returns true if barcode exists', () {
-      expect(product.isBarcodeExist('0123456789'), true);
-    });
+  test('fromJson', () {
+    var json = {
+      'id': '1',
+      'name': 'Product Name',
+      'threshold': 0,
+      'quantity': 0,
+      'barcodes': ['123456'],
+      'checked': 'false',
+      'validity': 'false',
+      'notification': 'false',
+      'imageURL': 'https://example.com/image.png',
+    };
 
-    test('isBarcodeExist returns false if barcode does not exist', () {
-      expect(product.isBarcodeExist('0000000000'), false);
-    });
+    var product = Product.fromJson(json);
 
-    test('toggleCheckedStatus toggles the checked status of the product', () {
-      product.toggleCheckedStatus();
-      expect(product.checked, true);
-    });
-
-    test('toJson returns a map representation of the product', () {
-      expect(product.toJson(), {
-        'id': '1',
-        'name': 'Beans',
-        'threshold': 0,
-        'quantity': 0,
-        'barcodes': ['0123456789', '9876543210', '1032547698'],
-        'checked': 'true',
-        'validity': 'false',
-      });
-    });
-
-    test('Product.fromJson creates a product from a map', () {
-      var productFromJson = Product.fromJson({
-        'id': '2',
-        'name': 'Peas',
-        'threshold': 10,
-        'quantity': 20,
-        'barcodes': ['012349765'],
-        'checked': 'false',
-        'validity': 'true',
-      });
-
-      expect(productFromJson.id, '2');
-      expect(productFromJson.name, 'Peas');
-      expect(productFromJson.threshold, 10);
-      expect(productFromJson.quantity, 20);
-      expect(productFromJson.barcodes, ['012349765']);
-      expect(productFromJson.checked, false);
-      expect(productFromJson.validity, true);
-    });
+    expect(product.id, '1');
+    expect(product.name, 'Product Name');
+    expect(product.threshold, 0);
+    expect(product.quantity, 0);
+    expect(product.barcodes, ['123456']);
+    expect(product.validity, false);
+    expect(product.notification, false);
+    expect(product.imageURL, 'https://example.com/image.png');
   });
 }

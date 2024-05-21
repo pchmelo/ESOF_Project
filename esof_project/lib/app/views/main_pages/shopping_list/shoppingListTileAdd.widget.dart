@@ -14,7 +14,7 @@ class ShoppingListTileAdd extends StatelessWidget {
     Function create_controller = ShoppingListControllers().CreateProduct;
 
     return AspectRatio(
-      aspectRatio: 1.0, // This makes the tile square
+      aspectRatio: 1.0,
       child: GestureDetector(
         onTap: () {
           return ProductListForm(context: context)
@@ -24,15 +24,14 @@ class ShoppingListTileAdd extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Colors.white, // This gives the tile a white background
-                border: Border.all(
-                    color: Colors.black), // This gives the tile a black border
+                color: Colors.white,
+                border: Border.all(color: Colors.black),
                 borderRadius: BorderRadius.circular(10.0),
               ),
             ),
             const Center(
               // This centers its child
-              child: Icon(Icons.add, size: 50.0), // Add icon
+              child: Icon(Icons.add, size: 50.0),
             ),
           ],
         ),

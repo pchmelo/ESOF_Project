@@ -59,6 +59,8 @@ class _ShoppingListBuilderState extends State<ShoppingListBuilder> {
           return Padding(
             padding: const EdgeInsets.all(5.0),
             child: Container(
+              width: 200,
+              height: 200,
               margin: const EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                 boxShadow: [
