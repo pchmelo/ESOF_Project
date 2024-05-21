@@ -22,7 +22,7 @@ class _FooterState extends State<Footer> {
         CustomPaint(
           size: Size(MediaQuery.of(context).size.width, 60),
           painter: BNBCustomPainter(),
-          child: Container(
+          child: SizedBox(
             height: 60,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -91,8 +91,8 @@ class _FooterState extends State<Footer> {
           ),
         ),
         Positioned(
-          bottom: 10, // adjust the position as needed
-          left: MediaQuery.of(context).size.width / 2 - 28, // center the FAB
+          bottom: 10,
+          left: MediaQuery.of(context).size.width / 2 - 28,
           child: FloatingActionButton(
             onPressed: () {
               String? currentRoute = ModalRoute.of(context)!.settings.name;
@@ -101,8 +101,8 @@ class _FooterState extends State<Footer> {
                     .PlusButtonForm(create_controller);
               }
             },
-            child: const Icon(Icons.add_circle, color: Colors.black, size: 50),
             backgroundColor: Colors.white,
+            child: const Icon(Icons.add_circle, color: Colors.black, size: 50),
           ),
         ),
       ],
