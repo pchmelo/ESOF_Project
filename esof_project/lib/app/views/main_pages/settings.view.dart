@@ -17,7 +17,6 @@ class _SettingsViewState extends State<SettingsView> {
   final AuthService _auth = AuthService();
   final name = 'Settings';
   String currentRoute = '/start/settings';
-  bool _notifications = false; // Add this line
 
   @override
   Widget build(BuildContext context) {
@@ -176,20 +175,19 @@ class _SettingsViewState extends State<SettingsView> {
                     onPressed: () async {
                       try {
                         await _auth.signOut();
-                        Navigator.pushReplacementNamed(context,
-                            '/start'); // assuming '/start' is your sign-in route
+                        Navigator.pushReplacementNamed(context, '/start');
                       } catch (e) {
                         print('Error signing out: $e');
                       }
                     },
-                    child: Row(
+                    child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.person, color: Colors.black, size: 50),
-                        const SizedBox(
+                        Icon(Icons.person, color: Colors.black, size: 50),
+                        SizedBox(
                           width: 20,
-                        ), // Adjust the width to increase or decrease the space
-                        const Text(
+                        ),
+                        Text(
                           'Logout',
                           style: TextStyle(
                             color: Colors.black,
@@ -248,7 +246,7 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
         ? Loading()
         : Scaffold(
             appBar: AppBar(
-              title: Text('Change Password'),
+              title: const Text('Change Password'),
             ),
             body: Form(
               key: _formKey,
@@ -257,31 +255,6 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextFormField(
-                      decoration: TextInputDecoration.copyWith(
-                        hintText: 'Email',
-                        errorStyle: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          backgroundColor: Colors.red[200],
-                        ),
-                      ),
-                      validator: (val) {
-                        if (val!.isEmpty) {
-                          return 'Enter an email';
-                        } else {
-                          return validateEmail(val);
-                        }
-                      },
-                      onChanged: (val) {
-                        setState(() {
-                          email = val;
-                        });
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
                     TextFormField(
                       decoration: TextInputDecoration.copyWith(
                         hintText: 'Actual Password',
@@ -352,7 +325,7 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
                     ),
                     const SizedBox(height: 30.0),
                     Center(
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.80,
                         height: MediaQuery.of(context).size.height * 0.06,
                         child: ElevatedButton(
@@ -362,33 +335,24 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
                                 loading = true;
                               });
                               try {
-                                // Get current user
                                 User user = _auth.currentUser!;
+                                email = user.email!;
 
-                                // Verify email matches current email
-                                if (email.isNotEmpty && email != user.email) {
-                                  throw 'Entered email does not match the current email';
-                                }
-
-                                // Reauthenticate user
                                 AuthCredential credential =
                                     EmailAuthProvider.credential(
                                         email: email, password: actualPassword);
                                 await user
                                     .reauthenticateWithCredential(credential);
 
-                                // Update password if provided
                                 if (password.isNotEmpty) {
                                   await user.updatePassword(password);
                                 }
 
-                                Navigator.pop(
-                                    context); // Go back to the previous screen
+                                Navigator.pop(context);
                               } catch (e) {
                                 setState(() {
                                   loading = false;
-                                  error =
-                                      'Failed to update password: Incorrect Email or Password';
+                                  error = 'Failed to update password';
                                 });
                               }
                             }
