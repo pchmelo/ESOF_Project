@@ -54,11 +54,27 @@ class ShoppingListDisplay extends StatelessWidget {
     });
   }
 
-  Future<void> deleteshoppingList(context) async {
+  Future<void> deleteshoppingList(BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Loading(); // Use your Loading widget here
+      },
+    );
+
     User user = FirebaseAuth.instance.currentUser!;
     DatabaseForShoppingList dbService = DatabaseForShoppingList(uid: user.uid);
 
     await dbService.deleteShoppingList(shoppingList.uid, context);
+
+    Navigator.pop(context); // Close the dialog
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ShoppingListView(),
+      ),
+    );
   }
 
   @override

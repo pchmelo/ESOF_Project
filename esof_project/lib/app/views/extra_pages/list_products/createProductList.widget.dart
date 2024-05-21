@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../main_pages/shopping_list/shoppingList.view.dart';
+
 class CreateProdutList extends StatefulWidget {
   final Function controller;
   const CreateProdutList({super.key, required this.controller});
@@ -75,7 +77,12 @@ class _CreateProdutListState extends State<CreateProdutList> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             await widget.controller(context, _name);
-                            //Navigator.pop(context);
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ShoppingListView(),
+                              ),
+                            );
                           }
                         },
                       ),

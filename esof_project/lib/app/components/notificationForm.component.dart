@@ -14,6 +14,7 @@ class NotificationForm {
     return showModalBottomSheet<void>(
       isScrollControlled: true,
       context: context,
+      isDismissible: false,
       builder: (BuildContext context) {
         return Padding(
           padding:
