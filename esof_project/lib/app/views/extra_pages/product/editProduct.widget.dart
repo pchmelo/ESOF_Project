@@ -82,7 +82,7 @@ Widget build(BuildContext context) {
                     setState(() => _threshold = int.parse(val)),
               ),
               CheckboxListTile(
-                title: const Text('Validity'),
+                title: const Text('Expiration Date'),
                 value: _validity,
                 activeColor: Colors.amber,
                 checkColor: Colors.black,
