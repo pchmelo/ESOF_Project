@@ -33,7 +33,6 @@ class ShoppingListControllers {
       products: <String, Map<int, bool>>{},
     );
     await dbService.createShoppingList(shoppingList);
-    Navigator.pop(context);
     isLoading.value = false;
   }
 

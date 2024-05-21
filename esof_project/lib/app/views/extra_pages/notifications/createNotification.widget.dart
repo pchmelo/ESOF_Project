@@ -32,8 +32,7 @@ class _CreateNotificationState extends State<CreateNotification> {
               color: Colors.black,
             ),
           ),
-          const SizedBox(height: 20), // Adjust as needed for spacing
-
+          const SizedBox(height: 20),
           Form(
             key: _formKey,
             child: Column(
@@ -43,10 +42,12 @@ class _CreateNotificationState extends State<CreateNotification> {
                   children: <Widget>[
                     Flexible(
                       child: TextField(
+                        controller:
+                            TextEditingController(text: time.toString()),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly
-                        ], // Only numbers can be entered
+                        ],
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Enter a number',
@@ -93,8 +94,7 @@ class _CreateNotificationState extends State<CreateNotification> {
                     ),
                     shape: MaterialStateProperty.all<OutlinedBorder>(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            10.0), // Decreasing border radius
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                   ),
