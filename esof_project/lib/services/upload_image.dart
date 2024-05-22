@@ -1,13 +1,11 @@
 import 'dart:typed_data';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 final FirebaseStorage fb_storage = FirebaseStorage.instance;
 
-class UploadData{
-  Future<String> uploadImage(String child, Uint8List image) async{
+class UploadData {
+  Future<String> uploadImage(String child, Uint8List image) async {
     Reference reference = fb_storage.ref().child(child);
     UploadTask uploadTask = reference.putData(image);
 

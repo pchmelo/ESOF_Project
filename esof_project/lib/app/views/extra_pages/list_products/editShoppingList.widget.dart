@@ -2,9 +2,7 @@ import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:esof_project/app/views/extra_pages/list_products/shoppingListCard.dart';
 import 'package:esof_project/app/views/extra_pages/list_products/showProductsShoppingListBuilder.dart';
 import 'package:flutter/material.dart';
-
 import '../../../controllers/shoppingListControllers.dart';
-import '../../../models/product.model.dart';
 
 class EditShoppingList extends StatefulWidget {
   final ShoppingList shoppingList;

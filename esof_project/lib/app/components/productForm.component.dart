@@ -129,7 +129,6 @@ class ShoppingListForm {
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {
-                  // Pop to the previously pushed route
                   Navigator.pop(context);
                 },
               ),

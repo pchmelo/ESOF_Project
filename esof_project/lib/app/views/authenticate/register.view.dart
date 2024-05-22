@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../services/authenticate.dart';
 import '../../shared/constants.dart';
 import '../../shared/loading.dart';
@@ -17,22 +16,14 @@ class _RegisterViewState extends State<RegisterView> {
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
-  // text field state
   String email = '';
   String password = '';
   String error = '';
 
   @override
   Widget build(BuildContext context) {
-
     String? validateEmail(String? value) {
-      const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
-          r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
-          r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
-          r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
-          r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
-          r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
-          r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])';
+      const pattern = r'^.+@.+\..+$';
       final regex = RegExp(pattern);
 
       return value!.isNotEmpty && !regex.hasMatch(value)
@@ -62,10 +53,12 @@ class _RegisterViewState extends State<RegisterView> {
                   onPressed: () {
                     widget.toggleView();
                   },
-                  icon: const Icon(Icons.person,
+                  icon: const Icon(
+                    Icons.person,
                     color: Colors.black,
                   ),
-                  label: const Text('Login',
+                  label: const Text(
+                    'Login',
                     style: TextStyle(
                       color: Colors.black,
                     ),
@@ -74,7 +67,7 @@ class _RegisterViewState extends State<RegisterView> {
               ],
             ),
             body: Container(
-              color: Colors.grey[200],
+                color: Colors.grey[200],
                 width: double.infinity,
                 height: double.infinity,
                 padding: const EdgeInsets.symmetric(
@@ -87,15 +80,17 @@ class _RegisterViewState extends State<RegisterView> {
                         height: 20.0,
                       ),
                       TextFormField(
-                        decoration: TextInputDecoration.copyWith(hintText: 'Email',
-                          errorStyle: TextStyle(color: Colors.black,
+                        decoration: TextInputDecoration.copyWith(
+                          hintText: 'Email',
+                          errorStyle: TextStyle(
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               backgroundColor: Colors.red[200]),
                         ),
                         validator: (val) {
-                          if(val!.isEmpty){
+                          if (val!.isEmpty) {
                             return 'Enter an email';
-                          }else{
+                          } else {
                             return validateEmail(val);
                           }
                         },
@@ -109,8 +104,10 @@ class _RegisterViewState extends State<RegisterView> {
                         height: 20.0,
                       ),
                       TextFormField(
-                        decoration: TextInputDecoration.copyWith(hintText: 'Password',
-                          errorStyle: TextStyle(color: Colors.black,
+                        decoration: TextInputDecoration.copyWith(
+                          hintText: 'Password',
+                          errorStyle: TextStyle(
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               backgroundColor: Colors.red[200]),
                         ),
@@ -145,7 +142,7 @@ class _RegisterViewState extends State<RegisterView> {
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.yellow),
+                              MaterialStateProperty.all<Color>(Colors.yellow),
                         ),
                         child: const Text(
                           'Register',
@@ -155,9 +152,16 @@ class _RegisterViewState extends State<RegisterView> {
                       const SizedBox(
                         height: 12,
                       ),
-                      Text(
-                        error,
-                        style: const TextStyle(color: Colors.red, fontSize: 14),
+                      Center(
+                        child: Text(error,
+                            style: error.isEmpty
+                                ? const TextStyle(
+                                    color: Colors.red, fontSize: 14.0)
+                                : TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    backgroundColor: Colors.red[200],
+                                  )),
                       ),
                     ],
                   ),

@@ -1,7 +1,5 @@
 import 'package:esof_project/app/controllers/productControllers.dart';
-import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/models/validity.model.dart';
-import 'package:esof_project/services/database_product.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';

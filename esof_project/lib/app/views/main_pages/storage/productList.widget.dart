@@ -1,9 +1,6 @@
-import 'dart:ui';
-
 import 'package:esof_project/app/shared/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../services/database_product.dart';
 import '../../../models/product.model.dart';
 import '../../../shared/filter.dart';
@@ -87,7 +84,7 @@ class _ProductListState extends State<ProductList> {
                           labelText: 'Search',
                           floatingLabelBehavior: FloatingLabelBehavior.never,
                           suffixIcon: Row(
-                            mainAxisSize: MainAxisSize.min, // This is important
+                            mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               IconButton(
                                 onPressed: _runFilter,

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
-import 'package:flutter/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../../services/authenticate.dart';
 import '../../shared/constants.dart';
 import '../../shared/loading.dart';
 import 'package:esof_project/app/components/footer.component.dart';
-
 import '../extra_pages/notifications/notificationsDisplay.widget.dart';
 
 class SettingsView extends StatefulWidget {
@@ -227,7 +225,6 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return loading
         ? Loading()
         : Scaffold(
@@ -362,9 +359,16 @@ class _ChangeEmailPasswordPageState extends State<ChangeEmailPasswordPage> {
                       ),
                     ),
                     const SizedBox(height: 12.0),
-                    Text(
-                      error,
-                      style: const TextStyle(color: Colors.red, fontSize: 14.0),
+                    Center(
+                      child: Text(error,
+                          style: error.isEmpty
+                              ? const TextStyle(
+                                  color: Colors.red, fontSize: 14.0)
+                              : TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  backgroundColor: Colors.red[200],
+                                )),
                     ),
                   ],
                 ),

@@ -1,7 +1,6 @@
 import 'package:esof_project/app/controllers/notificationController.dart';
 import 'package:esof_project/app/models/notication.model.dart';
 import 'package:esof_project/app/models/product.model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -44,8 +43,7 @@ class _UpdateNotificationState extends State<UpdateNotification> {
               color: Colors.black,
             ),
           ),
-          const SizedBox(height: 20), // Adjust as needed for spacing
-
+          const SizedBox(height: 20),
           Form(
             key: _formKey,
             child: Column(
@@ -59,7 +57,7 @@ class _UpdateNotificationState extends State<UpdateNotification> {
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly
-                        ], // Only numbers can be entered
+                        ],
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Enter a number',
@@ -108,8 +106,7 @@ class _UpdateNotificationState extends State<UpdateNotification> {
                     ),
                     shape: MaterialStateProperty.all<OutlinedBorder>(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            10.0), // Decreasing border radius
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                   ),

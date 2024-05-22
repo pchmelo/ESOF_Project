@@ -82,7 +82,7 @@ class _ShoppingListTileState extends State<ShoppingListTile> {
                     Row(
                       children: [
                         Expanded(
-                          flex: 3, // takes 75% of the space
+                          flex: 3,
                           child: Text(
                             entry.key.name,
                             style: const TextStyle(color: Colors.black),
@@ -90,7 +90,7 @@ class _ShoppingListTileState extends State<ShoppingListTile> {
                           ),
                         ),
                         Expanded(
-                          flex: 1, // takes 25% of the space
+                          flex: 1,
                           child: Text(
                             "x${entry.value}",
                             style: const TextStyle(color: Colors.black),

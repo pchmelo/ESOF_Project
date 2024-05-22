@@ -1,6 +1,5 @@
 import 'package:esof_project/app/components/footer.component.dart';
 import 'package:esof_project/app/controllers/validityControllers.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../models/validity.model.dart';

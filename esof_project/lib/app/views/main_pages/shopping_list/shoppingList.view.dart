@@ -3,7 +3,6 @@ import 'package:esof_project/app/controllers/shoppingListControllers.dart';
 import 'package:esof_project/app/views/extra_pages/list_products/shoppingListDisplay.dart';
 import 'package:esof_project/app/views/main_pages/shopping_list/shoppingList.widgetViewList.dart';
 import 'package:flutter/material.dart';
-
 import '../../../models/product.model.dart';
 
 class ShoppingListView extends StatelessWidget {

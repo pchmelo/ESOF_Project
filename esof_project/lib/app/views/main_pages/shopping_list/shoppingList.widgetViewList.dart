@@ -2,7 +2,6 @@ import 'package:esof_project/app/views/main_pages/shopping_list/shoppingListBuil
 import 'package:esof_project/services/database_shopping_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../../models/product.model.dart';
 import '../../../models/shoppingList.model.dart';
 import '../../../shared/loading.dart';

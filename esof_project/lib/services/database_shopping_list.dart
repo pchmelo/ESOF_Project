@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:esof_project/services/database_product.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../app/models/product.model.dart';
 
 class DatabaseForShoppingList {
@@ -46,15 +43,12 @@ class DatabaseForShoppingList {
       Map<Product, Map<int, bool>> result = {};
 
       for (var entry in productsData.entries) {
-        // Get the quantity and checked status from the entry value
         int quantity = int.parse(entry.value.keys.first);
         bool checked = entry.value.values.first as bool;
 
         DatabaseForProducts db = DatabaseForProducts(uid: uid);
-        // Fetch the Product from the database
         Product product = await db.getProductById(entry.key);
 
-        // Add the Product and its details to the map
         result[product] = {quantity: checked};
       }
 
@@ -77,11 +71,9 @@ class DatabaseForShoppingList {
     Map<String, Map<int, bool>> result = {};
 
     for (var entry in productsData.entries) {
-      // Get the quantity and checked status from the entry value
       int quantity = int.parse(entry.value.keys.first);
       bool checked = entry.value.values.first as bool;
 
-      // Add the productId and its details to the map
       result[entry.key] = {quantity: checked};
     }
 

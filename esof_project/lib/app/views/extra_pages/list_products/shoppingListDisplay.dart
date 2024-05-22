@@ -5,7 +5,6 @@ import 'package:esof_project/app/views/extra_pages/list_products/showProductsSho
 import 'package:esof_project/services/database_shopping_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../../controllers/shoppingListControllers.dart';
 import '../../../models/product.model.dart';
 import '../../main_pages/addProduct/manualAddProduct.view.dart';
@@ -59,7 +58,7 @@ class ShoppingListDisplay extends StatelessWidget {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return Loading(); // Use your Loading widget here
+        return Loading();
       },
     );
 
@@ -68,7 +67,7 @@ class ShoppingListDisplay extends StatelessWidget {
 
     await dbService.deleteShoppingList(shoppingList.uid, context);
 
-    Navigator.pop(context); // Close the dialog
+    Navigator.pop(context);
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -90,8 +89,7 @@ class ShoppingListDisplay extends StatelessWidget {
           return WillPopScope(
             onWillPop: () async => false,
             child: Scaffold(
-              backgroundColor:
-                  Colors.grey[200], // Set a background color for the scaffold
+              backgroundColor: Colors.grey[200],
               appBar: AppBar(
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back),

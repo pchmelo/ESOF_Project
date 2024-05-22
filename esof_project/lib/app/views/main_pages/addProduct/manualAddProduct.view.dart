@@ -1,7 +1,6 @@
 import 'package:esof_project/app/components/productForm.component.dart';
 import 'package:esof_project/app/views/main_pages/storage/productList.widget.dart';
 import 'package:flutter/material.dart';
-import '../../../controllers/productControllers.dart';
 
 class ManualProductView extends StatelessWidget {
   final listUid;

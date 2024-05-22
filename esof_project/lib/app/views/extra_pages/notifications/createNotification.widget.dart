@@ -1,6 +1,5 @@
 import 'package:esof_project/app/controllers/notificationController.dart';
 import 'package:esof_project/app/models/product.model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,9 +15,6 @@ class _CreateNotificationState extends State<CreateNotification> {
   final _formKey = GlobalKey<FormState>();
   String timeUnit = 'days';
   int time = 1;
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +45,7 @@ class _CreateNotificationState extends State<CreateNotification> {
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly
                         ],
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                           ),
@@ -94,9 +90,9 @@ class _CreateNotificationState extends State<CreateNotification> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.amber),
+                          MaterialStateProperty.all<Color>(Colors.amber),
                       foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.black),
+                          MaterialStateProperty.all<Color>(Colors.black),
                       textStyle: MaterialStateProperty.all<TextStyle>(
                         const TextStyle(
                           fontWeight: FontWeight.bold,
@@ -108,9 +104,7 @@ class _CreateNotificationState extends State<CreateNotification> {
                       ),
                       shape: MaterialStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10.0)
-                        ),
+                            borderRadius: BorderRadius.circular(10.0)),
                       ),
                     ),
                     child: const Text('Confirm'),

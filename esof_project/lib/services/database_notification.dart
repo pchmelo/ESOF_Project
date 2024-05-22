@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../app/models/notication.model.dart';
 
 class DatabaseForNotifications {
@@ -7,7 +6,6 @@ class DatabaseForNotifications {
 
   DatabaseForNotifications({required this.uid});
 
-  // collection reference
   final CollectionReference notificationCollection =
       FirebaseFirestore.instance.collection('users');
 

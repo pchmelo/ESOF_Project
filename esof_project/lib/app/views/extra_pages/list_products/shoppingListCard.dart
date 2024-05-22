@@ -1,7 +1,6 @@
 import 'package:esof_project/app/components/changeQuantitity.component.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:flutter/material.dart';
-
 import '../../../controllers/shoppingListControllers.dart';
 import '../../../models/product.model.dart';
 import '../../../shared/loading.dart';
@@ -20,8 +19,6 @@ class ShoppingListCard {
     return _values[productId]?.values.first ?? false;
   }
 
-
-
   Widget shoppingListCard(
       {required MapEntry<Product?, Map<int, bool>> entry,
       required ShoppingList shoppingList}) {
@@ -34,17 +31,17 @@ class ShoppingListCard {
       child: Card(
         color: checked ? const Color(0xFF90EE90) : Colors.white,
         child: Padding(
-          padding: const EdgeInsets.all(
-              0),
-          child: Row (
+          padding: const EdgeInsets.all(0),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row (
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ValueListenableBuilder(
                     valueListenable: ShoppingListControllers().isLoading,
-                    builder: (BuildContext context, bool isLoading, Widget? child) {
+                    builder:
+                        (BuildContext context, bool isLoading, Widget? child) {
                       if (isLoading) {
                         return Loading();
                       } else {
@@ -53,7 +50,8 @@ class ShoppingListCard {
                           value: checked,
                           onChanged: (bool? value) {
                             if (value != null) {
-                              ShoppingListControllers().updateProductCheckedStatus(
+                              ShoppingListControllers()
+                                  .updateProductCheckedStatus(
                                 shoppingList.uid,
                                 product?.id ?? '',
                                 value,
@@ -66,19 +64,14 @@ class ShoppingListCard {
                   ),
                   Text(
                     product?.name ?? 'Unknown product',
-                    style: const TextStyle(
-                        fontSize:
-                        25.0), // Increase font size to make the card look bigger
+                    style: const TextStyle(fontSize: 25.0),
                   ),
                   Text(
                     ' (x$quantity)',
-                    style: const TextStyle(
-                        fontSize:
-                            25.0), // Increase font size to make the card look bigger
+                    style: const TextStyle(fontSize: 25.0),
                   ),
                 ],
               ),
-
             ],
           ),
         ),
@@ -86,11 +79,9 @@ class ShoppingListCard {
     );
   }
 
-
-
   Widget editShoppingListCard(
       {required MapEntry<Product, Map<int, bool>> entry,
-        required ShoppingList shoppingList}) {
+      required ShoppingList shoppingList}) {
     Product product = entry.key;
     Map<int, bool> productDetails = entry.value;
     int quantity = productDetails.keys.first;
@@ -100,7 +91,7 @@ class ShoppingListCard {
       width: double.infinity,
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.all(10.0), // added padding
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -108,12 +99,12 @@ class ShoppingListCard {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Center(
-                  child: Text(
-                    (product.name?.length ?? 0) > 6
-                        ? '${product.name.substring(0, 6) ?? ''}...'
-                        : product.name ?? 'Unknown product',
-                    style: const TextStyle(fontSize: 20.0),
-                  ),
+                    child: Text(
+                      (product.name?.length ?? 0) > 6
+                          ? '${product.name.substring(0, 6) ?? ''}...'
+                          : product.name ?? 'Unknown product',
+                      style: const TextStyle(fontSize: 20.0),
+                    ),
                   ),
                   Container(
                     width: 235,
@@ -127,7 +118,6 @@ class ShoppingListCard {
                     ),
                   ),
                   IconButton(
-
                     icon: ValueListenableBuilder<bool>(
                       valueListenable: checkedNotifier,
                       builder: (context, value, child) {
