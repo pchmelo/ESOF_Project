@@ -64,6 +64,7 @@ class ProductForm {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       showModalBottomSheet(
         isScrollControlled: true,
+        isDismissible: false,
         context: context,
         builder: (BuildContext context) {
           return SizedBox(
