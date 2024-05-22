@@ -35,7 +35,12 @@ Obrigado!
 ## Business modeling
 
 ### Product Vision
-_"To make the world greener and to keep people's pantry stock 'cleaner'"._
+
+StockOverflow is a mobile application designed to simplify household inventory management, streamline shopping list organization, and provide timely alerts for expiring products. By combining these functionalities, StockOverflow aims to reduce waste, save money, and ensure households are always well-stocked with essential items.
+
+#### Vision Statement:
+
+"To empower households to efficiently manage their stock, minimize waste, and enhance their shopping experience through intelligent and user-friendly technology."
 
 
 ### Functionalities
