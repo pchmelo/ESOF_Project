@@ -6,21 +6,21 @@ Log com todas as adições e mudanças que foram realizadas ao longo do projeto.
 
 ### Novas Adições:
 
-- Utilizadores recebem alertas quanto à validade de produtos <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/26">Issue</a>
-- Utilizadores passam a poder colocar imagens como ícones de produtos <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/28">Issue</a>
-- Utilizadores passam a poder alterar as definições de conta <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/29">Issue</a>
+- Utilizadores recebem alertas quanto à validade de produtos (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/26">Issue</a>)
+- Utilizadores passam a poder colocar imagens como ícones de produtos (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/28">Issue</a>)
+- Utilizadores passam a poder alterar as definições de conta (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/29">Issue</a>)
 
 ### Alterações:
 
-- Continuação da melhoria do front-end da aplicação em geral <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/13">Issue 1</a>
-<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/30">Issue 2</a>
+- Continuação da melhoria do front-end da aplicação em geral (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/13">Issue 1</a>)
+(<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/30">Issue 2</a>)
 
 
-- Melhoria na funcionalidade do calendário <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/27">Issue</a>
+- Melhoria na funcionalidade do calendário (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/27">Issue</a>)
 
 ### Bugs corrigidos:
 
-- Bug na barra de Scan <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/14">Issue</a>
+- Bug na barra de Scan (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/14">Issue</a>)
 - Erros nos formulários
 - Atualização de dados sob certos contextos
 - Bugs de reload de página
