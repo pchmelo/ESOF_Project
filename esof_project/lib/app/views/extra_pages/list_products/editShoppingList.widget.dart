@@ -24,6 +24,7 @@ class _EditShoppingListState extends State<EditShoppingList> {
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: const Color(0xFF4CAF50),
+          iconTheme: IconThemeData(color: Colors.white), // This line changes the color of the back arrow
           title: SizedBox(
             width: double.infinity,
             child: TextField(
@@ -43,7 +44,7 @@ class _EditShoppingListState extends State<EditShoppingList> {
               child: ShowProductsShoppingListBuilder(
                   shoppingList: widget.shoppingList,
                   shoppingListCard:
-                      widget.shoppingListCard.editShoppingListCard),
+                  widget.shoppingListCard.editShoppingListCard),
             ),
           ],
         ),
@@ -59,7 +60,7 @@ class _EditShoppingListState extends State<EditShoppingList> {
             ),
             onPressed: () async {
               ShoppingListControllers shoppingListControllers =
-                  ShoppingListControllers();
+              ShoppingListControllers();
               var products_p = await shoppingListControllers
                   .fetchProducts(widget.shoppingList);
 
@@ -69,9 +70,9 @@ class _EditShoppingListState extends State<EditShoppingList> {
               for (var entry in products_p.entries) {
                 String productId = entry.key;
                 var quantity =
-                    widget.shoppingListCard.getValue(productId ?? '');
+                widget.shoppingListCard.getValue(productId ?? '');
                 bool deletion =
-                    widget.shoppingListCard.getDelete(productId ?? '');
+                widget.shoppingListCard.getDelete(productId ?? '');
 
                 if (deletion) {
                   new_shops.removeProduct(productId);
