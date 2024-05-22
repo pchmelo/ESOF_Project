@@ -66,15 +66,19 @@ class ProductForm {
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          return Padding(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: ChangeQuantityProduct(
-              listUid: listUid,
-              controller: controller,
-              product: product,
-              scancode: scancode,
-              spec: spec,
+          return Container(
+            height: MediaQuery.of(context).size.height *
+                0.5, // Adjust this value as needed
+            child: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: ChangeQuantityProduct(
+                listUid: listUid,
+                controller: controller,
+                product: product,
+                scancode: scancode,
+                spec: spec,
+              ),
             ),
           );
         },
