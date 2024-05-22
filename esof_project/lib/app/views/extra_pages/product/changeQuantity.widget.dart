@@ -60,8 +60,7 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
             color: Colors.white,
           ),
         ),
-        backgroundColor:
-        const Color(0xFF4CAF50),
+        backgroundColor: const Color(0xFF4CAF50),
       ),
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -74,7 +73,7 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
                 'Product Name: ${widget.product.name}',
                 style: const TextStyle(
                   fontSize: 18.0,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               Padding(
