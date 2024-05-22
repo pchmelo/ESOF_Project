@@ -43,6 +43,7 @@ class _RemoveQuantityProductState extends State<RemoveQuantityProduct> {
           ),
         ),
         backgroundColor: Colors.amber,
+        toolbarHeight: 100,
       ),
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -54,7 +55,7 @@ class _RemoveQuantityProductState extends State<RemoveQuantityProduct> {
               Text(
                 'Product Name: ${widget.product.name}',
                 style: const TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 25.0,
                   color: Colors.black,
                 ),
               ),

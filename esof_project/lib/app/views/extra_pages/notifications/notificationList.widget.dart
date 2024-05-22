@@ -41,52 +41,55 @@ class _NotificationsPageState extends State<NotificationsList> {
             itemBuilder: (BuildContext context, int index) {
               NotificationModel notification = notifications[index];
               Validity validity = validities[index];
-              return Container(
-                height: 100,
-                child: ListTile(
-                  leading: const Icon(Icons.notifications,
-                      color: Colors.blue, size: 30.0),
-                  title: Text(
-                    validity.name,
-                    style: const TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Quantity: ${validity.quantity.toString()}',
-                        style: const TextStyle(fontSize: 18.0),
-                      ),
-                      Text(
-                        'Expiration Date: ${validity.day}/${validity.month}/${validity.year}',
-                        style: const TextStyle(fontSize: 18.0),
-                      ),
-                      Text(
-                        'Notification Time: ${notification.time} ${notification.unitTime}',
-                        style: const TextStyle(fontSize: 18.0),
-                      ),
-                    ],
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.arrow_forward_ios,
+              return Padding(
+                padding: const EdgeInsets.all(8.0), // Add this
+                child: Container(
+                  height: 100,
+                  child: ListTile(
+                    leading: const Icon(Icons.notifications,
                         color: Colors.blue, size: 30.0),
-                    onPressed: () async {
-                      ProductControllers productControllers =
-                          ProductControllers();
-                      Product product = await productControllers
-                          .getProductById(validity.productId);
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProducDetailsPage(
-                                    product: product,
-                                    controller:
-                                        ProductControllers().EditProduct,
-                                  )));
-                    },
+                    title: Text(
+                      validity.name,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Quantity: ${validity.quantity.toString()}',
+                          style: const TextStyle(fontSize: 18.0),
+                        ),
+                        Text(
+                          'Expiration Date: ${validity.day}/${validity.month}/${validity.year}',
+                          style: const TextStyle(fontSize: 18.0),
+                        ),
+                        Text(
+                          'Notification Time: ${notification.time} ${notification.unitTime}',
+                          style: const TextStyle(fontSize: 18.0),
+                        ),
+                      ],
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.arrow_forward_ios,
+                          color: Colors.blue, size: 30.0),
+                      onPressed: () async {
+                        ProductControllers productControllers =
+                            ProductControllers();
+                        Product product = await productControllers
+                            .getProductById(validity.productId);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProducDetailsPage(
+                                      product: product,
+                                      controller:
+                                          ProductControllers().EditProduct,
+                                    )));
+                      },
+                    ),
                   ),
                 ),
               );

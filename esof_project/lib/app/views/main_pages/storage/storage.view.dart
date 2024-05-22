@@ -19,6 +19,8 @@ class _StorageViewState extends State<StorageView> {
 
   final edit_controller = ProductControllers().EditProduct;
 
+  final gestures = Gesture();
+
   static const name = 'Storage';
   String currentRoute = '/start/storage';
 
@@ -58,19 +60,28 @@ class _StorageViewState extends State<StorageView> {
           backgroundColor: Colors.amber,
           foregroundColor: Colors.black,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                ProductList(
-                    handleProductTap: handleProductTap,
-                    controller: edit_controller),
-              ],
+        body: GestureDetector(
+          onHorizontalDragEnd: (details) {
+            if (details.primaryVelocity! > 0) {
+              gestures.swipeLeft(context);
+            } else if (details.primaryVelocity! < 0) {
+              gestures.swipeRight(context);
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  ProductList(
+                      handleProductTap: handleProductTap,
+                      controller: edit_controller),
+                ],
+              ),
             ),
           ),
         ),

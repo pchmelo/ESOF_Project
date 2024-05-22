@@ -64,17 +64,21 @@ class ProductForm {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       showModalBottomSheet(
         isScrollControlled: true,
+        isDismissible: false,
         context: context,
         builder: (BuildContext context) {
-          return Padding(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: ChangeQuantityProduct(
-              listUid: listUid,
-              controller: controller,
-              product: product,
-              scancode: scancode,
-              spec: spec,
+          return SizedBox(
+            height: MediaQuery.of(context).size.height, // Full height
+            child: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: ChangeQuantityProduct(
+                listUid: listUid,
+                controller: controller,
+                product: product,
+                scancode: scancode,
+                spec: spec,
+              ),
             ),
           );
         },
@@ -132,6 +136,7 @@ class ShoppingListForm {
                   Navigator.pop(context);
                 },
               ),
+              toolbarHeight: 100,
               title: const Text('Select a Shopping List'),
             ),
             body: ShoppingListViewList(
