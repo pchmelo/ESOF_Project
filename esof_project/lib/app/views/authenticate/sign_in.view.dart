@@ -44,137 +44,161 @@ class _SignInView extends State<SignInView> {
     }
 
 
-    if (loading) {
-      return Loading();
-    } else {
-      return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.amber,
-          foregroundColor: Colors.black,
-          elevation: 0.0,
-          title: const Text(
-            'Login',
-            style: TextStyle(
-              fontFamily: 'CrimsonPro',
-              fontSize: 31,
-              fontWeight: FontWeight.bold,
+if (loading) {
+  return Loading();
+} else {
+  return Scaffold(
+    backgroundColor: Colors.white,
+    body: Padding(
+      padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/logo.png',
+              width: MediaQuery.of(context).size.width * 0.5,
+              height: MediaQuery.of(context).size.height * 0.15,
             ),
-          ),
-          centerTitle: true,
-          actions: [
-            TextButton.icon(
-              onPressed: () {
-                widget.toggleView();
-              },
-              icon: const Icon(Icons.person,
-                color: Colors.black,
-              ),
-              label: const Text('Register',
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            RichText(
+              text: const TextSpan(
                 style: TextStyle(
                   color: Colors.black,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.normal,
                 ),
-              ),
-            ),
-          ],
-        ),
-        body: Container(
-          color: Colors.grey[200],
-            width: double.infinity,
-            height: double.infinity,
-            padding:
-                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20.0,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: 'stock',
                   ),
-                  TextFormField(
-                    decoration: TextInputDecoration.copyWith(hintText: 'Email',
-                      errorStyle: TextStyle(color: Colors.black,
+                  TextSpan(
+                    text: 'overflow',
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      backgroundColor: Colors.red[200]),
-                    ),
-                    validator: (val) {
-                      if(val!.isEmpty){
-                        return 'Enter an email';
-                      }else{
-                        return validateEmail(val);
-                      }
-                    },
-                    onChanged: (val) {
-                      setState(() {
-                        email = val;
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    decoration: TextInputDecoration.copyWith(hintText: 'Password',
-                      errorStyle: TextStyle(color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          backgroundColor: Colors.red[200]),
-                    ),
-                    obscureText: true,
-                    validator: (val) => val!.length < 6
-                        ? 'Enter a password 6+ chars long'
-                        : null,
-                    onChanged: (val) {
-                      setState(() {
-                        password = val;
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        setState(() {
-                          () => loading = true;
-                        });
-                        if (_formKey.currentState!.validate()) {
-                          dynamic result = await _auth
-                              .signInWithEmailAndPassword(email, password);
-                          if (result == null) {
-                            setState(() {
-                              error =
-                              'Could not sign in with those credentials';
-                              loading = false;
-                            });
-                          }
-                        }
-                      }
-                    },
-                    style: ButtonStyle(
-                      backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.yellow),
-                    ),
-                    child: const Text(
-                      'Sign In',
-                      style: TextStyle(color: Colors.black),
                     ),
                   ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Container(
-                    color: Colors.red[200],
-                      child: Text(
-                        error,
-                        style: const TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
-                      ),
-                    ),
                 ],
               ),
             ),
-          ),
-      );
-    }
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  labelStyle: TextStyle(color: Colors.black),
+                  border: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.amber),
+                  ),
+                ),
+                validator: (val) {
+                  if(val!.isEmpty){
+                    return 'Enter an email';
+                  }else{
+                    return validateEmail(val);
+                  }
+                },
+                onChanged: (val) {
+                  setState(() {
+                    email = val;
+                  });
+                },
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  labelStyle: TextStyle(color: Colors.black),
+                  border: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.amber),
+                  ),
+                ),
+                obscureText: true,
+                validator: (val) => val!.length < 6
+                    ? 'Enter a password 6+ chars long'
+                    : null,
+                onChanged: (val) {
+                  setState(() {
+                    password = val;
+                  });
+                },
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.85,
+              height: MediaQuery.of(context).size.height * 0.06,
+              child: ElevatedButton(
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    setState(() {
+                      loading = true;
+                    });
+                    dynamic result = await _auth
+                        .signInWithEmailAndPassword(email, password);
+                    if (result == null) {
+                      setState(() {
+                        error =
+                        'Could not sign in with those credentials';
+                        loading = false;
+                      });
+                    }
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: const BorderSide(color: Colors.amber, width: 1),
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                child: const Text(
+                  'Sign In',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            Text(
+              error,
+              style: const TextStyle(color: Colors.red, fontSize: 16),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Don\'t Have an Account? '),
+                GestureDetector(
+                onTap: () {
+                widget.toggleView();
+                },
+                child: const Text(
+                'Register',
+                  style: TextStyle(
+                  color: Colors.amber,
+                  fontWeight: FontWeight.bold,
+                  ),
+                ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
   }
 }
