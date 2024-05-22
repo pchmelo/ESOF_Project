@@ -93,6 +93,11 @@ class _CreateValidityState extends State<CreateValidity> {
                 ElevatedButton(
                   onPressed: () => _selectDate(context),
                   style: ButtonStyle(
+                    shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.lightBlue),
                     foregroundColor:

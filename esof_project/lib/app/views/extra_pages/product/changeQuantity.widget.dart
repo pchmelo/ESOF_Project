@@ -57,10 +57,11 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.amber,
+        backgroundColor:
+        const Color(0xFF4CAF50),
       ),
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -73,7 +74,7 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
                 'Product Name: ${widget.product.name}',
                 style: const TextStyle(
                   fontSize: 18.0,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               Padding(
@@ -89,10 +90,10 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
               Container(
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.amber),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color(0xFF4CAF50)),
                     foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black),
+                        MaterialStateProperty.all<Color>(Colors.white),
                     textStyle: MaterialStateProperty.all<TextStyle>(
                       const TextStyle(
                         fontWeight: FontWeight.bold,

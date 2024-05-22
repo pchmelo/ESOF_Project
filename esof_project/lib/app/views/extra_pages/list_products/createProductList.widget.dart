@@ -58,7 +58,7 @@ class _CreateProdutListState extends State<CreateProdutList> {
                           backgroundColor: MaterialStateProperty.all<Color>(
                               const Color(0xFF4CAF50)),
                           foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.black),
+                              MaterialStateProperty.all<Color>(Colors.white),
                           shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
