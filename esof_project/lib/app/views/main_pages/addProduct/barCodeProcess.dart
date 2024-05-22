@@ -109,7 +109,8 @@ class _BarCodeProcessState extends State<BarCodeProcess> {
                   children: [
                     Text(
                       'Scan Code: ${widget.barCode}',
-                      style: const TextStyle(fontSize: 20),
+                      style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.width * 0.05),
                     ),
                     IconButton(
                       icon: const Icon(Icons.sync),
