@@ -2,6 +2,47 @@
 
 Log com todas as adições e mudanças que foram realizadas ao longo do projeto.
 
+## Sprint 3 22-05-2024
+
+### Novas Adições:
+
+- Utilizadores recebem alertas quanto à validade de produtos
+- Utilizadores passam a poder colocar imagens como ícones de produtos
+- Utilizadores passam a poder alterar as definições de conta
+
+### Alterações:
+
+- Continuação da melhoria do front-end da aplicação em geral
+- Melhoria na funcionalidade do calendário
+
+### Bugs corrigidos:
+
+- Bug na barra de Scan
+- Erros nos formulários
+- Atualização de dados sob certos contextos
+- Bugs de reload de página
+- Erros lógicos
+
+### Remoções:
+
+- Remoção de páginas intermediárias na interface de adição de produtos
+
+
+### Descrição:
+
+Neste sprint, o principal objectivo foi melhorar e optimizar aquilo que já estava implementado. Focamo-nos principalmente em melhorar a interface, deixando-a mais consistente e amigável para melhorar a experiência do utilizador na aplicação. Existiu também um foco em eliminar quaisqueres bugs existentes
+
+
+### Apontamentos:
+
+
+
+## Links para as releases:
+
+- <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/releases/tag/Sprint_2">Sprint2</a>
+
+
+
 ## Sprint 2 30-4-2024
 
 ### Novas Adições:
