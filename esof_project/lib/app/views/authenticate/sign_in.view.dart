@@ -30,140 +30,156 @@ class _SignInView extends State<SignInView> {
           : null;
     }
 
+
     if (loading) {
       return Loading();
     } else {
       return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.amber,
-          foregroundColor: Colors.black,
-          elevation: 0.0,
-          title: const Text(
-            'Login',
-            style: TextStyle(
-              fontFamily: 'CrimsonPro',
-              fontSize: 31,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          centerTitle: true,
-          actions: [
-            TextButton.icon(
-              onPressed: () {
-                widget.toggleView();
-              },
-              icon: const Icon(
-                Icons.person,
-                color: Colors.black,
-              ),
-              label: const Text(
-                'Register',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
-        body: Container(
-          color: Colors.grey[200],
-          width: double.infinity,
-          height: double.infinity,
-          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+        backgroundColor: Colors.white,
+        body: Padding(
+          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
           child: Form(
             key: _formKey,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 20.0,
+                Image.asset(
+                  'assets/logo.png',
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: MediaQuery.of(context).size.height * 0.15,
                 ),
-                TextFormField(
-                  decoration: TextInputDecoration.copyWith(
-                    hintText: 'Email',
-                    errorStyle: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        backgroundColor: Colors.red[200]),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                RichText(
+                  text: const TextSpan(
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.normal,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'stock',
+                      ),
+                      TextSpan(
+                        text: 'overflow',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Enter an email';
-                    } else {
-                      return validateEmail(val);
-                    }
-                  },
-                  onChanged: (val) {
-                    setState(() {
-                      email = val;
-                    });
-                  },
                 ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                TextFormField(
-                  decoration: TextInputDecoration.copyWith(
-                    hintText: 'Password',
-                    errorStyle: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        backgroundColor: Colors.red[200]),
-                  ),
-                  obscureText: true,
-                  validator: (val) =>
-                      val!.length < 6 ? 'Enter a password 6+ chars long' : null,
-                  onChanged: (val) {
-                    setState(() {
-                      password = val;
-                    });
-                  },
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
+                SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: 'Email',
+                      labelStyle: TextStyle(color: Colors.black),
+                      border: OutlineInputBorder(),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.amber),
+                      ),
+                    ),
+                    validator: (val) {
+                      if(val!.isEmpty){
+                        return 'Enter an email';
+                      }else{
+                        return validateEmail(val);
+                      }
+                    },
+                    onChanged: (val) {
                       setState(() {
-                        () => loading = true;
+                        email = val;
                       });
+                    },
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: 'Password',
+                      labelStyle: TextStyle(color: Colors.black),
+                      border: OutlineInputBorder(),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.amber),
+                      ),
+                    ),
+                    obscureText: true,
+                    validator: (val) => val!.length < 6
+                        ? 'Enter a password 6+ chars long'
+                        : null,
+                    onChanged: (val) {
+                      setState(() {
+                        password = val;
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.85,
+                  height: MediaQuery.of(context).size.height * 0.06,
+                  child: ElevatedButton(
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        dynamic result = await _auth.signInWithEmailAndPassword(
-                            email, password);
+                        setState(() {
+                          loading = true;
+                        });
+                        dynamic result = await _auth
+                            .signInWithEmailAndPassword(email, password);
                         if (result == null) {
                           setState(() {
-                            error = 'Could not sign in with those credentials';
+                            error =
+                            'Could not sign in with those credentials';
                             loading = false;
                           });
                         }
                       }
-                    }
-                  },
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.yellow),
-                  ),
-                  child: const Text(
-                    'Sign In',
-                    style: TextStyle(color: Colors.black),
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      side: const BorderSide(color: Colors.amber, width: 1),
+                      textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    child: const Text(
+                      'Sign In',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  height: 12,
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                Text(
+                  error,
+                  style: const TextStyle(color: Colors.red, fontSize: 16),
                 ),
-                Center(
-                  child: Container(
-                    color: Colors.red[200],
-                    child: Text(error,
-                        style: error.isEmpty
-                            ? const TextStyle(color: Colors.red, fontSize: 14.0)
-                            : TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                backgroundColor: Colors.red[200],
-                              )),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Don\'t Have an Account? '),
+                    GestureDetector(
+                      onTap: () {
+                        widget.toggleView();
+                      },
+                      child: const Text(
+                        'Register',
+                        style: TextStyle(
+                          color: Colors.amber,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
