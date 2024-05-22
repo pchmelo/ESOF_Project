@@ -49,7 +49,7 @@ class _ChangeQuantityComponentState extends State<ChangeQuantityComponent> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.amber,
+                backgroundColor: const Color(0xFF4CAF50),
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(15),
               ),
@@ -87,7 +87,7 @@ class _ChangeQuantityComponentState extends State<ChangeQuantityComponent> {
                 updateQuantity(1);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.amber,
+                backgroundColor: const Color(0xFF4CAF50),
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(15),
               ),
