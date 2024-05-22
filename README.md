@@ -319,14 +319,19 @@ Continuar com uma abordagem similar à anterior na maioria dos assuntos, pois fu
 #### Sprint 3 retrospective:
 
 ##### O que correu bem:
-...
+
+Acabamos por conseguir implementar todas as features pretendidas.
 
 ##### O que poderia ter corrido melhor:
-...
+
+- Tivemos alguns problemas inesperados de última hora relativos a Overflowing nas páginas da aplicação.
+
 
 ##### O que nos causou dúvidas:
-...
+
+- Acabamos por ser surpreendidos pelo facto que mesmo utilizando unidades adaptativas no código e funcionando no emulador, pudessem haver Overflows no telemóvel
+
 
 ### Final thoughts:
 
-...
+- De maneira geral, o nosso projeto foi relativamente bem conseguido, apesar das adversidades e imprevistos enfrentados
