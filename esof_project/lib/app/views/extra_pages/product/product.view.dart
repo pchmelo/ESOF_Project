@@ -66,7 +66,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                     child: Text(
                       'Product Info',
                       style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.04,
+                        fontSize: MediaQuery.of(context).size.width * 0.03,
                         fontWeight: FontWeight.bold,
                         color: isInProductInfo ? Colors.amber : Colors.black,
                       ),
@@ -83,7 +83,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                     child: Text(
                       'Expiration Dates',
                       style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.04,
+                        fontSize: MediaQuery.of(context).size.width * 0.03,
                         fontWeight: FontWeight.bold,
                         color: isInProductInfo ? Colors.black : Colors.amber,
                       ),

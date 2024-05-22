@@ -62,6 +62,7 @@ class _CreateProdutState extends State<CreateProdut> {
                       }
                       return null;
                     },
+                    onChanged: (val) => setState(() => _name = val),
                   ),
                   Padding(padding: EdgeInsets.only(top: screenHeight * 0.025)),
                   TextFormField(
