@@ -24,7 +24,6 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-
     String? validateEmail(String? value) {
       const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
           r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
@@ -40,164 +39,168 @@ class _RegisterViewState extends State<RegisterView> {
           : null;
     }
 
-return loading
-    ? Loading()
-    : Scaffold(
-        backgroundColor: Colors.white,
-        body: Padding(
-          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/logo.png',
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.height * 0.15,
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              RichText(
-                text: const TextSpan(
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.normal,
+    return loading
+        ? Loading()
+        : Scaffold(
+            backgroundColor: Colors.white,
+            body: Padding(
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/logo.png',
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    height: MediaQuery.of(context).size.height * 0.15,
                   ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'stock',
-                    ),
-                    TextSpan(
-                      text: 'overflow',
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                  RichText(
+                    text: const TextSpan(
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.normal,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          labelText: 'Email',
-                          labelStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.amber),
-                          ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'stock',
                         ),
-                        style: const TextStyle(color: Colors.black),
-                        validator: (val) {
-                          if(val!.isEmpty){
-                            return 'Enter an email';
-                          }else{
-                            return validateEmail(val);
-                          }
-                        },
-                        onChanged: (val) {
-                          setState(() {
-                            email = val;
-                          });
-                        },
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9, 
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          labelText: 'Password',
-                          labelStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.amber),
-                          ),
-                        ),
-                        style: const TextStyle(color: Colors.black),
-                        obscureText: true,
-                        validator: (val) => val!.length < 6
-                            ? 'Enter a password 6+ chars long'
-                            : null,
-                        onChanged: (val) {
-                          setState(() {
-                            password = val;
-                          });
-                        },
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.85,
-                      height: MediaQuery.of(context).size.height * 0.06,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              loading = true;
-                            });
-                            dynamic result = await _auth
-                                .registerWithEmailAndPassword(email, password);
-                            if (result == null) {
-                              setState(() {
-                                loading = false;
-                                error = 'Please supply a valid email';
-                              });
-                            }
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          side: const BorderSide(color: Colors.amber, width: 1),
-                          textStyle: const TextStyle(
+                        TextSpan(
+                          text: 'overflow',
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        child: const Text(
-                          'Register',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          )
-                        ),
-                      ),
+                      ],
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                    Text(
-                      error,
-                      style: const TextStyle(color: Colors.red, fontSize: 16),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                  Form(
+                    key: _formKey,
+                    child: Column(
                       children: [
-                        const Text('Already Have an Account? '),
-                        GestureDetector(
-                        onTap: () {
-                        widget.toggleView();
-                        },
-                        child: const Text(
-                        'Log In',
-                          style: TextStyle(
-                          color: Colors.amber,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Email',
+                              labelStyle: TextStyle(color: Colors.black),
+                              border: OutlineInputBorder(),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.amber),
+                              ),
+                            ),
+                            style: const TextStyle(color: Colors.black),
+                            validator: (val) {
+                              if (val!.isEmpty) {
+                                return 'Enter an email';
+                              } else {
+                                return validateEmail(val);
+                              }
+                            },
+                            onChanged: (val) {
+                              setState(() {
+                                email = val;
+                              });
+                            },
                           ),
                         ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Password',
+                              labelStyle: TextStyle(color: Colors.black),
+                              border: OutlineInputBorder(),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.amber),
+                              ),
+                            ),
+                            style: const TextStyle(color: Colors.black),
+                            obscureText: true,
+                            validator: (val) => val!.length < 6
+                                ? 'Enter a password 6+ chars long'
+                                : null,
+                            onChanged: (val) {
+                              setState(() {
+                                password = val;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.85,
+                          height: MediaQuery.of(context).size.height * 0.06,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  loading = true;
+                                });
+                                dynamic result =
+                                    await _auth.registerWithEmailAndPassword(
+                                        email, password);
+                                if (result == null) {
+                                  setState(() {
+                                    loading = false;
+                                    error = 'Please supply a valid email';
+                                  });
+                                }
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.black,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              side: const BorderSide(
+                                  color: Colors.amber, width: 1),
+                              textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            child: const Text('Register',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                )),
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01),
+                        Text(
+                          error,
+                          style:
+                              const TextStyle(color: Colors.red, fontSize: 16),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text('Already Have an Account? '),
+                            GestureDetector(
+                              onTap: () {
+                                widget.toggleView();
+                              },
+                              child: const Text(
+                                'Log In',
+                                style: TextStyle(
+                                  color: Colors.amber,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-      ),
-    );
+            ),
+          );
   }
 }

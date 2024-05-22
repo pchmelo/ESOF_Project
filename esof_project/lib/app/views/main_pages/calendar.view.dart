@@ -178,34 +178,45 @@ class _CalenderViewState extends State<CalenderView> {
                       },
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Stack(
                     children: <Widget>[
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back),
-                        onPressed: previousPage,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          IconButton(
+                            icon: const Icon(Icons.arrow_back),
+                            onPressed: previousPage,
+                          ),
+                          Text(
+                            '${(displayedValidities.length / 5) == 0 ? currentPage : currentPage + 1} / ${(displayedValidities.length / 5).ceil()}',
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.arrow_forward),
+                            onPressed: nextPage,
+                          ),
+                        ],
                       ),
-                      Text(
-                        '${currentPage + 1} / ${(displayedValidities.length / 5).ceil()}',
-                        style: const TextStyle(fontSize: 18),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Visibility(
+                          visible: isClicked,
+                          maintainSize: true,
+                          maintainAnimation: true,
+                          maintainState: true,
+                          child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                displayedValidities = allValidities;
+                                currentPage = 0;
+                                isClicked = false;
+                              });
+                            },
+                            tooltip: 'Display all products',
+                            icon: const Icon(Icons.filter_alt_off_rounded),
+                          ),
+                        ),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.arrow_forward),
-                        onPressed: nextPage,
-                      ),
-                      isClicked
-                          ? IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  displayedValidities = allValidities;
-                                  currentPage = 0;
-                                  isClicked = false;
-                                });
-                              },
-                              tooltip: 'Display all products',
-                              icon: const Icon(Icons.all_inclusive),
-                            )
-                          : Container()
                     ],
                   )
                 ],
