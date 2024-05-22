@@ -16,6 +16,8 @@ class _SettingsViewState extends State<SettingsView> {
   final name = 'Settings';
   String currentRoute = '/start/settings';
 
+  final gestures = Gesture();
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -35,171 +37,180 @@ class _SettingsViewState extends State<SettingsView> {
           backgroundColor: Colors.amber,
           foregroundColor: Colors.black,
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Text(
-                'Account',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
+        body: GestureDetector(
+          onHorizontalDragEnd: (details) {
+            if (details.primaryVelocity! > 0) {
+              gestures.swipeLeft(context);
+            } else if (details.primaryVelocity! < 0) {
+              gestures.swipeRight(context);
+            }
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Text(
+                  'Account',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.person,
-                    size: 50,
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'User',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'Change Password',
-                        style: TextStyle(fontSize: 16, color: Colors.grey),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 50,
-                        color: Colors.white,
-                      ),
-                      onPressed: () async {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ChangeEmailPasswordPage()),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Text(
-                'Settings',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: SizedBox(
+              SizedBox(
                 width: double.infinity,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const NotificationsDisplay(),
-                      ),
-                    );
-                  },
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.red.shade200,
-                        ),
-                        child: const Icon(
-                          Icons.circle_notifications_rounded,
-                          size: 50,
-                          color: Colors.black,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      const Text(
-                        'Alerts',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
-                    onPressed: () async {
-                      try {
-                        await _auth.signOut();
-                        Navigator.pushReplacementNamed(context, '/start');
-                      } catch (e) {
-                        print('Error signing out: $e');
-                      }
-                    },
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.person,
+                      size: 50,
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(Icons.person, color: Colors.black, size: 50),
-                        SizedBox(
-                          width: 20,
+                        Text(
+                          'User',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          'Logout',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
+                          'Change Password',
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 50,
+                          color: Colors.white,
+                        ),
+                        onPressed: () async {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChangeEmailPasswordPage()),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Text(
+                  'Settings',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const NotificationsDisplay(),
+                        ),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.red.shade200,
                           ),
+                          child: const Icon(
+                            Icons.circle_notifications_rounded,
+                            size: 50,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        const Text(
+                          'Alerts',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton(
+                      onPressed: () async {
+                        try {
+                          await _auth.signOut();
+                          Navigator.pushReplacementNamed(context, '/start');
+                        } catch (e) {
+                          print('Error signing out: $e');
+                        }
+                      },
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.person, color: Colors.black, size: 50),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            'Logout',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         bottomNavigationBar: const Footer(),
       ),

@@ -55,8 +55,19 @@ class _FooterState extends State<Footer> {
                   ),
                   iconSize: 40,
                 ),
-                const SizedBox(
-                  width: 60,
+                IconButton(
+                  onPressed: () {
+                    String? currentRoute = ModalRoute.of(context)!.settings.name;
+                    if (currentRoute != '/start/add_product') {
+                      return ProductForm(context: context)
+                          .PlusButtonForm(create_controller);
+                    }
+                  },
+                  icon: const Icon(
+                      Icons.add_circle,
+                      color: Colors.black
+                  ),
+                  iconSize: 40,
                 ),
                 IconButton(
                   onPressed: () {
@@ -90,21 +101,6 @@ class _FooterState extends State<Footer> {
             ),
           ),
         ),
-        Positioned(
-          bottom: 10,
-          left: MediaQuery.of(context).size.width / 2 - 28,
-          child: FloatingActionButton(
-            onPressed: () {
-              String? currentRoute = ModalRoute.of(context)!.settings.name;
-              if (currentRoute != '/start/add_product') {
-                return ProductForm(context: context)
-                    .PlusButtonForm(create_controller);
-              }
-            },
-            backgroundColor: Colors.white,
-            child: const Icon(Icons.add_circle, color: Colors.black, size: 50),
-          ),
-        ),
       ],
     );
   }
@@ -132,5 +128,37 @@ class BNBCustomPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
+  }
+}
+
+class Gesture {
+  final Map<String, int> routes = {
+    '/start/storage': 0,
+    '/start/shopping_list': 1,
+    '/start/calendar': 2,
+    '/start/settings': 3,
+  };
+
+  final Map<int, String> routesIndex = {
+    0: '/start/storage',
+    1: '/start/shopping_list',
+    2: '/start/calendar',
+    3: '/start/settings',
+  };
+
+  void swipeRight(context) {
+    String? currentRoute = ModalRoute.of(context)!.settings.name;
+    int? index = routes[currentRoute!]! + 1;
+    if (index! != 4) {
+      navigationService.navigateTo(routesIndex[index]!);
+    }
+  }
+
+  void swipeLeft(context) {
+    String? currentRoute = ModalRoute.of(context)!.settings.name;
+    int? index = routes[currentRoute!]! - 1;
+    if (index! != -1) {
+      navigationService.navigateTo(routesIndex[index]!);
+    }
   }
 }
