@@ -49,7 +49,7 @@ Neste sprint, o principal objectivo foi melhorar e optimizar aquilo que já esta
 - Editar lista de compras
 - Eliminar lista de compras
 - Finalizar a lista de compras (todos os produtos que estão selecionados são adicionados automáticamente ao Stock)
-- Criar, Editar e Eliminar datas de Validade para os produtos
+- Criar, Editar e Eliminar datas de Validade para os produtos <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/21">(Issue)</a>
 - Integração do sistema de validades na interface de adição de produtos
 - Animações de transição de página
 - Implementação de filtros de pesquisa para produtos e para validades
