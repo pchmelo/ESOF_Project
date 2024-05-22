@@ -335,3 +335,7 @@ Acabamos por conseguir implementar todas as features pretendidas.
 ### Final thoughts:
 
 - De maneira geral, o nosso projeto foi relativamente bem conseguido, apesar das adversidades e imprevistos enfrentados
+
+### Final Release (Sprint 3):
+
+<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/releases/tag/Sprint_3">Sprint 3 release</a>
