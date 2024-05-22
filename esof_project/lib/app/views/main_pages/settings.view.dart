@@ -39,96 +39,99 @@ class _SettingsViewState extends State<SettingsView> {
             backgroundColor: Colors.blueGrey,
             foregroundColor: Colors.white,
           ),
-          body: GestureDetector(
-            onHorizontalDragEnd: (details) {
-              if (details.primaryVelocity! > 0) {
-                gestures.swipeLeft(context);
-              } else if (details.primaryVelocity! < 0) {
-                gestures.swipeRight(context);
-              }
-            },
-            child: Padding(
-              padding: EdgeInsets.all(screenSize.width * 0.02),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: screenSize.height * 0.02),
-                  const Text(
-                    'Account',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(height: screenSize.height * 0.02),
-                  Card(
-                    child: ListTile(
-                      leading: const Icon(Icons.person, size: 30),
-                      title: const Text('User',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold)),
-                      subtitle: const Text('Change Password',
-                          style: TextStyle(fontSize: 14, color: Colors.grey)),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.arrow_forward_ios,
-                            size: 30, color: Colors.black),
-                        onPressed: () async {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ChangeEmailPasswordPage()),
-                          );
-                        },
+          body: Expanded(
+            child: GestureDetector(
+              onHorizontalDragEnd: (details) {
+                if (details.primaryVelocity! > 0) {
+                  gestures.swipeLeft(context);
+                } else if (details.primaryVelocity! < 0) {
+                  gestures.swipeRight(context);
+                }
+              },
+              child: Padding(
+                padding: EdgeInsets.all(screenSize.width * 0.02),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: screenSize.height * 0.02),
+                    const Text(
+                      'Account',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ),
-                  SizedBox(height: screenSize.height * 0.04),
-                  const Text(
-                    'Settings',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                    SizedBox(height: screenSize.height * 0.02),
+                    Card(
+                      child: ListTile(
+                        leading: const Icon(Icons.person, size: 30),
+                        title: const Text('User',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold)),
+                        subtitle: const Text('Change Password',
+                            style: TextStyle(fontSize: 14, color: Colors.grey)),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.arrow_forward_ios,
+                              size: 30, color: Colors.black),
+                          onPressed: () async {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ChangeEmailPasswordPage()),
+                            );
+                          },
+                        ),
+                      ),
                     ),
-                  ),
-                  SizedBox(height: screenSize.height * 0.02),
-                  Card(
-                    child: ListTile(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const NotificationsDisplay(),
-                          ),
-                        );
-                      },
-                      leading: const Icon(Icons.circle_notifications_rounded,
-                          size: 30, color: Colors.black),
-                      title: const Text('Alerts',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500)),
+                    SizedBox(height: screenSize.height * 0.04),
+                    const Text(
+                      'Settings',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: screenSize.height * 0.02),
-                  Card(
-                    child: ListTile(
-                      onTap: () async {
-                        try {
-                          await _auth.signOut();
-                          Navigator.pushReplacementNamed(context, '/start');
-                        } catch (e) {
-                          print('Error signing out: $e');
-                        }
-                      },
-                      leading: const Icon(Icons.logout,
-                          color: Colors.black, size: 30),
-                      title: const Text('Logout',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500)),
+                    SizedBox(height: screenSize.height * 0.02),
+                    Card(
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const NotificationsDisplay(),
+                            ),
+                          );
+                        },
+                        leading: const Icon(Icons.circle_notifications_rounded,
+                            size: 30, color: Colors.black),
+                        title: const Text('Alerts',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w500)),
+                      ),
                     ),
-                  ),
-                ],
+                    SizedBox(height: screenSize.height * 0.02),
+                    Card(
+                      child: ListTile(
+                        onTap: () async {
+                          try {
+                            await _auth.signOut();
+                            Navigator.pushReplacementNamed(context, '/start');
+                          } catch (e) {
+                            print('Error signing out: $e');
+                          }
+                        },
+                        leading: const Icon(Icons.logout,
+                            color: Colors.black, size: 30),
+                        title: const Text('Logout',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500)),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
