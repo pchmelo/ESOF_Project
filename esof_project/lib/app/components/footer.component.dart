@@ -148,6 +148,9 @@ class Gesture {
 
   void swipeRight(context) {
     String? currentRoute = ModalRoute.of(context)!.settings.name;
+    if (!routes.containsKey(currentRoute)) {
+      currentRoute = '/start/storage'; // default route
+    }
     int? index = routes[currentRoute!]! + 1;
     if (index! != 4) {
       navigationService.navigateTo(routesIndex[index]!);
@@ -156,6 +159,9 @@ class Gesture {
 
   void swipeLeft(context) {
     String? currentRoute = ModalRoute.of(context)!.settings.name;
+    if (!routes.containsKey(currentRoute)) {
+      currentRoute = '/start/storage'; // default route
+    }
     int? index = routes[currentRoute!]! - 1;
     if (index! != -1) {
       navigationService.navigateTo(routesIndex[index]!);
