@@ -310,10 +310,10 @@ Continuar com uma abordagem similar à anterior na maioria dos assuntos, pois fu
 
 ### Sprint 3:
 
-- Print da scrum board no início a realização do segundo sprint:
+- Print da scrum board no início a realização do terceiro sprint:
 <img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/sprint3.png?raw=true">
 
-- Print da scrum board após a realização do segundo sprint:
+- Print da scrum board após a realização do terceiro sprint:
 <img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/sprint3_conclusion.png?raw=true">
 
 #### Sprint 3 retrospective:
