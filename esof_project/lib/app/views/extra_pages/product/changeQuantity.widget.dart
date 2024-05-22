@@ -52,6 +52,7 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        toolbarHeight: 100,
         title: const Text(
           'Add Quantity to a Product',
           style: TextStyle(
