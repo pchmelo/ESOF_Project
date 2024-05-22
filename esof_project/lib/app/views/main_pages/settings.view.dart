@@ -16,6 +16,8 @@ class _SettingsViewState extends State<SettingsView> {
   final name = 'Settings';
   String currentRoute = '/start/settings';
 
+  final gestures = Gesture();
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -35,7 +37,15 @@ class _SettingsViewState extends State<SettingsView> {
           backgroundColor: Colors.blueGrey,
           foregroundColor: Colors.white,
         ),
-        body: Padding(
+        body: GestureDetector(
+          onHorizontalDragEnd: (details) {
+            if (details.primaryVelocity! > 0) {
+              gestures.swipeLeft(context);
+            } else if (details.primaryVelocity! < 0) {
+              gestures.swipeRight(context);
+            }
+          },
+          child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
