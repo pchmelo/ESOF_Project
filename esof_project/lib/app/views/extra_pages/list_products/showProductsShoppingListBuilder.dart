@@ -26,7 +26,6 @@ class _ShowProductsShoppingListBuilderState
     User user = FirebaseAuth.instance.currentUser!;
     productsStream = DatabaseForShoppingList(uid: user.uid)
         .getProductsInShoppingList(widget.shoppingList);
-    int count = 0;
   }
 
   @override

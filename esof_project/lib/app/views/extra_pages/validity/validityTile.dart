@@ -2,7 +2,6 @@ import 'package:esof_project/app/components/productForm.component.dart';
 import 'package:esof_project/app/controllers/validityControllers.dart';
 import 'package:esof_project/app/views/extra_pages/validity/editValidity.widget.dart';
 import 'package:flutter/material.dart';
-
 import '../../../models/validity.model.dart';
 
 class ValidityTile extends StatefulWidget {
@@ -22,8 +21,7 @@ class ValidityTile extends StatefulWidget {
   }
 
   ValidityTile()
-      : validity = ValidityNotifier(
-            Validity()), // Replace with a default Validity object
+      : validity = ValidityNotifier(Validity()),
         editValidity = ValueNotifier<bool>(false),
         super();
 

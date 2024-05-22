@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import '../../main_pages/shopping_list/shoppingList.view.dart';
 
 class CreateProdutList extends StatefulWidget {

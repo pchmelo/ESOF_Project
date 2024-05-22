@@ -1,11 +1,8 @@
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/views/extra_pages/validity/validityListBuilder.dart';
-import 'package:esof_project/app/views/extra_pages/validity/validityTile.dart';
 import 'package:esof_project/services/database_validity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../../../controllers/validityControllers.dart';
 import '../../../models/validity.model.dart';
 import '../../../shared/filter.dart';
 import '../../../shared/loading.dart';
@@ -76,7 +73,7 @@ class _ValidityListWidgetState extends State<ValidityListWidget> {
                 labelText: 'Search',
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 suffixIcon: Row(
-                  mainAxisSize: MainAxisSize.min, // This is important
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     IconButton(
                       onPressed: _runFilter,
@@ -181,10 +178,12 @@ class _ValidityListWidgetState extends State<ValidityListWidget> {
                           ),
                           onTap: () {
                             if (!sortMethod.value) {
-                              widget.filter = ValidityFilter().sortByValidityDateDesc;
+                              widget.filter =
+                                  ValidityFilter().sortByValidityDateDesc;
                               sortMethod.value = true;
                             } else {
-                              widget.filter = ValidityFilter().sortByValidityDateAsc;
+                              widget.filter =
+                                  ValidityFilter().sortByValidityDateAsc;
                               sortMethod.value = false;
                             }
                             _runFilter();

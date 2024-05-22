@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 class ChangeQuantityComponent extends StatefulWidget {
   final int initialValue;
@@ -24,8 +22,7 @@ class _ChangeQuantityComponentState extends State<ChangeQuantityComponent> {
   void initState() {
     super.initState();
     quantity = widget.initialValue;
-    quantityController =
-        TextEditingController(text: '$quantity');
+    quantityController = TextEditingController(text: '$quantity');
   }
 
   void updateQuantity(int change) {
@@ -106,4 +103,3 @@ class _ChangeQuantityComponentState extends State<ChangeQuantityComponent> {
     );
   }
 }
-

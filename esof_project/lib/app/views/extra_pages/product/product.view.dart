@@ -4,9 +4,7 @@ import 'package:esof_project/app/controllers/notificationController.dart';
 import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/views/extra_pages/validity/validityList.widget.dart';
-import 'package:esof_project/app/views/main_pages/shopping_list/shoppingList.view.dart';
 import 'package:esof_project/services/upload_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../services/image_selector.dart';
@@ -69,11 +67,8 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                       'Product Info',
                       style: TextStyle(
                         fontSize: 15.95,
-                        fontWeight: FontWeight.bold, // Make the font bold
-                        color: isInProductInfo
-                            ? Colors.amber
-                            : Colors
-                                .black, // Change the color based on the state
+                        fontWeight: FontWeight.bold,
+                        color: isInProductInfo ? Colors.amber : Colors.black,
                       ),
                     ),
                   ),
@@ -89,11 +84,8 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                       'Expiration Dates',
                       style: TextStyle(
                         fontSize: 15.95,
-                        fontWeight: FontWeight.bold, // Make the font bold
-                        color: isInProductInfo
-                            ? Colors.black
-                            : Colors
-                                .amber, // Change the color based on the state
+                        fontWeight: FontWeight.bold,
+                        color: isInProductInfo ? Colors.black : Colors.amber,
                       ),
                     ),
                   ),

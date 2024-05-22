@@ -2,7 +2,6 @@ import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:esof_project/app/views/main_pages/shopping_list/shoppingListTile.widget.dart';
 import 'package:esof_project/app/views/main_pages/shopping_list/shoppingListTileAdd.widget.dart';
 import 'package:flutter/material.dart';
-
 import '../../../models/product.model.dart';
 
 class ShoppingListBuilder extends StatefulWidget {
@@ -32,11 +31,9 @@ class _ShoppingListBuilderState extends State<ShoppingListBuilder> {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
-      itemCount: widget.foundShoppingList.length +
-          1, // Add 1 to include the final ShoppingListTile
+      itemCount: widget.foundShoppingList.length + 1,
       itemBuilder: (context, index) {
         if (index == widget.foundShoppingList.length) {
-          // If the current index is equal to the length of foundShoppingList, return a ShoppingListTile with an add icon
           return Padding(
             padding: const EdgeInsets.all(5.0),
             child: Container(
@@ -55,7 +52,6 @@ class _ShoppingListBuilderState extends State<ShoppingListBuilder> {
             ),
           );
         } else {
-          // Otherwise, return a ShoppingListTile as before
           return Padding(
             padding: const EdgeInsets.all(5.0),
             child: Container(

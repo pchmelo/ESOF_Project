@@ -1,6 +1,4 @@
-import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:flutter/material.dart';
-
 import '../../../components/productListForm.component.dart';
 import '../../../controllers/shoppingListControllers.dart';
 
@@ -30,7 +28,6 @@ class ShoppingListTileAdd extends StatelessWidget {
               ),
             ),
             const Center(
-              // This centers its child
               child: Icon(Icons.add, size: 50.0),
             ),
           ],

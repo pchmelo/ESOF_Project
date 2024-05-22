@@ -1,6 +1,5 @@
 import 'package:esof_project/app/views/main_pages/storage/storage.view.dart';
 import 'package:flutter/material.dart';
-
 import '../../services/notificationService.dart';
 import '../models/user.mode.dart';
 import '../shared/loading.dart';
@@ -19,8 +18,6 @@ class _WrapperState extends State<Wrapper> {
   @override
   void initState() {
     super.initState();
-    //notificationsService = NotificationsService();
-    //initFuture = notificationsService.scheduleNotification();
   }
 
   @override
@@ -35,12 +32,9 @@ class _WrapperState extends State<Wrapper> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Loading();
           } else if (snapshot.hasError) {
-            return Container(
-              child: Text('Error: ${snapshot.error}'),
-            );
+            return Text('Error: ${snapshot.error}');
           } else {
-            //notificationsService.testNotification();
-            return StorageView();
+            return const StorageView();
           }
         },
       );

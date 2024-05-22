@@ -2,7 +2,6 @@ import 'package:esof_project/app/controllers/productControllers.dart';
 import 'package:esof_project/app/shared/loading.dart';
 import 'package:esof_project/app/views/extra_pages/product/product.view.dart';
 import 'package:flutter/material.dart';
-
 import '../../../controllers/notificationController.dart';
 import '../../../models/notication.model.dart';
 import '../../../models/product.model.dart';
@@ -73,8 +72,7 @@ class _NotificationsPageState extends State<NotificationsList> {
                   ),
                   trailing: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios,
-                        color: Colors.blue,
-                        size: 30.0), // Increase the size of the icon
+                        color: Colors.blue, size: 30.0),
                     onPressed: () async {
                       ProductControllers productControllers =
                           ProductControllers();

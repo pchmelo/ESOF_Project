@@ -1,14 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esof_project/app/models/product.model.dart';
-
 import '../app/models/shoppingList.model.dart';
-import 'database_shopping_list.dart';
 
 class DatabaseForProducts {
   final String uid;
   DatabaseForProducts({required this.uid});
 
-  // collection reference
   final CollectionReference productCollection =
       FirebaseFirestore.instance.collection('users');
 
@@ -27,7 +24,6 @@ class DatabaseForProducts {
 
           if (!data.containsKey('id')) {
             print('Error: "id" field does not exist in the document');
-            // Handle the error appropriately
             return null;
           }
 
