@@ -12,8 +12,8 @@ Log com todas as adições e mudanças que foram realizadas ao longo do projeto.
 
 ### Alterações:
 
-- Continuação da melhoria do front-end da aplicação em geral <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/13">Issue</a>
-<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/30">Issue</a>
+- Continuação da melhoria do front-end da aplicação em geral <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/13">Issue 1</a>
+<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/30">Issue 2</a>
 
 
 - Melhoria na funcionalidade do calendário <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/27">Issue</a>
