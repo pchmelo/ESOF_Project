@@ -178,6 +178,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                     ],
                   ),
                 ),
+              if (isInProductInfo)
               PopupMenuItem<int>(
                 value: 3,
                 onTap: () => selectIcon(ImageSource.gallery),
