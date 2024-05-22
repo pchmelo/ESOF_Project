@@ -66,9 +66,8 @@ class ProductForm {
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          return Container(
-            height: MediaQuery.of(context).size.height *
-                0.5, // Adjust this value as needed
+          return SizedBox(
+            height: MediaQuery.of(context).size.height, // Full height
             child: Padding(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
