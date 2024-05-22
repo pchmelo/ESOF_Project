@@ -56,12 +56,16 @@ class _EditProdutState extends State<EditProduct> {
                   initialValue: widget.product.name,
                   decoration: InputDecoration(
                     labelText: 'Product Name',
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     labelStyle: TextStyle(
                         color: Colors.black, fontSize: screenHeight * 0.025),
                   ),
-                  validator: (val) =>
-                      val!.isEmpty ? 'Enter a product name' : null,
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return 'Please enter a product name';
+                    }
+                    return null;
+                  },
                   onChanged: (val) => setState(() => _name = val),
                 ),
                 Padding(padding: EdgeInsets.only(top: screenHeight * 0.02)),
@@ -71,11 +75,16 @@ class _EditProdutState extends State<EditProduct> {
                   initialValue: widget.product.threshold.toString(),
                   decoration: InputDecoration(
                     labelText: 'Threshold',
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     labelStyle: TextStyle(
                         color: Colors.black, fontSize: screenHeight * 0.025),
                   ),
-                  validator: (val) => val!.isEmpty ? 'Enter a threshold' : null,
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return 'Please enter a threshold';
+                    }
+                    return null;
+                  },
                   onChanged: (val) =>
                       setState(() => _threshold = int.parse(val)),
                 ),

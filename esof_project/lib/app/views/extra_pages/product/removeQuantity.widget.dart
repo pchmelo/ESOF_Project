@@ -43,6 +43,7 @@ class _RemoveQuantityProductState extends State<RemoveQuantityProduct> {
           ),
         ),
         backgroundColor: Colors.amber,
+        toolbarHeight: 100,
       ),
       body: Container(
         padding: const EdgeInsets.all(20),

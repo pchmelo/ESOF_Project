@@ -1,5 +1,7 @@
+import 'package:esof_project/app/models/product.model.dart';
 import 'package:esof_project/app/models/shoppingList.model.dart';
 import 'package:esof_project/app/views/extra_pages/list_products/shoppingListCard.dart';
+import 'package:esof_project/app/views/extra_pages/list_products/shoppingListDisplay.dart';
 import 'package:esof_project/app/views/extra_pages/list_products/showProductsShoppingListBuilder.dart';
 import 'package:flutter/material.dart';
 import '../../../controllers/shoppingListControllers.dart';
@@ -24,7 +26,9 @@ class _EditShoppingListState extends State<EditShoppingList> {
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: const Color(0xFF4CAF50),
-          iconTheme: IconThemeData(color: Colors.white), // This line changes the color of the back arrow
+          iconTheme: IconThemeData(
+              color: Colors
+                  .white), // This line changes the color of the back arrow
           title: SizedBox(
             width: double.infinity,
             child: TextField(
@@ -44,7 +48,7 @@ class _EditShoppingListState extends State<EditShoppingList> {
               child: ShowProductsShoppingListBuilder(
                   shoppingList: widget.shoppingList,
                   shoppingListCard:
-                  widget.shoppingListCard.editShoppingListCard),
+                      widget.shoppingListCard.editShoppingListCard),
             ),
           ],
         ),
@@ -60,7 +64,7 @@ class _EditShoppingListState extends State<EditShoppingList> {
             ),
             onPressed: () async {
               ShoppingListControllers shoppingListControllers =
-              ShoppingListControllers();
+                  ShoppingListControllers();
               var products_p = await shoppingListControllers
                   .fetchProducts(widget.shoppingList);
 
@@ -70,9 +74,9 @@ class _EditShoppingListState extends State<EditShoppingList> {
               for (var entry in products_p.entries) {
                 String productId = entry.key;
                 var quantity =
-                widget.shoppingListCard.getValue(productId ?? '');
+                    widget.shoppingListCard.getValue(productId ?? '');
                 bool deletion =
-                widget.shoppingListCard.getDelete(productId ?? '');
+                    widget.shoppingListCard.getDelete(productId ?? '');
 
                 if (deletion) {
                   new_shops.removeProduct(productId);
@@ -88,7 +92,19 @@ class _EditShoppingListState extends State<EditShoppingList> {
               widget.controller(
                   widget.shoppingList.uid, newName, new_shops.products);
 
-              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ShoppingListDisplay(
+                          uid: widget.shoppingList.uid,
+                          controller: ShoppingListControllers().CreateProduct,
+                          b: Product(
+                              id: '',
+                              name: '',
+                              validity: false,
+                              notification: false),
+                          a: "",
+                          c: '')));
             },
             child: const Text(
               'Confirm',

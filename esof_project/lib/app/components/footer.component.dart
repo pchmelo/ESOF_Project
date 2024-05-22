@@ -21,7 +21,6 @@ class _FooterState extends State<Footer> {
       children: [
         CustomPaint(
           size: Size(MediaQuery.of(context).size.width, 60),
-          painter: BNBCustomPainter(),
           child: SizedBox(
             height: 60,
             child: Row(
@@ -57,16 +56,14 @@ class _FooterState extends State<Footer> {
                 ),
                 IconButton(
                   onPressed: () {
-                    String? currentRoute = ModalRoute.of(context)!.settings.name;
+                    String? currentRoute =
+                        ModalRoute.of(context)!.settings.name;
                     if (currentRoute != '/start/add_product') {
                       return ProductForm(context: context)
                           .PlusButtonForm(create_controller);
                     }
                   },
-                  icon: const Icon(
-                      Icons.add_circle,
-                      color: Colors.black
-                  ),
+                  icon: const Icon(Icons.add_circle, color: Colors.black),
                   iconSize: 40,
                 ),
                 IconButton(
@@ -103,31 +100,6 @@ class _FooterState extends State<Footer> {
         ),
       ],
     );
-  }
-}
-
-class BNBCustomPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = Colors.grey[100]!
-      ..style = PaintingStyle.fill;
-
-    Path path = Path()..moveTo(0, 0);
-    path.lineTo(size.width * 0.5 - 26, 0);
-    path.quadraticBezierTo(
-        size.width * 0.5, size.height / 2 + 50.0, size.width * 0.5 + 26, 0);
-    path.lineTo(size.width, 0);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-    path.close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
   }
 }
 

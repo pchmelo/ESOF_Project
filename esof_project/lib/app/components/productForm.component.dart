@@ -132,6 +132,7 @@ class ShoppingListForm {
                   Navigator.pop(context);
                 },
               ),
+              toolbarHeight: 100,
               title: const Text('Select a Shopping List'),
             ),
             body: ShoppingListViewList(
