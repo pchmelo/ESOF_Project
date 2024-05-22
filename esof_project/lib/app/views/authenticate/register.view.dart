@@ -40,58 +40,58 @@ class _RegisterViewState extends State<RegisterView> {
           : null;
     }
 
-    return loading
-        ? Loading()
-        : Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              backgroundColor: Colors.amber,
-              foregroundColor: Colors.black,
-              elevation: 0.0,
-              title: const Text(
-                'Sign Up',
-                style: TextStyle(
-                  fontFamily: 'CrimsonPro',
-                  fontSize: 31,
-                  fontWeight: FontWeight.bold,
+return loading
+    ? Loading()
+    : Scaffold(
+        backgroundColor: Colors.white,
+        body: Padding(
+          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/logo.png',
+                width: MediaQuery.of(context).size.width * 0.5,
+                height: MediaQuery.of(context).size.height * 0.15,
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+              RichText(
+                text: const TextSpan(
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'stock',
+                    ),
+                    TextSpan(
+                      text: 'overflow',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              centerTitle: true,
-              actions: [
-                TextButton.icon(
-                  onPressed: () {
-                    widget.toggleView();
-                  },
-                  icon: const Icon(Icons.person,
-                    color: Colors.black,
-                  ),
-                  label: const Text('Login',
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            body: Container(
-              color: Colors.grey[200],
-                width: double.infinity,
-                height: double.infinity,
-                padding: const EdgeInsets.symmetric(
-                    vertical: 20.0, horizontal: 50.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        decoration: TextInputDecoration.copyWith(hintText: 'Email',
-                          errorStyle: TextStyle(color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              backgroundColor: Colors.red[200]),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          labelStyle: TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.amber),
+                          ),
                         ),
+                        style: const TextStyle(color: Colors.black),
                         validator: (val) {
                           if(val!.isEmpty){
                             return 'Enter an email';
@@ -105,15 +105,20 @@ class _RegisterViewState extends State<RegisterView> {
                           });
                         },
                       ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        decoration: TextInputDecoration.copyWith(hintText: 'Password',
-                          errorStyle: TextStyle(color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              backgroundColor: Colors.red[200]),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.9, 
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          labelText: 'Password',
+                          labelStyle: TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.amber),
+                          ),
                         ),
+                        style: const TextStyle(color: Colors.black),
                         obscureText: true,
                         validator: (val) => val!.length < 6
                             ? 'Enter a password 6+ chars long'
@@ -124,10 +129,12 @@ class _RegisterViewState extends State<RegisterView> {
                           });
                         },
                       ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      ElevatedButton(
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      height: MediaQuery.of(context).size.height * 0.06,
+                      child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             setState(() {
@@ -143,25 +150,54 @@ class _RegisterViewState extends State<RegisterView> {
                             }
                           }
                         },
-                        style: ButtonStyle(
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.yellow),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          side: const BorderSide(color: Colors.amber, width: 1),
+                          textStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         child: const Text(
                           'Register',
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          )
                         ),
                       ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Text(
-                        error,
-                        style: const TextStyle(color: Colors.red, fontSize: 14),
-                      ),
-                    ],
-                  ),
-                )),
-          );
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                    Text(
+                      error,
+                      style: const TextStyle(color: Colors.red, fontSize: 16),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Already Have an Account? '),
+                        GestureDetector(
+                        onTap: () {
+                        widget.toggleView();
+                        },
+                        child: const Text(
+                        'Log In',
+                          style: TextStyle(
+                          color: Colors.amber,
+                          fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+      ),
+    );
   }
 }
