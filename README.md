@@ -302,3 +302,26 @@ As dúvidas relativamente aos testes de Gherklin mantiveram-se e/ou agravaram-se
 Continuar com uma abordagem similar à anterior na maioria dos assuntos, pois funcionou, e adaptarmo-nos naquilo que não correu tão bem, seja no que toca ao tempo dedicado por cada elemento como à divisão de tarefas.
 
 #### <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/releases/tag/Sprint_2">Sprint 2 Release</a>
+
+### Sprint 3:
+
+- Print da scrum board no início a realização do segundo sprint:
+<img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/sprint3.png?raw=true">
+
+- Print da scrum board após a realização do segundo sprint:
+<img style="width: 100%; height: 100%" src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/blob/main/Images/sprint3_conclusion.png?raw=true">
+
+#### Sprint 3 retrospective:
+
+##### O que correu bem:
+...
+
+##### O que poderia ter corrido melhor:
+...
+
+##### O que nos causou dúvidas:
+...
+
+### Final thoughts:
+
+...
