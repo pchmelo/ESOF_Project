@@ -20,7 +20,7 @@ Log com todas as adições e mudanças que foram realizadas ao longo do projeto.
 
 ### Bugs corrigidos:
 
-- Bug na barra de Scan <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/14"></a>
+- Bug na barra de Scan <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/14">Issue</a>
 - Erros nos formulários
 - Atualização de dados sob certos contextos
 - Bugs de reload de página
