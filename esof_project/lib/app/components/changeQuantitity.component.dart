@@ -49,7 +49,7 @@ class _ChangeQuantityComponentState extends State<ChangeQuantityComponent> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF4CAF50),
+                backgroundColor: Colors.red,
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(15),
               ),
@@ -102,4 +102,113 @@ class _ChangeQuantityComponentState extends State<ChangeQuantityComponent> {
       ),
     );
   }
+}
+
+
+class ChangeQuantityComponent2 extends StatefulWidget {
+  final int initialValue;
+  final ValueChanged<int> onQuantityChanged;
+
+  const ChangeQuantityComponent2({
+    Key? key,
+    required this.initialValue,
+    required this.onQuantityChanged,
+  }) : super(key: key);
+
+  @override
+  _ChangeQuantityComponentState2 createState() =>
+      _ChangeQuantityComponentState2();
+}
+
+class _ChangeQuantityComponentState2 extends State<ChangeQuantityComponent2> {
+  late int quantity;
+  late TextEditingController quantityController;
+
+  @override
+  void initState() {
+    super.initState();
+    quantity = widget.initialValue;
+    quantityController = TextEditingController(text: '$quantity');
+  }
+
+  void updateQuantity(int change) {
+    setState(() {
+      quantity += change;
+      quantityController.text = '$quantity';
+    });
+    widget.onQuantityChanged(quantity);
+  }
+
+@override
+Widget build(BuildContext context) {
+  return Padding(
+    padding: const EdgeInsets.all(8), // Reduced padding
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            if (quantity > 0) {
+              updateQuantity(-1);
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
+            shape: const CircleBorder(),
+            padding: const EdgeInsets.all(10), // Reduced padding
+          ),
+          child: const Icon(
+            Icons.remove,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
+        SizedBox(
+          width: 60,
+          child: TextField(
+            controller: quantityController,
+            onSubmitted: (value) {
+              quantity = int.parse(value);
+              widget.onQuantityChanged(quantity);
+            },
+            textAlign: TextAlign.center,
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly,
+            ],
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              contentPadding: EdgeInsets.symmetric(horizontal: 8), // Reduced padding
+              hintStyle: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground,
+                fontSize: 18,
+              ),
+            ),
+            style: TextStyle(
+              fontSize: 18,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            updateQuantity(1);
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF4CAF50),
+            foregroundColor: Colors.white,
+            shape: const CircleBorder(),
+            padding: const EdgeInsets.all(10), // Reduced padding
+          ),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 15, // Reduced icon size
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }

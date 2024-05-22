@@ -79,63 +79,59 @@ class ShoppingListCard {
     );
   }
 
-  Widget editShoppingListCard(
-      {required MapEntry<Product, Map<int, bool>> entry,
-      required ShoppingList shoppingList}) {
-    Product product = entry.key;
-    Map<int, bool> productDetails = entry.value;
-    int quantity = productDetails.keys.first;
-    ValueNotifier<bool> checkedNotifier = ValueNotifier(product.checked);
-    return SizedBox(
-      height: 113,
-      width: double.infinity,
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Center(
-                    child: Text(
-                      (product.name?.length ?? 0) > 6
-                          ? '${product.name.substring(0, 6) ?? ''}...'
-                          : product.name ?? 'Unknown product',
-                      style: const TextStyle(fontSize: 20.0),
-                    ),
-                  ),
-                  Container(
-                    width: 235,
-                    height: 85,
-                    child: ChangeQuantityComponent(
-                      initialValue: quantity ?? 0,
-                      onQuantityChanged: (value) {
-                        _values[product.id ?? ''] = {value: product.checked};
-                        quantity = value;
-                      },
-                    ),
-                  ),
-                  IconButton(
-                    icon: ValueListenableBuilder<bool>(
-                      valueListenable: checkedNotifier,
-                      builder: (context, value, child) {
-                        return Icon(value ? Icons.close : Icons.delete);
-                      },
-                    ),
-                    onPressed: () {
-                      product.toggleCheckedStatus();
-                      _values[product.id ?? ''] = {quantity: product.checked};
-                      checkedNotifier.value = product.checked;
-                    },
-                  ),
-                ],
+
+
+
+
+Widget editShoppingListCard(
+    {required MapEntry<Product, Map<int, bool>> entry,
+    required ShoppingList shoppingList}) {
+  Product product = entry.key;
+  Map<int, bool> productDetails = entry.value;
+  int quantity = productDetails.keys.first;
+  ValueNotifier<bool> checkedNotifier = ValueNotifier(product.checked);
+  return Card(
+    elevation: 2,
+    margin: const EdgeInsets.all(15),
+    child: Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              product.name ?? 'Unknown product',
+              style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
+            trailing: IconButton(
+              icon: ValueListenableBuilder<bool>(
+                valueListenable: checkedNotifier,
+                builder: (context, value, child) {
+                  return Icon(value ? Icons.close : Icons.delete_outline, color: value ? Colors.red : Colors.grey);
+                },
               ),
-            ],
+              onPressed: () {
+                product.toggleCheckedStatus();
+                _values[product.id ?? ''] = {quantity: product.checked};
+                checkedNotifier.value = product.checked;
+              },
+            ),
           ),
-        ),
+          const Divider(),
+          const SizedBox(height: 15),
+          ChangeQuantityComponent2(
+            initialValue: quantity ?? 0,
+            onQuantityChanged: (value) {
+              _values[product.id ?? ''] = {value: product.checked};
+              quantity = value;
+            },
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
 }
