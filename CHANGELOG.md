@@ -45,14 +45,12 @@ Neste sprint, o principal objectivo foi melhorar e optimizar aquilo que já esta
 
 ### Novas Adições:
 
-- Criar lista de compras
-- Editar lista de compras
-- Eliminar lista de compras
+- Criar lista de compras, Editar e Eliminar Listas de Compras <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/20">(Issue 1)</a> <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/16">(Issue 2)</a>
 - Finalizar a lista de compras (todos os produtos que estão selecionados são adicionados automáticamente ao Stock)
 - Criar, Editar e Eliminar datas de Validade para os produtos <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/21">(Issue)</a>
-- Integração do sistema de validades na interface de adição de produtos
-- Animações de transição de página
-- Implementação de filtros de pesquisa para produtos e para validades
+- Integração do sistema de validades na interface de adição de produtos <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/21">(Issue)</a>
+- Animações de transição de página <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/19">(Issue)</a>
+- Implementação de filtros de pesquisa para produtos e para validades <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/22">(Issue)</a>
 
 ### Alterações:
 
@@ -87,13 +85,13 @@ Uma vez que, tal como no Sprint anterior, a interface do Calendário ainda não 
 
 ### Novas Adições:
 
-- Criar um produto 
-- Editar um produto
-- Eliminar um produto
-- Visualizar detalhes do produto
-- Pesquisar por um produto
-- Adicionar um produto à Dispensa através de código de barras
-- Manter a sessão iniciada após o log-in
+- Criar um produto <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/7">(Issue)</a>
+- Editar um produto <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/9">(Issue)</a>
+- Eliminar um produto <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/8">(Issue)</a>
+- Visualizar detalhes do produto <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/10">(Issue)</a>
+- Pesquisar por um produto <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/11">(Issue)</a>
+- Adicionar um produto à Dispensa através de código de barras <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/6">(Issue)</a>
+- Manter a sessão iniciada após o log-in <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/12">(Issue)</a>
 
 ### Descrição:
 
