@@ -24,6 +24,9 @@ class _NotificationsPageState extends State<NotificationsList> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return FutureBuilder<Map<Validity, NotificationModel>>(
       future: _notificationsFuture,
       builder: (BuildContext context,
@@ -42,16 +45,17 @@ class _NotificationsPageState extends State<NotificationsList> {
               NotificationModel notification = notifications[index];
               Validity validity = validities[index];
               return Padding(
-                padding: const EdgeInsets.all(8.0), // Add this
+                padding: EdgeInsets.all(screenWidth * 0.02), // Adjust as needed
                 child: Container(
-                  height: 100,
+                  height: screenHeight * 0.1, // Adjust as needed
                   child: ListTile(
-                    leading: const Icon(Icons.notifications,
-                        color: Colors.blue, size: 30.0),
+                    leading: Icon(Icons.notifications,
+                        color: Colors.blue,
+                        size: screenWidth * 0.06), // Adjust as needed
                     title: Text(
                       validity.name,
-                      style: const TextStyle(
-                        fontSize: 20.0,
+                      style: TextStyle(
+                        fontSize: screenWidth * 0.05, // Adjust as needed
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -60,21 +64,25 @@ class _NotificationsPageState extends State<NotificationsList> {
                       children: [
                         Text(
                           'Quantity: ${validity.quantity.toString()}',
-                          style: const TextStyle(fontSize: 18.0),
+                          style: TextStyle(
+                              fontSize: screenWidth * 0.04), // Adjust as needed
                         ),
                         Text(
                           'Expiration Date: ${validity.day}/${validity.month}/${validity.year}',
-                          style: const TextStyle(fontSize: 18.0),
+                          style: TextStyle(
+                              fontSize: screenWidth * 0.04), // Adjust as needed
                         ),
                         Text(
                           'Notification Time: ${notification.time} ${notification.unitTime}',
-                          style: const TextStyle(fontSize: 18.0),
+                          style: TextStyle(
+                              fontSize: screenWidth * 0.04), // Adjust as needed
                         ),
                       ],
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.arrow_forward_ios,
-                          color: Colors.blue, size: 30.0),
+                      icon: Icon(Icons.arrow_forward_ios,
+                          color: Colors.blue,
+                          size: screenWidth * 0.06), // Adjust as needed
                       onPressed: () async {
                         ProductControllers productControllers =
                             ProductControllers();
