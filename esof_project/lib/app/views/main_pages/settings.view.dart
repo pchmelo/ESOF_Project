@@ -24,31 +24,30 @@ class _SettingsViewState extends State<SettingsView> {
 
     return WillPopScope(
         onWillPop: () async => false,
-        child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: const Text(
-              'Settings',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-              ),
-            ),
-            centerTitle: true,
-            backgroundColor: Colors.blueGrey,
-            foregroundColor: Colors.white,
-          ),
-          body: Expanded(
-            child: GestureDetector(
-              onHorizontalDragEnd: (details) {
-                if (details.primaryVelocity! > 0) {
-                  gestures.swipeLeft(context);
-                } else if (details.primaryVelocity! < 0) {
-                  gestures.swipeRight(context);
-                }
+        child: GestureDetector(
+            onHorizontalDragEnd: (details) {
+              if (details.primaryVelocity! > 0) {
+                gestures.swipeLeft(context);
+              } else if (details.primaryVelocity! < 0) {
+                gestures.swipeRight(context);
+              }
               },
-              child: Padding(
+          child: Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              title: const Text(
+                'Settings',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+              ),
+              centerTitle: true,
+              backgroundColor: Colors.blueGrey,
+              foregroundColor: Colors.white,
+            ),
+            body: Padding(
                 padding: EdgeInsets.all(screenSize.width * 0.02),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,8 +97,7 @@ class _SettingsViewState extends State<SettingsView> {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const NotificationsDisplay(),
+                              builder: (context) => const NotificationsDisplay(),
                             ),
                           );
                         },
@@ -133,9 +131,8 @@ class _SettingsViewState extends State<SettingsView> {
                   ],
                 ),
               ),
-            ),
+            bottomNavigationBar: const Footer(),
           ),
-          bottomNavigationBar: const Footer(),
         ));
   }
 }
