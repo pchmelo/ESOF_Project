@@ -20,6 +20,7 @@ class _CalenderViewState extends State<CalenderView> {
   List<Validity> displayedValidities = [];
   bool isClicked = false;
 
+  DateTime? focusedDay;
   final gestures = Gesture();
 
   List<Validity> getValiditiesForCurrentPage() {
@@ -53,6 +54,7 @@ class _CalenderViewState extends State<CalenderView> {
   @override
   void initState() {
     super.initState();
+    focusedDay = today;
     loadValidities();
   }
 
@@ -123,7 +125,7 @@ class _CalenderViewState extends State<CalenderView> {
                     shape: BoxShape.circle,
                   ),
                 ),
-                focusedDay: today,
+                focusedDay: focusedDay!,
                 firstDay: DateTime.utc(today.year - 2, 1, 1),
                 lastDay: DateTime.utc(today.year + 30, 12, 31),
                 locale: 'en_US',
@@ -141,6 +143,7 @@ class _CalenderViewState extends State<CalenderView> {
                 onDaySelected: (selectedDay, focusedDay) {
                   setState(() {
                     this.selectedDay = selectedDay.toLocal();
+                    this.focusedDay = focusedDay; // Update focusedDay here
                     displayedValidities = [];
                     validitiesMap.forEach((key, value) {
                       if (isSameDay(this.selectedDay!, key)) {
