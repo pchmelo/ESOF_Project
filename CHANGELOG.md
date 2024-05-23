@@ -9,6 +9,7 @@ Log com todas as adições e mudanças que foram realizadas ao longo do projeto.
 - Utilizadores recebem alertas quanto à validade de produtos (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/26">Issue</a>)
 - Utilizadores passam a poder colocar imagens como ícones de produtos (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/28">Issue</a>)
 - Utilizadores passam a poder alterar as definições de conta (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/29">Issue</a>)
+- Adição de swipe-right e swipe-left para facilitar as transições de página (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/37">Issue</a>)
 
 ### Alterações:
 
@@ -45,12 +46,12 @@ Neste sprint, o principal objectivo foi melhorar e optimizar aquilo que já esta
 
 ### Novas Adições:
 
-- Criar lista de compras, Editar e Eliminar Listas de Compras <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/20">(Issue 1)</a> <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/16">(Issue 2)</a>
+- Criar lista de compras, Editar e Eliminar Listas de Compras (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/20">Issue 1</a>) (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/16">Issue 2</a>)
 - Finalizar a lista de compras (todos os produtos que estão selecionados são adicionados automáticamente ao Stock)
-- Criar, Editar e Eliminar datas de Validade para os produtos <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/21">(Issue)</a>
-- Integração do sistema de validades na interface de adição de produtos <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/21">(Issue)</a>
-- Animações de transição de página <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/19">(Issue)</a>
-- Implementação de filtros de pesquisa para produtos e para validades <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/22">(Issue)</a>
+- Criar, Editar e Eliminar datas de Validade para os produtos (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/21">Issue</a>)
+- Integração do sistema de validades na interface de adição de produtos (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/21">Issue</a>)
+- Animações de transição de página (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/19">Issue</a>)
+- Implementação de filtros de pesquisa para produtos e para validades (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/22">Issue</a>)
 
 ### Alterações:
 
@@ -85,13 +86,13 @@ Uma vez que, tal como no Sprint anterior, a interface do Calendário ainda não 
 
 ### Novas Adições:
 
-- Criar um produto <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/7">(Issue)</a>
-- Editar um produto <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/9">(Issue)</a>
-- Eliminar um produto <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/8">(Issue)</a>
-- Visualizar detalhes do produto <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/10">(Issue)</a>
-- Pesquisar por um produto <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/11">(Issue)</a>
-- Adicionar um produto à Dispensa através de código de barras <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/6">(Issue)</a>
-- Manter a sessão iniciada após o log-in <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/12">(Issue)</a>
+- Criar um produto (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/7">Issue</a>)
+- Editar um produto (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/9">Issue</a>)
+- Eliminar um produto (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/8">Issue</a>)
+- Visualizar detalhes do produto (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/10">Issue</a>)
+- Pesquisar por um produto (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/11">Issue</a>)
+- Adicionar um produto à Dispensa através de código de barras (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/6">Issue</a>)
+- Manter a sessão iniciada após o log-in (<a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T3/issues/12">Issue</a>)
 
 ### Descrição:
 
