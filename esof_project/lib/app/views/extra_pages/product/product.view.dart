@@ -179,19 +179,19 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                   ),
                 ),
               if (isInProductInfo)
-              PopupMenuItem<int>(
-                value: 3,
-                onTap: () => selectIcon(ImageSource.gallery),
-                child: const Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
-                      child: Icon(Icons.photo_library),
-                    ),
-                    Text('Change Icon From Gallery'),
-                  ],
+                PopupMenuItem<int>(
+                  value: 3,
+                  onTap: () => selectIcon(ImageSource.gallery),
+                  child: const Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 5.0, 0),
+                        child: Icon(Icons.photo_library),
+                      ),
+                      Text('Change Icon From Gallery'),
+                    ],
+                  ),
                 ),
-              ),
               if (widget.product.notification)
                 PopupMenuItem<int>(
                   value: 4,
@@ -283,6 +283,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                           ),
                         ),
                       ),
+                      /*
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: ElevatedButton(
@@ -311,6 +312,7 @@ class _ProducDetailsPageState extends State<ProducDetailsPage> {
                           ),
                         ),
                       ),
+                      */
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: widget.product.validity

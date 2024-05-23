@@ -148,7 +148,7 @@ class ProductControllers {
 
     newQuantity = newQuantity < 0 ? 0 : newQuantity;
 
-    Product updatedProduct = Product(
+    Product updatedProduct = Product.withImage(
       validity: product.validity,
       id: product.id,
       name: product.name,
@@ -156,6 +156,7 @@ class ProductControllers {
       quantity: newQuantity,
       barcodes: product.barcodes,
       notification: product.notification,
+      imageURL: product.imageURL,
     );
 
     await dbService.updateProduct(updatedProduct);

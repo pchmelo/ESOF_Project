@@ -73,8 +73,8 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
               Text(
                 'Product Name: ${widget.product.name}',
                 style: const TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.white,
+                  fontSize: 25.0,
+                  color: Colors.black,
                 ),
               ),
               Padding(
@@ -87,56 +87,53 @@ class _ChangeQuantityProductState extends State<ChangeQuantityProduct> {
                 ),
               ),
               const SizedBox(height: 230),
-              Container(
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color(0xFF4CAF50)),
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                      const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                    minimumSize: MaterialStateProperty.all<Size>(
-                      const Size(330.0, 55.0),
-                    ),
-                    shape: MaterialStateProperty.all<OutlinedBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(const Color(0xFF4CAF50)),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  textStyle: MaterialStateProperty.all<TextStyle>(
+                    const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
                     ),
                   ),
-                  child: const Text('Confirm'),
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      if (widget.spec == 'middle') {
-                        await widget.controller(widget.listUid, widget.product,
-                            _value, widget.scancode);
-                        Navigator.pop(context);
-                        if (widget.product.validity) {
-                          await ProductForm(context: context)
-                              .CreateValidityForm(widget.product, _value!);
-                        }
-                      } else if (widget.spec == 'scanner') {
-                        await widget.controller(widget.listUid, widget.product,
-                            _value, widget.scancode);
-                        if (widget.product.validity) {
-                          await ProductForm(context: context)
-                              .CreateValidityForm(widget.product, _value!);
-                        }
-                        Navigator.pushReplacementNamed(
-                            context, '/start/storage');
-                      } else {
-                        await widget.controller(widget.listUid, widget.product,
-                            _value, widget.scancode);
-                        Navigator.pop(context);
-                      }
-                    }
-                  },
+                  minimumSize: MaterialStateProperty.all<Size>(
+                    const Size(330.0, 55.0),
+                  ),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
                 ),
+                child: const Text('Confirm'),
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    if (widget.spec == 'middle') {
+                      await widget.controller(widget.listUid, widget.product,
+                          _value, widget.scancode);
+                      Navigator.pop(context);
+                      if (widget.product.validity) {
+                        await ProductForm(context: context)
+                            .CreateValidityForm(widget.product, _value!);
+                      }
+                    } else if (widget.spec == 'scanner') {
+                      await widget.controller(widget.listUid, widget.product,
+                          _value, widget.scancode);
+                      if (widget.product.validity) {
+                        await ProductForm(context: context)
+                            .CreateValidityForm(widget.product, _value!);
+                      }
+                      Navigator.pushReplacementNamed(context, '/start/storage');
+                    } else {
+                      await widget.controller(widget.listUid, widget.product,
+                          _value, widget.scancode);
+                      Navigator.pop(context);
+                    }
+                  }
+                },
               ),
             ],
           ),
